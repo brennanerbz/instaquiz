@@ -10,8 +10,8 @@ export default class Header extends Component {
 			<div 
 				style={{
 					width: '100%', 
-					height: '48px', 
-					lineHeight: '48px',
+					height: isMobile ? '40px' : '48px', 
+					lineHeight: isMobile ? '40px' : '48px',
 					padding: '0 25px'
 				}} 
 				className="display_flex flex_horizontal">

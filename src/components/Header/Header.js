@@ -5,7 +5,7 @@ export default class Header extends Component {
 	}
 
 	render() {
-		const { isMobile } = this.props;
+		const { isMobile, show } = this.props;
 		return (
 			<div 
 				style={{
@@ -18,8 +18,8 @@ export default class Header extends Component {
 				{
 					isMobile
 					&&
-					<div style={{marginLeft: 'auto'}} className="flex_container_right">
-						<a onClick={() => this.props.openHowItWorks()} className="link">How It Works</a>
+					<div style={{marginLeft: 'auto', marginTop: '10px'}} className="flex_container_right">
+						<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
 					</div> 
 				}
 			</div>

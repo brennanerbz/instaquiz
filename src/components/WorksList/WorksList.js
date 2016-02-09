@@ -33,7 +33,7 @@ export default class WorksList extends Component {
 		return (
 			<div style={{display: show ? 'block' : 'none', boxSizing: 'border-box', position: 'relative'}}>
 				<div 
-				style={{width: '100%', padding: '4em 0', borderBottom: '1px solid #DAE0E7'}} 
+				style={{width: '100%', padding: '5em 0', borderBottom: '1px solid #DAE0E7'}} 
 				className="display_flex flex_vertical">
 					<i 
 					id={style.close_icon}
@@ -53,7 +53,7 @@ export default class WorksList extends Component {
 						How It Works
 					</h2>
 					</div>
-					<ul style={{padding: '0 50px'}} className={style.hiw_list}>
+					<ul style={{padding: '0 75px'}} className={style.hiw_list}>
 						{
 							hiwItems.map((item, i) => {
 								return (

@@ -8,13 +8,13 @@ export default class Footer extends Component {
 		return (
 			<div style={{
 				position: 'fixed', 
+				background: '#fff',
 				bottom: '0', 
 				width: '100%', 
 				height: '48px', 
 				lineHeight: '48px',
 				padding: '0 50px'
-			}}
-				 className="background_grey">
+			}}>
 				<div className="display_flex flex_horizontal">
 					<div 
 						className="flex_container_left grey">

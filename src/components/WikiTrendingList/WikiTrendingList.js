@@ -15,7 +15,7 @@ export default class WikiForm extends Component {
 		return (
 			<div 
 			style={{
-				marginTop: isMobile ? '40px' : '60px', 
+				marginTop: isMobile ? '25px' : '60px', 
 				marginBottom: '85px'
 			}} 
 			className="display_flex flex_vertical flex_center">

@@ -1,0 +1,196 @@
+/**
+ * Override Bootstrap styles that you can't modify via variables here.
+ *
+ */
+// Normalize
+html {
+	font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    margin-top: 0!important;
+    padding-top: 0!important;
+}
+body {
+	height: 100%;
+	width: 100%;
+	min-width: 8in;
+	font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-size: 1pc;
+	line-height: 1rem;
+	background: #fff;
+	color: #555459;
+	padding: 0!important;
+	margin: 0!important;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+	margin-top: 0!important;
+}
+a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, ins, kbd, label, legend, li, object, ol, p, pre, q, s, samp, small, span, strike, strong, sub, sup, table, tbody, td, tfoot, th, thead, tr, tt, ul, var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+
+// Input 
+
+
+// Button
+button {
+}
+
+// Modal 
+.modal {
+	font-family: "Helvetica Neue", Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
+	&.fade {
+		top: -100%;
+		-webkit-transition: opacity .10s linear,top .15s ease-out;
+		-moz-transition: opacity .10s linear,top .15s ease-out;
+		-o-transition: opacity .10s linear,top .15s ease-out;
+		transition: opacity .10s linear,top .15s ease-out;
+		&.in {
+			top: 3.75%;
+			opacity: 1;	
+		}
+	}
+	.modal-content {
+		height: 500px!important; // CHANGE FOR OTHER MODALS
+		border: none;
+		border-radius: 4px;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		&.no_shadow {
+			box-shadow: none!important;
+			border: 1px solid #e8e8e8;
+		}
+		.modal-header {
+			padding: 1rem 1.5rem 0.75rem 1.25rem;
+			background: #fff;
+			font-weight: 400;
+		    border-bottom: 1px solid rgba(0, 0, 0, .10);
+			border-top-right-radius: .5rem;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+			border-top-left-radius: .5rem;
+			background-clip: padding-box;
+			.modal-title {
+				color: rgba(0, 0, 0, 1);
+				font-size: 17px;
+				font-weight: 500;
+				vertical-align: middle;
+			}
+			&.settings {
+				border-bottom: 1px solid #DDD;
+			}
+		}
+		.modal-title {
+			box-sizing: content-box;
+			font-size: 18px;
+			font-weight: 900;
+			line-height: normal;
+			background: none;
+			margin: 0;
+			min-height: 24px;
+			-webkit-flex-shrink: 0;
+			-ms-flex-negative: 0;
+			flex-shrink: 0;
+			margin: 0;
+			line-height: normal;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+			white-space: normal!important; 
+			text-overflow: initial!important;
+		}
+		.modal-body {
+			border-bottom: none;
+			padding: 0.5rem 2rem 2rem;
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+			// background: #fafafa;
+			&.no_footer {
+				padding: 1rem 2rem 1.5rem!important;
+			}
+		}
+		.modal-footer {
+			border-top: none;
+			background: #fff;
+			box-shadow: none;
+			border-top: none;
+			padding: 2rem 2rem 2rem;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: .5rem;
+			border-bottom-left-radius: .5rem;
+			border-top-left-radius: 0;
+			background-clip: padding-box;
+			.button {
+				&:not(:last-child) { 
+					margin-right: 10px; 
+				}
+			}
+		}
+	}
+}
+
+.fade {
+	opacity: 0;
+    -webkit-transition: opacity 0.05s linear;
+    -o-transition: opacity 0.05s linear;
+    transition: opacity 0.05s linear;
+}
+// Popover 
+.popover {
+	min-width: 350px;
+	z-index: 201!important;
+	padding: 0!important;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 9px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.15);
+    &.bottom {
+    	.arrow {
+    		border-bottom-color: rgba(0, 0, 0, 0.17);
+    	}
+    }
+    &.right {
+    	.arrow {
+    		top: 40%;
+    	}
+    }
+	.popover-title {
+		background: #fff;
+		padding: 1.2em;
+		color: rgba(0, 0, 0, 1);
+		font-size: 16.5px;
+		font-weight: 500;
+		vertical-align: middle;
+	}
+	.popover-content {
+		padding: 1.2em;
+	}
+}
+
+
+// Tooltip
+.tooltip {
+	font-family: "Helvetica Neue", Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
+	font-size: 12.5px;
+	font-weight: 500;
+	.tooltip-inner {
+		padding: 6px 10px;
+	}
+}
+
+// Spin
+.fa-spin {
+    -webkit-animation: fa-spin 1.2s infinite linear;
+    animation: fa-spin 1.2s infinite linear;
+}
+

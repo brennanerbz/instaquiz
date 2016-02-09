@@ -11,8 +11,8 @@ import config from '../../config';
 // Components
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import WorksList from '../../components/WorksList/WorksList';
 // Containers
-
 
 @connect(state => ({
 
@@ -30,7 +30,8 @@ export default class App extends Component {
 	}
 
 	state = {
-		isMobile: false
+		isMobile: false,
+		howItWorksOpen: false
 	}
 
 	componentDidMount() {
@@ -43,14 +44,22 @@ export default class App extends Component {
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState } = this.props;
-		const { isMobile } = this.state;
+		const { isMobile, howItWorksOpen } = this.state;
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
-				isMobile: isMobile
+				isMobile: isMobile,
+				openHowItWorks: () => this.setState({howItWorksOpen: true})
 			})
 		})
 		return (
 			<div id={style.app}>
+				{
+					howItWorksOpen
+					&&
+					<WorksList
+						closeHowItWorks={() => this.setState({howItWorksOpen: false})}
+					/>
+				}
 				<Header 
 					isMobile={isMobile}
 				/>

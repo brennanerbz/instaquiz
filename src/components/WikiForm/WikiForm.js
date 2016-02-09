@@ -32,18 +32,18 @@ export default class WikiForm extends Component {
 				className="display_flex flex_vertical flex_center">
 				<h1 
 					style={{
-						fontSize: isMobile ? '30px' : '32px', 
+						fontSize: isMobile ? '30px' : '36px', 
 						fontWeight: '600', 
 						color: '#2C3239', 
 						marginBottom: '20px'
 					}}>
 					<span className="inline_block">
-						<img style={{height: '28px', marginRight: '5px'}} src={logo}/>
+						<img style={{height: '30px', marginRight: '5px'}} src={logo}/>
 					</span>
 						Quizly
 					<span 
 					style={{
-						fontSize: '15px', 
+						fontSize: '17px', 
 						color: '#A8B6C1', 
 						marginLeft: '5px'
 					}} 
@@ -122,6 +122,7 @@ export default class WikiForm extends Component {
 								Transform
 							</button>
 							<button 
+								onClick={() => this.props.openHowItWorks()}
 								className="button primary_white">
 								How It Works
 							</button>

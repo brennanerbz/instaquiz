@@ -1,4 +1,4 @@
-# Branch App
+# Instaquiz
 
 This is the client for Instaquiz, a tool which can turn Wikipedia pages into practice tests.
 

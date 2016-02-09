@@ -19,7 +19,7 @@ export default class Header extends Component {
 					isMobile
 					&&
 					<div style={{marginLeft: 'auto'}} className="flex_container_right">
-						<a className="link">How It Works</a>
+						<a onClick={() => this.props.openHowItWorks()} className="link">How It Works</a>
 					</div> 
 				}
 			</div>

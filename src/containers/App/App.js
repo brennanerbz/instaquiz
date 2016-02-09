@@ -59,6 +59,7 @@ export default class App extends Component {
 				/>
 				<Header 
 					isMobile={isMobile}
+					openHowItWorks={() => this.setState({howItWorksOpen: true})}
 				/>
 				{appChildrenWithProps}
 				<Footer 

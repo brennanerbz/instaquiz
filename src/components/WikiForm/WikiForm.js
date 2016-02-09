@@ -59,7 +59,10 @@ export default class WikiForm extends Component {
 					textAlign: 'center'}}>
 					Instantly transform any Wikipedia page into quiz questions
 				</h2>
-				<form id={style.wiki_form} className="display_flex flex_vertical flex_center">
+				<form 
+					onSubmit={(e) => e.preventDefault()} 
+					id={style.wiki_form} 
+					className="display_flex flex_vertical flex_center">
 					<div style={{marginBottom: '20px', width: '100%'}} className="input_wrapper relative">
 						<input
 							style={{
@@ -67,6 +70,7 @@ export default class WikiForm extends Component {
 								fontSize: isMobile ? '16px' : '18px',
 								lineHeight: '22px'
 							}}
+							type="text"
 							ref="wiki_input"
 							className="input_with_icon"
 							placeholder="Paste Wikipedia article URL here..."

@@ -1,6 +1,6 @@
 # Branch App
 
-This is the Fat-Client-Side for Branch, a messaging app that allows users to branch off into sub-topics by hashtags.
+This is the client for Instaquiz, a tool which can turn Wikipedia pages into practice tests.
 
 ## Installation
 

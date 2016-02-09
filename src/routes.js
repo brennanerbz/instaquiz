@@ -1,12 +1,11 @@
 import React from 'react';
 import cookie from 'react-cookie';
 import {IndexRoute, Route} from 'react-router';
-import { isLoaded as isAuthLoaded, loadAuthCookie } from 'redux/modules/auth';
 import {
     App,
     Landing,
     NotFound
-  } from 'containers';
+} from 'containers';
 
 export default (store) => {
   return (

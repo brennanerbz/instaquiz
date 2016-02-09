@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class NotFound extends Component {
+export default class WikiForm extends Component {
 	static propTypes = {
 	}
 
 	render() {
-		return(
+		return (
 			<div>
+				Trending List
 			</div>
 		);
 	}

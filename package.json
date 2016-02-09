@@ -1,0 +1,11 @@
+{
+  "name": "instaquiz",
+  "version": "0.0.1",
+  "description": "Instantly turn wikipedia article into practice quiz.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brennan Erbeznik & Nathan Lomeli",
+  "license": "ISC"
+}

@@ -12,8 +12,8 @@ export default class Landing extends Component {
 		return (
 			<div id={style.landing} style={{height: '100%'}} id={style.landing} className="display_flex flex_center">
 				<div className="flex_container_center">
-					<WikiForm/>
-					<WikiTrendingList/>
+					<WikiForm {...this.props}/>
+					<WikiTrendingList {...this.props}/>
 				</div>
 			</div>
 		);

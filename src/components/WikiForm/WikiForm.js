@@ -3,6 +3,7 @@ import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 export default class WikiForm extends Component {
 	static propTypes = {
+		isMobile: PropTypes.bool
 	}
 
 	state = {
@@ -22,19 +23,40 @@ export default class WikiForm extends Component {
 	render() {
 		const style = require('./WikiForm.scss');
 		const logo = require('./QuizlyLogo.png');
+		const { isMobile } = this.props;
 		const { wikiLink } = this.state;
 		return (
-			<div id={style.wiki_form} className="display_flex flex_vertical flex_center">
-				<h1 style={{fontSize: '32px', fontWeight: '600', color: '#2C3239', marginBottom: '20px'}}>
+			<div 
+				style={{padding: isMobile ? '0px 20px' : ''}} 
+				id={style.wiki_form} 
+				className="display_flex flex_vertical flex_center">
+				<h1 
+					style={{
+						fontSize: isMobile ? '30px' : '32px', 
+						fontWeight: '600', 
+						color: '#2C3239', 
+						marginBottom: '20px'
+					}}>
 					<span className="inline_block">
 						<img style={{height: '28px', marginRight: '5px'}} src={logo}/>
 					</span>
 						Quizly
-					<span style={{fontSize: '15px', color: '#A8B6C1', marginLeft: '5px'}} className="inline_block small_text">
+					<span 
+					style={{
+						fontSize: '15px', 
+						color: '#A8B6C1', 
+						marginLeft: '5px'
+					}} 
+					className="inline_block small_text">
 						BETA
 					</span>
 				</h1>
-				<h2 style={{fontSize: '26px', fontWeight: '300', color: '#2C3239', marginBottom: '20px'}}>
+				<h2 style={{
+					fontSize: isMobile ? '22px' : '26px',
+					fontWeight: '300', 
+					color: '#2C3239', 
+					marginBottom: '20px', 
+					textAlign: 'center'}}>
 					Instantly transform any Wikipedia page into quiz questions
 				</h2>
 				<form id={style.wiki_form} className="display_flex flex_vertical flex_center">
@@ -42,7 +64,8 @@ export default class WikiForm extends Component {
 						<input
 							style={{
 								height: '48px',
-								fontSize: '18px',
+								fontSize: isMobile ? '16px' : '18px',
+								lineHeight: '22px'
 							}}
 							ref="wiki_input"
 							className="input_with_icon"
@@ -59,6 +82,7 @@ export default class WikiForm extends Component {
 									this.handleSubmitLink()
 								}
 							}}
+							autoFocus={true}
 						/>
 						<OverlayTrigger 
 							delayShow={500} 
@@ -81,11 +105,24 @@ export default class WikiForm extends Component {
 							</span>
 						</OverlayTrigger>
 					</div>
-					<button 
-						onClick={::this.handleSubmitLink}
-						className="button primary_green">
-						Transform
-					</button>
+					{
+						!isMobile
+						&&
+						<div className="flex_horizontal">
+							<button 
+								style={{
+									marginRight: '10px'
+								}}
+								onClick={::this.handleSubmitLink}
+								className="button primary_green">
+								Transform
+							</button>
+							<button 
+								className="button primary_white">
+								How It Works
+							</button>
+						</div>
+					}
 				</form>
 			</div>
 		);

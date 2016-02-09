@@ -13,6 +13,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 // Containers
 
+
 @connect(state => ({
 
 	}),
@@ -28,19 +29,35 @@ export default class App extends Component {
 		pushState: PropTypes.func.isRequired
 	}
 
+	state = {
+		isMobile: false
+	}
+
+	componentDidMount() {
+		const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+		this.setState({
+			isMobile: isMobile
+		});
+	}
+
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState } = this.props;
+		const { isMobile } = this.state;
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
-
+				isMobile: isMobile
 			})
 		})
 		return (
 			<div id={style.app}>
-				<Header />
+				<Header 
+					isMobile={isMobile}
+				/>
 				{appChildrenWithProps}
-				<Footer />
+				<Footer 
+					isMobile={isMobile}
+				/>
 			</div>
 		);
 	}

@@ -6,6 +6,7 @@ $primary-grey: #EDF0F3;
 $primary-grey-border: #DAE0E7;
 $secondary-grey: #A8B6C1;
 
+
 #app {
 	width: 100%;
 	height: 100%;
@@ -14,11 +15,15 @@ $secondary-grey: #A8B6C1;
 	left: 0;
 	right: 0;
 	top: 0;
-	overflow: auto;
 	font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
 	text-rendering: optimizeSpeed;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+}
+
+// Backgrounds
+:global .background_grey {
+	background: $primary-grey;
 }
 
 
@@ -164,7 +169,7 @@ $secondary-grey: #A8B6C1;
 // Input with icon
 :global .input_wrapper {
 	input {
-		padding: 4px 25px 0px 15px;
+	    padding: 0 47px 0 15px;
 		font-weight: 400;
 		width: 100%;
 		background: $primary-grey;
@@ -214,7 +219,7 @@ $secondary-grey: #A8B6C1;
 	position: relative;
 	border-radius: 0.25em;
 	cursor: pointer;
-	display: inline-block;
+	display: inline-block!important;
 	border: none;
 	outline: none;
 	font-weight: 600;
@@ -222,6 +227,15 @@ $secondary-grey: #A8B6C1;
     -webkit-tap-highlight-color: transparent;
 	&:hover {	
 		box-shadow: inset 0 -2px rgba(0,0,0,.25);	
+	}
+	&.primary_white {
+		background: #fff;
+		border: 1px solid $primary-grey-border;
+		color: #8799A7;
+		&:hover {
+			color: $primary-black;
+		}
+		box-shadow: none!important;
 	}
 	&.primary_green {
 		background: $primary-green;

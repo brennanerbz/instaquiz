@@ -171,6 +171,7 @@ $secondary-grey: #A8B6C1;
 		border: none!important;
 		outline: none!important;
 		border-radius: 0.25em!important;
+		color: $primary-black;
 	}
 	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 	    color: $secondary-grey;
@@ -229,3 +230,25 @@ $secondary-grey: #A8B6C1;
 }
 
 
+// List
+:global .list {
+	list-style-type: none!important;
+	.list_item {
+		a {
+			display: block;
+			padding: 10px 15px;
+		}
+	}
+}
+
+
+// Link
+:global .link {
+	color: $primary-blue;
+	cursor: pointer;
+	font-weight: 500;
+	&:hover {
+		color: $primary-blue;
+		text-decoration: underline;
+	}
+}

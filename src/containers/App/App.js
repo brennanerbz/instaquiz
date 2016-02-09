@@ -53,13 +53,10 @@ export default class App extends Component {
 		})
 		return (
 			<div id={style.app}>
-				{
-					howItWorksOpen
-					&&
-					<WorksList
-						closeHowItWorks={() => this.setState({howItWorksOpen: false})}
-					/>
-				}
+				<WorksList
+					show={howItWorksOpen}
+					closeHowItWorks={() => this.setState({howItWorksOpen: false})}
+				/>
 				<Header 
 					isMobile={isMobile}
 				/>

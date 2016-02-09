@@ -18,7 +18,7 @@ export default class Footer extends Component {
 				<div className="display_flex flex_horizontal">
 					<div 
 						className="flex_container_left grey">
-						<a style={{color: '#A8B6C1'}} className="link">About</a>
+						<a style={{color: '#A8B6C1', fontWeight: '500', textDecoration: 'none'}}>&copy; Quizly 2016.</a>
 					</div>
 					<div 
 						style={{marginLeft: 'auto'}} 

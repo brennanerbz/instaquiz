@@ -23,3 +23,15 @@
 	-ms-justify-content: space-around;
 	justify-content: space-around;
 }
+
+#close_icon {
+	position: absolute; 
+	right: 50px; 
+	top: 35px; 
+	font-size: 1.45em; 
+	color: #A8B6C1; 
+	cursor: pointer;
+	&:hover {
+		color: #2C3239;
+	}
+}

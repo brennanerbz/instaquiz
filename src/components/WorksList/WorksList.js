@@ -35,8 +35,9 @@ export default class WorksList extends Component {
 				<div 
 				style={{width: '100%', padding: '4em 0', borderBottom: '1px solid #DAE0E7'}} 
 				className="display_flex flex_vertical">
-					<i onClick={() => this.props.closeHowItWorks()} 
-					style={{position: 'absolute', right: '50px', top: '35px', fontSize: '1.45em', color: '#A8B6C1', cursor: 'pointer'}} 
+					<i 
+					id={style.close_icon}
+					onClick={() => this.props.closeHowItWorks()} 
 					className="fa fa-times"></i>
 					<div className="flex_item_align_center">
 					<h2 

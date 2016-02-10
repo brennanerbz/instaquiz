@@ -53,7 +53,7 @@ export default class WorksList extends Component {
 						How It Works
 					</h2>
 					</div>
-					<ul style={{padding: '0px 10px'}} className={style.hiw_list}>
+					<ul style={{padding: '0px 30px'}} className={style.hiw_list}>
 						{
 							hiwItems.map((item, i) => {
 								return (

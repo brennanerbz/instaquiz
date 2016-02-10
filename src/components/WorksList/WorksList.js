@@ -58,6 +58,7 @@ export default class WorksList extends Component {
 							hiwItems.map((item, i) => {
 								return (
 									<WorksItem 
+									key={item.title + i}
 									index={i} 
 									item={item}/>
 								)

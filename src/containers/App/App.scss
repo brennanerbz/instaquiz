@@ -87,6 +87,9 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-items: flex-start;
 	-ms-align-items: flex-start;
 	align-items: flex-start;
+	-webkit-align-content: flex-start;
+	-ms-align-content: flex-start;
+	align-content: flex-start;
 }
 :global .flex_container_center {
 	-webkit-align-items: center;
@@ -98,6 +101,9 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-items: flex-end;
 	-ms-align-items: flex-end;
 	align-items: flex-end;
+	-webkit-align-content: flex-end;
+	-ms-align-content: flex-end;
+	align-content: flex-end;
 }
 // Single item
 :global .flex_item_align_left {

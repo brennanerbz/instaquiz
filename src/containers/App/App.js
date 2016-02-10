@@ -15,7 +15,8 @@ import WorksList from '../../components/WorksList/WorksList';
 // Containers
 
 @connect(state => ({
-
+	params: state.router.params,
+	location: state.router.location
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -43,7 +44,7 @@ export default class App extends Component {
 
 	render() {
 		const style = require('./App.scss');
-		const { children, pushState } = this.props;
+		const { children, pushState, params, location } = this.props;
 		const { isMobile, howItWorksOpen } = this.state;
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
@@ -58,6 +59,9 @@ export default class App extends Component {
 					closeHowItWorks={() => this.setState({howItWorksOpen: false})}
 				/>
 				<Header 
+					pushState={pushState}
+					params={params}
+					location={location}
 					isMobile={isMobile}
 					show={howItWorksOpen}
 					openHowItWorks={(value) => this.setState({howItWorksOpen: value})}

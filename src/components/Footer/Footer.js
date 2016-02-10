@@ -7,15 +7,17 @@ export default class Footer extends Component {
 	render() {
 		return (
 			<div style={{
-				position: 'fixed', 
+				// position: 'absolute', 
 				background: '#fff',
 				bottom: '0', 
 				width: '100%', 
-				height: '48px', 
+				height: '54px', 
 				lineHeight: '48px',
-				padding: '0 50px'
-			}}>
-				<div className="display_flex flex_horizontal">
+				padding: '0 10px',
+				maxWidth: '1000px'
+			}}
+			className="display_flex flex_container_center">
+				<div style={{width: '100%'}} className="flex_horizontal">
 					<div 
 						className="flex_container_left grey">
 						<a style={{color: '#A8B6C1', fontWeight: '500', textDecoration: 'none'}}>&copy; Quizly 2016.</a>

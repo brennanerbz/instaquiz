@@ -9,8 +9,9 @@ export default class Landing extends Component {
 
 	render() {
 		const style = require('./Landing.scss');
+		const { location, isMobile } = this.props;
 		return (
-			<div id={style.landing} style={{height: '100%'}} id={style.landing} className="display_flex flex_center">
+			<div id={style.landing} style={{height: '88%'}} id={style.landing} className="display_flex flex_center">
 				<div className="flex_container_center">
 					<WikiForm {...this.props}/>
 					<WikiTrendingList {...this.props}/>

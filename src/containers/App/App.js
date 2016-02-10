@@ -49,6 +49,7 @@ export default class App extends Component {
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
 				isMobile: isMobile,
+				location: location,
 				openHowItWorks: () => this.setState({howItWorksOpen: true})
 			})
 		})

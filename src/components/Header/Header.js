@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { isEmpty } from '../../utils/helperfunctions';
 
 export default class Header extends Component {
 
@@ -14,9 +15,12 @@ export default class Header extends Component {
 		const logo = require('../WikiForm/QuizlyLogo.png');
 		const { isMobile, show, params, location, pushState } = this.props;
 		const isNotHomeView = location.pathname.match(/quiz/gi);
+		console.log(isEmpty(isNotHomeView))
 		return (
 			<div 
 				style={{
+					position: isNotHomeView ? 'fixed' : '',
+					background: '#fff',
 					width: '100%', 
 					height: isMobile ? '40px' : '48px', 
 					lineHeight: isMobile ? '40px' : '48px',
@@ -26,9 +30,9 @@ export default class Header extends Component {
 				}} 
 				className={'display_flex flex_horizontal ' + (isNotHomeView ? 'flex_center' : '')}>
 				{
-					isMobile
+					isMobile && !isNotHomeView
 					&&
-					<div style={{marginLeft: 'auto', marginTop: '10px'}} className="flex_container_right">
+					<div style={{marginLeft: 'auto', marginTop: '10px', marginRight: '20px'}} className="flex_container_right">
 						<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
 					</div> 
 				}
@@ -38,7 +42,7 @@ export default class Header extends Component {
 					<h1 
 						onClick={() => pushState(null, '/')}
 						style={{
-							fontSize: isMobile ? '30px' : '36px', 
+							fontSize: isMobile ? '24px' : '32px', 
 							fontWeight: '600', 
 							color: '#2C3239', 
 							marginBottom: '20px',
@@ -46,12 +50,12 @@ export default class Header extends Component {
 							cursor: 'pointer'
 						}}>
 						<span className="inline_block">
-							<img style={{height: '30px', marginRight: '5px'}} src={logo}/>
+							<img style={{height: isMobile ? '20px' : '26px', marginRight: '5px'}} src={logo}/>
 						</span>
 							Quizly
 						<span 
 						style={{
-							fontSize: '17px', 
+							fontSize: '15px', 
 							color: '#A8B6C1', 
 							marginLeft: '5px'
 						}} 

@@ -29,8 +29,10 @@ export default class Quiz extends Component {
 		const { isMobile } = this.props;
 		return (
 			<div style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
-				<QuizHeader isMobile={isMobile}/>
-				<QuizContent/>
+				<div style={{width: '100%'}} className="flex_vertical">
+					<QuizHeader isMobile={isMobile}/>
+					<QuizContent/>
+				</div>
 			</div>
 		);
 	}

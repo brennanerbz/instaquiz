@@ -8,10 +8,12 @@ export default class QuizHeader extends Component {
 		const style = require('./QuizHeader.scss');
 		const { isMobile } = this.props;
 		return (
-			<div className={style.quiz_header}>
+			<div 
+				style={{paddingTop: '6em', textAlign: isMobile ? 'center' : ''}} 
+				className={isMobile ? 'flex_container_center' : ''}>
 				<h1
 				style={{
-					fontSize: isMobile ? '24px' : '32px',
+					fontSize: isMobile ? '28px' : '32px',
 					fontWeight: '600',
 					color: '#2C3239',
 					marginBottom: '5px'

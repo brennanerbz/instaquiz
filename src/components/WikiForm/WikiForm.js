@@ -38,7 +38,7 @@ export default class WikiForm extends Component {
 						marginBottom: '20px'
 					}}>
 					<span className="inline_block">
-						<img style={{height: '30px', marginRight: '5px'}} src={logo}/>
+						<img style={{height: isMobile ? '26px' : '30px', marginRight: '5px'}} src={logo}/>
 					</span>
 						Quizly
 					<span 

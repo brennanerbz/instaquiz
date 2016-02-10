@@ -14,10 +14,7 @@ export default class WikiForm extends Component {
 		const { quizzes } = this.state;
 		return (
 			<div 
-			style={{
-				marginTop: isMobile ? '25px' : '60px', 
-				marginBottom: '85px'
-			}} 
+			style={{marginTop: isMobile ? '20px' : '60px'}} 
 			className="display_flex flex_vertical flex_center">
 				<h2 style={{fontSize: '24px', fontWeight: '300', color: '#2C3239', marginBottom: '20px'}}>
 					Popular quizzes

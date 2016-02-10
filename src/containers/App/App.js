@@ -48,10 +48,10 @@ export default class App extends Component {
 	handleScroll() {
 		const { scrolling } = this.state;
 		const node = document.body
-		if(scrolling && node.scrollTop < 170) {
+		if(node.scrollTop < 170) {
 			this.setState({scrolling: false})
 		} 
-		if(!scrolling && node.scrollTop > 170) {
+		if(node.scrollTop > 170) {
 			this.setState({scrolling: true});
 		}
 	}

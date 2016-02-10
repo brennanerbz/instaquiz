@@ -7,36 +7,68 @@ import cookie from 'react-cookie';
 import { pushState } from 'redux-router';
 import connectData from 'helpers/connectData';
 
+// Actions
+import * as quizActions from '../../redux/modules/quiz';
+
 // Components 
 import QuizHeader from '../../components/QuizHeader/QuizHeader';
 import QuizContent from '../../components/QuizContent/QuizContent';
 
 @connect(state => ({
+		start: state.quiz.start,
+		end: state.quiz.end,
+		loaded: state.quiz.loaded
 	}),
 	dispatch => ({
 		...bindActionCreators({
+			...quizActions,
 			pushState
 		}, dispatch)
 	})
 )
 export default class Quiz extends Component {
+
 	static propTypes = {
+		// Device
+		isMobile: PropTypes.bool,
+		scrolling: PropTypes.bool,
+		// State
+		start: PropTypes.number,
+		end: PropTypes.number,
+		loaded: PropTypes.bool,
+		// Routes
+		params: PropTypes.object,
 		pushState: PropTypes.func
 	}
 
-	componentDidMount() {
-		// window.addEventListener('scroll', ::this.handleScroll)
+	state = {
+		title: ''
 	}
 
-	
+	componentDidMount() {
+		const { params } = this.props;
+		var title = params.quiz_title;
+		if(title) {
+			title = title.replace("-", " ")
+			this.setState({
+				title: title
+			});
+		}
+	}
+
+	componentWillUnmount() {
+		const { clearQuiz } = this.props;
+		clearQuiz()
+	}
 
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile, scrolling } = this.props;
+		const { isMobile, scrolling, end, loaded } = this.props;
+		const { title } = this.state;
 		return (
 			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
-					<QuizHeader isMobile={isMobile} scrolling={scrolling}/>
+					<QuizHeader loaded={loaded} title={title} count={end} isMobile={isMobile} scrolling={scrolling}/>
 					<QuizContent/>
 				</div>
 			</div>

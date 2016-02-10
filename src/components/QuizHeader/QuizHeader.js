@@ -6,7 +6,7 @@ export default class QuizHeader extends Component {
 
 	render() {
 		const style = require('./QuizHeader.scss');
-		const { isMobile, scrolling } = this.props;
+		const { isMobile, scrolling, title, loaded } = this.props;
 		return (
 			<div 
 				style={{paddingTop: '6em', textAlign: isMobile ? 'center' : ''}} 
@@ -18,7 +18,7 @@ export default class QuizHeader extends Component {
 					color: '#2C3239',
 					marginBottom: '5px'
 				}}>
-					Set title
+					{title}
 				</h1>
 				<p
 				style={{
@@ -30,7 +30,7 @@ export default class QuizHeader extends Component {
 					Questions count
 				</p>
 				{
-					scrolling
+					scrolling && !isMobile
 					&&
 					<button 
 						id={style.scrolling_button}
@@ -40,15 +40,23 @@ export default class QuizHeader extends Component {
 							top: '11px'
 						}} 
 						className="button primary_green">
-						Quiz me
+						{
+							loaded
+							? 'Quiz me'
+							: 'Loading...'
+						}
 					</button>
 				}
 				<button 
 					style={{
-						zIndex: scrolling ? '-1' : '0',
+						zIndex: '0'
 					}} 
 					className="button primary_green">
-					Quiz me
+					{
+						loaded
+						? 'Quiz me'
+						: 'Loading...'
+					}
 				</button>
 			</div>
 		);

@@ -42,18 +42,12 @@ export default class App extends Component {
 			isMobile: isMobile
 		});
 
-		window.addEventListener('scroll', ::this.handleScroll)
+		// window.addEventListener('scroll', ::this.handleScroll)
 	}
 
 	handleScroll() {
-		const { scrolling } = this.state;
+		const { scrolling, isMobile } = this.state;
 		const node = document.body
-		if(node.scrollTop < 170) {
-			this.setState({scrolling: false})
-		} 
-		if(node.scrollTop > 170) {
-			this.setState({scrolling: true});
-		}
 	}
 
 	render() {

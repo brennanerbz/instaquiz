@@ -25,7 +25,8 @@ export default class Header extends Component {
 					lineHeight: isMobile ? '40px' : '48px',
 					padding: '0 25px',
 					boxShadow: isNotHomeView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
-					padding: isNotHomeView ? '2em 50px' : ''
+					padding: isNotHomeView ? '2em 50px' : '',
+					zIndex: '2'
 				}} 
 				className={'display_flex flex_horizontal ' + (isNotHomeView ? 'flex_center' : '')}>
 				{
@@ -48,7 +49,7 @@ export default class Header extends Component {
 							marginTop: '10px!important',
 							cursor: 'pointer'
 						}}
-						className={'fade ' + (scrolling && isMobile ? '' : 'in')}>
+						className={'fade in'}>
 						<span className="inline_block">
 							<img style={{height: isMobile ? '20px' : '26px', marginRight: '5px'}} src={logo}/>
 						</span>

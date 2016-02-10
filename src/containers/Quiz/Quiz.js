@@ -9,10 +9,12 @@ import connectData from 'helpers/connectData';
 
 // Actions
 import * as quizActions from '../../redux/modules/quiz';
+import * as overlayActions from '../../redux/modules/overlays';
 
 // Components 
 import QuizHeader from '../../components/QuizHeader/QuizHeader';
 import QuizContent from '../../components/QuizContent/QuizContent';
+
 
 @connect(state => ({
 		start: state.quiz.start,
@@ -22,6 +24,7 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 	dispatch => ({
 		...bindActionCreators({
 			...quizActions,
+			...overlayActions,
 			pushState
 		}, dispatch)
 	})
@@ -42,17 +45,14 @@ export default class Quiz extends Component {
 	}
 
 	state = {
-		title: ''
 	}
 
 	componentDidMount() {
-		const { params } = this.props;
+		const { params, fetchItems, start } = this.props;
 		var title = params.quiz_title;
 		if(title) {
 			title = title.replace("-", " ")
-			this.setState({
-				title: title
-			});
+			// fetchItems(title, start)
 		}
 	}
 
@@ -68,7 +68,13 @@ export default class Quiz extends Component {
 		return (
 			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
-					<QuizHeader loaded={loaded} title={title} count={end} isMobile={isMobile} scrolling={scrolling}/>
+					<QuizHeader 
+						openModal={this.props.openModal}
+						loaded={loaded} 
+						title={title} 
+						count={end} 
+						isMobile={isMobile}
+						scrolling={scrolling}/>
 					<QuizContent/>
 				</div>
 			</div>

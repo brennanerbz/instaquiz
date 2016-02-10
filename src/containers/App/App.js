@@ -12,7 +12,9 @@ import config from '../../config';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import WorksList from '../../components/WorksList/WorksList';
+import Modal from '../../components/Modals/Modal';
 // Containers
+
 
 @connect(state => ({
 	params: state.router.params,
@@ -42,12 +44,14 @@ export default class App extends Component {
 			isMobile: isMobile
 		});
 
-		// window.addEventListener('scroll', ::this.handleScroll)
+		window.addEventListener('scroll', ::this.handleScroll)
 	}
 
 	handleScroll() {
 		const { scrolling, isMobile } = this.state;
 		const node = document.body
+		// Scroll logic
+		console.log(node.scrollTop)
 	}
 
 	render() {
@@ -64,6 +68,7 @@ export default class App extends Component {
 		})
 		return (
 			<div id={style.app}>
+				<Helmet {...config.app.head}/>
 				<WorksList
 					isMobile={isMobile}
 					show={howItWorksOpen}
@@ -82,6 +87,7 @@ export default class App extends Component {
 				<Footer 
 					isMobile={isMobile}
 				/>
+				<Modal isMobile={isMobile}/>
 			</div>
 		);
 	}

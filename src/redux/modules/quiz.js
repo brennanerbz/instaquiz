@@ -8,6 +8,7 @@ export const CLEAR_QUIZ = 'Instaquiz/quiz/CLEAR_QUIZ';
 const initialState = {
 	start: 0,
 	end: 0,
+	quiz: {},
 	items: [],
 	loaded: false,
 	error: null
@@ -25,6 +26,7 @@ export default function reducer (state = initialState, action) {
 			items = [...items, ...action.result.items]
 			return {
 				...state,
+				quiz: Object.keys(state.quiz).length === 0 ? action.result.set : state.quiz,
 				items: items,
 				loaded: items.length === state.end,
 				start: state.start + action.result.items.length,

@@ -24,13 +24,19 @@ export default class Quiz extends Component {
 		pushState: PropTypes.func
 	}
 
+	componentDidMount() {
+		// window.addEventListener('scroll', ::this.handleScroll)
+	}
+
+	
+
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile } = this.props;
+		const { isMobile, scrolling } = this.props;
 		return (
-			<div style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
+			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
-					<QuizHeader isMobile={isMobile}/>
+					<QuizHeader isMobile={isMobile} scrolling={scrolling}/>
 					<QuizContent/>
 				</div>
 			</div>

@@ -89,7 +89,7 @@ export default class QuizContent extends Component {
 				{
 					questions.map((question, i) => {
 						return (
-							<li style={{padding: '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
+							<li key={i} style={{padding: '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
 								<p style={{width: '50%'}} className="flex_item_align_left">
 								{question.question}
 								</p>

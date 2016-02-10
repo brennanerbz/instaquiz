@@ -32,7 +32,8 @@ export default class App extends Component {
 
 	state = {
 		isMobile: false,
-		howItWorksOpen: false
+		howItWorksOpen: false,
+		scrolling: false
 	}
 
 	componentDidMount() {
@@ -40,16 +41,30 @@ export default class App extends Component {
 		this.setState({
 			isMobile: isMobile
 		});
+
+		window.addEventListener('scroll', ::this.handleScroll)
+	}
+
+	handleScroll() {
+		const { scrolling } = this.state;
+		const node = document.body
+		if(scrolling && node.scrollTop < 170) {
+			this.setState({scrolling: false})
+		} 
+		if(!scrolling && node.scrollTop > 170) {
+			this.setState({scrolling: true});
+		}
 	}
 
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState, params, location } = this.props;
-		const { isMobile, howItWorksOpen } = this.state;
+		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
 				isMobile: isMobile,
 				location: location,
+				scrolling: scrolling,
 				openHowItWorks: () => this.setState({howItWorksOpen: true})
 			})
 		})
@@ -66,6 +81,7 @@ export default class App extends Component {
 					location={location}
 					isMobile={isMobile}
 					show={howItWorksOpen}
+					scrolling={scrolling}
 					openHowItWorks={(value) => this.setState({howItWorksOpen: value})}
 				/>
 				{appChildrenWithProps}

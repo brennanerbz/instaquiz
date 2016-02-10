@@ -13,9 +13,8 @@ export default class Header extends Component {
 
 	render() {
 		const logo = require('../WikiForm/QuizlyLogo.png');
-		const { isMobile, show, params, location, pushState } = this.props;
+		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const isNotHomeView = location.pathname.match(/quiz/gi);
-		console.log(isEmpty(isNotHomeView))
 		return (
 			<div 
 				style={{
@@ -48,7 +47,8 @@ export default class Header extends Component {
 							marginBottom: '20px',
 							marginTop: '10px!important',
 							cursor: 'pointer'
-						}}>
+						}}
+						className={'fade ' + (scrolling && isMobile ? '' : 'in')}>
 						<span className="inline_block">
 							<img style={{height: isMobile ? '20px' : '26px', marginRight: '5px'}} src={logo}/>
 						</span>

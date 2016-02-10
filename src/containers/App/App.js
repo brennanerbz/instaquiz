@@ -56,6 +56,7 @@ export default class App extends Component {
 		return (
 			<div id={style.app}>
 				<WorksList
+					isMobile={isMobile}
 					show={howItWorksOpen}
 					closeHowItWorks={() => this.setState({howItWorksOpen: false})}
 				/>

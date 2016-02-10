@@ -33,7 +33,7 @@ export default class WorksList extends Component {
 		return (
 			<div style={{display: show ? 'block' : 'none', boxSizing: 'border-box', position: 'relative'}}>
 				<div 
-				style={{width: '100%', padding: '5em 0', borderBottom: '1px solid #DAE0E7'}} 
+				style={{width: '100%', padding: isMobile ? '5em 0 0 0' : '5em 0', borderBottom: '1px solid #DAE0E7'}} 
 				className="display_flex flex_vertical">
 					<i 
 					id={style.close_icon}
@@ -42,7 +42,7 @@ export default class WorksList extends Component {
 					<div className="flex_item_align_center">
 					<h2 
 						style={{
-							fontSize: isMobile ? '18px' : '22px',
+							fontSize: isMobile ? '19px' : '22px',
 							fontWeight: '500', 
 							color: '#2C3239', 
 							marginBottom: '45px', 
@@ -53,7 +53,7 @@ export default class WorksList extends Component {
 						How It Works
 					</h2>
 					</div>
-					<ul style={{padding: '0 75px'}} className={style.hiw_list}>
+					<ul style={{padding: '0px 10px'}} className={style.hiw_list}>
 						{
 							hiwItems.map((item, i) => {
 								return (

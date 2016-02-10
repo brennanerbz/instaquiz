@@ -8,7 +8,7 @@ export default class WorksItem extends Component {
 		const { item, index } = this.props;
 		const style = require('./WorksItem.scss');
 		return (
-			<div order={index} className={style.hiw_item}>
+			<div style={{padding: '0 0.5em'}} order={index} className={style.hiw_item}>
 				<div className={style.hiw_item_icon}>
 					<img src={item.image}/>
 				</div>

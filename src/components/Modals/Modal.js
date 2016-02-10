@@ -22,6 +22,10 @@ export default class DefaultModal extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		phoneNumber: ''
+	}
+
 	close() {
 		const { closeModal } = this.props;
 		closeModal()
@@ -31,6 +35,7 @@ export default class DefaultModal extends Component {
 		const style = require('./Modals.scss');
 		const chatBubbles = require('../../../static/ChatBubbles.png');
 		const { open, type, isMobile } = this.props;
+		const { phoneNumber } = this.state;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -45,7 +50,8 @@ export default class DefaultModal extends Component {
 						position: 'absolute',
 						top: '20px',
 						right: '20px',
-						color: '#A8B6C1'
+						color: '#A8B6C1',
+						cursor: 'pointer'
 					}} 
 					className="fa fa-times">
 					</i>
@@ -96,9 +102,18 @@ export default class DefaultModal extends Component {
 								padding: '0px 0 0 10px',
 								width: '100%'
 							}}
+							onChange={(e) => {
+								var number = e.target.value;
+								number = number.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
+								this.setState({
+									phoneNumber: number
+								});
+							}}
+							value={phoneNumber}
 							ref="phone_number"
 							placeholder="Phone Number #"
-							type="number"
+							type="text"
+							pattern="[0-9]*"
 							autoFocus={true}/>
 						</div>
 						<button 

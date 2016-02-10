@@ -35,7 +35,6 @@ export default class QuizHeader extends Component {
 					<button 
 						id={style.scrolling_button}
 						style={{
-							// opacity: scrolling ? '1' : '0',
 							zIndex: '1',
 							position: 'fixed',
 							top: '11px'

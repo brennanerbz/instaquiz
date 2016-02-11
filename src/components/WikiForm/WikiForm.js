@@ -70,7 +70,7 @@ export default class WikiForm extends Component {
 								fontSize: isMobile ? '16px' : '18px',
 								lineHeight: '22px'
 							}}
-							type="submit"
+							type="text"
 							ref="wiki_input"
 							className="input_with_icon"
 							placeholder="Paste Wikipedia article URL here..."

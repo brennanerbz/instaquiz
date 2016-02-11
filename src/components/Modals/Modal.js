@@ -62,7 +62,7 @@ export default class DefaultModal extends Component {
 					className="display_flex flex_vertical flex_center">
 						<img 
 						style={{
-							marginTop: '7.5px',
+							marginTop: isMobile ? '7.5px' : '1.5em',
 							height: isMobile ? '95px' : '115px'
 						}} 
 						src={chatBubbles}/>
@@ -80,7 +80,8 @@ export default class DefaultModal extends Component {
 							color: '#A8B6C1',
 							fontWeight: '400',
 							fontSize: isMobile ? '15.5px' : '19px',
-							margin: '5px 0 10px 0!important'
+							margin: isMobile ? '5px 0 10px 0!important' : '10px 0 15px 0',
+							width: isMobile ? '100%' : '75%'
 						}}>
 							The quiz is messaging based. Don't worry, we're paying for everything.
 						</p>
@@ -90,7 +91,8 @@ export default class DefaultModal extends Component {
 							padding: '7.5px 5px',
 							borderTop: '1px solid #EEEEEE',
 							borderBottom: '1px solid #EEEEEE',
-							width: '100%'
+							width: isMobile ? '100%' : '78%',
+							fontSize: isMobile ? '16px' : '18px'
 						}} 
 						className="input_wrapper flex_horizontal">
 							<span style={{padding: '7.5px 5px'}}>
@@ -100,7 +102,9 @@ export default class DefaultModal extends Component {
 							style={{
 								background: '#fff',
 								padding: '0px 0 0 10px',
-								width: '100%'
+								width: '100%',
+								fontSize: isMobile ? '16px' : '18px',
+								lineHeight: isMobile ? '17px' : '19px'
 							}}
 							onChange={(e) => {
 								var number = e.target.value;

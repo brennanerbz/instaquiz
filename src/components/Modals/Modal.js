@@ -50,13 +50,13 @@ export default class DefaultModal extends Component {
 						type == 'contact'
 						&&
 						<div>
-							<h1 style={{fontWeight: '600', fontSize: '32px', color: '#2C3239', margin: '0.5em 0 1em 0!important'}}>
+							<h1 style={{fontWeight: '600', fontSize: isMobile ? '24px' : '32px', color: '#2C3239', margin: '0.5em 0 1em 0!important'}}>
 							Contact us
 							</h1>
-							<p style={{fontWeight: '400', fontSize: '20px', color: '#A8B6C1'}}>Email</p>
-							<h2 style={{fontWeight: '500', fontSize: '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}><a className="link" href="mailto:team@quizly.com">team@quizly.com</a></h2>
-							<p style={{fontWeight: '400', fontSize: '20px', color: '#A8B6C1', marginTop: '1.5em'}}>Twitter</p>
-							<h2 style={{fontWeight: '500', fontSize: '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}>@quizlyapp</h2>
+							<p style={{fontWeight: '400', fontSize: isMobile ? '15px' : '20px', color: '#A8B6C1'}}>Email</p>
+							<h2 style={{fontWeight: '500', fontSize: isMobile ? '19px' : '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}><a className="link" href="mailto:team@quizly.com">team@quizly.com</a></h2>
+							<p style={{fontWeight: '400', fontSize: isMobile ? '15px' : '20px', color: '#A8B6C1', marginTop: '1.5em'}}>Twitter</p>
+							<h2 style={{fontWeight: '500', fontSize: isMobile ? '19px' : '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}>@quizlyapp</h2>
 						</div>
 					}
 				</Modal.Body>

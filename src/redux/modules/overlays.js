@@ -14,12 +14,14 @@ export default function reducer (state = initialState, action) {
 		case OPEN_MODAL:
 			return {
 				...state,
-				modalOpen: true
+				modalOpen: true,
+				modalType: action.modalType
 			}
 		case CLOSE_MODAL:
 			return {
 				...state,
-				modalOpen: false
+				modalOpen: false,
+				modalType: ''
 			}
 		default:		
 			return {
@@ -29,9 +31,10 @@ export default function reducer (state = initialState, action) {
 	}
 }
 
-export function openModal() {
+export function openModal(modalType) {
 	return {
-		type: OPEN_MODAL
+		type: OPEN_MODAL,
+		modalType
 	}
 }
 

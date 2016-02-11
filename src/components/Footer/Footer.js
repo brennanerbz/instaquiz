@@ -1,5 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { pushState } from 'redux-router';
 
+import * as overlayActions from '../../redux/modules/overlays';
+
+@connect(
+  state => ({
+  }),
+  dispatch => ({
+    ...bindActionCreators({
+      ...overlayActions,
+      pushState
+    }, dispatch)
+  })
+)
 export default class Footer extends Component {
 	static propTypes = {
 	}
@@ -25,7 +40,10 @@ export default class Footer extends Component {
 					<div 
 						style={{marginLeft: 'auto'}} 
 						className="flex_container_right grey">
-						<a style={{color: '#A8B6C1'}} className="link">Contact us</a>
+						<a 
+						onClick={() => this.props.openModal('contact')}
+						style={{color: '#A8B6C1'}} 
+						className="link">Contact us</a>
 					</div> 
 				</div>
 			</div>

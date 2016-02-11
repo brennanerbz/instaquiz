@@ -7,6 +7,11 @@
 	}
 	.hiw_item_icon {
 		margin: 0 auto 20px;
+		&.bot {
+			img {
+				height: 80px;
+			}
+		}
 		img {
 			height: 70px;
 		}

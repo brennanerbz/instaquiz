@@ -5,6 +5,7 @@ import { pushState } from 'redux-router';
 import { Modal } from 'react-bootstrap';
 
 import * as overlayActions from '../../redux/modules/overlays';
+import PhoneModal from './PhoneModal';
 
 @connect(
   state => ({
@@ -22,10 +23,6 @@ export default class DefaultModal extends Component {
 	static propTypes = {
 	}
 
-	state = {
-		phoneNumber: ''
-	}
-
 	close() {
 		const { closeModal } = this.props;
 		closeModal()
@@ -33,9 +30,7 @@ export default class DefaultModal extends Component {
 
 	render() {
 		const style = require('./Modals.scss');
-		const chatBubbles = require('../../../static/ChatBubbles.png');
 		const { open, type, isMobile } = this.props;
-		const { phoneNumber } = this.state;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -43,91 +38,27 @@ export default class DefaultModal extends Component {
 			show={open}
 			onHide={::this.close}>
 				<Modal.Body>
-					<i 
-					onClick={::this.close}
-					style={{
-						fontSize: '1em',
-						position: 'absolute',
-						top: '20px',
-						right: '20px',
-						color: '#A8B6C1',
-						cursor: 'pointer'
-					}} 
-					className="fa fa-times">
-					</i>
-					<div
-					style={{
-						textAlign: 'center'
-					}}
-					className="display_flex flex_vertical flex_center">
-						<img 
-						style={{
-							marginTop: isMobile ? '7.5px' : '1.5em',
-							height: isMobile ? '95px' : '115px'
-						}} 
-						src={chatBubbles}/>
-						<h1
-						style={{
-							color: '#2C3239',
-							fontWeight: '600',
-							fontSize: isMobile ? '17px' : '24px',
-							margin: '10px 0 5px 0!important'
-						}}>
-							Enter phone number to take quiz
-						</h1>
-						<p
-						style={{
-							color: '#A8B6C1',
-							fontWeight: '400',
-							fontSize: isMobile ? '15.5px' : '19px',
-							margin: isMobile ? '5px 0 10px 0!important' : '10px 0 15px 0',
-							width: isMobile ? '100%' : '75%'
-						}}>
-							The quiz is messaging based. Don't worry, we're paying for everything.
-						</p>
-						<div 
-						style={{
-							margin: '10px 0px',
-							padding: '7.5px 5px',
-							borderTop: '1px solid #EEEEEE',
-							borderBottom: '1px solid #EEEEEE',
-							width: isMobile ? '100%' : '78%',
-							fontSize: isMobile ? '16px' : '18px'
-						}} 
-						className="input_wrapper flex_horizontal">
-							<span style={{padding: '7.5px 5px'}}>
-								+1
-							</span>
-							<input 
-							style={{
-								background: '#fff',
-								padding: '0px 0 0 10px',
-								width: '100%',
-								fontSize: isMobile ? '16px' : '18px',
-								lineHeight: isMobile ? '17px' : '19px'
-							}}
-							onChange={(e) => {
-								var number = e.target.value;
-								number = number.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
-								this.setState({
-									phoneNumber: number
-								});
-							}}
-							value={phoneNumber}
-							ref="phone_number"
-							placeholder="Phone Number #"
-							type="text"
-							pattern="[0-9]*"
-							autoFocus={true}/>
+					{
+						type == 'phone'
+						&&
+						<PhoneModal
+							isMobile={isMobile}
+							close={::this.close}
+						/>
+					}
+					{
+						type == 'contact'
+						&&
+						<div>
+							<h1 style={{fontWeight: '600', fontSize: '32px', color: '#2C3239', margin: '0.5em 0 1em 0!important'}}>
+							Contact us
+							</h1>
+							<p style={{fontWeight: '400', fontSize: '20px', color: '#A8B6C1'}}>Email</p>
+							<h2 style={{fontWeight: '500', fontSize: '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}><a className="link" href="mailto:team@quizly.com">team@quizly.com</a></h2>
+							<p style={{fontWeight: '400', fontSize: '20px', color: '#A8B6C1', marginTop: '1.5em'}}>Twitter</p>
+							<h2 style={{fontWeight: '500', fontSize: '25px', color: '#2C3239', margin: '0 0 0.5em 0!important' }}>@quizlyapp</h2>
 						</div>
-						<button 
-						style={{
-							margin: '5px 0px'
-						}} 
-						className="button primary_green">
-							Start
-						</button>
-					</div>
+					}
 				</Modal.Body>
 			</Modal>
 		);

@@ -9,7 +9,7 @@ export default class WorksItem extends Component {
 		const style = require('./WorksItem.scss');
 		return (
 			<div style={{padding: '0 0.5em'}} order={index} className={style.hiw_item}>
-				<div className={style.hiw_item_icon}>
+				<div className={style.hiw_item_icon + ' ' + (index === 1 ? style.bot : '')}>
 					<img src={item.image}/>
 				</div>
 				<h3 className={style.hiw_item_title}>

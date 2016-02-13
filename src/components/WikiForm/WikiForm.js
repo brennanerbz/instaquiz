@@ -62,7 +62,7 @@ export default class WikiForm extends Component {
 					textAlign: 'center'}}>
 					Instantly transform any Wikipedia page into quiz questions
 				</h2>
-				<form 
+				<div 
 					onSubmit={(e) => e.preventDefault()} 
 					id={style.wiki_form} 
 					className="display_flex flex_vertical flex_center">
@@ -84,7 +84,7 @@ export default class WikiForm extends Component {
 								});
 							}}
 							onKeyDown={(e) => {
-								if(e.which === 13) {
+								if(e.which === 13 && wiki.length > 0) {
 									e.preventDefault()
 									this.handleSubmitLink()
 								}
@@ -120,7 +120,11 @@ export default class WikiForm extends Component {
 								style={{
 									marginRight: '10px'
 								}}
-								onClick={::this.handleSubmitLink}
+								onClick={() => { 
+									if(wiki.length > 0) {
+										this.handleSubmitLink()
+									}
+								}}
 								className="button primary_green">
 								Transform
 							</button>
@@ -131,7 +135,7 @@ export default class WikiForm extends Component {
 							</button>
 						</div>
 					}
-				</form>
+				</div>
 			</div>
 		);
 	}

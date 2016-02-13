@@ -75,7 +75,7 @@ export default class PhoneModal extends Component {
 					</p>
 					<div 
 					style={{
-						margin: '10px 0px',
+						margin: '7.5px 0px',
 						padding: '7.5px 5px',
 						borderTop: '1px solid',
 						borderBottom: '1px solid',
@@ -105,7 +105,10 @@ export default class PhoneModal extends Component {
 							});
 						}}
 						onKeyDown={(e) => {
-							if(e.which === 13) this.submitPhoneNumber()
+							if(e.which === 13) {
+								e.preventDefault()
+								this.submitPhoneNumber()
+							}
 						}}
 						value={phoneNumber}
 						ref="phone_number"

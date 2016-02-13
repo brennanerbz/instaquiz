@@ -17,7 +17,9 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 
 
 @connect(state => ({
-		loaded: state.quiz.loaded
+		loaded: state.quiz.loaded,
+		title: state.quiz.title,
+		items_count: state.quiz.items_count
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -61,8 +63,7 @@ export default class Quiz extends Component {
 
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile, scrolling, end, loaded } = this.props;
-		const { title } = this.state;
+		const { isMobile, scrolling, title, items_count, loaded } = this.props;
 		return (
 			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
@@ -70,7 +71,7 @@ export default class Quiz extends Component {
 						openModal={this.props.openModal}
 						loaded={loaded} 
 						title={title} 
-						count={end} 
+						count={items_count} 
 						isMobile={isMobile}
 						scrolling={scrolling}/>
 					<QuizContent/>

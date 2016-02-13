@@ -23,6 +23,17 @@ const initialState = {
 	error: null
 }
 
+
+Array.prototype.__uniqueShallow = function() {
+  var seen = new Set;
+  return this.filter(function(item, i){
+    if (!seen.has(item)) {
+      seen.add(item);
+      return true;
+    }
+  });
+}
+
 export default function reducer (state = initialState, action) {
 	var { items } = state;
 
@@ -46,11 +57,11 @@ export default function reducer (state = initialState, action) {
 				...state
 			}
 		case FETCH_ITEMS_SUCCESS:
-			items = [...items, ...action.result.items]
+			items = [...items, ...action.items].__uniqueShallow()
 			return {
 				...state,
 				items: items,
-				loaded: action.result.completed
+				loaded: action.completed
 			}
 		case FETCH_ITEMS_FAILURE:
 			return {
@@ -71,6 +82,7 @@ export default function reducer (state = initialState, action) {
 
 export function addTopic(topic) {
 	return (dispatch, getState) => {
+		dispatch({type: ADD_TOPIC})
 		request
 		.post(`${config.herokuApi}/topics/`)
 		.send({topic: topic})
@@ -78,7 +90,6 @@ export function addTopic(topic) {
 			if(res.ok) {
 				const result = res.body;
 				dispatch({type: ADD_TOPIC_SUCCESS, result})
-				console.log('result: ', result)
 				dispatch(fetchItems(topic))
 			}
 		})

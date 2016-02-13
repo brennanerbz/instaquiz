@@ -5,14 +5,30 @@ export default class PhoneModal extends Component {
 	}
 
 	state = {
-		phoneNumber: ''
+		phoneNumber: '',
+		error: false
+	}
+
+	submitPhoneNumber() {
+		const { startQuiz } = this.props;
+		var { phoneNumber } = this.state;
+		var phoneNumberRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+		if(phoneNumber.match(phoneNumberRegExp)) {
+			phoneNumber = phoneNumber.replace(/-/g, '')
+			startQuiz(phoneNumber)
+		}
+		else {
+			this.setState({
+				error: true
+			});
+		}
 	}
 
 	render() {
 		const style = require('./Modals.scss');
 		const chatBubbles = require('../../../static/ChatBubbles.png');
 		const { isMobile } = this.props;
-		const { phoneNumber } = this.state;
+		const { phoneNumber, error } = this.state;
 		return(
 			<div className="">
 				<i 
@@ -61,13 +77,14 @@ export default class PhoneModal extends Component {
 					style={{
 						margin: '10px 0px',
 						padding: '7.5px 5px',
-						borderTop: '1px solid #EEEEEE',
-						borderBottom: '1px solid #EEEEEE',
+						borderTop: '1px solid',
+						borderBottom: '1px solid',
+						borderColor: error ? '#FE3034' : '#EEEEEE',
 						width: isMobile ? '100%' : '78%',
 						fontSize: isMobile ? '16px' : '18px'
 					}} 
 					className="input_wrapper flex_horizontal">
-						<span style={{padding: '7.5px 5px'}}>
+						<span style={{padding: '7.5px 5px', color: error ? '#FE3034' : ''}}>
 							+1
 						</span>
 						<input 
@@ -76,14 +93,19 @@ export default class PhoneModal extends Component {
 							padding: '0px 0 0 10px',
 							width: '100%',
 							fontSize: isMobile ? '16px' : '18px',
-							lineHeight: isMobile ? '17px' : '19px'
+							lineHeight: isMobile ? '17px' : '19px',
+							color: error ? '#FE3034' : '',
 						}}
 						onChange={(e) => {
 							var number = e.target.value;
 							number = number.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
 							this.setState({
-								phoneNumber: number
+								phoneNumber: number,
+								error: false
 							});
+						}}
+						onKeyDown={(e) => {
+							if(e.which === 13) this.submitPhoneNumber()
 						}}
 						value={phoneNumber}
 						ref="phone_number"
@@ -92,9 +114,12 @@ export default class PhoneModal extends Component {
 						pattern="[0-9]*"
 						autoFocus={true}/>
 					</div>
+					{error && <p style={{color: error ? '#FE3034' : '', marginBottom: '5px'}}>Oops! Please enter a valid phone number</p>}
 					<button 
+					onClick={::this.submitPhoneNumber}
 					style={{
-						margin: '5px 0px'
+						margin: '5px 0px',
+						width: '80%'
 					}} 
 					className="button primary_green">
 						Start

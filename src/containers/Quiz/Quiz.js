@@ -17,8 +17,6 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 
 
 @connect(state => ({
-		start: state.quiz.start,
-		end: state.quiz.end,
 		loaded: state.quiz.loaded
 	}),
 	dispatch => ({
@@ -51,7 +49,7 @@ export default class Quiz extends Component {
 		const { params, addTopic, start } = this.props;
 		var title = params.quiz_title;
 		if(title) {
-			title = title.replace("-", " ")
+			title = title.replace(/-/g, " ")
 			addTopic(title)
 		}
 	}

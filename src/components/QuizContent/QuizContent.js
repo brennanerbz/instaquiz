@@ -98,14 +98,14 @@ export default class QuizContent extends Component {
 		return (
 			<ul style={{marginTop: '2em', marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%'}}>
 				{
-					questions.map((question, i) => {
+					items.map((item, i) => {
 						return (
 							<li key={i} style={{padding: '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
 								<p style={{width: '50%'}} className="flex_item_align_left">
-								{question.question}
+								{item[1]}
 								</p>
 								<p style={{width: '50%'}} className="flex_item_align_right">
-								{question.answer}
+								{item.slice(-1)[0]}
 								</p>
 							</li>
 						)

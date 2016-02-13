@@ -13,7 +13,7 @@ export default class WikiForm extends Component {
 	handleSubmitLink() {
 		const { pushState } = this.props;
 		const { wiki } = this.state;
-		const articleTitle = wiki.replace(' ', '-')
+		const articleTitle = wiki.replace(/ /g, '-')
 		pushState(null, `/quiz/${articleTitle}`)
 	}
 

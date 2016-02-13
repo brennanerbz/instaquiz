@@ -28,7 +28,7 @@ export default class WikiForm extends Component {
 								return (
 									<li style={{textAlign: isMobile ? 'center' : ''}} className="list_item">
 										<a 
-										onClick={() => pushState(null, `/quiz/${quiz.replace(' ', '-')}`)}
+										onClick={() => pushState(null, `/quiz/${quiz.replace(/ /g, '-')}`)}
 										className="link">{quiz}</a>
 									</li>
 								)
@@ -46,7 +46,7 @@ export default class WikiForm extends Component {
 									return (
 										<li className="list_item">
 											<a 
-											onClick={() => pushState(null, `/quiz/${quiz.replace(' ', '-')}`)}
+											onClick={() => pushState(null, `/quiz/${quiz.replace(/ /g, '-')}`)}
 											className="link">{quiz}</a>
 										</li>
 									)

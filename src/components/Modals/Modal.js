@@ -5,6 +5,7 @@ import { pushState } from 'redux-router';
 import { Modal } from 'react-bootstrap';
 
 import * as overlayActions from '../../redux/modules/overlays';
+import { startQuiz } from '../../redux/modules/quiz';
 import PhoneModal from './PhoneModal';
 
 @connect(
@@ -15,6 +16,7 @@ import PhoneModal from './PhoneModal';
   dispatch => ({
     ...bindActionCreators({
       ...overlayActions,
+      startQuiz,
       pushState
     }, dispatch)
   })
@@ -30,7 +32,7 @@ export default class DefaultModal extends Component {
 
 	render() {
 		const style = require('./Modals.scss');
-		const { open, type, isMobile } = this.props;
+		const { open, type, isMobile, startQuiz } = this.props;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -44,6 +46,7 @@ export default class DefaultModal extends Component {
 						<PhoneModal
 							isMobile={isMobile}
 							close={::this.close}
+							startQuiz={startQuiz}
 						/>
 					}
 					{

@@ -10,7 +10,7 @@ export default class WikiForm extends Component {
 	}
 
 	render() {
-		const { isMobile } = this.props;
+		const { isMobile, pushState } = this.props;
 		const { quizzes } = this.state;
 		return (
 			<div 
@@ -27,7 +27,9 @@ export default class WikiForm extends Component {
 							.map((quiz) => {
 								return (
 									<li style={{textAlign: isMobile ? 'center' : ''}} className="list_item">
-										<a className="link">{quiz}</a>
+										<a 
+										onClick={() => pushState(null, `/quiz/${quiz.replace(' ', '-')}`)}
+										className="link">{quiz}</a>
 									</li>
 								)
 							})
@@ -43,7 +45,9 @@ export default class WikiForm extends Component {
 								.map((quiz) => {
 									return (
 										<li className="list_item">
-											<a className="link">{quiz}</a>
+											<a 
+											onClick={() => pushState(null, `/quiz/${quiz.replace(' ', '-')}`)}
+											className="link">{quiz}</a>
 										</li>
 									)
 								})

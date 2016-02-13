@@ -1,4 +1,9 @@
 import request from 'superagent';
+import config from '../../config';
+
+export const ADD_TOPIC = 'Instaquiz/quiz/ADD_TOPIC';
+export const ADD_TOPIC_SUCCESS = 'Instaquiz/quiz/ADD_TOPIC_SUCCESS';
+export const ADD_TOPIC_FAILURE = 'Instaquiz/quiz/ADD_TOPIC_FAILURE';
 
 export const FETCH_ITEMS = 'Instaquiz/quiz/FETCH_ITEMS';
 export const FETCH_ITEMS_SUCCESS = 'Instaquiz/quiz/FETCH_ITEMS_SUCCESS';
@@ -52,13 +57,24 @@ export default function reducer (state = initialState, action) {
 	}
 }
 
-export function fetchItems(title, start) {
-	return {
-		types: [FETCH_ITEMS, FETCH_ITEMS_SUCCESS, FETCH_ITEMS_FAILURE],
-		promise: (client) => client.get(`/items/?start=${start}`, {
-			title: title
+export function addTopic(topic) {
+	return (dispatch, getState) => {
+		request
+		.post(`${config.herokuApi}/topics/`)
+		.send({topic: topic})
+		.end((err, res) => {
+			if(res.ok) {
+				const result = res.body;
+				dispatch({type: ADD_TOPIC_SUCCESS, result})
+				console.log('result: ', result)
+				// dispatch(fetchItems(result.url))
+			}
 		})
 	}
+}
+
+export function fetchItems(url) {
+	
 }
 
 export function clearQuiz() {

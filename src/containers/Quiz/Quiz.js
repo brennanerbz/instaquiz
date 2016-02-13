@@ -48,11 +48,11 @@ export default class Quiz extends Component {
 	}
 
 	componentDidMount() {
-		const { params, fetchItems, start } = this.props;
+		const { params, addTopic, start } = this.props;
 		var title = params.quiz_title;
 		if(title) {
 			title = title.replace("-", " ")
-			// fetchItems(title, start)
+			addTopic(title)
 		}
 	}
 

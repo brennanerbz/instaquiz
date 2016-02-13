@@ -7,11 +7,14 @@ export default class WikiForm extends Component {
 	}
 
 	state = {
-		wikiLink: ''
+		wiki: ''
 	}
 
 	handleSubmitLink() {
-
+		const { pushState } = this.props;
+		const { wiki } = this.state;
+		const articleTitle = wiki.replace(' ', '-')
+		pushState(null, `/quiz/${articleTitle}`)
 	}
 
 	tooltip(text) {
@@ -24,7 +27,7 @@ export default class WikiForm extends Component {
 		const style = require('./WikiForm.scss');
 		const logo = require('./QuizlyLogo.png');
 		const { isMobile } = this.props;
-		const { wikiLink } = this.state;
+		const { wiki } = this.state;
 		return (
 			<div 
 				style={{padding: isMobile ? '0px 20px' : ''}} 
@@ -73,11 +76,11 @@ export default class WikiForm extends Component {
 							type="text"
 							ref="wiki_input"
 							className="input_with_icon"
-							placeholder="Paste Wikipedia article URL here..."
-							value={wikiLink}
+							placeholder="Search Wikipedia articles..."
+							value={wiki}
 							onChange={(e) => {
 								this.setState({
-									wikiLink: e.target.value
+									wiki: e.target.value
 								});
 							}}
 							onKeyDown={(e) => {
@@ -98,14 +101,14 @@ export default class WikiForm extends Component {
 									fontSize: '1.1em'
 								}}
 								onClick={() => {
-									if(wikiLink.length > 0) {
+									if(wiki.length > 0) {
 										this.handleSubmitLink()
 									} else {
 										this.refs.wiki_input.focus()
 									}
 								}}
 								id={style.input_icon}
-								className="fa fa-arrow-right right">
+								className="fa fa-search right">
 							</span>
 						</OverlayTrigger>
 					</div>

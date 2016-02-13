@@ -1,5 +1,84 @@
 import React, { Component, PropTypes } from 'react';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import Autosuggest from 'react-autosuggest';
+
+const articles = [
+	  {
+	    name: 'C',
+	    year: 1972
+	  },
+	  {
+	    name: 'C#',
+	    year: 2000
+	  },
+	  {
+	    name: 'C++',
+	    year: 1983
+	  },
+	  {
+	    name: 'Clojure',
+	    year: 2007
+	  },
+	  {
+	    name: 'Elm',
+	    year: 2012
+	  },
+	  {
+	    name: 'Go',
+	    year: 2009
+	  },
+	  {
+	    name: 'Haskell',
+	    year: 1990
+	  },
+	  {
+	    name: 'Java',
+	    year: 1995
+	  },
+	  {
+	    name: 'Javascript',
+	    year: 1995
+	  },
+	  {
+	    name: 'Perl',
+	    year: 1987
+	  },
+	  {
+	    name: 'PHP',
+	    year: 1995
+	  },
+	  {
+	    name: 'Python',
+	    year: 1991
+	  },
+	  {
+	    name: 'Ruby',
+	    year: 1995
+	  },
+	  {
+	    name: 'Scala',
+	    year: 2003
+	  }
+]
+
+function getArticleSuggestions(value) {
+	const inputValue = value.trim().toLowerCase();
+	const inputLength = inputValue.length;
+
+	return inputLength === 0 ? [] : articles.filter(article =>
+		article.name.toLowerCase().slice(0, inputLength) === inputValue
+	);
+}
+
+function getSuggestionValue(suggestion) {
+	return suggestion.name;
+}
+
+function renderSuggestion(suggestion) {
+	return (
+		<span>{suggestion.name}</span>
+	);
+}
 
 export default class WikiForm extends Component {
 	static propTypes = {
@@ -7,14 +86,32 @@ export default class WikiForm extends Component {
 	}
 
 	state = {
-		wiki: ''
+		value: '',
+		articles: getArticleSuggestions('')
 	}
 
-	handleSubmitLink() {
-		const { pushState } = this.props;
-		const { wiki } = this.state;
-		const articleTitle = wiki.replace(/ /g, '-')
-		pushState(null, `/quiz/${articleTitle}`)
+	onChange(event, { newValue, method }) {
+		this.setState({value: newValue});
+	}
+
+	onSuggestionsUpdateRequested({ value }) {
+		this.setState({
+			articles: getArticleSuggestions(value)
+		});
+	}
+
+	onSuggestionSelected(event, {suggestion, suggestionValue, method}) {
+	}
+
+	handleSubmitLink(event) {
+		if(event.which === 13) {
+			const { pushState } = this.props;
+			const { value } = this.state;
+			if(value.length > 0) {
+				const articleTitle = value.replace(/ /g, '-')
+				pushState(null, `/quiz/${articleTitle}`)
+			}
+		}
 	}
 
 	tooltip(text) {
@@ -27,7 +124,19 @@ export default class WikiForm extends Component {
 		const style = require('./WikiForm.scss');
 		const logo = require('./QuizlyLogo.png');
 		const { isMobile } = this.props;
-		const { wiki } = this.state;
+		const { value, articles } = this.state;
+		const inputProps = {
+			autoFocus: true,
+			style: {
+				height: '48px',
+				fontSize: isMobile ? '16px' : '18px',
+				lineHeight: '22px'
+			},
+			placeholder: 'Search Wikipedia articles...',
+			value,
+			onChange: ::this.onChange,
+			onKeyDown: ::this.handleSubmitLink
+		}
 		return (
 			<div 
 				style={{padding: isMobile ? '0px 20px' : ''}} 
@@ -63,45 +172,28 @@ export default class WikiForm extends Component {
 					Instantly transform any Wikipedia page into quiz questions
 				</h2>
 				<div 
-					onSubmit={(e) => e.preventDefault()} 
 					id={style.wiki_form} 
 					className="display_flex flex_vertical flex_center">
 					<div style={{marginBottom: '20px', width: '100%'}} className="input_wrapper relative">
-						<input
-							style={{
-								height: '48px',
-								fontSize: isMobile ? '16px' : '18px',
-								lineHeight: '22px'
-							}}
-							type="text"
-							ref="wiki_input"
-							className="input_with_icon"
-							placeholder="Search Wikipedia articles..."
-							value={wiki}
-							onChange={(e) => {
-								this.setState({
-									wiki: e.target.value
-								});
-							}}
-							onKeyDown={(e) => {
-								if(e.which === 13 && wiki.length > 0) {
-									e.preventDefault()
-									this.handleSubmitLink()
-								}
-							}}
-							autoFocus={true}
+						<Autosuggest
+							suggestions={articles}
+							onSuggestionsUpdateRequested={::this.onSuggestionsUpdateRequested}
+		                    getSuggestionValue={getSuggestionValue}
+		                    onSuggestionSelected={::this.onSuggestionSelected}
+		                    renderSuggestion={renderSuggestion}
+		                    inputProps={inputProps}
 						/>
 						<OverlayTrigger 
 							delayShow={500} 
 							delayHide={0} 
 							placement="bottom" 
-							overlay={::this.tooltip('Click to transform Wiki page')}>
+							overlay={::this.tooltip('Click to transform value page')}>
 							<span 
 								style={{
 									fontSize: '1.1em'
 								}}
 								onClick={() => {
-									if(wiki.length > 0) {
+									if(value.length > 0) {
 										this.handleSubmitLink()
 									} else {
 										this.refs.wiki_input.focus()
@@ -121,7 +213,7 @@ export default class WikiForm extends Component {
 									marginRight: '10px'
 								}}
 								onClick={() => { 
-									if(wiki.length > 0) {
+									if(value.length > 0) {
 										this.handleSubmitLink()
 									}
 								}}

@@ -286,3 +286,63 @@ $secondary-grey: #A8B6C1;
 	}
 }
 */
+
+
+// Autosuggest
+:global .react-autosuggest__container {
+  position: relative;
+}
+
+:global .react-autosuggest__suggestions-container {
+  position: absolute;
+  top: 48px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background: #fff;
+  border: 1px solid $primary-grey-border;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: 0.25em;
+  z-index: 2;
+  li {
+  	  &:first-child {
+  		border-top-left-radius: 0.25rem;
+  		border-top-right-radius: 0.25rem;
+  	  }
+  	  &:last-child {
+  		border-bottom-left-radius: 0.25rem;
+  		border-bottom-right-radius: 0.25rem;
+  	  }
+  }
+}
+
+:global .react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+:global .react-autosuggest__suggestion--focused {
+  background-color: #40A0FF;
+  color: #fff;
+}
+
+:global .react-autosuggest__section-title {
+  padding: 10px 0 0 10px;
+  font-size: 12px;
+  color: #777;
+  border-top: 1px dashed #ccc;
+}
+
+:global .react-autosuggest__section-container:first-child .react-autosuggest__section-title {
+  border-top: 0;
+}
+
+:global .react-autosuggest__section-suggestions-container {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}

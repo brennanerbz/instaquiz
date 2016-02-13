@@ -1,3 +1,15 @@
 #wiki_form {
 	width: 100%;
 }
+
+.article {
+	padding: 2px 6px;
+	cursor: default;
+}
+
+.highlighted {
+	color: #fff;
+	background: hsl(200, 50%, 50%);
+	padding: 2px 6px;
+	cursor: default;
+}

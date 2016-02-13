@@ -51,7 +51,6 @@ export default class App extends Component {
 		const { scrolling, isMobile } = this.state;
 		const node = document.body
 		// Scroll logic
-		console.log(node.scrollTop)
 	}
 
 	render() {

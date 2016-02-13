@@ -16,23 +16,31 @@ export default class QuizContent extends Component {
 
 	render() {
 		const style = require('./QuizContent.scss');
-		const { items, loaded } = this.props;
+		const { items, loaded, isMobile } = this.props;
+		const itemList = [];
+		items.map((item, i) => {
+			const term = item[1];
+			var question = item[2];
+			question = question
+			.replace(new RegExp('(^|\\s)(' + term + ')(\\s|$)','ig'), '$1<b>$2</b>$3')
+			itemList.push(
+				<li key={i} style={{position: 'relative', padding: isMobile ? '0.5em' : '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
+					<p 
+					style={{width: '50%', padding: isMobile ? '0.5em 0.5em 0.5em 0' : '1em 1em 1em 0.5em'}} 
+					className="flex_item_align_left"
+					dangerouslySetInnerHTML={{__html: question}}>
+					</p>
+					<p 
+					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '1em 0.5em 1em 1em', position: 'absolute', top: isMobile ? '6.5px' : '15px'}} 
+					className="flex_item_align_right">
+					<b>{item[1]}</b>
+					</p>
+				</li>
+			)
+		})
 		return (
-			<ul style={{marginTop: '2em', marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%'}}>
-				{
-					items.map((item, i) => {
-						return (
-							<li key={i} style={{padding: '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
-								<p style={{width: '50%'}} className="flex_item_align_left">
-								{item.slice(-1)[0]}
-								</p>
-								<p style={{width: '50%'}} className="flex_item_align_right">
-								{item[1]}
-								</p>
-							</li>
-						)
-					})
-				}
+			<ul style={{marginTop: '2em', marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%', fontSize: isMobile ? '14px' : ''}}>
+				{itemList}
 			</ul>
 		);
 	}

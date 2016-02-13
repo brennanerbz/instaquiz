@@ -50,7 +50,8 @@ export default class QuizHeader extends Component {
 				<button 
 					onClick={() => {this.props.openModal('phone')}}
 					style={{
-						zIndex: '0'
+						zIndex: '0',
+						width: isMobile ? '100%' : ''
 					}} 
 					className="button primary_green">
 					{

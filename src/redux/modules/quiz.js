@@ -23,17 +23,6 @@ const initialState = {
 	error: null
 }
 
-
-Array.prototype.__uniqueShallow = function() {
-  var seen = new Set;
-  return this.filter(function(item, i){
-    if (!seen.has(item)) {
-      seen.add(item);
-      return true;
-    }
-  });
-}
-
 export default function reducer (state = initialState, action) {
 	var { items } = state;
 
@@ -57,10 +46,9 @@ export default function reducer (state = initialState, action) {
 				...state
 			}
 		case FETCH_ITEMS_SUCCESS:
-			items = [...items, ...action.items].__uniqueShallow()
 			return {
-				...state,
-				items: items,
+				...state, 
+				items: action.items,
 				loaded: action.completed
 			}
 		case FETCH_ITEMS_FAILURE:
@@ -71,7 +59,10 @@ export default function reducer (state = initialState, action) {
 		case CLEAR_QUIZ:
 			return {
 				...state = initialState,
-				items: []
+				title: '',
+				items: [],
+				items_count: 0,
+				loaded: false
 			}
 		default:		
 			return {
@@ -90,7 +81,7 @@ export function addTopic(topic) {
 			if(res.ok) {
 				const result = res.body;
 				dispatch({type: ADD_TOPIC_SUCCESS, result})
-				dispatch(fetchItems(topic))
+				dispatch(fetchItems(result.title))
 			}
 		})
 	}
@@ -105,14 +96,14 @@ export function fetchItems(topic) {
 				const result = res.body;
 				const items = result.items;
 				var completed = false;
-				if(items.length < 100) {
+				if(result.completed || items.length > 100) {
+					completed = true;
+					dispatch({type: FETCH_ITEMS_SUCCESS, items, completed})
+				} else {
 					dispatch({type: FETCH_ITEMS_SUCCESS, items, completed})
 					if(!result.completed) {
 						dispatch(fetchItems(topic))
 					}
-				} else {
-					completed = true;
-					dispatch({type: FETCH_ITEMS_SUCCESS, items, completed})
 				}
 			}
 		})

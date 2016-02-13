@@ -74,7 +74,7 @@ export default class Quiz extends Component {
 						count={items_count} 
 						isMobile={isMobile}
 						scrolling={scrolling}/>
-					<QuizContent/>
+					<QuizContent isMobile={isMobile}/>
 				</div>
 			</div>
 		);

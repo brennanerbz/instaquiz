@@ -34,8 +34,7 @@ export default function reducer (state = initialState, action) {
 		case ADD_TOPIC_SUCCESS:
 			return {
 				...state,
-				title: action.result.title,
-				items_count: action.result.items_count
+				title: action.result.title
 			}
 		case ADD_TOPIC_FAILURE:
 			return {
@@ -49,7 +48,8 @@ export default function reducer (state = initialState, action) {
 			return {
 				...state, 
 				items: action.items,
-				loaded: action.completed
+				loaded: action.completed,
+				items_count: action.items.length
 			}
 		case FETCH_ITEMS_FAILURE:
 			return {
@@ -98,9 +98,9 @@ export function fetchItems(topic) {
 				var completed = false;
 				if(result.completed || items.length > 100) {
 					completed = true;
-					dispatch({type: FETCH_ITEMS_SUCCESS, items, completed})
+					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
 				} else {
-					dispatch({type: FETCH_ITEMS_SUCCESS, items, completed})
+					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
 					if(!result.completed) {
 						dispatch(fetchItems(topic))
 					}

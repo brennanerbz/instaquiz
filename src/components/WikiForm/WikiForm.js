@@ -85,6 +85,13 @@ export default class WikiForm extends Component {
 		isMobile: PropTypes.bool
 	}
 
+	componentDidMount() {
+		const { params } = this.props;
+		if(Object.keys(params).length > 0 && params.quiz_title) {
+			this.setState({value: params.quiz_title.replace(/-/g, ' ')});
+		}
+	}
+
 	state = {
 		value: '',
 		articles: getArticleSuggestions('')

@@ -58,7 +58,7 @@ export default class PhoneModal extends Component {
 					style={{
 						color: '#2C3239',
 						fontWeight: '600',
-						fontSize: isMobile ? '17px' : '24px',
+						fontSize: isMobile ? '17px' : '22px',
 						margin: '10px 0 5px 0!important'
 					}}>
 						Enter phone number to take quiz

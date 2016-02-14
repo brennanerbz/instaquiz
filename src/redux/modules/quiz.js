@@ -116,7 +116,7 @@ export function startQuiz(number) {
 		request
 		.post(`${config.herokuApi}/users/`)
 		.send({
-			user_cell_phone_number: number,
+			user_cell_phone_number: '+1' + number,
 			topic: quizTitle
 		})
 		.end((err, res) => {

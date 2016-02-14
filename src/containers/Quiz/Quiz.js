@@ -57,10 +57,10 @@ export default class Quiz extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { addTopic } = this.props;
-		if(this.props.quiz_title !== nextProps.quiz_title) {
-			const title = nextProps.quiz_title.replace(/-/g, " ")
-			addTopic(title)
+		if(this.props.params.quiz_title !== nextProps.params.quiz_title) {
+			const title = nextProps.params.quiz_title.replace(/-/g, " ")
+			this.props.clearQuiz()
+			this.props.addTopic(title)
 		}
 	}
 

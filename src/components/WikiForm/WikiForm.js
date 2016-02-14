@@ -131,7 +131,7 @@ export default class WikiForm extends Component {
 				fontSize: isMobile || isNotHomeView ? '16px' : '18px',
 				lineHeight: '22px'
 			},
-			placeholder: 'Search Wikipedia articles...',
+			placeholder: isMobile ? 'Search Wikipedia...' : 'Search Wikipedia articles...',
 			value,
 			onChange: ::this.onChange,
 			onKeyDown: ::this.handleSubmitLink
@@ -140,7 +140,9 @@ export default class WikiForm extends Component {
 				<div 
 					id={style.wiki_form} 
 					className="display_flex flex_vertical flex_center">
-					<div style={{marginBottom: isNotHomeView ? '0' : '20px', width: '100%'}} className="input_wrapper relative">
+					<div 
+					style={{marginBottom: isNotHomeView ? '0' : '20px', width: '100%'}} 
+					className={'input_wrapper relative' + ' ' + (isNotHomeView || isMobile ? 'small' : '')}>
 						<Autosuggest
 							suggestions={articles}
 							onSuggestionsUpdateRequested={::this.onSuggestionsUpdateRequested}
@@ -153,10 +155,11 @@ export default class WikiForm extends Component {
 							delayShow={500} 
 							delayHide={0} 
 							placement="bottom" 
-							overlay={::this.tooltip('Click to transform value page')}>
+							overlay={::this.tooltip('Click to transform Wiki page')}>
 							<span 
 								style={{
-									fontSize: '1.1em'
+									fontSize: '1.1em',
+									top: isMobile && isNotHomeView ? '11px' : ''
 								}}
 								onClick={() => {
 									if(value.length > 0) {

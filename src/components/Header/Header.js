@@ -22,19 +22,20 @@ export default class Header extends Component {
 					position: isNotHomeView ? 'fixed' : '',
 					background: '#fff',
 					width: '100%', 
-					height: isMobile ? '40px' : '48px', 
+					height: isNotHomeView && isMobile ? '' : (isMobile ? '40px' : '48px'), 
 					lineHeight: isMobile ? '40px' : '48px',
-					padding: '0 25px',
 					boxShadow: isNotHomeView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
-					padding: isNotHomeView ? '2em 50px' : '',
+					padding: (isNotHomeView && !isMobile) ? '2em 50px' : '',
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_horizontal ' + (isNotHomeView ? 'flex_center' : '')}>
-				<div style={{maxWidth: '1000px', width: '100%'}} className={isNotHomeView ? 'flex_center': ''}>
+				<div 
+				style={{maxWidth: '1000px', width: '100%'}} 
+				className={(isMobile ? 'display_flex ' : '') + (isNotHomeView ? 'flex_center' : '')}>
 					{
 						isMobile && !isNotHomeView
 						&&
-						<div style={{marginLeft: 'auto', marginTop: '10px', marginRight: '20px'}} className="flex_container_right">
+						<div style={{marginLeft: 'auto', marginTop: '10px', marginRight: '20px'}} className="flex_item_align_right">
 							<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
 						</div> 
 					}
@@ -48,30 +49,36 @@ export default class Header extends Component {
 									fontSize: isMobile ? '20px' : '26px', 
 									fontWeight: '600', 
 									color: '#2C3239', 
-									marginBottom: '20px',
+									marginBottom: isMobile ? '15px' : '20px',
 									marginTop: '13px!important',
 									cursor: 'pointer',
 								}}
 								className={'fade in flex_item_align_left'}>
 								<span className="inline_block">
-									<img style={{height: isMobile ? '15px' : '20px', marginRight: '5px'}} src={logo}/>
+									<img style={{height: '20px', marginRight: '5px'}} src={logo}/>
 								</span>
-									Quizly
-								<span 
-								style={{
-									fontSize: '14px', 
-									color: '#A8B6C1', 
-									marginLeft: '5px'
-								}} 
-								className="inline_block small_text">
-									BETA
-								</span>
+								{
+									!isMobile && isNotHomeView
+									&&
+									<span>
+										Quizly
+										<span 
+										style={{
+											fontSize: '14px', 
+											color: '#A8B6C1', 
+											marginLeft: '5px'
+										}} 
+										className="inline_block small_text">
+											BETA
+										</span>
+									</span>
+								}
 							</h1>
 						}
 						{
 							isNotHomeView
 							&&
-							<div style={{margin: '5px 0 0 15px', width: '50%', }} className="flex_item_align_left">
+							<div style={{margin: '5px 0 0 15px', width: isMobile ? '100%' : '50%' }} className="flex_item_align_left">
 								<WikiForm isNotHomeView={isNotHomeView} {...this.props}/>
 							</div>
 						}

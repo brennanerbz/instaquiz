@@ -16,7 +16,7 @@ export default class QuizContent extends Component {
 
 	render() {
 		const style = require('./QuizContent.scss');
-		const { items, loaded, isMobile } = this.props;
+		const { items, loaded, isMobile, pushState } = this.props;
 		const itemList = [];
 		items.map((item, i) => {
 			const term = item[1];
@@ -33,7 +33,7 @@ export default class QuizContent extends Component {
 					<p 
 					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '1em 0.5em 1em 1em', position: 'absolute', top: isMobile ? '6.5px' : '15px'}} 
 					className="flex_item_align_right">
-					<b>{item[1]}</b>
+					<b>{term}</b>
 					</p>
 				</li>
 			)

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { isEmpty } from '../../utils/helperfunctions';
+import WikiForm from '../WikiForm/WikiForm';
 
 export default class Header extends Component {
 
@@ -29,42 +30,53 @@ export default class Header extends Component {
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_horizontal ' + (isNotHomeView ? 'flex_center' : '')}>
-				{
-					isMobile && !isNotHomeView
-					&&
-					<div style={{marginLeft: 'auto', marginTop: '10px', marginRight: '20px'}} className="flex_container_right">
-						<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
-					</div> 
-				}
-				{
-					isNotHomeView
-					&&
-					<h1 
-						onClick={() => pushState(null, '/')}
-						style={{
-							fontSize: isMobile ? '24px' : '32px', 
-							fontWeight: '600', 
-							color: '#2C3239', 
-							marginBottom: '20px',
-							marginTop: '10px!important',
-							cursor: 'pointer'
-						}}
-						className={'fade in'}>
-						<span className="inline_block">
-							<img style={{height: isMobile ? '20px' : '26px', marginRight: '5px'}} src={logo}/>
-						</span>
-							Quizly
-						<span 
-						style={{
-							fontSize: '15px', 
-							color: '#A8B6C1', 
-							marginLeft: '5px'
-						}} 
-						className="inline_block small_text">
-							BETA
-						</span>
-					</h1>
-				}
+				<div style={{maxWidth: '1000px', width: '100%'}} className={isNotHomeView ? 'flex_center': ''}>
+					{
+						isMobile && !isNotHomeView
+						&&
+						<div style={{marginLeft: 'auto', marginTop: '10px', marginRight: '20px'}} className="flex_container_right">
+							<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
+						</div> 
+					}
+					<div className="flex_horizontal flex_nowrap">
+						{
+							isNotHomeView
+							&&
+							<h1 
+								onClick={() => pushState(null, '/')}
+								style={{
+									fontSize: isMobile ? '20px' : '26px', 
+									fontWeight: '600', 
+									color: '#2C3239', 
+									marginBottom: '20px',
+									marginTop: '13px!important',
+									cursor: 'pointer',
+								}}
+								className={'fade in flex_item_align_left'}>
+								<span className="inline_block">
+									<img style={{height: isMobile ? '15px' : '20px', marginRight: '5px'}} src={logo}/>
+								</span>
+									Quizly
+								<span 
+								style={{
+									fontSize: '14px', 
+									color: '#A8B6C1', 
+									marginLeft: '5px'
+								}} 
+								className="inline_block small_text">
+									BETA
+								</span>
+							</h1>
+						}
+						{
+							isNotHomeView
+							&&
+							<div style={{margin: '5px 0 0 15px', width: '50%', }} className="flex_item_align_left">
+								<WikiForm isNotHomeView={isNotHomeView} {...this.props}/>
+							</div>
+						}
+					</div>
+				</div>
 			</div>
 		);
 	}

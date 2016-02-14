@@ -122,14 +122,13 @@ export default class WikiForm extends Component {
 
 	render() {
 		const style = require('./WikiForm.scss');
-		const logo = require('./QuizlyLogo.png');
-		const { isMobile } = this.props;
+		const { isMobile, isNotHomeView } = this.props;
 		const { value, articles } = this.state;
 		const inputProps = {
 			autoFocus: true,
 			style: {
-				height: '48px',
-				fontSize: isMobile ? '16px' : '18px',
+				height: isNotHomeView ? '38px' : '48px',
+				fontSize: isMobile || isNotHomeView ? '16px' : '18px',
 				lineHeight: '22px'
 			},
 			placeholder: 'Search Wikipedia articles...',
@@ -138,43 +137,10 @@ export default class WikiForm extends Component {
 			onKeyDown: ::this.handleSubmitLink
 		}
 		return (
-			<div 
-				style={{padding: isMobile ? '0px 20px' : ''}} 
-				id={style.wiki_form} 
-				className="display_flex flex_vertical flex_center">
-				<h1 
-					style={{
-						fontSize: isMobile ? '30px' : '36px', 
-						fontWeight: '600', 
-						color: '#2C3239', 
-						marginBottom: '20px'
-					}}>
-					<span className="inline_block">
-						<img style={{height: isMobile ? '26px' : '30px', marginRight: '5px'}} src={logo}/>
-					</span>
-						Quizly
-					<span 
-					style={{
-						fontSize: '17px', 
-						color: '#A8B6C1', 
-						marginLeft: '5px'
-					}} 
-					className="inline_block small_text">
-						BETA
-					</span>
-				</h1>
-				<h2 style={{
-					fontSize: isMobile ? '22px' : '26px',
-					fontWeight: '300', 
-					color: '#2C3239', 
-					marginBottom: '20px', 
-					textAlign: 'center'}}>
-					Instantly transform any Wikipedia page into quiz questions
-				</h2>
 				<div 
 					id={style.wiki_form} 
 					className="display_flex flex_vertical flex_center">
-					<div style={{marginBottom: '20px', width: '100%'}} className="input_wrapper relative">
+					<div style={{marginBottom: isNotHomeView ? '0' : '20px', width: '100%'}} className="input_wrapper relative">
 						<Autosuggest
 							suggestions={articles}
 							onSuggestionsUpdateRequested={::this.onSuggestionsUpdateRequested}
@@ -205,7 +171,7 @@ export default class WikiForm extends Component {
 						</OverlayTrigger>
 					</div>
 					{
-						!isMobile
+						!isMobile && !isNotHomeView
 						&&
 						<div className="flex_horizontal">
 							<button 
@@ -228,7 +194,6 @@ export default class WikiForm extends Component {
 						</div>
 					}
 				</div>
-			</div>
 		);
 	}
 }

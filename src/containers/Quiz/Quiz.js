@@ -56,6 +56,14 @@ export default class Quiz extends Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		const { addTopic } = this.props;
+		if(this.props.quiz_title !== nextProps.quiz_title) {
+			const title = nextProps.quiz_title.replace(/-/g, " ")
+			addTopic(title)
+		}
+	}
+
 	componentWillUnmount() {
 		const { clearQuiz } = this.props;
 		clearQuiz()
@@ -63,7 +71,7 @@ export default class Quiz extends Component {
 
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile, scrolling, title, items_count, loaded } = this.props;
+		const { isMobile, scrolling, title, items_count, loaded, pushState } = this.props;
 		return (
 			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
@@ -74,7 +82,7 @@ export default class Quiz extends Component {
 						count={items_count} 
 						isMobile={isMobile}
 						scrolling={scrolling}/>
-					<QuizContent isMobile={isMobile}/>
+					<QuizContent isMobile={isMobile} pushState={pushState}/>
 				</div>
 			</div>
 		);

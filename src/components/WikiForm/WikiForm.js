@@ -131,6 +131,7 @@ export default class WikiForm extends Component {
 		const { value, articles } = this.state;
 		const inputProps = {
 			type: 'search',
+			name: 'q',
 			ariaLabel: 'search',
 			autoFocus: true,
 			style: {
@@ -148,6 +149,7 @@ export default class WikiForm extends Component {
 						e.preventDefault()
 						this.handleSubmitLink()
 					}}
+					action='/quiz'
 					id={style.wiki_form} 
 					role="search"
 					className="display_flex flex_vertical flex_center">

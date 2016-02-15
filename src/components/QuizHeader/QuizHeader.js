@@ -48,13 +48,14 @@ export default class QuizHeader extends Component {
 					</button>
 				}
 				<p
-				className="flex_item_align_center"
+				className={isMobile ? 'flex_item_align_center' : 'flex_item_align_left'}
 				style={{
 					fontSize: isMobile ? '14px' : '16px',
 					fontWeight: '400',
 					marginBottom: '1em',
 					padding: isMobile ? '0 1em' : '' ,
-					maxWidth: isMobile ? '350px' : ''
+					maxWidth: isMobile ? '350px' : '',
+					textAlign: isMobile ? 'center' : ''
 				}}>
 				{definition}
 				</p>

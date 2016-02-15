@@ -60,8 +60,10 @@ export default class Quiz extends Component {
 	componentWillReceiveProps(nextProps) {
 		if(this.props.query.q !== nextProps.query.q) {
 			const title = nextProps.query.q
-			this.props.clearQuiz()
-			this.props.addTopic(title)
+			if(title && title.length > 0) {
+				this.props.clearQuiz()
+				this.props.addTopic(title)
+			}
 		}
 	}
 

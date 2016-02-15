@@ -31,7 +31,7 @@ export default class QuizContent extends Component {
 					dangerouslySetInnerHTML={{__html: question}}>
 					</p>
 					<p 
-					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '1em 0.5em 1em 1em', position: 'absolute', top: isMobile ? '6.5px' : '15px'}} 
+					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '0.5em 0.5em 1em 1em', position: 'absolute', top: isMobile ? '6.5px' : '15px'}} 
 					className="flex_item_align_right">
 					<b>{term}</b>
 					</p>

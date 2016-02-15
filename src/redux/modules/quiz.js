@@ -89,7 +89,10 @@ export function addTopic(topic) {
 	}
 }
 
+var initTimeout = false;
+var itemsTimeout = null;
 var itemListPromise = [];
+var fetchItemsTimeout = null;
 export function fetchItems(topic) {
 	return (dispatch, getState) => {
 		var req = request.get(`${config.herokuApi}/topics/${topic}`)
@@ -100,23 +103,36 @@ export function fetchItems(topic) {
 				const items = result.items;
 				const itemsInState = getState().quiz.items;
 				var completed = false;
-				if(result.completed 
-				|| items.length > 100 
-				|| (itemsInState.length > 0 && itemsInState.length >= items.length)) {
-					completed = true;
-					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
-				} else {
-					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
-					if(!result.completed) {
-						setTimeout(() => {
-							dispatch(fetchItems(topic))
-						}, 100)
-					}
+				if(itemsTimeout && items && (items.length > itemsInState.length)) {
+					clearTimeout(itemsTimeout)
 				}
+				if(items && items.length === itemsInState.length) {
+					if(!itemsTimeout) {
+						itemsTimeout = setTimeout(() => {
+							initTimeout = true;
+						}, 5000)
+					}
+				} 
+				if(initTimeout || result.completed) {
+					itemListPromise.forEach(item => item.abort())
+					completed = true;
+					initTimeout = false;
+					clearTimeout(itemsTimeout)
+					clearTimeout(fetchItemsTimeout)
+					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
+					return;
+				}
+				dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
+				fetchItemsTimeout = setTimeout(() => {
+					dispatch(fetchItems(topic))
+				}, 750)
 			}
 		})
 	}
 }
+
+
+
 
 export function startQuiz(number) {
 	return (dispatch, getState) => {
@@ -138,6 +154,7 @@ export function startQuiz(number) {
 }
 
 export function clearQuiz() {
+	clearTimeout(fetchItemsTimeout)
 	itemListPromise.forEach(item => item.abort())
 	return {
 		type: CLEAR_QUIZ

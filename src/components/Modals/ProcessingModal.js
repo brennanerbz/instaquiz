@@ -22,6 +22,7 @@ export default class ProcessingModal extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const { messages, currentMessage } = this.state;
 		if(currentMessage >= messages.length) {
+			this.setState({currentMessage: 0})
 			clearInterval(this.processingTimer)
 			this.props.close()
 		}

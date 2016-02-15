@@ -70,10 +70,17 @@ button {
 	.modal-dialog {
 		&.mobile {
 			margin: 0!important;
+			&.processing {
+				max-width: inherit;
+			}
 		}
 		@media screen and (min-width: 768px) {
 		    width: 555px;
 		    margin: 30px auto;
+		}
+		&.processing {
+			padding: 2.5em;
+			max-width: 350px;
 		}
 	}
 	.modal-content {

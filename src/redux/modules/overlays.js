@@ -3,6 +3,7 @@ export const OPEN_MODAL = 'Instaquiz/quiz/OPEN_MODAL';
 export const CLOSE_MODAL = 'Instaquiz/quiz/CLOSE_MODAL';
 
 import {
+	ADD_TOPIC,
 	START_QUIZ,
 	START_QUIZ_SUCCESS,
 	START_QUIZ_FAILURE
@@ -17,6 +18,12 @@ export default function reducer (state = initialState, action) {
 	var { items } = state;
 
 	switch(action.type) {
+		case ADD_TOPIC:
+			return {
+				...state,
+				modalOpen: true,
+				modalType: 'processing'
+			}
 		case OPEN_MODAL:
 			return {
 				...state,

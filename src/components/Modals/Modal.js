@@ -8,6 +8,7 @@ import * as overlayActions from '../../redux/modules/overlays';
 import { startQuiz } from '../../redux/modules/quiz';
 import PhoneModal from './PhoneModal';
 import Success from './SuccessModal';
+import Processing from './ProcessingModal';
 
 @connect(
   state => ({
@@ -37,10 +38,13 @@ export default class DefaultModal extends Component {
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
-			dialogClassName={(isMobile ? 'mobile' : '') + ' ' + 'modal-dialog'}
+			dialogClassName={(type == 'processing' ? 'processing' : '') + ' ' + (isMobile ? 'mobile' : '') + ' ' + 'modal-dialog'}
 			show={open}
 			onHide={::this.close}>
-				<Modal.Body>
+				<Modal.Body 
+				style={{
+					padding: type == 'processing' ? '2em 0 2.75em 0' : ''
+				}}>
 					{
 						type == 'phone'
 						&&
@@ -54,6 +58,13 @@ export default class DefaultModal extends Component {
 						type == 'quiz_success'
 						&&
 						<Success/>
+					}
+					{
+						type == 'processing'
+						&&
+						<Processing
+						close={::this.close}
+						/>
 					}
 					{
 						type == 'contact'

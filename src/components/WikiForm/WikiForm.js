@@ -86,9 +86,9 @@ export default class WikiForm extends Component {
 	}
 
 	componentDidMount() {
-		const { params } = this.props;
-		if(Object.keys(params).length > 0 && params.quiz_title) {
-			this.setState({value: params.quiz_title.replace(/-/g, ' ')});
+		const { query } = this.props;
+		if(query && query.q) {
+			this.setState({value: query.q});
 		}
 	}
 
@@ -111,13 +111,11 @@ export default class WikiForm extends Component {
 	}
 
 	handleSubmitLink(event) {
-		if(event.which === 13) {
-			const { pushState } = this.props;
-			const { value } = this.state;
-			if(value.length > 0) {
-				const articleTitle = value.replace(/ /g, '-')
-				pushState(null, `/quiz/${articleTitle}`)
-			}
+		const { pushState } = this.props;
+		const { value } = this.state;
+		if(value.length > 0) {
+			const articleTitle = value.trim().replace(/ /g, '+')
+			pushState(null, `/quiz?q=${articleTitle}`)
 		}
 	}
 
@@ -133,7 +131,6 @@ export default class WikiForm extends Component {
 		const { value, articles } = this.state;
 		const inputProps = {
 			type: 'search',
-			name: 'query',
 			ariaLabel: 'search',
 			autoFocus: true,
 			style: {
@@ -144,13 +141,15 @@ export default class WikiForm extends Component {
 			placeholder: isMobile ? 'Search Wikipedia...' : 'Search Wikipedia articles...',
 			value,
 			onChange: ::this.onChange,
-			onKeyDown: ::this.handleSubmitLink
 		}
 		return (
 				<form
-					onSubmit={(e) => e.preventDefault()}
-					action="/search"
+					onSubmit={(e, q) => {
+						e.preventDefault()
+						this.handleSubmitLink()
+					}}
 					id={style.wiki_form} 
+					role="search"
 					className="display_flex flex_vertical flex_center">
 					<div 
 					style={{marginBottom: isNotHomeView ? '0' : '20px', width: '100%'}} 
@@ -193,11 +192,7 @@ export default class WikiForm extends Component {
 								style={{
 									marginRight: '10px'
 								}}
-								onClick={() => { 
-									if(value.length > 0) {
-										this.handleSubmitLink()
-									}
-								}}
+								type="submit"
 								className="button primary_green">
 								Transform
 							</button>

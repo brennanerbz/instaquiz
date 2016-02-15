@@ -17,6 +17,7 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 
 
 @connect(state => ({
+		query: state.router.location.query,
 		loaded: state.quiz.loaded,
 		title: state.quiz.title,
 		definition: state.quiz.definition,
@@ -49,17 +50,16 @@ export default class Quiz extends Component {
 	}
 
 	componentDidMount() {
-		const { params, addTopic, start } = this.props;
-		var title = params.quiz_title;
+		const { query, addTopic, start } = this.props;
+		var title = query.q;
 		if(title) {
-			title = title.replace(/-/g, " ")
 			addTopic(title)
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(this.props.params.quiz_title !== nextProps.params.quiz_title) {
-			const title = nextProps.params.quiz_title.replace(/-/g, " ")
+		if(this.props.query.q !== nextProps.query.q) {
+			const title = nextProps.query.q
 			this.props.clearQuiz()
 			this.props.addTopic(title)
 		}

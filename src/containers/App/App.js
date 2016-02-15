@@ -18,7 +18,8 @@ import Modal from '../../components/Modals/Modal';
 
 @connect(state => ({
 	params: state.router.params,
-	location: state.router.location
+	location: state.router.location,
+	query: state.router.location.query
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -55,7 +56,7 @@ export default class App extends Component {
 
 	render() {
 		const style = require('./App.scss');
-		const { children, pushState, params, location } = this.props;
+		const { children, pushState, params, location, query } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
@@ -77,6 +78,7 @@ export default class App extends Component {
 					pushState={pushState}
 					params={params}
 					location={location}
+					query={query}
 					isMobile={isMobile}
 					show={howItWorksOpen}
 					scrolling={scrolling}

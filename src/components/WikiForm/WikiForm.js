@@ -133,6 +133,8 @@ export default class WikiForm extends Component {
 		const { value, articles } = this.state;
 		const inputProps = {
 			type: 'search',
+			name: 'query',
+			ariaLabel: 'search',
 			autoFocus: true,
 			style: {
 				height: isNotHomeView ? '38px' : '48px',
@@ -145,7 +147,9 @@ export default class WikiForm extends Component {
 			onKeyDown: ::this.handleSubmitLink
 		}
 		return (
-				<div 
+				<form
+					onSubmit={(e) => e.preventDefault()}
+					action="/search"
 					id={style.wiki_form} 
 					className="display_flex flex_vertical flex_center">
 					<div 
@@ -204,7 +208,7 @@ export default class WikiForm extends Component {
 							</button>
 						</div>
 					}
-				</div>
+				</form>
 		);
 	}
 }

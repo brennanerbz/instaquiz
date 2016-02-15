@@ -19,6 +19,7 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 @connect(state => ({
 		loaded: state.quiz.loaded,
 		title: state.quiz.title,
+		definition: state.quiz.definition,
 		items_count: state.quiz.items_count
 	}),
 	dispatch => ({
@@ -71,18 +72,31 @@ export default class Quiz extends Component {
 
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile, scrolling, title, items_count, loaded, pushState } = this.props;
+		const { isMobile, scrolling, title, definition, items_count, loaded, pushState } = this.props;
 		return (
-			<div  style={{maxWidth: '1000px'}} className="display_flex flex_container_center">
+			<div  style={{maxWidth: '1050px'}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
 					<QuizHeader 
 						openModal={this.props.openModal}
 						loaded={loaded} 
 						title={title} 
+						definition={definition} 
 						count={items_count} 
 						isMobile={isMobile}
 						scrolling={scrolling}/>
-					<QuizContent isMobile={isMobile} pushState={pushState}/>
+					<div style={{padding: isMobile ? '' : '0 25px'}}>
+						<div 
+						style={{color: '#A8B6C1', fontSize: isMobile ? '14px' : '16px', marginTop: '2em', marginBottom: '1em'}} 
+						className="flex_horizontal">
+							<p style={{width: '50%', marginLeft: isMobile ? '1.5em' : '0'}}> 
+								Definitions
+							</p>
+							<p style={{width: '50%'}} className="flex_item_align_right">
+								Concepts
+							</p>
+						</div>
+						<QuizContent isMobile={isMobile} pushState={pushState}/>
+					</div>
 				</div>
 			</div>
 		);

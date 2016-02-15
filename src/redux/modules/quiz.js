@@ -17,6 +17,7 @@ export const CLEAR_QUIZ = 'Instaquiz/quiz/CLEAR_QUIZ';
 
 const initialState = {
 	title: '',
+	definition: '',
 	items: [],
 	items_count: 0,
 	loaded: false,
@@ -34,7 +35,8 @@ export default function reducer (state = initialState, action) {
 		case ADD_TOPIC_SUCCESS:
 			return {
 				...state,
-				title: action.result.title
+				title: action.result.title,
+				definition: action.result.definition
 			}
 		case ADD_TOPIC_FAILURE:
 			return {
@@ -90,7 +92,6 @@ export function addTopic(topic) {
 var itemListPromise = [];
 export function fetchItems(topic) {
 	return (dispatch, getState) => {
-		console.log(itemListPromise)
 		var req = request.get(`${config.herokuApi}/topics/${topic}`)
 		itemListPromise.push(req)
 		req.end((err, res) => {
@@ -107,7 +108,9 @@ export function fetchItems(topic) {
 				} else {
 					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
 					if(!result.completed) {
-						dispatch(fetchItems(topic))
+						setTimeout(() => {
+							dispatch(fetchItems(topic))
+						}, 100)
 					}
 				}
 			}
@@ -135,6 +138,7 @@ export function startQuiz(number) {
 }
 
 export function clearQuiz() {
+	itemListPromise.forEach(item => item.abort())
 	return {
 		type: CLEAR_QUIZ
 	}

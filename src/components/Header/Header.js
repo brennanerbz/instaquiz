@@ -31,7 +31,7 @@ export default class Header extends Component {
 				className={'display_flex flex_horizontal ' + (isNotHomeView ? 'flex_center' : '')}>
 				<div 
 				style={{maxWidth: '1000px', width: '100%'}} 
-				className={(isMobile ? 'display_flex ' : '') + (isNotHomeView ? 'flex_center' : '')}>
+				className={(isMobile ? 'display_flex ' : '') + (isNotHomeView && !isMobile ? 'flex_center' : '')}>
 					{
 						isMobile && !isNotHomeView
 						&&
@@ -39,7 +39,7 @@ export default class Header extends Component {
 							<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
 						</div> 
 					}
-					<div className="flex_horizontal flex_nowrap">
+					<div style={{width: isMobile ? '100%' : '', padding: isMobile ? '0 1em' : ''}} className="flex_horizontal flex_nowrap">
 						{
 							isNotHomeView
 							&&

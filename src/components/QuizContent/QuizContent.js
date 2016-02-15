@@ -24,7 +24,7 @@ export default class QuizContent extends Component {
 			question = question
 			.replace(new RegExp('(^|\\s)(' + term + ')(\\s|$)','ig'), '$1<b>$2</b>$3')
 			itemList.push(
-				<li key={i} style={{position: 'relative', padding: isMobile ? '0.5em' : '1em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
+				<li key={term + i} style={{position: 'relative', padding: '0.5em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
 					<p 
 					style={{width: '50%', padding: isMobile ? '0.5em 0.5em 0.5em 0' : '1em 1em 1em 0.5em'}} 
 					className="flex_item_align_left"
@@ -39,7 +39,7 @@ export default class QuizContent extends Component {
 			)
 		})
 		return (
-			<ul style={{marginTop: '2em', marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%', fontSize: isMobile ? '14px' : ''}}>
+			<ul style={{marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%', fontSize: isMobile ? '14px' : ''}}>
 				{itemList}
 			</ul>
 		);

@@ -49,7 +49,7 @@ export default class QuizHeader extends Component {
 				}
 				<p
 				style={{
-					fontSize: isMobile ? '14px' : '17px',
+					fontSize: isMobile ? '14px' : '16px',
 					fontWeight: '400',
 					marginBottom: '1em',
 					padding: isMobile ? '0 1em' : '' ,
@@ -64,11 +64,7 @@ export default class QuizHeader extends Component {
 						width: isMobile ? '250px' : ''
 					}} 
 					className="button primary_green">
-					{
-						loaded
-						? 'Quiz me'
-						: 'Loading...'
-					}
+					Quiz Me
 				</button>
 			</div>
 		);

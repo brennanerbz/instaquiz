@@ -7,6 +7,7 @@ import { Modal } from 'react-bootstrap';
 import * as overlayActions from '../../redux/modules/overlays';
 import { startQuiz } from '../../redux/modules/quiz';
 import PhoneModal from './PhoneModal';
+import Success from './SuccessModal';
 
 @connect(
   state => ({
@@ -50,6 +51,11 @@ export default class DefaultModal extends Component {
 						/>
 					}
 					{
+						type == 'quiz_success'
+						&&
+						<Success/>
+					}
+					{
 						type == 'contact'
 						&&
 						<div>
@@ -63,6 +69,15 @@ export default class DefaultModal extends Component {
 						</div>
 					}
 				</Modal.Body>
+				{
+					type == 'quiz_success'
+					&&
+					<Modal.Footer style={{borderTop: '1px solid #DAE0E7'}}>
+						<div className="display_flex flex_center">
+							<h3 style={{fontSize: isMobile ? '14px' : '17px', color: '#1AD877'}}>Check your phone!</h3>
+						</div>
+					</Modal.Footer>
+				}
 			</Modal>
 		);
 	}

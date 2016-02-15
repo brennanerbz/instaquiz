@@ -39,10 +39,11 @@ export default class Header extends Component {
 							<a onClick={() => this.props.openHowItWorks(!show)} className="link">How It Works</a>
 						</div> 
 					}
-					<div style={{width: isMobile ? '100%' : '', padding: isMobile ? '0 1em' : ''}} className="flex_horizontal flex_nowrap">
-						{
-							isNotHomeView
-							&&
+					{
+						isNotHomeView
+						&&
+						<div style={{width: isMobile ? '100%' : '', padding: isMobile ? '0 1em' : ''}} className="flex_horizontal flex_nowrap">
+							
 							<h1 
 								onClick={() => pushState(null, '/')}
 								style={{
@@ -74,15 +75,15 @@ export default class Header extends Component {
 									</span>
 								}
 							</h1>
-						}
-						{
-							isNotHomeView
-							&&
-							<div style={{margin: '5px 0 0 15px', width: isMobile ? '100%' : '50%' }} className="flex_item_align_left">
-								<WikiForm isNotHomeView={isNotHomeView} {...this.props}/>
-							</div>
-						}
-					</div>
+							{
+								isNotHomeView
+								&&
+								<div style={{margin: '5px 0 0 15px', width: isMobile ? '100%' : '50%' }} className="flex_item_align_left">
+									<WikiForm isNotHomeView={isNotHomeView} {...this.props}/>
+								</div>
+							}
+						</div>
+					}
 				</div>
 			</div>
 		);

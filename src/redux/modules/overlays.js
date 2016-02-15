@@ -2,6 +2,12 @@
 export const OPEN_MODAL = 'Instaquiz/quiz/OPEN_MODAL';
 export const CLOSE_MODAL = 'Instaquiz/quiz/CLOSE_MODAL';
 
+import {
+	START_QUIZ,
+	START_QUIZ_SUCCESS,
+	START_QUIZ_FAILURE
+} from './quiz';
+
 const initialState = {
 	modalOpen: false,
 	modalType: ''
@@ -22,6 +28,11 @@ export default function reducer (state = initialState, action) {
 				...state,
 				modalOpen: false,
 				modalType: ''
+			}
+		case START_QUIZ_SUCCESS:
+			return {
+				modalOpen: true,
+				modalType: 'quiz_success'
 			}
 		default:		
 			return {

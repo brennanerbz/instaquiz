@@ -27,7 +27,7 @@ export default class QuizHeader extends Component {
 					color: '#A8B6C1',
 					marginBottom: '1em'
 				}}>
-					{count} questions
+					{count} questions {!loaded && <span style={{fontSize: '15px'}}>(still creating...)</span>}
 				</p>
 				{
 					scrolling && !isMobile

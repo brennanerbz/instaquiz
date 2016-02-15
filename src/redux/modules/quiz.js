@@ -87,16 +87,21 @@ export function addTopic(topic) {
 	}
 }
 
+var itemListPromise = [];
 export function fetchItems(topic) {
 	return (dispatch, getState) => {
-		request
-		.get(`${config.herokuApi}/topics/${topic}`)
-		.end((err, res) => {
+		console.log(itemListPromise)
+		var req = request.get(`${config.herokuApi}/topics/${topic}`)
+		itemListPromise.push(req)
+		req.end((err, res) => {
 			if(res.ok) {
 				const result = res.body;
 				const items = result.items;
+				const itemsInState = getState().quiz.items;
 				var completed = false;
-				if(result.completed || items.length > 100) {
+				if(result.completed 
+				|| items.length > 100 
+				|| (itemsInState.length > 0 && itemsInState.length >= items.length)) {
 					completed = true;
 					dispatch({type: FETCH_ITEMS_SUCCESS, result, items, completed})
 				} else {

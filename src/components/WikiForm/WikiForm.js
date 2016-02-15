@@ -132,6 +132,7 @@ export default class WikiForm extends Component {
 		const { isMobile, isNotHomeView } = this.props;
 		const { value, articles } = this.state;
 		const inputProps = {
+			type: 'search',
 			autoFocus: true,
 			style: {
 				height: isNotHomeView ? '38px' : '48px',

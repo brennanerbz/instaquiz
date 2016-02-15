@@ -6,7 +6,7 @@ export default class WikiForm extends Component {
 	}
 
 	state = {
-		quizzes: ['Artificial Intelligence', 'Electoral College', 'Donald Trump', 'Y Combinator', 'Elon Musk', 'Word of Mouth', 'Hacker News', 'Election']
+		quizzes: ['Neuron', 'Osmosis', 'Debt', 'Interest', 'Cell',  'Supply and demand', 'Venture capital', 'Private equity']
 	}
 
 	render() {

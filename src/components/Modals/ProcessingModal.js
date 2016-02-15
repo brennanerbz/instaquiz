@@ -21,10 +21,12 @@ export default class ProcessingModal extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const { messages, currentMessage } = this.state;
+		const { loaded, title } = this.props;
 		if(currentMessage >= messages.length) {
-			this.setState({currentMessage: 0})
 			clearInterval(this.processingTimer)
-			this.props.close()
+			if(title && title.length > 0) {
+				this.props.close()
+			}
 		}
 	} 
 
@@ -32,7 +34,7 @@ export default class ProcessingModal extends Component {
 		const { messages, currentMessage } = this.state;
 		return (
 			<div style={{width: '100%'}} className="display_flex flex_vertical flex_center">
-				<LoadingSpinner/>
+				<LoadingSpinner size={7}/>
 				<h1 style={{fontSize: '19px', fontWeight: '600', color: '#2C3239'}}>
 				{messages[currentMessage]}
 				</h1>

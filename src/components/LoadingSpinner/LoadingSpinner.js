@@ -7,8 +7,9 @@ export default class LoadingSpinner extends Component {
 
 	render() {
 		const style = require('./LoadingSpinner.scss');
-		return(
-			<div className={style.loader}>
+		const { size } = this.props;
+		return (
+			<div style={{fontSize: size + 'px'}} className={style.loader}>
 			</div>
 		);
 	}

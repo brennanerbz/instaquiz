@@ -2,10 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 @connect(state => ({
 		items: state.quiz.items,
-		loaded: state.quiz.loaded
+		loaded: state.quiz.loaded,
+		modalOpen: state.overlays.modalOpen
 	})
 )
 export default class QuizContent extends Component {
@@ -16,7 +18,7 @@ export default class QuizContent extends Component {
 
 	render() {
 		const style = require('./QuizContent.scss');
-		const { items, loaded, isMobile, pushState } = this.props;
+		const { items, loaded, modalOpen, isMobile, pushState } = this.props;
 		const itemList = [];
 		items.map((item, i) => {
 			const term = item[1];
@@ -41,6 +43,13 @@ export default class QuizContent extends Component {
 		return (
 			<ul style={{marginBottom: '2em', padding: '0.25em 1em', border: '1px solid #DAE0E7', borderRadius: '0.25em', width: '100%', fontSize: isMobile ? '14px' : ''}}>
 				{itemList}
+				{
+					!loaded && !modalOpen
+					&&
+					<li style={{padding: '0.5em'}} className="display_flex flex_center">
+						<LoadingSpinner size={4}/>
+					</li>
+				}				
 			</ul>
 		);
 	}

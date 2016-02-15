@@ -116,6 +116,7 @@ export default class WikiForm extends Component {
 		if(value.length > 0) {
 			const articleTitle = value.trim().replace(/ /g, '+')
 			pushState(null, `/quiz?q=${articleTitle}`)
+			document.getElementById('wiki_input').blur()
 		}
 	}
 
@@ -131,9 +132,10 @@ export default class WikiForm extends Component {
 		const { value, articles } = this.state;
 		const inputProps = {
 			type: 'search',
+			id: 'wiki_input',
 			name: 'q',
 			ariaLabel: 'search',
-			autoFocus: true,
+			autoFocus: !isNotHomeView,
 			style: {
 				height: isNotHomeView ? '38px' : '48px',
 				fontSize: isMobile || isNotHomeView ? '16px' : '18px',

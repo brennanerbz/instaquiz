@@ -48,6 +48,7 @@ export default class QuizHeader extends Component {
 					</button>
 				}
 				<p
+				className="flex_item_align_center"
 				style={{
 					fontSize: isMobile ? '14px' : '16px',
 					fontWeight: '400',

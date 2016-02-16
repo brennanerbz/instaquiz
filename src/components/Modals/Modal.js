@@ -15,7 +15,8 @@ import Processing from './ProcessingModal';
   	open: state.overlays.modalOpen,
   	type: state.overlays.modalType,
   	title: state.quiz.title,
-  	loaded: state.quiz.loaded
+  	loaded: state.quiz.loaded,
+  	error: state.quiz.error
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -36,7 +37,7 @@ export default class DefaultModal extends Component {
 
 	render() {
 		const style = require('./Modals.scss');
-		const { open, type, isMobile, startQuiz, loaded, title } = this.props;
+		const { open, type, isMobile, startQuiz, loaded, title, error } = this.props;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -68,6 +69,7 @@ export default class DefaultModal extends Component {
 						close={::this.close}
 						title={title}
 						loaded={loaded}
+						error={error}
 						/>
 					}
 					{

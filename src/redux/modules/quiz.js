@@ -36,11 +36,14 @@ export default function reducer (state = initialState, action) {
 			return {
 				...state,
 				title: action.result.title,
-				definition: action.result.definition
+				definition: action.result.definition,
+				error: null
 			}
 		case ADD_TOPIC_FAILURE:
 			return {
-				...state
+				...state,
+				loaded: false,
+				error: 404
 			}
 		case FETCH_ITEMS:
 			return {
@@ -51,7 +54,8 @@ export default function reducer (state = initialState, action) {
 				...state, 
 				items: action.items,
 				loaded: action.completed,
-				items_count: action.items.length
+				items_count: action.items.length,
+				error: null
 			}
 		case FETCH_ITEMS_FAILURE:
 			return {
@@ -64,7 +68,8 @@ export default function reducer (state = initialState, action) {
 				title: '',
 				items: [],
 				items_count: 0,
-				loaded: false
+				loaded: false,
+				error: null
 			}
 		default:		
 			return {
@@ -84,6 +89,8 @@ export function addTopic(topic) {
 				const result = res.body;
 				dispatch({type: ADD_TOPIC_SUCCESS, result})
 				dispatch(fetchItems(result.title))
+			} else {
+				dispatch({type: ADD_TOPIC_FAILURE})
 			}
 		})
 	}
@@ -126,6 +133,8 @@ export function fetchItems(topic) {
 				fetchItemsTimeout = setTimeout(() => {
 					dispatch(fetchItems(topic))
 				}, 750)
+			} else {
+				dispatch({type: FETCH_ITEMS_FAILURE})
 			}
 		})
 	}

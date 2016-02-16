@@ -21,7 +21,8 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 		loaded: state.quiz.loaded,
 		title: state.quiz.title,
 		definition: state.quiz.definition,
-		items_count: state.quiz.items_count
+		items_count: state.quiz.items_count,
+		error: state.quiz.error
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -74,31 +75,46 @@ export default class Quiz extends Component {
 
 	render() {
 		const style = require('./Quiz.scss');
-		const { isMobile, scrolling, title, definition, items_count, loaded, pushState } = this.props;
+		const sadFace = require('./SadFace.png');
+		const { isMobile, scrolling, title, definition, items_count, loaded, error, pushState } = this.props;
 		return (
-			<div  style={{maxWidth: '1050px'}} className="display_flex flex_container_center">
+			<div  style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
-					<QuizHeader 
-						openModal={this.props.openModal}
-						loaded={loaded} 
-						title={title} 
-						definition={definition} 
-						count={items_count} 
-						isMobile={isMobile}
-						scrolling={scrolling}/>
-					<div style={{padding: isMobile ? '' : '0 25px'}}>
-						<div 
-						style={{color: '#A8B6C1', fontSize: isMobile ? '14px' : '16px', marginTop: '2em', marginBottom: '1em'}} 
-						className="flex_horizontal">
-							<p style={{width: '50%', marginLeft: isMobile ? '1.5em' : '0'}}> 
-								Definitions
-							</p>
-							<p style={{width: '50%'}} className="flex_item_align_right">
-								Concepts
-							</p>
+					{
+						(error && error === 404)
+						?
+						<div className="display_flex flex_vertical flex_center">
+							<img style={{height: isMobile ? '95px' : '130px'}} src={sadFace}/>
+							<h1 
+							style={{marginTop: '0.95em!important', fontSize: isMobile ? '30px' : '34px', fontWeight: '600', color: '#2C3239', textAlign: 'center'}}>
+							Oh no, we couldn't find that article!
+							</h1>
 						</div>
-						<QuizContent isMobile={isMobile} pushState={pushState}/>
-					</div>
+						:
+						<div>
+						<QuizHeader 
+							openModal={this.props.openModal}
+							loaded={loaded} 
+							title={title} 
+							definition={definition} 
+							count={items_count} 
+							isMobile={isMobile}
+							scrolling={scrolling}/>
+						<div style={{padding: isMobile ? '' : '0 25px'}}>
+							<div 
+							style={{color: '#A8B6C1', fontSize: isMobile ? '14px' : '16px', marginTop: '2em', marginBottom: '1em'}} 
+							className="flex_horizontal">
+								<p style={{width: '50%', marginLeft: isMobile ? '1.5em' : '0'}}> 
+									Definitions
+								</p>
+								<p style={{width: '50%'}} className="flex_item_align_right">
+									Concepts
+								</p>
+							</div>
+							<QuizContent isMobile={isMobile} pushState={pushState}/>
+						</div>
+						</div>
+					}
 				</div>
 			</div>
 		);

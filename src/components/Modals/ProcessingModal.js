@@ -30,6 +30,13 @@ export default class ProcessingModal extends Component {
 		}
 	} 
 
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.error && nextProps.error === 404) {
+			clearInterval(this.processingTimer)
+			this.props.close()
+		}
+	}
+
 	render() {
 		const { messages, currentMessage } = this.state;
 		return (

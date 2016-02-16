@@ -6,7 +6,7 @@ export default class ProcessingModal extends Component {
 	}
 
 	state = {
-		messages: ['Fetching article...', 'Reading article...', 'Finding key concepts...', 'Transforming material...'],
+		messages: ['Reading article...', 'Finding key concepts...', 'Transforming material...'],
 		currentMessage: 0
 	}
 

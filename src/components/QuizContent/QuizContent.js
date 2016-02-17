@@ -29,13 +29,13 @@ export default class QuizContent extends Component {
 				<li key={term + i} style={{position: 'relative', padding: '0.5em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
 					<p 
 					style={{width: '50%', padding: isMobile ? '0.5em 0.5em 0.5em 0' : '1em 1em 1em 0.5em'}} 
-					className="flex_item_align_left"
-					dangerouslySetInnerHTML={{__html: question}}>
+					className="flex_item_align_left">
+					<b>{term}</b>
 					</p>
 					<p 
-					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '0.5em 0.5em 1em 1em', position: 'absolute', top: isMobile ? '6.5px' : '15px'}} 
-					className="flex_item_align_right">
-					<b>{term}</b>
+					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '0.5em 0.5em 1em 1em' }} 
+					className="flex_item_align_right"
+					dangerouslySetInnerHTML={{__html: question}}>
 					</p>
 				</li>
 			)

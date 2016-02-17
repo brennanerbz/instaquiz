@@ -1,5 +1,5 @@
 // Colors
-$primary-green: #2DD67B;
+$primary-green: #21D931;
 $primary-black: #2C3239;
 $primary-blue: #187BFC;
 $primary-grey: #EDF0F3;
@@ -181,7 +181,7 @@ $secondary-grey: #A8B6C1;
 		background: $primary-grey;
 		border: none!important;
 		outline: none!important;
-		border-radius: 0.25em!important;
+		border-radius: 1px!important;
 		color: $primary-black;
 	}
 	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -223,7 +223,7 @@ $secondary-grey: #A8B6C1;
 :global .button {
 	padding: 12.5px 25px;
 	position: relative;
-	border-radius: 0.25em;
+	border-radius: 1px;
 	cursor: pointer;
 	display: inline-block!important;
 	border: none;

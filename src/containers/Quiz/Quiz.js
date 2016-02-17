@@ -105,10 +105,10 @@ export default class Quiz extends Component {
 							style={{color: '#A8B6C1', fontSize: isMobile ? '14px' : '16px', marginTop: '2em', marginBottom: '1em'}} 
 							className="flex_horizontal">
 								<p style={{width: '50%', marginLeft: isMobile ? '1.5em' : '0'}}> 
-									Definitions
+									Concepts
 								</p>
 								<p style={{width: '50%'}} className="flex_item_align_right">
-									Concepts
+									Questions
 								</p>
 							</div>
 							<QuizContent isMobile={isMobile} pushState={pushState}/>

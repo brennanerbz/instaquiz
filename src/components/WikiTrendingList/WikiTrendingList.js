@@ -16,7 +16,7 @@ export default class WikiForm extends Component {
 			<div 
 			style={{marginTop: isMobile ? '20px' : '60px'}} 
 			className="display_flex flex_vertical flex_center">
-				<h2 style={{fontSize: '24px', fontWeight: '300', color: '#2C3239', marginBottom: '20px'}}>
+				<h2 style={{fontSize: isMobile ? '15px' : '20px', fontWeight: '600', color: '#2C3239', marginBottom: '20px'}}>
 					Popular quizzes
 				</h2>
 				<div id="popular_list" className="flex_horizontal">

@@ -156,7 +156,7 @@ export default class WikiForm extends Component {
 					role="search"
 					className="display_flex flex_vertical flex_center">
 					<div 
-					style={{marginBottom: isNotHomeView ? '0' : '20px', width: '100%'}} 
+					style={{marginBottom: isNotHomeView ? '0' : '20px', width: isMobile ? '100%' : '605px'}} 
 					className={'input_wrapper relative' + ' ' + (isNotHomeView || isMobile ? 'small' : '')}>
 						<Autosuggest
 							suggestions={articles}

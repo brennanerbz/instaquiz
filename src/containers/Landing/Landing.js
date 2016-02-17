@@ -27,6 +27,7 @@ export default class Landing extends Component {
 		const style = require('./Landing.scss');
 		const { location, isMobile } = this.props;
 		const logo = require('../../components/WikiForm/QuizlyLogo.png');
+		const boldLogo = require('../../../static/QuizlyBetaLogoBold.png');
 		return (
 			<div id={style.landing} style={{height: '88%'}} id={style.landing} className="display_flex flex_center">
 				<div className="flex_container_center">
@@ -41,9 +42,8 @@ export default class Landing extends Component {
 								marginBottom: '20px'
 							}}>
 							<span className="inline_block">
-								<img style={{height: isMobile ? '26px' : '30px', marginRight: '5px'}} src={logo}/>
+								<img style={{height: isMobile ? '85px' : '105px', marginRight: '5px'}} src={boldLogo}/>
 							</span>
-								Quizly
 							<span 
 							style={{
 								fontSize: '17px', 
@@ -51,12 +51,11 @@ export default class Landing extends Component {
 								marginLeft: '5px'
 							}} 
 							className="inline_block small_text">
-								BETA
 							</span>
 						</h1>
 						<h2 style={{
-							fontSize: isMobile ? '22px' : '26px',
-							fontWeight: '300', 
+							fontSize: isMobile ? '17px' : '20px',
+							fontWeight: '600', 
 							color: '#2C3239', 
 							marginBottom: '20px', 
 							textAlign: 'center'}}>

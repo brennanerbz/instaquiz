@@ -14,6 +14,8 @@ export default class Header extends Component {
 
 	render() {
 		const logo = require('../WikiForm/QuizlyLogo.png');
+		const boldLogo = require('../../../static/QuizlyBetaLogoBold.png');
+		const QLogo = require('../../../static/QNoBgLogo.png');
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const isNotHomeView = location.pathname.match(/quiz/gi);
 		return (
@@ -50,16 +52,16 @@ export default class Header extends Component {
 									fontSize: isMobile ? '20px' : '26px', 
 									fontWeight: '600', 
 									color: '#2C3239', 
-									marginBottom: isMobile ? '15px' : '20px',
-									marginTop: '13px!important',
+									marginBottom: isMobile ? '5px' : '7px',
+									marginTop: '9px!important',
 									cursor: 'pointer',
 								}}
 								className={'fade in flex_item_align_left'}>
 								<span className="inline_block">
-									<img style={{height: '20px', marginRight: '5px'}} src={logo}/>
+									<img style={{height: isMobile ? '32px' : '40px', marginRight: isMobile ? '0px' : '55px'}} src={isMobile ? QLogo : boldLogo}/>
 								</span>
 								{
-									!isMobile && isNotHomeView
+									!isMobile && isNotHomeView && false
 									&&
 									<span>
 										Quizly

@@ -9,17 +9,17 @@ export default class WorksList extends Component {
 	state = {
 		hiwItems: [
 			{
-				title: 'Paste a link',
-				message: 'The Wikipedia article is sent to an artificially intelligent bot.',
-				image: require('../WorksItem/share.png')
+				title: 'Search for article',
+				message: 'Once selected, the Wikipedia article is sent to an A.I.',
+				image: require('../WorksItem/search.png')
 			},
 			{
-				title: 'Our AI reads article',
-				message: 'As the AI reads the page, it looks for key concepts, facts and explanations.',
+				title: 'Our A.I. reads article',
+				message: 'As the A.I. reads the page, it looks for key concepts, facts and explanations.',
 				image: require('../WorksItem/bot.png')
 			},
 			{
-				title: 'Practice with AI',
+				title: 'Practice with A.I.',
 				message: 'The AI turns each piece it\'s collected into an engaging practice question.',
 				image: require('../WorksItem/chat.png')
 			}

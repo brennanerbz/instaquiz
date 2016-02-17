@@ -23,11 +23,12 @@ export default class Footer extends Component {
 	}
 
 	render() {
-		const { loaded, title, error } = this.props;
+		const { loaded, title, error, location } = this.props;
+		const isNotHomeView = location.pathname.match(/quiz/gi);
 		return (
 			<div style={{
 				// position: (!title || error) ? 'absolute' : '', 
-				background: (!loaded) ? '#fff' : '#21D931',
+				background: (!loaded && isNotHomeView) ? '#fff' : '#21D931',
 				bottom: '0', 
 				width: '100%', 
 				height: '54px', 

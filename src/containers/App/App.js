@@ -86,6 +86,7 @@ export default class App extends Component {
 				/>
 				{appChildrenWithProps}
 				<Footer 
+					location={location}
 					isMobile={isMobile}
 				/>
 				<Modal isMobile={isMobile}/>

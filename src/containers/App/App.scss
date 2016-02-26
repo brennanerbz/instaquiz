@@ -90,6 +90,7 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-content: flex-start;
 	-ms-align-content: flex-start;
 	align-content: flex-start;
+	margin-right: auto;
 }
 :global .flex_container_center {
 	-webkit-align-items: center;
@@ -104,6 +105,7 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-content: flex-end;
 	-ms-align-content: flex-end;
 	align-content: flex-end;
+	margin-left: auto;
 }
 // Single item
 :global .flex_item_align_left {
@@ -271,11 +273,25 @@ $secondary-grey: #A8B6C1;
 	color: $primary-blue;
 	cursor: pointer;
 	font-weight: 500;
+	&.grey {
+		color: $primary-grey;
+	}
 	&:hover {
 		color: $primary-blue;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 }
+
+// Link List
+:global .link_list {
+	list-style-type: none;
+	.link_list_item {
+		a {
+			padding: 5px 10px;
+		}
+	}
+}
+
 
 // Fade
 /*

@@ -74,7 +74,7 @@ export default class ProductDetails extends Component {
 							features.map((feature, i) => {
 								let even = i % 2 === 0;
 								return (
-									<li className={'flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
+									<li key={feature.heading + i} className={'flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
 										<span 
 										style={{order: (even && !isMobile ? 1 : 2), width: '50%', minWidth: '350px'}} 
 										className={'display_flex ' + (isMobile ? 'flex_center' : '')}>

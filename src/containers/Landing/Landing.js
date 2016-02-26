@@ -26,6 +26,7 @@ export default class Landing extends Component {
 		const style = require('./Landing.scss');
 		const { location, isMobile } = this.props;
 		const halfiPhone = require('../../../static/images/halfIphone.png');
+		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
 		return (
 			<div id="landing">
 				<div id="hero">
@@ -62,6 +63,52 @@ export default class Landing extends Component {
 					</div>
 				</div>
 				<Features isMobile={isMobile}/>
+				<div id="create bottom" style={{background: '#00B5FF', padding: '10em 0', marginTop: '80px'}} className="display_flex flex_center flex_vertical">
+					<h1 style={{fontSize: '28px', fontWeight: '300', color: '#fff', marginBottom: '30px', textAlign: 'center'}}>You and your class will do great things with Nightly.</h1>
+					<button className="button" style={{background: '#009CEE', color: '#fff'}}>
+						Create a new assignment
+					</button>
+				</div>
+				<div 
+				id={style.landing_footer}
+				className="display_flex flex_center"
+				style={{padding: '7em 0', background: '#263345'}}>
+					<div style={{width: '100%', maxWidth: '1000px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
+						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+							<img src={whiteLogo} style={{height: '73px', width: '157px'}}/>
+						</div>
+						<div style={{order: '2', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+							<ul className="link_list">
+								<li className={style.footer_link_header}>
+									PRODUCT
+								</li>
+								<li className={style.footer_link}>
+								How It Works
+								</li>
+							</ul>
+						</div>
+						<div style={{order: '3', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+							<ul className="link_list">
+								<li className={style.footer_link_header}>
+									COMPANY
+								</li>
+								<li className={style.footer_link}>
+								About Us
+								</li>
+							</ul>
+						</div>
+						<div style={{order: '4', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+							<ul className="link_list">
+								<li className={style.footer_link_header}>
+									HANDY LINKS
+								</li>
+								<li className={style.footer_link}>
+									Create a new assignment
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

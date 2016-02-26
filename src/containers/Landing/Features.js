@@ -74,18 +74,24 @@ export default class ProductDetails extends Component {
 							features.map((feature, i) => {
 								let even = i % 2 === 0;
 								return (
-									<li className={'flex_horizontal flex_wrap ' + style.feature}>
+									<li className={'flex_horizontal flex_wrap ' + style.feature + (isMobile && ' flex_center')}>
 										<span 
 										style={{order: (even && !isMobile ? 1 : 2), width: '50%', minWidth: '350px'}} 
-										className={'display_flex'}>
+										className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 											{
 												feature.heading === 'Snap' || feature.heading === 'Watch'
-												? <img src={feature.image} className={(even ? 'flex_item_align_left ' : 'flex_item_align_right ') + style.feature_phone}/>
-												: <img src={feature.image} className={(even ? 'flex_item_align_left ' : 'flex_item_align_right ' ) + style.feature_closeup}/>
+												? <img src={feature.image} className={!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ') : '' + style.feature_phone}/>
+												: <img src={feature.image} className={!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ' ) : '' + style.feature_closeup}/>
 											}
 										</span>
 										<span 
-										style={{order: (even && !isMobile ? 2 : 1), width: '50%', minWidth: '350px'}} 
+										style={{
+											order: (even && !isMobile ? 2 : 1), 
+											width: '50%', 
+											minWidth: '350px',
+											textAlign: isMobile ? 'center' : '',
+											marginBottom: isMobile ? '20px' : ''
+										}} 
 										className={'flex_container_center'}>
 											<h1 className={style.feature_heading}>{feature.heading}</h1>
 											<h3 className={style.feature_message}>{feature.message}</h3>

@@ -175,6 +175,11 @@ $secondary-grey: #A8B6C1;
 }
 
 
+// Width
+:global .span_1_of_4 {
+	width: 23.8%;
+}
+
 
 // Input with icon
 :global .input_wrapper {

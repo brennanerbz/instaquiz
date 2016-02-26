@@ -28,7 +28,7 @@ export default class Landing extends Component {
 		const halfiPhone = require('../../../static/images/halfIphone.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
 		return (
-			<div id="landing" style={{overflowX: isMobile ? '' : 'hidden'}}>
+			<div id="landing">
 				<div id="hero">
 					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">

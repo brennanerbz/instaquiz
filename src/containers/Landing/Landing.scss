@@ -54,6 +54,9 @@ $secondary-grey: #A8B6C1;
 		margin-bottom: 15px;
 	}
 	.footer_link {
-		color: #8492A7;
+		a {
+			color: #8492A7!important;
+			text-decoration: none!important;
+		}
 	}
 }

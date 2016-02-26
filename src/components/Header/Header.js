@@ -28,10 +28,10 @@ export default class Header extends Component {
 				}} 
 				className={'display_flex flex_center'}>
 				<div className="flex_horizontal" style={{maxWidth: '1050px', minWidth: '950px', width: '100%', padding: isMobile ? '15px 25px 10px' : '15px 25px 10px'}}>
-					<img src={blueLogo} style={{height: isMobile ? '45px' : '55px'}}/>
+					<img onClick={() => pushState(null, '/')} src={blueLogo} style={{height: isMobile ? '45px' : '55px', cursor: 'pointer'}}/>
 					<ul style={{lineHeight: isMobile ? '45px' : '55px'}} className="flex_container_right link_list">
 						<li className="link_list_item">
-							<a className="grey link">How It Works</a>
+							<a href="#features" className="grey link">How It Works</a>
 						</li>
 					</ul>
 				</div>

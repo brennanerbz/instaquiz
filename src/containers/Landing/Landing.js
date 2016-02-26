@@ -24,7 +24,7 @@ export default class Landing extends Component {
 
 	render() {
 		const style = require('./Landing.scss');
-		const { location, isMobile } = this.props;
+		const { location, isMobile, pushState } = this.props;
 		const halfiPhone = require('../../../static/images/halfIphone.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
 		return (
@@ -55,7 +55,7 @@ export default class Landing extends Component {
 									A simple app that automates the way teachers create, assign and grade homework.
 								</h2>
 								<button style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} className="button primary_blue">
-									Create assignment
+									Create new assignment
 								</button>
 								<img src={halfiPhone} style={{height: isMobile ? '285px' : '350px'}}/>
 							</div>
@@ -75,7 +75,10 @@ export default class Landing extends Component {
 				style={{padding: '7em 0', background: '#263345'}}>
 					<div style={{width: '100%',  maxWidth: '1050px', minWidth: '950px', padding: '0 25px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
 						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
-							<img src={whiteLogo} style={{height: isMobile ? '45px' : '55px', width: isMobile ? '115px' : '140px'}}/>
+							<img 
+							onClick={() => pushState(null, '/')} 
+							src={whiteLogo} 
+							style={{height: isMobile ? '45px' : '55px', width: isMobile ? '115px' : '140px', cursor: 'pointer'}}/>
 						</div>
 						<div style={{order: '2', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<ul className="link_list">
@@ -83,7 +86,7 @@ export default class Landing extends Component {
 									PRODUCT
 								</li>
 								<li className={style.footer_link}>
-								How It Works
+									<a href="#features">How It Works</a>
 								</li>
 							</ul>
 						</div>
@@ -93,7 +96,7 @@ export default class Landing extends Component {
 									COMPANY
 								</li>
 								<li className={style.footer_link}>
-								About Us
+									<a>About Us</a>
 								</li>
 							</ul>
 						</div>
@@ -103,7 +106,7 @@ export default class Landing extends Component {
 									HANDY LINKS
 								</li>
 								<li className={style.footer_link}>
-									Create a new assignment
+									<a>Create a new assignment</a>
 								</li>
 							</ul>
 						</div>

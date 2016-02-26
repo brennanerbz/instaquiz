@@ -39,7 +39,7 @@ export default class QuizHeader extends Component {
 							position: 'fixed',
 							top: '11px'
 						}} 
-						className="button primary_green">
+						className="button primary_blue">
 						{
 							loaded
 							? 'Quiz me'
@@ -65,7 +65,7 @@ export default class QuizHeader extends Component {
 						zIndex: '0',
 						width: isMobile ? '250px' : ''
 					}} 
-					className="button primary_green">
+					className="button primary_blue">
 					Quiz Me
 				</button>
 			</div>

@@ -28,7 +28,7 @@ export default class Footer extends Component {
 		return (
 			<div style={{
 				// position: (!title || error) ? 'absolute' : '', 
-				background: (!loaded && isNotHomeView) ? '#fff' : '#21D931',
+				background: (!loaded && isNotHomeView) ? '#fff' : '#4A89DC',
 				bottom: '0', 
 				width: '100%', 
 				height: '54px', 
@@ -39,7 +39,7 @@ export default class Footer extends Component {
 				<div style={{width: '100%', maxWidth: '1000px'}} className="flex_horizontal">
 					<div 
 						className="flex_container_left grey">
-						<a style={{color: '#fff', fontWeight: '500', textDecoration: 'none'}}>&copy; Quizly 2016.</a>
+						<a style={{color: '#fff', fontWeight: '500', textDecoration: 'none'}}>&copy; Nightly 2016.</a>
 					</div>
 					<div 
 						style={{marginLeft: 'auto'}} 

@@ -197,8 +197,8 @@ export default class WikiForm extends Component {
 									marginRight: '10px'
 								}}
 								type="submit"
-								className="button primary_green">
-								Transform
+								className="button primary_blue">
+								Search
 							</button>
 							<button 
 								onClick={() => this.props.openHowItWorks()}

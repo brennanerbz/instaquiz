@@ -1,5 +1,5 @@
 export App from './App/App';
-export Landing from './Landing/Landing';
+export Index from './Index/Index';
 export NotFound from './NotFound/NotFound';
 export Quiz from './Quiz/Quiz';
 

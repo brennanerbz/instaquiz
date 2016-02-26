@@ -1,19 +1,19 @@
 import request from 'superagent';
 import config from '../../config';
 
-export const ADD_TOPIC = 'Instaquiz/quiz/ADD_TOPIC';
-export const ADD_TOPIC_SUCCESS = 'Instaquiz/quiz/ADD_TOPIC_SUCCESS';
-export const ADD_TOPIC_FAILURE = 'Instaquiz/quiz/ADD_TOPIC_FAILURE';
+export const ADD_TOPIC = 'nightly/quiz/ADD_TOPIC';
+export const ADD_TOPIC_SUCCESS = 'nightly/quiz/ADD_TOPIC_SUCCESS';
+export const ADD_TOPIC_FAILURE = 'nightly/quiz/ADD_TOPIC_FAILURE';
 
-export const FETCH_ITEMS = 'Instaquiz/quiz/FETCH_ITEMS';
-export const FETCH_ITEMS_SUCCESS = 'Instaquiz/quiz/FETCH_ITEMS_SUCCESS';
-export const FETCH_ITEMS_FAILURE = 'Instaquiz/quiz/FETCH_ITEMS_FAILURE';
+export const FETCH_ITEMS = 'nightly/quiz/FETCH_ITEMS';
+export const FETCH_ITEMS_SUCCESS = 'nightly/quiz/FETCH_ITEMS_SUCCESS';
+export const FETCH_ITEMS_FAILURE = 'nightly/quiz/FETCH_ITEMS_FAILURE';
 
-export const START_QUIZ = 'Instaquiz/quiz/START_QUIZ';
-export const START_QUIZ_SUCCESS = 'Instaquiz/quiz/START_QUIZ_SUCCESS';
-export const START_QUIZ_FAILURE = 'Instaquiz/quiz/START_QUIZ_FAILURE';
+export const START_QUIZ = 'nightly/quiz/START_QUIZ';
+export const START_QUIZ_SUCCESS = 'nightly/quiz/START_QUIZ_SUCCESS';
+export const START_QUIZ_FAILURE = 'nightly/quiz/START_QUIZ_FAILURE';
 
-export const CLEAR_QUIZ = 'Instaquiz/quiz/CLEAR_QUIZ';
+export const CLEAR_QUIZ = 'nightly/quiz/CLEAR_QUIZ';
 
 const initialState = {
 	title: '',

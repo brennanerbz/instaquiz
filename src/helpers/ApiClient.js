@@ -15,8 +15,12 @@ function formatUrl(path) {
 class _ApiClient {
   constructor(req) {
     methods.forEach((method) =>
-      this[method] = (path, data) => new Promise((resolve, reject) => {
+      this[method] = (path, data, token) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
+
+        if(token) {
+          request.auth('', token)
+        }
 
         if (data) {
           request.send(data);

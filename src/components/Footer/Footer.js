@@ -23,7 +23,7 @@ export default class Footer extends Component {
 	}
 
 	render() {
-		const { loaded, title, error, location } = this.props;
+		const { loaded, title, error, location, user } = this.props;
 		const isNotHomeView = location.pathname.match(/quiz/gi);
 		return (
 			<div style={{

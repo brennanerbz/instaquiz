@@ -6,15 +6,17 @@ import Helmet from 'react-helmet';
 import cookie from 'react-cookie';
 import { pushState } from 'redux-router';
 
+import { createUser } from '../../redux/modules/user';
+
 // Children
 import Features from './Features';
 
 @connect(state => ({
-	// the list of top wiki articles
 	}),
 	dispatch => ({
 		...bindActionCreators({
-			pushState
+			pushState,
+			createUser
 		}, dispatch)
 	})
 )
@@ -54,7 +56,12 @@ export default class Landing extends Component {
 									}}>
 									A simple app that automates the way teachers create, assign and grade homework.
 								</h2>
-								<button style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} className="button primary_blue">
+								<button 
+								onClick={() => {
+									this.props.createUser()
+								}} 
+								style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} 
+								className="button primary_blue">
 									Create new assignment
 								</button>
 								<img src={halfiPhone} style={{height: isMobile ? '285px' : '350px'}}/>

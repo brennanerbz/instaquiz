@@ -28,7 +28,7 @@ export default class Landing extends Component {
 		const halfiPhone = require('../../../static/images/halfIphone.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
 		return (
-			<div id="landing" style={{overflowX: 'hidden'}}>
+			<div id="landing" style={{overflowX: isMobile ? '' : 'hidden'}}>
 				<div id="hero">
 					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
@@ -73,8 +73,10 @@ export default class Landing extends Component {
 				id={style.landing_footer}
 				className="display_flex flex_center"
 				style={{padding: '7em 0', background: '#263345'}}>
-					<div style={{width: '100%',  maxWidth: '1050px', minWidth: '950px', padding: '0 25px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
-						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+					<div style={{width: '100%',  maxWidth: '1050px', minWidth: isMobile ? '' : '950px', padding: '0 25px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
+						<div 
+						style={{order: '1', minWidth: '200px', marginBottom: '40px'}} 
+						className={'span_1_of_4 flex_vertical' + ' ' + (isMobile ? 'flex_center' : '')}>
 							<img 
 							onClick={() => pushState(null, '/')} 
 							src={whiteLogo} 

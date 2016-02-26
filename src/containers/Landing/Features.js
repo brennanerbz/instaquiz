@@ -69,7 +69,7 @@ export default class ProductDetails extends Component {
 					<ul 
 					id={style.features_list} 
 					className={'dislay_flex flex_vertical' + ' ' + (isMobile ? style.mobile : '')} 
-					style={{width: '100%', maxWidth: '1050px', minWidth: '950px', padding: '25px'}}>
+					style={{width: '100%', maxWidth: '1050px', minWidth: isMobile ? '' : '950px', padding: '25px'}}>
 						{
 							features.map((feature, i) => {
 								let even = i % 2 === 0;

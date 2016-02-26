@@ -33,7 +33,7 @@ export default class Landing extends Component {
 					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
 							<div 
-								style={{padding: isMobile ? '0px 20px' : ''}} 
+								style={{padding: isMobile ? '10px 20px 0' : ''}} 
 								className="display_flex flex_vertical flex_center">
 								<h1 
 									style={{
@@ -75,7 +75,7 @@ export default class Landing extends Component {
 				style={{padding: '7em 0', background: '#263345'}}>
 					<div style={{width: '100%', maxWidth: '1000px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
 						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
-							<img src={whiteLogo} style={{height: '73px', width: '157px'}}/>
+							<img src={whiteLogo} style={{height: isMobile ? '45px' : '55px', width: isMobile ? '115px' : '140px'}}/>
 						</div>
 						<div style={{order: '2', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<ul className="link_list">

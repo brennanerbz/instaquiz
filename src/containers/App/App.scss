@@ -112,6 +112,7 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-self: flex-start;
 	-ms-align-self: flex-start;
 	align-self: flex-start;
+	margin-right: auto;
 }
 :global .flex_item_align_center {
 	// max-width: 50%;
@@ -124,6 +125,7 @@ $secondary-grey: #A8B6C1;
 	-webkit-align-self: flex-end;
 	-ms-align-self: flex-end;
 	align-self: flex-end;
+	margin-left: auto;
 }
 :global .flex_vertical {
 	display: -webkit-box;

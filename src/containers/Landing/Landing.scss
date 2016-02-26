@@ -1,9 +1,46 @@
-$primary-green: #2DD67B;
-$primary-black: #2C3239;
-$primary-blue: #187BFC;
-$primary-grey: #EDF0F3;
+$primary-green: #21D931;
+$primary-black: #3C4858;
+$primary-blue: #1FB6FF;
+$primary-grey: #8492A6;
 $primary-grey-border: #DAE0E7;
 $secondary-grey: #A8B6C1;
 
-#landing {
+
+#features_list {
+	.feature {
+		margin: 15px 0;
+		.feature_phone {
+			height: 710px;
+		}
+		.feature_closeup {
+			height: 430px;
+		}
+		.feature_heading {
+			font-size: 30px;
+			font-weight: 500;
+			color: $primary-black;
+			margin-bottom: 5px;
+		}
+		.feature_message {
+			font-size: 24px;
+			font-weight: 300;
+			color: $primary-grey;
+		}
+	}
+	&.mobile {
+		.feature {
+			.feature_phone {
+				height: 550px;
+			}
+			.feature_closeup {
+				height: 350px;
+			}
+			.feature_heading {
+				font-size: 26px;
+			}
+			.feature_message {
+				font-size: 21px;
+			}
+		}
+	}
 }

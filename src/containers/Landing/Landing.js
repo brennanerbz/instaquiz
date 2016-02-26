@@ -29,7 +29,7 @@ export default class Landing extends Component {
 		return (
 			<div id="landing">
 				<div id="hero">
-					<div id={style.landing} style={{borderBottom: '1px solid #8492A6'}} id={style.landing} className="display_flex flex_center">
+					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
 							<div 
 								style={{padding: isMobile ? '0px 20px' : ''}} 
@@ -61,8 +61,7 @@ export default class Landing extends Component {
 						</div>
 					</div>
 				</div>
-				<div id="features_container">
-				</div>
+				<Features isMobile={isMobile}/>
 			</div>
 		);
 	}

@@ -73,16 +73,22 @@ export default class Landing extends Component {
 				id={style.landing_footer}
 				className="display_flex flex_center"
 				style={{padding: '7em 0', background: '#263345'}}>
-					<div style={{width: '100%',  maxWidth: '1050px', minWidth: isMobile ? '' : '950px', padding: '0 25px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
+					<div style={{
+							width: '100%',  
+							maxWidth: '1050px', 
+							minWidth: isMobile ? '' : '950px', 
+							padding: '0 25px'
+						}} 
+						className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
 						<div 
-						style={{order: '1', minWidth: '200px', marginBottom: '40px'}} 
+						style={{order: '0', minWidth: '200px', marginBottom: '40px'}} 
 						className={'span_1_of_4 flex_vertical' + ' ' + (isMobile ? 'flex_center' : '')}>
 							<img 
 							onClick={() => pushState(null, '/')} 
 							src={whiteLogo} 
 							style={{height: isMobile ? '45px' : '55px', width: isMobile ? '115px' : '140px', cursor: 'pointer'}}/>
 						</div>
-						<div style={{order: '2', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<ul className="link_list">
 								<li className={style.footer_link_header}>
 									PRODUCT
@@ -92,7 +98,7 @@ export default class Landing extends Component {
 								</li>
 							</ul>
 						</div>
-						<div style={{order: '3', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+						<div style={{order: '2', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<ul className="link_list">
 								<li className={style.footer_link_header}>
 									COMPANY
@@ -102,7 +108,7 @@ export default class Landing extends Component {
 								</li>
 							</ul>
 						</div>
-						<div style={{order: '4', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
+						<div style={{order: '3', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<ul className="link_list">
 								<li className={style.footer_link_header}>
 									HANDY LINKS

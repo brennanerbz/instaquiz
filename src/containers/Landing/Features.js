@@ -81,9 +81,9 @@ export default class ProductDetails extends Component {
 								return (
 									<li 
 									key={feature.heading + i} 
-									className={'flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
+									className={'display_flex flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
 										<span 
-										style={{order: (even && !isMobile ? 1 : 2), width: '50%', minWidth: '350px'}} 
+										style={{order: ((even && !isMobile) ? 0 : 1), width: '50%', minWidth: '350px'}} 
 										className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 											{
 												feature.heading === 'Snap' || feature.heading === 'Watch'
@@ -97,7 +97,7 @@ export default class ProductDetails extends Component {
 										</span>
 										<span 
 										style={{
-											order: (even && !isMobile ? 2 : 1), 
+											order: ((even && !isMobile) ? 1 : 0), 
 											width: '50%', 
 											minWidth: '350px',
 											textAlign: isMobile ? 'center' : '',

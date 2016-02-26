@@ -1,6 +1,6 @@
-# Instaquiz
+# Nightly
 
-This is the client for Instaquiz, a tool which can turn Wikipedia pages into practice tests.
+This is the client for Nightly, a tool that automates the way teachers create, assign and grade homework.
 
 ## Installation
 

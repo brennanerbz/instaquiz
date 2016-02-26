@@ -28,12 +28,12 @@ export default class Landing extends Component {
 		const halfiPhone = require('../../../static/images/halfIphone.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
 		return (
-			<div id="landing">
+			<div id="landing" style={{overflowX: 'hidden'}}>
 				<div id="hero">
 					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
 							<div 
-								style={{padding: isMobile ? '10px 20px 0' : ''}} 
+								style={{padding: isMobile ? '10px 20px 0' : '70px 0 0'}} 
 								className="display_flex flex_vertical flex_center">
 								<h1 
 									style={{
@@ -54,7 +54,7 @@ export default class Landing extends Component {
 									}}>
 									A simple app that automates the way teachers create, assign and grade homework.
 								</h2>
-								<button style={{margin: '20px 0'}} className="button primary_blue">
+								<button style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} className="button primary_blue">
 									Create assignment
 								</button>
 								<img src={halfiPhone} style={{height: isMobile ? '285px' : '350px'}}/>
@@ -73,7 +73,7 @@ export default class Landing extends Component {
 				id={style.landing_footer}
 				className="display_flex flex_center"
 				style={{padding: '7em 0', background: '#263345'}}>
-					<div style={{width: '100%', maxWidth: '1000px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
+					<div style={{width: '100%',  maxWidth: '1050px', minWidth: '950px', padding: '0 25px'}} className={(isMobile ? 'flex_center ' : '') + 'flex_horizontal flex_wrap'}>
 						<div style={{order: '1', minWidth: '200px', marginBottom: '40px'}} className="span_1_of_4 flex_vertical">
 							<img src={whiteLogo} style={{height: isMobile ? '45px' : '55px', width: isMobile ? '115px' : '140px'}}/>
 						</div>

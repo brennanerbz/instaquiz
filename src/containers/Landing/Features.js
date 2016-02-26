@@ -71,17 +71,28 @@ export default class ProductDetails extends Component {
 					className={'dislay_flex flex_vertical' + ' ' + (isMobile ? style.mobile : '')} 
 					style={{width: '100%', maxWidth: '1050px', minWidth: isMobile ? '' : '950px', padding: '25px'}}>
 						{
+							isMobile
+							&&
+							<h1>MOBILE</h1>
+						}
+						{
 							features.map((feature, i) => {
 								let even = i % 2 === 0;
 								return (
-									<li key={feature.heading + i} className={'flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
+									<li 
+									key={feature.heading + i} 
+									className={'flex_horizontal flex_wrap ' + style.feature + (isMobile ? ' flex_center ' : '')}>
 										<span 
 										style={{order: (even && !isMobile ? 1 : 2), width: '50%', minWidth: '350px'}} 
 										className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 											{
 												feature.heading === 'Snap' || feature.heading === 'Watch'
-												? <img src={feature.image} className={(!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ') : '') + style.feature_phone}/>
-												: <img src={feature.image} className={(!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ' ) : '') + style.feature_closeup}/>
+												? <img 
+												src={feature.image} 
+												className={(!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ') : '') + style.feature_phone}/>
+												: <img 
+												src={feature.image} 
+												className={(!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ' ) : '') + style.feature_closeup}/>
 											}
 										</span>
 										<span 

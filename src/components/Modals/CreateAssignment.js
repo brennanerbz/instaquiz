@@ -99,7 +99,7 @@ export default class CreateAssignment extends Component {
 					<textarea 
 					ref="assignment_text"
 					style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
-					placeholder="Paste text here..."
+					placeholder={'Paste text here to...\n\n1. Process text\n2. Generate questions\n3. Create automatic assignment for you'}
 					className={isMobile ? 'mobile' : ''}
 					onChange={(e) => this.setState({text: e.target.value})}
 					onBlur={() => this.props.updateText(text)}

@@ -42,8 +42,8 @@ export default class Landing extends Component {
 								style={{padding: isMobile ? '10px 20px 0' : '70px 0 0'}} 
 								className="display_flex flex_vertical flex_center">
 								<h1 
+									className={style.hero_heading}
 									style={{
-										fontSize: isMobile ? '24px' : '34px', 
 										fontWeight: '600', 
 										color: '#3C4858', 
 										marginBottom: '20px'
@@ -53,7 +53,7 @@ export default class Landing extends Component {
 								<h2 
 									style={{
 										maxWidth: isMobile ? '350px' : '550px',
-										fontSize: isMobile ? '19px' : '24px',
+										fontSize: isMobile ? '18px' : '24px',
 										fontWeight: '300',
 										color: '#8492A6',
 										textAlign: 'center'

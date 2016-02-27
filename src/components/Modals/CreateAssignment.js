@@ -8,6 +8,7 @@ import * as assignmentActions from '../../redux/modules/assignments';
 
 @connect(
   state => ({
+  	user_id: state.user.id,
   	title: state.assignments.title,
   	text: state.assignments.text
   }),
@@ -36,6 +37,12 @@ export default class CreateAssignment extends Component {
 		const { title, text } = this.props;
 		if(title) this.setState({title: title});
 		if(text) this.setState({text: text});
+	}
+
+	handleCreateAssignment() {
+		const { createAssignment, user_id } = this.props;
+		const { title, text } = this.state;
+		createAssignment(user_id, title, text)
 	}
 
 	render() {
@@ -87,8 +94,17 @@ export default class CreateAssignment extends Component {
 						Submit
 					</a>}
 				</div>
-				<div className="flex_vertical" style={{padding: isMobile ? '' : '2em'}}>
+				<form 
+				onSubmit={(e) => {
+					e.preventDefault()
+					this.handleCreateAssignment()
+				}} 
+				action="/edit"
+				role="create"
+				className="flex_vertical" 
+				style={{padding: isMobile ? '' : '2em'}}>
 					<input 
+					ariaLabel="Assignment title"
 					autoFocus={true}
 					style={{height: '50px', lineHeight: isMobile ? '18px' : '50px'}}
 					placeholder="Assignment name"
@@ -97,12 +113,18 @@ export default class CreateAssignment extends Component {
 					onChange={(e) => this.setState({title: e.target.value})}
 					onBlur={() => this.props.updateTitle(title)}/>
 					<textarea 
+					ariaLabel="Assignment text"
 					ref="assignment_text"
 					style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
 					placeholder={'Paste text here to...\n\n1. Process text\n2. Generate questions\n3. Create automatic assignment for you'}
 					className={isMobile ? 'mobile' : ''}
 					onChange={(e) => this.setState({text: e.target.value})}
 					onBlur={() => this.props.updateText(text)}
+					onKeyDown={(e) => {
+						if(e.which === 13) {
+							this.handleCreateAssignment()
+						}
+					}}
 					value={text}/>
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">
@@ -111,13 +133,13 @@ export default class CreateAssignment extends Component {
 							<a className="grey link">Wondering how this works?</a>
 						</span>
 						<button 
-						onClick={() => this.props.createAssignment()}
+						onClick={() => this.handleCreateAssignment()}
 						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
 						className="button primary_green flex_item_align_right">
 							Submit
 						</button>
 					</div>}
-				</div>
+				</form>
 			</div>
 		);
 	}

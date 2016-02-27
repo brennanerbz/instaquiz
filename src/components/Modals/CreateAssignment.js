@@ -70,21 +70,21 @@ export default class CreateAssignment extends Component {
 					}}>
 					Create Assignment</h1>
 					{isMobile &&
-					<a
+					<button
 					style={{
 						position: 'absolute',
 						top: '1.25em',
 						right: '1em',
 						fontSize: '17px'
 					}}
-					className="link">
+					className="button primary_green small">
 						Submit
-					</a>}
+					</button>}
 				</div>
 				<div className="flex_vertical" style={{padding: isMobile ? '' : '2em'}}>
 					<input 
 					autoFocus={true}
-					style={{height: '50px', lineHeight: isMobile ? '17px' : '50px'}}
+					style={{height: '50px', lineHeight: isMobile ? '16px' : '50px'}}
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
 					value={title}

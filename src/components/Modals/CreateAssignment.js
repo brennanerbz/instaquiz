@@ -84,7 +84,7 @@ export default class CreateAssignment extends Component {
 				<div className="flex_vertical" style={{padding: isMobile ? '' : '2em'}}>
 					<input 
 					autoFocus={true}
-					style={{height: '50px', lineHeight: '50px'}}
+					style={{height: '50px', lineHeight: isMobile ? '17px' : '50px'}}
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
 					value={title}

@@ -40,10 +40,42 @@ a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, d
 
 
 // Input 
+input, textarea {
+	outline: none;
+	border: 1px solid #DFE6ED;
+	border-radius: 4px;
+	font-size: 16px;
+	padding: 0 15px;
+	color: #3c4858;
+	&:focus {
+		border-color: #00BBFD;
+		outline: none;
+	}
+}
+input {
+	height: 50px;
+	line-height: 50px;
+}
+textarea {
+	padding: 15px;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	width: 100%;
+	outline: none;
+	overflow: hidden;
+	resize: none;
+}
 
 
 // Button
 button {
+}
+
+.modal-backdrop {
+	background: #fff!important;
+	&.in {
+		opacity: 0.95!important;
+	}
 }
 
 // Modal 
@@ -51,8 +83,14 @@ button {
 	font-family: "Helvetica Neue", Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
 	&.mobile {
 		&.fade {
+			top: 100%!important;
+			-webkit-transition: opacity .10s linear,top .25s ease-out;
+			-moz-transition: opacity .10s linear,top .25s ease-out;
+			-o-transition: opacity .10s linear,top .25s ease-out;
+			transition: opacity .10s linear,top .25s ease-out;
 			&.in {
 				top: 0!important;
+				opacity: 1;
 			}
 		}
 	}
@@ -73,6 +111,9 @@ button {
 			&.processing {
 				max-width: inherit;
 			}
+			&.create {
+				width: inherit;
+			}
 		}
 		@media screen and (min-width: 768px) {
 		    width: 555px;
@@ -82,11 +123,14 @@ button {
 			padding: 2.5em;
 			max-width: 350px;
 		}
+		&.create {
+			width: 590px;
+		}
 	}
 	.modal-content {
-		border: none;
-		border-radius: 4px;
-		box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		border: 1px solid #e0e6ed;
+		border-radius: 5px;
+		box-shadow: 0 1px 6px rgba(31,45,61,0.05);
 		.modal-header {
 			padding: 1rem 1.5rem 0.75rem 1.25rem;
 			background: #fff;

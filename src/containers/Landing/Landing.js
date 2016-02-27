@@ -7,6 +7,7 @@ import cookie from 'react-cookie';
 import { pushState } from 'redux-router';
 
 import { createUser } from '../../redux/modules/user';
+import * as overlayActions from '../../redux/modules/overlays';
 
 // Children
 import Features from './Features';
@@ -16,7 +17,8 @@ import Features from './Features';
 	dispatch => ({
 		...bindActionCreators({
 			pushState,
-			createUser
+			createUser,
+			...overlayActions
 		}, dispatch)
 	})
 )
@@ -29,6 +31,8 @@ export default class Landing extends Component {
 		const { location, isMobile, pushState } = this.props;
 		const halfiPhone = require('../../../static/images/halfIphone.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png')
+		// Modal Actions
+		const { openModal, closeModal } = this.props;
 		return (
 			<div id="landing">
 				<div id="hero">
@@ -58,7 +62,7 @@ export default class Landing extends Component {
 								</h2>
 								<button 
 								onClick={() => {
-									this.props.createUser()
+									openModal('create_assignment')
 								}} 
 								style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} 
 								className="button primary_blue">

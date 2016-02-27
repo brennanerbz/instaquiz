@@ -10,7 +10,7 @@ export default class IndexRoute extends Component {
 	render() {
 		const { user } = this.props;
 		return (
-			user ? <Dashboard/> : <Landing/>	
+			user ? <Dashboard/> : <Landing {...this.props}/>	
 		);
 	}
 }

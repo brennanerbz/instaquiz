@@ -9,6 +9,8 @@ import { startQuiz } from '../../redux/modules/quiz';
 import PhoneModal from './PhoneModal';
 import Success from './SuccessModal';
 import Processing from './ProcessingModal';
+import CreateAssignment from './CreateAssignment';
+
 
 @connect(
   state => ({
@@ -38,16 +40,31 @@ export default class DefaultModal extends Component {
 	render() {
 		const style = require('./Modals.scss');
 		const { open, type, isMobile, startQuiz, loaded, title, error } = this.props;
+		let bodyPadding;
+		if(type == 'processing') bodyPadding = '2em 0 2.75em 0'
+		if(type == 'create_assignment') bodyPadding = '0'
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
-			dialogClassName={(type == 'processing' ? 'processing' : '') + ' ' + (isMobile ? 'mobile' : '') + ' ' + 'modal-dialog'}
+			dialogClassName={
+				(type == 'processing' ? 'processing' : '') 
+				+ ' ' + (isMobile ? 'mobile' : '') 
+				+ ' ' + (type == 'create_assignment' && !isMobile ? 'create' : '')
+				+ ' ' + 'modal-dialog'}
 			show={open}
 			onHide={::this.close}>
 				<Modal.Body 
 				style={{
-					padding: type == 'processing' ? '2em 0 2.75em 0' : ''
+					padding: bodyPadding
 				}}>
+					{
+						type == 'create_assignment'
+						&&
+						<CreateAssignment
+							isMobile={isMobile}
+							close={::this.close}
+						/>
+					}
 					{
 						type == 'phone'
 						&&

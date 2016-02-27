@@ -14,8 +14,7 @@ export const FETCH_USER_FAILURE = 'nightly/user/FETCH_USER_FAILURE';
 const initialState = {
 	loaded: false,
 	loading: false,
-	id: '',
-	assignments: []
+	id: ''
 }
 
 export default function reducer(state = initialState, action) {
@@ -43,9 +42,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				loaded: true,
 				loading: false,
-				id: action.result.user.id,
-				assignments: action.result.user.assignments,
-				
+				id: action.result.user.id				
 			}
 		case FETCH_USER_FAILURE:
 			return {
@@ -68,8 +65,6 @@ export function createUser() {
 }
 
 export function fetchUser(token) {
-	console.log('------ \n\n\nCalling fetch\n\n\n----')
-	console.log(FETCH_USER)
 	return {
 		types: [FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE],
 		promise: (client) => client.get('/user', null, token)

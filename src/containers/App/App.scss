@@ -237,7 +237,7 @@ $secondary-grey: #A8B6C1;
 	display: inline-block!important;
 	border: none;
 	outline: none;
-	font-weight: 600;
+	font-weight: 500;
 	-webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
 	&:hover {	
@@ -259,6 +259,11 @@ $secondary-grey: #A8B6C1;
 	&.primary_green {
 		background: $primary-green;
 		color: #fff;
+	}
+	&.small {
+		padding: 7px 15px;
+		font-size: 14px;
+		font-weight: 600;
 	}
 }
 

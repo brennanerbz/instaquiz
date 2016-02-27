@@ -51,6 +51,12 @@ input, textarea {
 		border-color: #00BBFD;
 		outline: none;
 	}
+	&.mobile {
+		border-radius: 1px;
+		&:focus {
+			border-color: #DFE6ED;
+		}
+	}
 }
 input {
 	height: 50px;

@@ -71,11 +71,6 @@ export default class ProductDetails extends Component {
 					className={'dislay_flex flex_vertical' + ' ' + (isMobile ? style.mobile : '')} 
 					style={{width: '100%', maxWidth: '1050px', minWidth: isMobile ? '' : '950px', padding: '25px'}}>
 						{
-							isMobile
-							&&
-							<h1>MOBILE</h1>
-						}
-						{
 							features.map((feature, i) => {
 								let even = i % 2 === 0;
 								return (

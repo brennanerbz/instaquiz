@@ -30,7 +30,8 @@ function fetchData(getState, dispatch) {
 @connect(state => ({
 	params: state.router.params,
 	location: state.router.location,
-	query: state.router.location.query
+	query: state.router.location.query,
+	modalOpen: state.overlays.modalOpen
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -58,6 +59,13 @@ export default class App extends Component {
 			isMobile: isMobile
 		});
 		window.addEventListener('scroll', ::this.handleScroll)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.modalOpen && nextProps.modalOpen) {
+			const node = document.body;
+			node.scrollTop = 0
+		}
 	}
 
 	handleScroll() {

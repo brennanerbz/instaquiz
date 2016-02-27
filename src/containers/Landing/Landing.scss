@@ -32,17 +32,65 @@ $secondary-grey: #A8B6C1;
 			margin: 20px 0;
 			.feature_phone {
 				height: 550px;
+				@media screen and (min-width: 320px) {
+					height: 500px;
+				}
+				@media screen and (min-width: 350px) {
+					height: 525px;
+				}
+				@media screen and (min-width: 400px) {
+					height: 550px;
+				}
 			}
 			.feature_closeup {
 				height: 350px;
+				@media screen and (min-width: 320px) {
+					height: 300px;
+				}
+				@media screen and (min-width: 350px) {
+					height: 325px;
+				}
+				@media screen and (min-width: 400px) {
+					height: 350px;
+				}
 			}
 			.feature_heading {
 				font-size: 26px;
+				@media screen and (min-width: 320px) {
+					font-size: 23px;
+				}
+				@media screen and (min-width: 350px) {
+					font-size: 24px;
+				}
+				@media screen and (min-width: 400px) {
+					font-size: 26px;
+				}
 			}
 			.feature_message {
 				font-size: 21px;
+				@media screen and (min-width: 320px) {
+					font-size: 19px;
+				}
+				@media screen and (min-width: 350px) {
+					font-size: 20px;
+				}
+				@media screen and (min-width: 400px) {
+					font-size: 21px;
+				}
 			}
 		}
+	}
+}
+
+.action_heading {
+	@media screen and (min-width: 320px) {
+		font-size: 24px;
+	}
+	@media screen and (min-width: 350px) {
+		font-size: 26px;
+	}
+	@media screen and (min-width: 400px) {
+		font-size: 28px;
 	}
 }
 

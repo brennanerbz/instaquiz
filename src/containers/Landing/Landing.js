@@ -43,7 +43,7 @@ export default class Landing extends Component {
 								className="display_flex flex_vertical flex_center">
 								<h1 
 									style={{
-										fontSize: isMobile ? '28px' : '34px', 
+										fontSize: isMobile ? '24px' : '34px', 
 										fontWeight: '600', 
 										color: '#3C4858', 
 										marginBottom: '20px'
@@ -53,7 +53,7 @@ export default class Landing extends Component {
 								<h2 
 									style={{
 										maxWidth: isMobile ? '350px' : '550px',
-										fontSize: isMobile ? '21px' : '24px',
+										fontSize: isMobile ? '19px' : '24px',
 										fontWeight: '300',
 										color: '#8492A6',
 										textAlign: 'center'
@@ -68,14 +68,20 @@ export default class Landing extends Component {
 								className="button primary_blue">
 									Create new assignment
 								</button>
-								<img src={halfiPhone} style={{height: isMobile ? '285px' : '350px'}}/>
+								<img src={halfiPhone} style={{height: isMobile ? '265px' : '350px'}}/>
 							</div>
 						</div>
 					</div>
 				</div>
 				<Features isMobile={isMobile}/>
-				<div id="create bottom" style={{background: '#00B5FF', padding: '10em 0', marginTop: '80px'}} className="display_flex flex_center flex_vertical">
-					<h1 style={{fontSize: '28px', fontWeight: '300', color: '#fff', marginBottom: '30px', textAlign: 'center'}}>You and your class will do great things with Nightly.</h1>
+				<div 
+				id="create bottom" 
+				style={{background: '#00B5FF', padding: '10em 1em', marginTop: '80px'}} className="display_flex flex_center flex_vertical">
+					<h1 
+					className={style.action_heading}
+					style={{fontWeight: '300', color: '#fff', marginBottom: '30px', textAlign: 'center'}}>
+					You and your class will do great things with Nightly.
+					</h1>
 					<button onClick={() => openModal('create_assignment')} className="button" style={{background: '#009CEE', color: '#fff'}}>
 						Create a new assignment
 					</button>

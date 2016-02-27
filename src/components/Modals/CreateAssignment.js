@@ -59,7 +59,7 @@ export default class CreateAssignment extends Component {
 					cursor: 'pointer'
 				}}/>
 				<div 
-				style={{padding: isMobile ? '1.25em 0' : '2em 2em 0'}} 
+				style={{padding: isMobile ? '1.25em 0' : '2em 2em 0', background: '#fff'}} 
 				className={'display_flex flex_horizontal' + ' ' + (isMobile ? 'flex_center' : '')}>
 					<h1 
 					className={isMobile ? '' : 'flex_item_align_left'}
@@ -91,7 +91,7 @@ export default class CreateAssignment extends Component {
 					onChange={(e) => this.setState({title: e.target.value})}/>
 					<textarea 
 					ref="assignment_text"
-					style={{minHeight: '350px', margin: '20px 0'}} 
+					style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
 					placeholder="Paste text here..."
 					className={isMobile ? 'mobile' : ''}
 					onChange={(e) => this.setState({text: e.target.value})}

@@ -55,7 +55,8 @@ export default class DefaultModal extends Component {
 			onHide={::this.close}>
 				<Modal.Body 
 				style={{
-					padding: bodyPadding
+					padding: bodyPadding,
+					background: type == 'create_assignment' && isMobile ? '#F9FAFC' : ''
 				}}>
 					{
 						type == 'create_assignment'

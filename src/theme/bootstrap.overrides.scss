@@ -93,11 +93,11 @@ button {
 	font-family: "Helvetica Neue", Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
 	&.mobile {
 		&.fade {
-			top: 100%!important;
-			-webkit-transition: opacity .10s linear,top .25s ease-out;
-			-moz-transition: opacity .10s linear,top .25s ease-out;
-			-o-transition: opacity .10s linear,top .25s ease-out;
-			transition: opacity .10s linear,top .25s ease-out;
+			top: 200%!important;
+			-webkit-transition: opacity .01s linear,top .4s ease-out;
+			-moz-transition: opacity .01s linear,top .4s ease-out;
+			-o-transition: opacity .01s linear,top .4s ease-out;
+			transition: opacity .01s linear,top .4s ease-out;
 			&.in {
 				top: 0!important;
 				opacity: 1;

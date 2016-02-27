@@ -4,10 +4,12 @@ import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import $ from 'jquery';
 
-import assignmentActions from '../../redux/modules/assignments';
+import * as assignmentActions from '../../redux/modules/assignments';
 
 @connect(
   state => ({
+  	title: state.assignments.title,
+  	text: state.assignments.text
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -31,9 +33,9 @@ export default class CreateAssignment extends Component {
 			this.style.height = 'auto'
 			this.style.height = (this.scrollHeight) + 'px'
 		})
-		setTimeout(() => {
-			node.trigger('input')
-		}, 1)
+		const { title, text } = this.props;
+		if(title) this.setState({title: title});
+		if(text) this.setState({text: text});
 	}
 
 	render() {
@@ -48,7 +50,10 @@ export default class CreateAssignment extends Component {
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
-				onClick={() => this.props.close()} 
+				onClick={() => {
+					this.props.close()
+					this.props.clearDraft()
+				}} 
 				src={deleteIcon} 
 				style={{
 					height: isMobile ? '15px' : '16px',
@@ -71,6 +76,7 @@ export default class CreateAssignment extends Component {
 					Create Assignment</h1>
 					{isMobile &&
 					<a
+					onClick={() => this.props.createAssignment()}
 					style={{
 						position: 'absolute',
 						top: '1.25em',
@@ -88,13 +94,15 @@ export default class CreateAssignment extends Component {
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
 					value={title}
-					onChange={(e) => this.setState({title: e.target.value})}/>
+					onChange={(e) => this.setState({title: e.target.value})}
+					onBlur={() => this.props.updateTitle(title)}/>
 					<textarea 
 					ref="assignment_text"
 					style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
 					placeholder="Paste text here..."
 					className={isMobile ? 'mobile' : ''}
 					onChange={(e) => this.setState({text: e.target.value})}
+					onBlur={() => this.props.updateText(text)}
 					value={text}/>
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">
@@ -102,7 +110,10 @@ export default class CreateAssignment extends Component {
 							<img src={question} style={{height: '16px', marginRight: '15px'}}/>
 							<a className="grey link">Wondering how this works?</a>
 						</span>
-						<button style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} className="button primary_green flex_item_align_right">
+						<button 
+						onClick={() => this.props.createAssignment()}
+						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
+						className="button primary_green flex_item_align_right">
 							Submit
 						</button>
 					</div>}

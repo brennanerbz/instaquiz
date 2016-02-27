@@ -16,7 +16,8 @@ import EditingList from '../EditingList/EditingList';
   	text: state.assignments.text,
   	creating: state.assignments.creating,
   	editing: state.assignments.editing,
-  	items: state.assignments.items
+  	items: state.assignments.items,
+  	assignment: state.assignments.assignment
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -49,6 +50,21 @@ export default class CreateAssignment extends Component {
 		const { createAssignment, user_id } = this.props;
 		const { title, text } = this.state;
 		createAssignment(user_id, title, text)
+	}
+
+	handleFinishAssignment() {
+		const { items, assignment } = this.props;
+		var finished = false;
+		items.forEach((item, i) => {
+			if(!item.selected) {
+				this.props.deleteItem(item.id)
+			}
+			if(i === items.length - 1) finished = true
+		})
+		if(finished) {
+			this.props.close()
+			this.props.pushState(null, `/assignment/${assignment.id}`)
+		}
 	}
 
 	render() {
@@ -94,7 +110,10 @@ export default class CreateAssignment extends Component {
 					</h1>
 					{isMobile &&
 					<a
-					onClick={() => this.props.createAssignment()}
+					onClick={() => {
+						if(!editing) this.handleCreateAssignment()
+						if(editing) this.handleFinishAssignment()
+					}}
 					style={{
 						position: 'absolute',
 						top: '1.25em',
@@ -105,16 +124,12 @@ export default class CreateAssignment extends Component {
 						{editing ? 'Finish' : 'Submit'}
 					</a>}
 				</div>
-				<form 
-				onSubmit={(e) => {
-					e.preventDefault()
-					this.handleCreateAssignment()
-				}} 
-				action="/edit"
-				role="create"
+				<div 
 				className="flex_vertical" 
 				style={{padding: isMobile ? '' : '2em'}}>
 					<input 
+					type="text"
+					name="title"
 					ariaLabel="Assignment title"
 					autoFocus={true}
 					style={{height: '50px', lineHeight: isMobile ? '18px' : '50px'}}
@@ -126,6 +141,8 @@ export default class CreateAssignment extends Component {
 
 					{!creating && !editing &&
 						<textarea 
+						type="submit"
+						name="text"
 						ariaLabel="Assignment text"
 						ref="assignment_text"
 						style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
@@ -162,7 +179,7 @@ export default class CreateAssignment extends Component {
 						<button 
 						onClick={() => {
 							if(!editing) this.handleCreateAssignment()
-							if(editing) true
+							if(editing) this.handleFinishAssignment()
 						}}
 						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
 						className="button primary_green flex_item_align_right">
@@ -170,7 +187,7 @@ export default class CreateAssignment extends Component {
 						</button>
 					</div>}
 
-				</form>
+				</div>
 			</div>
 		);
 	}

@@ -23,6 +23,11 @@ const initialState = {
 	//
 	creating: false,
 	editing: false,
+	assignment: {
+		id: 1,
+		title: 'Ms. smith',
+		text: 'Blah!'
+	},
 	items: [
 		{selected: true, id: 1, target: 'Series A round', cue: 'What is the name typically given to a company\'s first round of fundraising?'},
 		{selected: true, id: 2, target: 'Angel investor', cue: 'What is an affluent individual who provides capital for start ups?'},

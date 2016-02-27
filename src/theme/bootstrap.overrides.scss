@@ -41,12 +41,16 @@ a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, d
 
 // Input 
 input, textarea {
-	outline: none;
+	outline: none!important;
 	border: 1px solid #DFE6ED;
 	border-radius: 4px;
 	font-size: 16px;
 	padding: 0 15px;
 	color: #3c4858;
+	box-shadow: none!important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	&:focus {
 		border-color: #00BBFD;
 		outline: none;

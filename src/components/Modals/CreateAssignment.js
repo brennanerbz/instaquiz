@@ -6,11 +6,17 @@ import $ from 'jquery';
 
 import * as assignmentActions from '../../redux/modules/assignments';
 
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import EditingList from '../EditingList/EditingList';
+
 @connect(
   state => ({
   	user_id: state.user.id,
   	title: state.assignments.title,
-  	text: state.assignments.text
+  	text: state.assignments.text,
+  	creating: state.assignments.creating,
+  	editing: state.assignments.editing,
+  	items: state.assignments.items
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -54,6 +60,10 @@ export default class CreateAssignment extends Component {
 		const question = require('../../../static/icons/question.png');
 		// State
 		const { title, text } = this.state;
+		// Loading
+		const { creating } = this.props;
+		// Items
+		const { items, editing } = this.props;
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
@@ -80,7 +90,8 @@ export default class CreateAssignment extends Component {
 						fontWeight: '500',
 						color: '#283643'
 					}}>
-					Create Assignment</h1>
+					{(editing ? 'Edit' : 'Create') + ' Assignment'}
+					</h1>
 					{isMobile &&
 					<a
 					onClick={() => this.props.createAssignment()}
@@ -91,7 +102,7 @@ export default class CreateAssignment extends Component {
 						fontSize: '17px'
 					}}
 					className="link">
-						Submit
+						{editing ? 'Finish' : 'Submit'}
 					</a>}
 				</div>
 				<form 
@@ -112,20 +123,36 @@ export default class CreateAssignment extends Component {
 					value={title}
 					onChange={(e) => this.setState({title: e.target.value})}
 					onBlur={() => this.props.updateTitle(title)}/>
-					<textarea 
-					ariaLabel="Assignment text"
-					ref="assignment_text"
-					style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
-					placeholder={'Paste text here to...\n\n1. Process text\n2. Generate questions\n3. Create automatic assignment for you'}
-					className={isMobile ? 'mobile' : ''}
-					onChange={(e) => this.setState({text: e.target.value})}
-					onBlur={() => this.props.updateText(text)}
-					onKeyDown={(e) => {
-						if(e.which === 13) {
-							this.handleCreateAssignment()
-						}
-					}}
-					value={text}/>
+
+					{!creating && !editing &&
+						<textarea 
+						ariaLabel="Assignment text"
+						ref="assignment_text"
+						style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
+						placeholder={'Paste text here to...\n\n1. Process text\n2. Generate questions\n3. Create automatic assignment for you'}
+						className={isMobile ? 'mobile' : ''}
+						onChange={(e) => this.setState({text: e.target.value})}
+						onBlur={() => this.props.updateText(text)}
+						onKeyDown={(e) => {
+							if(e.which === 13) {
+								this.handleCreateAssignment()
+							}
+						}}
+						value={text}/>}
+
+					{creating && !editing &&
+					<LoadingSpinner size={4}/>}
+
+					{editing &&
+						<EditingList 
+							isMobile={isMobile}
+							items={items}
+							handleSelectItem={(id) => {
+								this.props.selectItem(id)
+							}}
+						/>
+					}
+
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">
 						<span style={{lineHeight: '45px'}}>
@@ -133,12 +160,16 @@ export default class CreateAssignment extends Component {
 							<a className="grey link">Wondering how this works?</a>
 						</span>
 						<button 
-						onClick={() => this.handleCreateAssignment()}
+						onClick={() => {
+							if(!editing) this.handleCreateAssignment()
+							if(editing) true
+						}}
 						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
 						className="button primary_green flex_item_align_right">
-							Submit
+							{editing ? 'Finish' : 'Submit'}
 						</button>
 					</div>}
+
 				</form>
 			</div>
 		);

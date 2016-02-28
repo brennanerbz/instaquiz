@@ -37,6 +37,43 @@ const initialState = {
 		{selected: true, id: 3, target: 'Seed money', cue: 'What is a form of securities offering in which an investor invests capital in exchange for an equity stake in the company?'},
 		{selected: true, id: 4, target: 'Initial public offering', cue: 'What is it called when a company\'s shares are initially sold to the public?'}
 	],
+	sequences: [
+		{
+			id: 1,
+			identifier: 'Brennan Erbeznik',
+			correct_count: 3,
+			incorrect_count: 1,
+			reading_completed: true
+		},
+		{
+			id: 2,
+			identifier: 'Nathan Lomeli',
+			correct_count: 2,
+			incorrect_count: 2,
+			reading_completed: true
+		},
+		{
+			id: 3,
+			identifier: 'Paige Woolen',
+			correct_count: 1,
+			incorrect_count: 3,
+			reading_completed: true
+		},
+		{
+			id: 4,
+			identifier: 'Brandon Iribe',
+			correct_count: 3,
+			incorrect_count: 1,
+			reading_completed: true
+		},
+		{
+			id: 5,
+			identifier: 'Chris Sacca',
+			correct_count: 1,
+			incorrect_count: 3,
+			reading_completed: true
+		}
+	],
 	items_count: 4,
 	assignments: [],
 	error: null

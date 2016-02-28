@@ -18,6 +18,7 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 		title: state.assignments.assignment.title,
 		items: state.assignments.items,
 		items_count: state.assignments.items_count,
+		sequences: state.assignments.sequences,
 		error: state.assignments.error
 	}),
 	dispatch => ({
@@ -50,6 +51,7 @@ export default class Assignment extends Component {
 		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
 		const { tabs, activeTab } = this.state;
+		const { sequences } = this.props;
 		return (
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
@@ -141,8 +143,44 @@ export default class Assignment extends Component {
 							</div>}
 							{activeTab === 'Scores' &&
 							<div id="scores" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
-								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '1em'}}>
-								
+								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '0 1em 1em'}}>
+								<ul id="score_list">
+									{
+										sequences.map((sequence, i) => {
+											const score = (sequence.correct_count / items_count) * 100
+											const first = i === 0;
+											return (
+												<li 
+												style={{
+													borderTop: !first ? '1px solid #DAE0E7' : '',
+													padding: '0.75em 0',
+													fontSize: isMobile ? '14px' : '16px'
+												}}
+												key={sequence.id + i} 
+												className="display_flex flex_horizontal">
+													<span style={{width: '50%', lineHeight: '40px'}}>
+														<b>{sequence.identifier}</b>
+													</span>
+													<span 
+													className="display_flex" 
+													style={{width: '50%'}}>
+														<span 
+														style={{
+															borderRadius: '50%',
+															border: '1px solid #1FB6FF',
+															padding: '11px',
+															color: '#1FB6FF',
+															fontWeight: '500'
+														}}
+														className="flex_item_align_right">
+														{score}
+														</span>
+													</span>
+												</li>
+											)
+										})
+									}
+								</ul>
 								</div>
 							</div>}
 						</div>

@@ -30,8 +30,9 @@ export default class Header extends Component {
 				}} 
 				className={'display_flex flex_center'}>
 				<div className="flex_horizontal" style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 25px 10px' : '15px 25px 10px'}}>
-					{!isMobile && isNotHomeView &&
-					<img 
+					{isMobile && !isNotHomeView
+					? null
+					: <img 
 					onClick={() => pushState(null, '/')} 
 					src={blueLogo} 
 					style={{

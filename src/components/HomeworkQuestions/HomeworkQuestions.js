@@ -11,7 +11,7 @@ export default class HomeworkQuestions extends Component {
 	render() {
 		const choices = ['Series A Round', "Seed round", 'Angel investor', 'Initial public offering']
 		return (
-			<div id="questions" style={{background: '#F9FAFC', height: '100%'}} className="display_flex flex_vertical">
+			<div id="questions" style={{background: '#fff', height: '100%'}} className="display_flex flex_vertical">
 				<div 
 				id="cue" 
 				style={{
@@ -21,7 +21,7 @@ export default class HomeworkQuestions extends Component {
 					background: '#fff', 
 					border: '1px solid #E4E4E4', 
 					borderRadius: '4px',
-					boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)',
+					boxShadow: '0 1px 7px 0 rgba(31,45,61,0.1)',
 					fontSize: '17px'
 				}}>
 					What is a form of securities offering in which an investor invests capital in exchange for an equity stake in the company?
@@ -40,16 +40,16 @@ export default class HomeworkQuestions extends Component {
 								style={{
 									background: selected ? '#1FB6FF' : '#fff', 
 									border: '1px solid', 
-									borderColor: selected ? '#1FB6FF' : '#E4E4E4',
+									borderColor: !selected ? '#1FB6FF' : '#E4E4E4',
 									borderRadius: '4px', 
 									margin: '1em 0 0',
-									boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)'
+									// boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)'
 								}} 
 								key={choice + i}>
 									<a style={{
 										padding: '15px 20px', 
-										color: selected ? '#fff' : '#283643', 
-										fontWeight: selected ? '500' : '400',
+										color: selected ? '#fff' : '#1FB6FF', 
+										fontWeight: selected ? '500' : '500',
 										textDecoration: 'none'
 									}}>
 										{choice}

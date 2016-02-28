@@ -52,7 +52,7 @@ export default class CreateAssignment extends Component {
 		const { assignment } = nextProps;
 		if(!this.props.finished && nextProps.finished) {
 			this.props.close()
-			this.props.pushState(null, `/assignment/${assignment.token}`)
+			this.props.pushState(null, `/assignment/${assignment.token}/questions`)
 		}
 	}
 
@@ -74,7 +74,7 @@ export default class CreateAssignment extends Component {
 			this.props.deleteItems(delete_ids, teacher_token)
 		} else {
 			this.props.close()
-			this.props.pushState(null, `/assignment/${assignment.token}`)
+			this.props.pushState(null, `/assignment/${assignment.token}/questions`)
 		}
 	}
 

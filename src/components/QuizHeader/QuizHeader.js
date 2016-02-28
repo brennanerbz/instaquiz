@@ -6,10 +6,10 @@ export default class QuizHeader extends Component {
 
 	render() {
 		const style = require('./QuizHeader.scss');
-		const { isMobile, scrolling, title, definition, count } = this.props;
+		const { isMobile, title, count } = this.props;
 		return (
 			<div 
-				style={{textAlign: isMobile ? 'center' : '', padding: !isMobile ? '1em 25px 0 25px' : '1em 0 0 0'}} 
+				style={{textAlign: isMobile ? 'center' : '', padding: !isMobile ? '6em 25px 0 25px' : '5em 0 0 0'}} 
 				className={isMobile ? 'flex_container_center' : ''}>
 				<h1
 				style={{
@@ -27,7 +27,7 @@ export default class QuizHeader extends Component {
 					color: '#A8B6C1',
 					marginBottom: '1em'
 				}}>
-					{count} questions {<span style={{fontSize: '15px'}}>(still creating...)</span>}
+					{count} questions
 				</p>
 				<button 
 					onClick={() => {this.props.openModal('phone')}}

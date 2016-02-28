@@ -13,10 +13,11 @@ import QuizHeader from '../../components/QuizHeader/QuizHeader';
 import QuizContent from '../../components/QuizContent/QuizContent';
 
 @connect(state => ({
+		assignment: state.assignments.assignment,
 		token: state.assignments.assignment.token,
 		title: state.assignments.assignment.title,
 		items: state.assignments.items,
-		items_count: state.assignments.item_count,
+		items_count: state.assignments.items_count,
 		error: state.assignments.error
 	}),
 	dispatch => ({
@@ -34,19 +35,19 @@ export default class Assignment extends Component {
 	componentDidMount() {
 		const { params } = this.props;
 		this.setState({
-			activeTab: params.tab.charAt(0).toUpperCase() + params.tab.slice(1)
+			activeTab: params.tab ? params.tab.charAt(0).toUpperCase() + params.tab.slice(1) : 'Questions'
 		});
 	}
 
 	state = {
-		tabs: ['Content', 'Questions', 'Scores'],
+		tabs: ['Reading', 'Questions', 'Scores'],
 		activeTab: ''
 	}
 
 	render() {
 		const sadFace = require('./SadFace.png');
 		const { isMobile } = this.props;
-		const { token, title, items, items_count } = this.props;
+		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
 		const { tabs, activeTab } = this.state;
 		return (
@@ -70,51 +71,61 @@ export default class Assignment extends Component {
 								count={items_count} 
 								isMobile={isMobile}
 								/>
-							<ul 
-							style={{
-								padding: isMobile ? '' : '0 25px',
-								listStyleType: 'none',
-								marginTop: '30px'
-							}} 
-							id="tabs" 
-							className="display_flex flex_horizontal flex_nowrap">
-								{
-									tabs.map((tab, i)=> {
-										const first = i === 0;
-										const last = i === tabs.length - 1;
-										const active = tab === activeTab
-										return (
-											<li 
-												style={{
-												}}
-												onClick={() => {
-													this.setState({activeTab: tab})
-													this.props.pushState(null, `/assignment/${token}/${tab.toLowerCase()}`)
-												}} 
-												key={tab + i}>
-												<a 
-												style={{
-													padding: '10px 20px',
-													background: active ? '#1FB6FF' : '#fff',
-													borderRadius: first || last ? '4px' : '',
-													border: '1px solid #1FB6FF',
-													borderLeft: !first && !last ? 'none' : '',
-													borderRight: !first && !last ? 'none' : '',
-													borderTopRightRadius: first ? '0px' :  '',
-													borderBottomRightRadius: first ? '0px' : '',
-													borderTopLeftRadius: last ? '0px' :  '',
-													borderBottomLeftRadius: last ? '0px' : '',
-													color: active ? '#fff' : '',
-													cursor: active ? 'default' : 'pointer',
-													textDecoration: 'none'
-												}}>
-													{tab}
-												</a>
-											</li>
-										)
-									})
-								}
-							</ul>
+							<div className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
+								<ul 
+								style={{
+									padding: isMobile ? '' : '0 25px',
+									listStyleType: 'none',
+									marginTop: '30px'
+								}} 
+								id="tabs" 
+								className="display_flex flex_horizontal flex_nowrap">
+									{
+										tabs.map((tab, i)=> {
+											const first = i === 0;
+											const last = i === tabs.length - 1;
+											const active = tab === activeTab
+											return (
+												<li 
+													style={{
+													}}
+													onClick={() => {
+														this.setState({activeTab: tab})
+														this.props.pushState(null, `/assignment/${token}/${tab.toLowerCase()}`)
+													}} 
+													key={tab + i}>
+													<a 
+													style={{
+														padding: '10px 20px',
+														background: active ? '#1FB6FF' : '#fff',
+														borderRadius: first || last ? '4px' : '',
+														border: '1px solid #1FB6FF',
+														borderLeft: !first && !last ? 'none' : '',
+														borderRight: !first && !last ? 'none' : '',
+														borderTopRightRadius: first ? '0px' :  '',
+														borderBottomRightRadius: first ? '0px' : '',
+														borderTopLeftRadius: last ? '0px' :  '',
+														borderBottomLeftRadius: last ? '0px' : '',
+														color: active ? '#fff' : '',
+														cursor: active ? 'default' : 'pointer',
+														textDecoration: 'none'
+													}}>
+														{tab}
+													</a>
+												</li>
+											)
+										})
+									}
+								</ul>
+							</div>
+							{activeTab === 'Reading' &&
+							<div id="reading" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
+								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '1em'}}>
+								{assignment.text}
+								</div>
+							</div>
+							}
+							{activeTab === 'Questions' &&
 							<div style={{padding: isMobile ? '' : '0 25px'}}>
 								<div 
 								style={{color: '#A8B6C1', fontSize: isMobile ? '14px' : '16px', marginTop: '2em', marginBottom: '1em'}} 
@@ -127,7 +138,8 @@ export default class Assignment extends Component {
 									</p>
 								</div>
 								<QuizContent isMobile={isMobile} pushState={pushState}/>
-							</div>
+							</div>}
+							{activeTab === 'Scores'}
 						</div>
 					}
 				</div>

@@ -15,8 +15,10 @@ export default class Header extends Component {
 	render() {
 		const blueLogo = require('../../../static/logo/nightlyLogoBlue.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png');
+		const backArrow = require('../../../static/icons/backArrow.png')
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
-		const isNotHomeView = location.pathname.match(/quiz/gi);
+		const isNotHomeView = location.pathname.match(/assignment|homework/gi);
+		const assignmentView = location.pathname.match(/assignment/gi);
 		return (
 			<div 
 				style={{
@@ -28,12 +30,29 @@ export default class Header extends Component {
 				}} 
 				className={'display_flex flex_center'}>
 				<div className="flex_horizontal" style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 25px 10px' : '15px 25px 10px'}}>
-					<img onClick={() => pushState(null, '/')} src={blueLogo} style={{height: isMobile ? '45px' : '55px', cursor: 'pointer'}}/>
-					<ul style={{lineHeight: isMobile ? '45px' : '55px'}} className="flex_container_right link_list">
-						<li className="link_list_item">
-							<a href="#features" className="grey link">How It Works</a>
-						</li>
-					</ul>
+					{!isMobile &&
+					<img 
+					onClick={() => pushState(null, '/')} 
+					src={blueLogo} 
+					style={{
+						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
+						cursor: 'pointer'
+					}}/>}
+					{assignmentView && isMobile &&
+					<span style={{height: '30px', lineHeight: '25px', fontSize: isMobile ? '18px' : '19px'}}>
+						<img src={backArrow} style={{height: '20px', position: 'absolute', top: '17px'}}/>
+						<a style={{marginLeft: '20px'}} className="link">Assignments</a>
+					</span>}
+					{
+						!isNotHomeView
+						&&
+						<ul style={{lineHeight: isMobile ? '45px' : '55px'}} className="flex_container_right link_list">
+							<li className="link_list_item">
+								<a href="#features" className="grey link">How It Works</a>
+							</li>
+						</ul>
+
+					}
 				</div>
 			</div>
 		);

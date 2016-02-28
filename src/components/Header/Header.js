@@ -65,7 +65,7 @@ export default class Header extends Component {
 								if(student_name === null || student_name === undefined || student_name.length === 0) {
 									this.props.nameError()
 								} else {
-									this.props.pushState(null, `/homework${route}/questions`)
+									this.props.pushState(null, `/homework/${route}/questions`)
 								}
 							}} 
 							style={{marginRight: '27px'}} 

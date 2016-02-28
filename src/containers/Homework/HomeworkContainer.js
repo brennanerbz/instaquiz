@@ -55,6 +55,15 @@ export default class HomeworkContainer extends Component {
 	componentWillReceiveProps(nextProps) {
 		const previousRoute = this.props.route.split('/')[3]
 		const nextRoute = nextProps.route.split('/')[3]
+		const token = nextProps.route.split('/')[2]
+		if(previousRoute == 'read' && nextRoute == 'questions') {
+			if(nextProps.sequence && !nextProps.sequence.reading_completed) {
+				this.props.updateSequence(nextProps.identifier, token)
+			} 
+		}
+		if(previousRoute == 'questions' && nextRoute == 'read') {
+			this.props.pushState(null, `/homework/${token}/questions`)
+		}
 	}
 
 	render() {

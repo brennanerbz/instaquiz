@@ -136,10 +136,10 @@ export function fetchSequence(id) {
 	}
 }
 
-export function updateSequence(name) {
+export function updateSequence(name, token) {
 	return {
 		types: [UPDATE_SEQUENCE, UPDATE_SEQUENCE_SUCCESS, UPDATE_SEQUENCE_FAILURE],
-		promise: (client) => client.put(`/sequences/${id}`, {
+		promise: (client) => client.put(`/sequences/${token}`, {
 			identifier: name,
 			reading_completed: true
 		})

@@ -11,6 +11,7 @@ export default class HomeworkReading extends Component {
 	}
 
 	tooltip() {
+		// add node getboundingrect
 		return (
 			<div style={{top: '95px', left: '65px'}} className="tooltip bottom in">
 				<div style={{left: '12%'}} className="tooltip-arrow">

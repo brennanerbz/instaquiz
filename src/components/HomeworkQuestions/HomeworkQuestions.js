@@ -4,6 +4,10 @@ export default class HomeworkQuestions extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		selected: ''
+	}
+
 	render() {
 		const choices = ['Series A Round', "Seed round", 'Angel investor', 'Initial public offering']
 		return (
@@ -25,18 +29,31 @@ export default class HomeworkQuestions extends Component {
 				<ul id="choices" style={{margin: 'auto 1em 1em', listStyleType: 'none'}} className="">
 					{
 						choices.map((choice, i) => {
+							const selected = this.state.selected === i
 							return (
 								<li 
+								onClick={() => {
+									this.setState({selected: i})
+									this.props.selected()
+								}}
 								className="display_flex"
 								style={{
-									background: '#fff', 
-									border: '1px solid #E4E4E4', 
+									background: selected ? '#1FB6FF' : '#fff', 
+									border: '1px solid', 
+									borderColor: selected ? '#1FB6FF' : '#E4E4E4',
 									borderRadius: '4px', 
 									margin: '1em 0 0',
 									boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)'
 								}} 
 								key={choice + i}>
-									<a style={{padding: '15px 20px', color: '#283643', fontWeight: '400'}}>{choice}</a>
+									<a style={{
+										padding: '15px 20px', 
+										color: selected ? '#fff' : '#283643', 
+										fontWeight: selected ? '500' : '400',
+										textDecoration: 'none'
+									}}>
+										{choice}
+									</a>
 								</li>
 							)
 						})

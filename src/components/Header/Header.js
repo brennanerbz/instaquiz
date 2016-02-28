@@ -17,6 +17,7 @@ export default class Header extends Component {
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png');
 		const backArrow = require('../../../static/icons/backArrow.png')
 		const forwardArrow = require('../../../static/icons/forwardArrow.png')
+		const forwardArrowGrey = require('../../../static/icons/forwardArrowGrey.png')
 
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const route = location.pathname.split('/')[2]
@@ -27,7 +28,7 @@ export default class Header extends Component {
 		const homeworkView = location.pathname.match(/homework/gi);
 		const readingView = location.pathname.match(/read/gi);
 		const questionsView = location.pathname.match(/questions/gi);
-		const { student_name } = this.props;
+		const { student_name, selected } = this.props;
 		return (
 			<div 
 				style={{
@@ -71,6 +72,12 @@ export default class Header extends Component {
 							style={{marginRight: '27px'}} 
 							className="link">Questions</a>
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
+					</span>}
+					{questionsView && isMobile &&
+					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
+						<a  style={{marginRight: '27px'}} 
+							className={(!selected ? 'grey' : '') + ' ' + 'link'}>Next</a>
+						<img src={selected ? forwardArrow : forwardArrowGrey} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					{
 						!isNotHomeView

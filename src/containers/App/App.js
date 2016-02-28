@@ -33,7 +33,8 @@ function fetchData(getState, dispatch) {
 	location: state.router.location,
 	query: state.router.location.query,
 	modalOpen: state.overlays.modalOpen,
-	student_name: state.homework.identifier
+	student_name: state.homework.identifier,
+	selected: state.homework.selected
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -82,7 +83,7 @@ export default class App extends Component {
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState, params, location, query } = this.props;
-		const { nameError, student_name } = this.props;
+		const { nameError, student_name, selected } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
@@ -102,6 +103,7 @@ export default class App extends Component {
 					pushState={pushState}
 					nameError={nameError}
 					student_name={student_name}
+					selected={selected}
 					params={params}
 					location={location}
 					query={query}

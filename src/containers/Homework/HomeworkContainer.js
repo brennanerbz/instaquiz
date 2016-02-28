@@ -84,7 +84,8 @@ export default class HomeworkContainer extends Component {
 				sequence: this.props.sequence,
 				question: this.props.question,
 				updateName: this.props.updateName,
-				invalid: this.props.invalid
+				invalid: this.props.invalid,
+				selected: this.props.selected
 			})
 		})
 		return (<div style={{height: '100%'}}>{homeworkChildrenWithProps}</div>);

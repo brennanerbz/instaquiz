@@ -21,6 +21,8 @@ export const SUBMIT_ANSWER = 'NightlyCode/homework/SUBMIT_ANSWER';
 export const SUBMIT_ANSWER_SUCCESS = 'NightlyCode/homework/SUBMIT_ANSWER_SUCCESS';
 export const SUBMIT_ANSWER_FAILURE = 'NightlyCode/homework/SUBMIT_ANSWER_FAILURE';
 
+export const SELECTED_CHOICE = 'NightlyCode/homework/SELECTED_CHOICE';
+
 const initialState = {
 	title: '',
 	reading: 'Finally, in addition to adjusting for hardware and data, we should also adjust for effort in assessing how significant an AI milestone is. With Deep Blue, for example, significant domain expertise was used to develop the AI that beat Gary Kasparov, rather than a system learning from scratch and thus demonstrating domain-general intelligence. Hassabis at AAAI and elsewhere has argued that AlphaGo represents more general progress in AI than did Deep Blue, and that the techniques used were general purpose. However, the very development of the policy and value network ideas for this project, as well as the specific training regimen used (a sequence of supervised learning and self-play, rather than end-to-end learning), was itself informed by the domain-specific expertise of researchers like David Silver and Aja Huang, who have substantial computer Go and Go expertise. While AlphaGo ultimately exceeded their skill levels, the search for algorithms in this case was informed by this specific domain (and, as mentioned earlier, part of the algorithm encoded domain-specific knowledge – namely, the MCTS component). Also, the team was large –15-20 people, significantly more than prior Go engines that I’m aware of, and more comparable to large projects like Deep Blue or Watson in terms of effort than anything else in computer Go history. So, if we should reasonably expect a large team of some of the smartest, most expert people in a given area working on a problem to yield progress on that problem, then the scale of this effort suggests we should slightly update downwards our impression of the significance of the AlphaGo milestone. This is in contrast to what we should have thought if, e.g. DeepMind had simply taken their existing DQN algorithm, applied it to Go, and achieved the same result. At the same time, innovations inspired by a specific domain may have broad relevance, and value/policy networks may be a case of this. It\'s still a bit early to say.',
@@ -28,7 +30,8 @@ const initialState = {
 	sequence: {
 		reading_completed: true
 	},
-	question: {}
+	question: {},
+	selected: false
 }
 
 export default function reducer (state = initialState, action) {
@@ -109,6 +112,11 @@ export default function reducer (state = initialState, action) {
 				identifier: action.name,
 				invalid: false
 			}
+		case SELECTED_CHOICE:
+			return {
+				...state,
+				selected: true
+			}
 		default:		
 			return {
 				...state,
@@ -122,6 +130,9 @@ export function nameError() {
 }
 export function updateName(name) {
 	return {type: UPDATE_NAME, name}
+}
+export function selected() {
+	return {type: SELECTED_CHOICE}
 }
 
 export function newSequence(token) {

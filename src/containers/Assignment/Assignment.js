@@ -143,7 +143,7 @@ export default class Assignment extends Component {
 							</div>}
 							{activeTab === 'Scores' &&
 							<div id="scores" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
-								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '0 1em 1em'}}>
+								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '0 1em 0em'}}>
 								<ul id="score_list">
 									{
 										sequences.map((sequence, i) => {
@@ -159,12 +159,17 @@ export default class Assignment extends Component {
 												}}
 												key={sequence.id + i} 
 												className="display_flex flex_horizontal">
-													<span style={{width: '50%', lineHeight: '40px'}}>
+													<span 
+													style={{width: '50%', lineHeight: '40px', paddingLeft: !isMobile ? '1em' : ''}}>
 														<b>{sequence.identifier}</b>
 													</span>
 													<span 
 													className="display_flex" 
-													style={{width: '50%', lineHeight: !completed ? '40px' : ''}}>
+													style={{
+														width: '50%', 
+														lineHeight: !completed ? '40px' : '',
+														paddingRight: !isMobile ? '1em' : ''
+													}}>
 														{
 															completed
 															?
@@ -174,13 +179,13 @@ export default class Assignment extends Component {
 																border: '1px solid #1FB6FF',
 																padding: '11px',
 																color: '#1FB6FF',
-																fontWeight: '500'
+																fontWeight: '500',
 															}}
-															className="flex_item_align_right">
+															className={isMobile ? 'flex_item_align_right' : ''}>
 															{score}
 															</span>
 															:
-															<span className="flex_item_align_right">
+															<span className={isMobile ? 'flex_item_align_right' : ''}>
 																In progress...
 															</span>
 														}

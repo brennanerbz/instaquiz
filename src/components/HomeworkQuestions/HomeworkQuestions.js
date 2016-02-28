@@ -11,7 +11,7 @@ export default class HomeworkQuestions extends Component {
 	render() {
 		const choices = ['Series A Round', "Seed round", 'Angel investor', 'Initial public offering']
 		return (
-			<div id="questions" style={{background: '#fbfbfb', height: '100%'}} className="display_flex flex_vertical">
+			<div id="questions" style={{background: '#fff', height: '100%'}} className="display_flex flex_vertical">
 				<div 
 				id="cue" 
 				style={{

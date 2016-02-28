@@ -14,6 +14,7 @@ export default class Header extends Component {
 
 	render() {
 		const blueLogo = require('../../../static/logo/nightlyLogoBlue.png');
+		const soloLogo = require('../../../static/logo/nightlySolo.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png');
 		const backArrow = require('../../../static/icons/backArrow.png')
 		const forwardArrow = require('../../../static/icons/forwardArrow.png')
@@ -49,6 +50,10 @@ export default class Header extends Component {
 						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
 						cursor: 'pointer'
 					}}/>}
+					{
+						isMobile && homeworkView &&
+						<img src={soloLogo} style={{height: '31px', position: 'absolute', left: '1em'}}/>
+					}
 					{assignmentView && isMobile &&
 					<span onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
 						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '18px'}}/>

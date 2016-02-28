@@ -50,6 +50,7 @@ export default class HomeworkContainer extends Component {
 		} else {
 			newSequence(route_token)
 		}
+		// Route control to prevent cheating
 		if(this.props.sequence && this.props.sequence.reading_completed) {
 			if(this.props.route.split('/')[3] == 'read') {
 				this.props.pushState(null, `/homework/${route_token}/questions`)
@@ -66,6 +67,7 @@ export default class HomeworkContainer extends Component {
 				this.props.updateSequence(nextProps.identifier, token)
 			} 
 		}
+		// Route control to prevent cheating
 		if(previousRoute == 'questions' && nextRoute == 'read') {
 			this.props.pushState(null, `/homework/${token}/questions`)
 		}
@@ -85,6 +87,6 @@ export default class HomeworkContainer extends Component {
 				invalid: this.props.invalid
 			})
 		})
-		return (<div>{homeworkChildrenWithProps}</div>);
+		return (<div style={{height: '100%'}}>{homeworkChildrenWithProps}</div>);
 	}
 }

@@ -19,7 +19,8 @@ export default class HomeworkReading extends Component {
 					<input
 						style={{
 							border: 'none',
-							width: '85%'
+							width: '85%',
+							lineHeight: '18px'
 						}}
 						type="text"
 						placeholder="Enter your real name for credit..."

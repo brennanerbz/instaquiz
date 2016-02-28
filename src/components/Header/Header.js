@@ -73,7 +73,7 @@ export default class Header extends Component {
 							className="link">Questions</a>
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
-					{questionsView && isMobile &&
+					{homeworkView && questionsView && isMobile &&
 					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
 						<a  style={{marginRight: '27px'}} 
 							className={(!selected ? 'grey' : '') + ' ' + 'link'}>Next</a>

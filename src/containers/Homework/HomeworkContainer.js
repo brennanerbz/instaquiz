@@ -50,6 +50,11 @@ export default class HomeworkContainer extends Component {
 		} else {
 			newSequence(route_token)
 		}
+		if(this.props.sequence && this.props.sequence.reading_completed) {
+			if(this.props.route.split('/')[3] == 'read') {
+				this.props.pushState(null, `/homework/${route_token}/questions`)
+			}
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {

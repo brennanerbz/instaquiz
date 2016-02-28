@@ -21,12 +21,14 @@ function fetchData(getState, dispatch) {
 
 // @connectData(fetchData)
 @connect(state => ({
+		route: state.router.location.pathname,
 		route_token: state.router.params.token,
 		title: state.homework.title,
 		reading: state.homework.reading,
 		identifier: state.homework.identifier,
 		sequence: state.homework.sequence,
-		question: state.homework.question
+		question: state.homework.question,
+		invalid: state.homework.invalid
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -50,6 +52,11 @@ export default class HomeworkContainer extends Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		const previousRoute = this.props.route.split('/')[3]
+		const nextRoute = nextProps.route.split('/')[3]
+	}
+
 	render() {
 		var homeworkChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
@@ -60,6 +67,8 @@ export default class HomeworkContainer extends Component {
 				identifier: this.props.identifier,
 				sequence: this.props.sequence,
 				question: this.props.question,
+				updateName: this.props.updateName,
+				invalid: this.props.invalid
 			})
 		})
 		return (<div>{homeworkChildrenWithProps}</div>);

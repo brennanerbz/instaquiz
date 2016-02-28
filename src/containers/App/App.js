@@ -16,6 +16,7 @@ import Modal from '../../components/Modals/Modal';
 
 // API calls
 import { fetchUser } from '../../redux/modules/user';
+import { nameError } from '../../redux/modules/homework';
 
 function fetchData(getState, dispatch) {
 	const promises = [];
@@ -31,11 +32,13 @@ function fetchData(getState, dispatch) {
 	params: state.router.params,
 	location: state.router.location,
 	query: state.router.location.query,
-	modalOpen: state.overlays.modalOpen
+	modalOpen: state.overlays.modalOpen,
+	student_name: state.homework.identifier
 	}),
 	dispatch => ({
 		...bindActionCreators({
 			pushState,
+			nameError,
 			fetchUser
 		}, dispatch)
 	})
@@ -79,6 +82,7 @@ export default class App extends Component {
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState, params, location, query } = this.props;
+		const { nameError, student_name } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
@@ -96,6 +100,8 @@ export default class App extends Component {
 				<Helmet {...config.app.head}/>
 				<Header 
 					pushState={pushState}
+					nameError={nameError}
+					student_name={student_name}
 					params={params}
 					location={location}
 					query={query}

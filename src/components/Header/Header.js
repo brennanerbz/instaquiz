@@ -19,6 +19,7 @@ export default class Header extends Component {
 		const forwardArrow = require('../../../static/icons/forwardArrow.png')
 
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
+		const route = location.pathname.split('/')[2]
 		const isNotHomeView = location.pathname.match(/assignment|homework/gi);
 		// Assignment | Teacher
 		const assignmentView = location.pathname.match(/assignment/gi);
@@ -26,6 +27,7 @@ export default class Header extends Component {
 		const homeworkView = location.pathname.match(/homework/gi);
 		const readingView = location.pathname.match(/read/gi);
 		const questionsView = location.pathname.match(/questions/gi);
+		const { student_name } = this.props;
 		return (
 			<div 
 				style={{
@@ -59,7 +61,15 @@ export default class Header extends Component {
 					</span>}
 					{homeworkView && readingView && isMobile &&
 					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
-						<a style={{marginRight: '27px'}} className="link">Questions</a>
+						<a onClick={() => {
+								if(student_name === null || student_name === undefined || student_name.length === 0) {
+									this.props.nameError()
+								} else {
+									this.props.pushState(null, `/homework${route}/questions`)
+								}
+							}} 
+							style={{marginRight: '27px'}} 
+							className="link">Questions</a>
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					{

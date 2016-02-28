@@ -6,6 +6,9 @@ export const FETCH_SEQUENCE = 'NightlyCode/homework/FETCH_SEQUENCE';
 export const FETCH_SEQUENCE_SUCCESS = 'NightlyCode/homework/FETCH_SEQUENCE_SUCCESS';
 export const FETCH_SEQUENCE_FAILURE = 'NightlyCode/homework/FETCH_SEQUENCE_FAILURE';
 
+export const ERROR_ON_NAME = 'NightlyCode/homework/ERROR_ON_NAME';
+export const UPDATE_NAME = 'NightlyCode/homework/UPDATE_NAME';
+
 export const UPDATE_SEQUENCE = 'NightlyCode/homework/UPDATE_SEQUENCE';
 export const UPDATE_SEQUENCE_SUCCESS = 'NightlyCode/homework/UPDATE_SEQUENCE_SUCCESS';
 export const UPDATE_SEQUENCE_FAILURE = 'NightlyCode/homework/UPDATE_SEQUENCE_FAILURE';
@@ -93,12 +96,30 @@ export default function reducer (state = initialState, action) {
 			return {
 				...state
 			}
+		case ERROR_ON_NAME:
+			return {
+				...state,
+				invalid: true
+			}
+		case UPDATE_NAME:
+			return {
+				...state,
+				identifier: action.name,
+				invalid: false
+			}
 		default:		
 			return {
 				...state,
 
 			}
 	}
+}
+
+export function nameError() {
+	return {type: ERROR_ON_NAME}
+}
+export function updateName(name) {
+	return {type: UPDATE_NAME, name}
 }
 
 export function newSequence(token) {
@@ -115,12 +136,12 @@ export function fetchSequence(id) {
 	}
 }
 
-export function updateSequence(name, reading_completed) {
+export function updateSequence(name) {
 	return {
-		types: [FETCH_SEQUENCE, FETCH_SEQUENCE_SUCCESS, FETCH_SEQUENCE_FAILURE],
+		types: [UPDATE_SEQUENCE, UPDATE_SEQUENCE_SUCCESS, UPDATE_SEQUENCE_FAILURE],
 		promise: (client) => client.put(`/sequences/${id}`, {
 			identifier: name,
-			reading_completed: reading_completed
+			reading_completed: true
 		})
 	}
 }

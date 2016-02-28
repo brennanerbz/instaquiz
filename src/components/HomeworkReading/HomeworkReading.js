@@ -1,12 +1,31 @@
 import React, { Component, PropTypes } from 'react';
+import { Tooltip, Overlay } from 'react-bootstrap';
+
 
 export default class HomeworkReading extends Component {
 	static propTypes = {
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.invalid && nextProps.invalid) this.refs.name_input.focus()
+	}
+
+	tooltip() {
+		return (
+			<div style={{top: '95px', left: '65px'}} className="tooltip bottom in">
+				<div style={{left: '12%'}} className="tooltip-arrow">
+				</div>
+				<div style={{maxWidth: '350px'}} className="tooltip-inner">
+					Oops! Add your name to continue!
+				</div>
+			</div>
+		)
+	}
+
 	render() {
 		const { isMobile } = this.props;
 		const { reading } = this.props;
+		const { invalid } = this.props;
 		return (
 			<div id="reading">
 				<div 
@@ -17,19 +36,26 @@ export default class HomeworkReading extends Component {
 						Name
 					</label>
 					<input
+						ref="name_input"
+						autoFocus={true}
 						style={{
 							border: 'none',
 							width: '85%',
 							lineHeight: '18px'
 						}}
+						onChange={(e) => {
+							this.props.updateName(e.target.value)
+						}}
 						type="text"
 						placeholder="Enter your real name for credit..."
 					/>
 				</div>
+				<div className={'fade' + ' ' + (invalid && 'in')}>
+				{this.tooltip()}
+				</div>
 				<section id="reading_section" style={{margin: '0'}}>
 					<article id="text" 
 					style={{
-						// background: '#fbfbfb', 
 						color: '#002735', 
 						borderRadius: '4px', 
 						border: isMobile ? '' : '1px solid #DAE0E7', 

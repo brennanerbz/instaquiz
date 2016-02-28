@@ -139,7 +139,12 @@ export default class Assignment extends Component {
 								</div>
 								<QuizContent isMobile={isMobile} pushState={pushState}/>
 							</div>}
-							{activeTab === 'Scores'}
+							{activeTab === 'Scores' &&
+							<div id="scores" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
+								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '1em'}}>
+								
+								</div>
+							</div>}
 						</div>
 					}
 				</div>

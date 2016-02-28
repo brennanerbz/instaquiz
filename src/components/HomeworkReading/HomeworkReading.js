@@ -31,7 +31,7 @@ export default class HomeworkReading extends Component {
 			<div id="reading">
 				<div 
 					className="display_flex flex_horizontal flex_nowrap" 
-					style={{padding: isMobile ? '0' : '15px', borderBottom: '1px solid #E4E4E4'}}>
+					style={{padding: isMobile ? '0' : '15px', borderBottom: '1px solid #DAE0E7'}}>
 					<label 
 					style={{marginLeft: '1em', fontSize: '16px', fontWeight: '500', color: '#3C4858', width: '15%', lineHeight: '50px'}}>
 						Name
@@ -64,12 +64,23 @@ export default class HomeworkReading extends Component {
 						lineHeight: '1.5em'
 					}}>
 						<b style={{color: '#3C4858'}}>Instructions:</b><br/> 
-						Read this page then move on to the questions. Make sure you read, you won't be able to come back to this.
-						<br/><br/>
-						<b style={{color: '#3C4858'}}>Reading:</b><br/>
-						{reading}
+						Read this page then move on to the questions. <i>Make sure you read</i>, you won't be able to come back to this.
 					</article>
 				</section>
+				<section id="reading_section" style={{margin: '1em'}}>
+					<article id="text" 
+					style={{
+						color: '#002735', 
+						borderRadius: '4px', 
+						border: '1px solid #DAE0E7', 
+						padding: '1em', 
+						lineHeight: '1.5em'
+					}}>
+					<b style={{color: '#3C4858'}}>Reading:</b><br/>
+					{reading}
+					</article>
+				</section>
+				
 			</div>
 		);
 	}

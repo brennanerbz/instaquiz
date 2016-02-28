@@ -11,11 +11,13 @@ import EditingList from '../EditingList/EditingList';
 
 @connect(
   state => ({
+  	teacher_token: state.user.token,
   	user_id: state.user.id,
   	title: state.assignments.title,
   	text: state.assignments.text,
   	creating: state.assignments.creating,
   	editing: state.assignments.editing,
+  	finished: state.assignments.finished,
   	items: state.assignments.items,
   	assignment: state.assignments.assignment
   }),
@@ -46,24 +48,33 @@ export default class CreateAssignment extends Component {
 		if(text) this.setState({text: text});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		const { assignment } = nextProps;
+		if(!this.props.finished && nextProps.finished) {
+			this.props.close()
+			this.props.pushState(null, `/assignment/${assignment.token}`)
+		}
+	}
+
 	handleCreateAssignment() {
-		const { createAssignment, user_id } = this.props;
+		const { createAssignment, user_id, teacher_token} = this.props;
 		const { title, text } = this.state;
-		createAssignment(user_id, title, text)
+		createAssignment(teacher_token, title, text)
 	}
 
 	handleFinishAssignment() {
-		const { items, assignment } = this.props;
-		var finished = false;
+		const { items, assignment, teacher_token } = this.props;
+		var delete_ids = [];
 		items.forEach((item, i) => {
 			if(!item.selected) {
-				this.props.deleteItem(item.id)
+				delete_ids.push(item.id)
 			}
-			if(i === items.length - 1) finished = true
 		})
-		if(finished) {
+		if(delete_ids.length > 0) {
+			this.props.deleteItems(delete_ids, teacher_token)
+		} else {
 			this.props.close()
-			this.props.pushState(null, `/assignment/${assignment.id}`)
+			this.props.pushState(null, `/assignment/${assignment.token}`)
 		}
 	}
 

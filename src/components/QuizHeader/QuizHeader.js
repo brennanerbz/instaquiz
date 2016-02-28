@@ -6,10 +6,10 @@ export default class QuizHeader extends Component {
 
 	render() {
 		const style = require('./QuizHeader.scss');
-		const { isMobile, scrolling, title, definition, count, loaded } = this.props;
+		const { isMobile, scrolling, title, definition, count } = this.props;
 		return (
 			<div 
-				style={{textAlign: isMobile ? 'center' : '', padding: !isMobile ? '6em 25px 0 25px' : '5em 0 0 0'}} 
+				style={{textAlign: isMobile ? 'center' : '', padding: !isMobile ? '1em 25px 0 25px' : '1em 0 0 0'}} 
 				className={isMobile ? 'flex_container_center' : ''}>
 				<h1
 				style={{
@@ -27,37 +27,7 @@ export default class QuizHeader extends Component {
 					color: '#A8B6C1',
 					marginBottom: '1em'
 				}}>
-					{count} questions {!loaded && <span style={{fontSize: '15px'}}>(still creating...)</span>}
-				</p>
-				{
-					scrolling && !isMobile
-					&&
-					<button 
-						id={style.scrolling_button}
-						style={{
-							zIndex: '1',
-							position: 'fixed',
-							top: '11px'
-						}} 
-						className="button primary_blue">
-						{
-							loaded
-							? 'Quiz me'
-							: 'Loading...'
-						}
-					</button>
-				}
-				<p
-				className={isMobile ? 'flex_item_align_center' : 'flex_item_align_left'}
-				style={{
-					fontSize: isMobile ? '14px' : '16px',
-					fontWeight: '400',
-					marginBottom: '1em',
-					padding: isMobile ? '0 1em' : '' ,
-					maxWidth: isMobile ? '350px' : '',
-					textAlign: isMobile ? 'center' : ''
-				}}>
-				{definition}
+					{count} questions {<span style={{fontSize: '15px'}}>(still creating...)</span>}
 				</p>
 				<button 
 					onClick={() => {this.props.openModal('phone')}}
@@ -66,7 +36,7 @@ export default class QuizHeader extends Component {
 						width: isMobile ? '250px' : ''
 					}} 
 					className="button primary_blue">
-					Quiz Me
+					Assign
 				</button>
 			</div>
 		);

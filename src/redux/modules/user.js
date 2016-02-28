@@ -14,7 +14,8 @@ export const FETCH_USER_FAILURE = 'nightly/user/FETCH_USER_FAILURE';
 const initialState = {
 	loaded: false,
 	loading: false,
-	id: ''
+	id: '',
+	token: ''
 }
 
 export default function reducer(state = initialState, action) {
@@ -26,7 +27,8 @@ export default function reducer(state = initialState, action) {
 		case CREATE_USER_SUCCESS:
 			cookie.save('token', action.result.token, { path: '/'});
 			return {
-				...state
+				...state,
+				token: action.result.token
 			}
 		case CREATE_USER_FAILURE:
 			return {

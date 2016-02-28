@@ -62,6 +62,7 @@ export default class Landing extends Component {
 								</h2>
 								<button 
 								onClick={() => {
+									this.props.createUser()
 									openModal('create_assignment')
 								}} 
 								style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} 
@@ -82,7 +83,13 @@ export default class Landing extends Component {
 					style={{fontWeight: '300', color: '#fff', marginBottom: '30px', textAlign: 'center'}}>
 					You and your class will do great things with Nightly.
 					</h1>
-					<button onClick={() => openModal('create_assignment')} className="button" style={{background: '#009CEE', color: '#fff'}}>
+					<button 
+					onClick={() => {
+						this.props.createUser()
+						openModal('create_assignment')
+					}} 
+					className="button" 
+					style={{background: '#009CEE', color: '#fff'}}>
 						Create a new assignment
 					</button>
 				</div>

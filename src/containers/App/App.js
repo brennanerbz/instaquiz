@@ -82,6 +82,7 @@ export default class App extends Component {
 		const { children, pushState, params, location, query } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const user = cookie.load('token', {path: '/'}) ? true : false
+		const teacher = cookie.load('teacher', {path: '/'})
 		var appChildrenWithProps = React.Children.map(children, (child) => {
 			return React.cloneElement(child, {
 				isMobile: isMobile,
@@ -104,14 +105,9 @@ export default class App extends Component {
 					scrolling={scrolling}
 					openHowItWorks={(value) => this.setState({howItWorksOpen: value})}
 					user={user}
+					teacher={teacher}
 				/>
 				{appChildrenWithProps}
-				{user &&
-				<Footer 
-					location={location}
-					isMobile={isMobile}
-					user={user}
-				/>}
 				<Modal isMobile={isMobile}/>
 			</div>
 		);

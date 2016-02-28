@@ -19,7 +19,7 @@ class _ApiClient {
         const request = superagent[method](formatUrl(path));
 
         if(token) {
-          request.auth('', token)
+          request.auth(token, '')
         }
 
         if (data) {

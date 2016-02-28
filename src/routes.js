@@ -14,7 +14,9 @@ export default (store) => {
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
   	  <Route path="assignment" component={Assignment}>
-  	  	<Route path=":id" component={Assignment}/>
+  	  	<Route path=":id" component={Assignment}>
+          <Route path=":tab" component={Assignment}/>
+        </Route>
   	  </Route>
       <Route path="*" component={NotFound} status={404} />
     </Route>

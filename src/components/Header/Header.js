@@ -16,6 +16,8 @@ export default class Header extends Component {
 		const blueLogo = require('../../../static/logo/nightlyLogoBlue.png');
 		const whiteLogo = require('../../../static/logo/nightlyLogoWhite.png');
 		const backArrow = require('../../../static/icons/backArrow.png')
+		const forwardArrow = require('../../../static/icons/forwardArrow.png')
+
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const isNotHomeView = location.pathname.match(/assignment|homework/gi);
 		// Assignment | Teacher
@@ -57,7 +59,8 @@ export default class Header extends Component {
 					</span>}
 					{homeworkView && readingView && isMobile &&
 					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
-						<a className="link">Finish</a>
+						<a style={{marginRight: '27px'}} className="link">Questions</a>
+						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					{
 						!isNotHomeView

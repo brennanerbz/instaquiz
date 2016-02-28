@@ -29,12 +29,11 @@ export default class HomeworkReading extends Component {
 				<section id="reading_section" style={{margin: '0'}}>
 					<article id="text" 
 					style={{
-						background: '#fbfbfb', 
+						// background: '#fbfbfb', 
 						color: '#002735', 
 						borderRadius: '4px', 
 						border: isMobile ? '' : '1px solid #DAE0E7', 
 						padding: '1em', 
-						fontFamily: 'Lora',
 						fontSize: '15px',
 						lineHeight: '1.5em'
 					}}>

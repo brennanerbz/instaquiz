@@ -18,7 +18,12 @@ export default class Header extends Component {
 		const backArrow = require('../../../static/icons/backArrow.png')
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const isNotHomeView = location.pathname.match(/assignment|homework/gi);
+		// Assignment | Teacher
 		const assignmentView = location.pathname.match(/assignment/gi);
+		// Homework | Student
+		const homeworkView = location.pathname.match(/homework/gi);
+		const readingView = location.pathname.match(/read/gi);
+		const questionsView = location.pathname.match(/questions/gi);
 		return (
 			<div 
 				style={{
@@ -43,6 +48,16 @@ export default class Header extends Component {
 					<span onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
 						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '18px'}}/>
 						<a style={{marginLeft: '17px'}} className="link">Assignments</a>
+					</span>}
+					{homeworkView && isMobile &&
+					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
+						<p style={{fontWeight: '500', color: '#3C4858'}}>
+						{readingView && 'Reading'}{questionsView && 'Questions'}
+						</p>
+					</span>}
+					{homeworkView && readingView && isMobile &&
+					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
+						<a className="link">Finish</a>
 					</span>}
 					{
 						!isNotHomeView

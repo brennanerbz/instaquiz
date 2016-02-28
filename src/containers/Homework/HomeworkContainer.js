@@ -53,14 +53,15 @@ export default class HomeworkContainer extends Component {
 	render() {
 		var homeworkChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
-				props: true
+				isMobile: this.props.isMobile,
+				pushState: this.props.pushState,
+				title: this.props.title,
+				reading: this.props.reading,
+				identifier: this.props.identifier,
+				sequence: this.props.sequence,
+				question: this.props.question,
 			})
 		})
-		return (
-			<div>
-				<h1>Homework</h1>
-				{homeworkChildrenWithProps}
-			</div>
-		);
+		return (<div>{homeworkChildrenWithProps}</div>);
 	}
 }

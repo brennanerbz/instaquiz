@@ -54,12 +54,12 @@ export default class HomeworkReading extends Component {
 				<div className={'fade' + ' ' + (invalid && 'in')}>
 				{this.tooltip()}
 				</div>
-				<section id="reading_section" style={{margin: '0'}}>
+				<section id="reading_section" style={{margin: '1em'}}>
 					<article id="text" 
 					style={{
 						color: '#002735', 
 						borderRadius: '4px', 
-						border: isMobile ? '' : '1px solid #DAE0E7', 
+						border: '1px solid #DAE0E7', 
 						padding: '1em', 
 						lineHeight: '1.5em'
 					}}>

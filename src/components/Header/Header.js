@@ -41,7 +41,7 @@ export default class Header extends Component {
 					}}/>}
 					{assignmentView && isMobile &&
 					<span onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '17px'}}/>
+						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '18px'}}/>
 						<a style={{marginLeft: '17px'}} className="link">Assignments</a>
 					</span>}
 					{

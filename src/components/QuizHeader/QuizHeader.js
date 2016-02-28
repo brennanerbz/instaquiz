@@ -13,7 +13,7 @@ export default class QuizHeader extends Component {
 				className={isMobile ? 'flex_container_center' : ''}>
 				<h1
 				style={{
-					fontSize: isMobile ? '28px' : '32px',
+					fontSize: isMobile ? '22px' : '32px',
 					fontWeight: '600',
 					color: '#2C3239',
 					marginBottom: '5px'

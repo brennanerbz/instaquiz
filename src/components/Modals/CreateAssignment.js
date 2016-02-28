@@ -193,7 +193,7 @@ export default class CreateAssignment extends Component {
 							if(editing) this.handleFinishAssignment()
 						}}
 						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
-						className="button primary_green flex_item_align_right">
+						className="button primary_blue flex_item_align_right">
 							{editing ? 'Finish' : 'Submit'}
 						</button>
 					</div>}

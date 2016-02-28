@@ -24,14 +24,17 @@ export default class QuizContent extends Component {
 			question = question
 			.replace(new RegExp('(^|\\s)(' + term + ')(\\s|$)','ig'), '$1<b>$2</b>$3')
 			itemList.push(
-				<li key={term + i} style={{position: 'relative', padding: '0.5em', borderTop: i !== 0 ? '1px solid #DAE0E7' : ''}} className="display_flex flex_horizontal">
+				<li 
+				key={term + i} 
+				style={{position: 'relative', padding: '0.5em', borderTop: i !== 0 ? '1px solid #DAE0E7' : '', lineHeight: '1.15em'}} 
+				className="display_flex flex_horizontal">
 					<p 
 					style={{width: '50%', padding: isMobile ? '0.5em 0.5em 0.5em 0' : '1em 1em 1em 0.5em'}} 
 					className="flex_item_align_left">
 					<b>{term}</b>
 					</p>
 					<p 
-					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '0.5em 0.5em 1em 1em' }} 
+					style={{width: '50%', padding:  isMobile ? '0.5em 0em 0.5em 0.5em' : '0.5em 0.5em 1em 0em' }} 
 					className="flex_item_align_right"
 					dangerouslySetInnerHTML={{__html: question}}>
 					</p>

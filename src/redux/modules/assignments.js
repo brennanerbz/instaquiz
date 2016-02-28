@@ -43,35 +43,40 @@ const initialState = {
 			identifier: 'Brennan Erbeznik',
 			correct_count: 3,
 			incorrect_count: 1,
-			reading_completed: true
+			reading_completed: true,
+			questions_remaining: 0
 		},
 		{
 			id: 2,
 			identifier: 'Nathan Lomeli',
 			correct_count: 2,
 			incorrect_count: 2,
-			reading_completed: true
+			reading_completed: true,
+			questions_remaining: 0
 		},
 		{
 			id: 3,
 			identifier: 'Paige Woolen',
 			correct_count: 1,
 			incorrect_count: 3,
-			reading_completed: true
+			reading_completed: true,
+			questions_remaining: 0
 		},
 		{
 			id: 4,
 			identifier: 'Brandon Iribe',
 			correct_count: 3,
 			incorrect_count: 1,
-			reading_completed: true
+			reading_completed: true,
+			questions_remaining: 0
 		},
 		{
 			id: 5,
 			identifier: 'Chris Sacca',
 			correct_count: 1,
-			incorrect_count: 3,
-			reading_completed: true
+			incorrect_count: 2,
+			reading_completed: true,
+			questions_remaining: 1
 		}
 	],
 	items_count: 4,

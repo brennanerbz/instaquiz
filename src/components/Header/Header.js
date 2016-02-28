@@ -29,7 +29,7 @@ export default class Header extends Component {
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_center'}>
-				<div className="flex_horizontal" style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 25px 10px' : '15px 25px 10px'}}>
+				<div className="flex_horizontal" style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 20px 10px' : '15px 25px 10px'}}>
 					{isMobile && isNotHomeView
 					? null
 					: <img 
@@ -40,9 +40,9 @@ export default class Header extends Component {
 						cursor: 'pointer'
 					}}/>}
 					{assignmentView && isMobile &&
-					<span style={{height: '30px', lineHeight: '25px', fontSize: isMobile ? '18px' : '19px'}}>
-						<img src={backArrow} style={{height: '20px', position: 'absolute', top: '17px'}}/>
-						<a style={{marginLeft: '20px'}} className="link">Assignments</a>
+					<span onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
+						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '17px'}}/>
+						<a style={{marginLeft: '17px'}} className="link">Assignments</a>
 					</span>}
 					{
 						!isNotHomeView

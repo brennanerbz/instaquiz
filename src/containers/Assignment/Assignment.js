@@ -149,6 +149,7 @@ export default class Assignment extends Component {
 										sequences.map((sequence, i) => {
 											const score = (sequence.correct_count / items_count) * 100
 											const first = i === 0;
+											const completed = sequence.questions_remaining === 0;
 											return (
 												<li 
 												style={{
@@ -163,18 +164,26 @@ export default class Assignment extends Component {
 													</span>
 													<span 
 													className="display_flex" 
-													style={{width: '50%'}}>
-														<span 
-														style={{
-															borderRadius: '50%',
-															border: '1px solid #1FB6FF',
-															padding: '11px',
-															color: '#1FB6FF',
-															fontWeight: '500'
-														}}
-														className="flex_item_align_right">
-														{score}
-														</span>
+													style={{width: '50%', lineHeight: !completed ? '40px' : ''}}>
+														{
+															completed
+															?
+															<span 
+															style={{
+																borderRadius: '50%',
+																border: '1px solid #1FB6FF',
+																padding: '11px',
+																color: '#1FB6FF',
+																fontWeight: '500'
+															}}
+															className="flex_item_align_right">
+															{score}
+															</span>
+															:
+															<span className="flex_item_align_right">
+																In progress...
+															</span>
+														}
 													</span>
 												</li>
 											)

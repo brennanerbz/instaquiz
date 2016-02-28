@@ -34,7 +34,6 @@ export default class HomeworkReading extends Component {
 						borderRadius: '4px', 
 						border: isMobile ? '' : '1px solid #DAE0E7', 
 						padding: '1em', 
-						fontSize: '15px',
 						lineHeight: '1.5em'
 					}}>
 						<b style={{color: '#3C4858'}}>Instructions:</b><br/> 

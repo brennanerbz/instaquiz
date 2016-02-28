@@ -52,7 +52,6 @@ export default class App extends Component {
 		scrolling: false,
 	}
 
-
 	componentDidMount() {
 		// Check for mobile
 		var check = false;
@@ -83,7 +82,7 @@ export default class App extends Component {
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
-		var appChildrenWithProps = React.Children.map(children, (child) => {
+		var appChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
 				isMobile: isMobile,
 				location: location,

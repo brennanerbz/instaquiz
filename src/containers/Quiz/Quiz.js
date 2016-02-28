@@ -75,7 +75,7 @@ export default class Quiz extends Component {
 
 	render() {
 		const style = require('./Quiz.scss');
-		const sadFace = require('./SadFace.png');
+		const sadFace = require('../Assignment/SadFace.png');
 		const { isMobile, scrolling, title, definition, items_count, loaded, error, pushState } = this.props;
 		return (
 			<div  style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">

@@ -9,6 +9,12 @@ export default class PhoneModal extends Component {
 		error: false
 	}
 
+	componentDidMount() {
+		setTimeout(() => {
+			this.refs.link_to_homework.select()
+		}, 100)
+	}
+
 	submitPhoneNumber() {
 		const { startQuiz } = this.props;
 		var { phoneNumber } = this.state;
@@ -29,6 +35,7 @@ export default class PhoneModal extends Component {
 		const chatBubbles = require('../../../static/ChatBubbles.png');
 		const { isMobile } = this.props;
 		const { phoneNumber, error } = this.state;
+		const linkToHomework = this.props.path.split('/')[2]
 		return(
 			<div className="">
 				<i 
@@ -61,7 +68,7 @@ export default class PhoneModal extends Component {
 						fontSize: isMobile ? '17px' : '22px',
 						margin: '10px 0 5px 0!important'
 					}}>
-						Enter phone number to take quiz
+						Share this link with your students!
 					</h1>
 					<p
 					style={{
@@ -71,64 +78,29 @@ export default class PhoneModal extends Component {
 						margin: isMobile ? '5px 0 10px 0!important' : '10px 0 15px 0',
 						width: isMobile ? '100%' : '75%'
 					}}>
-						The quiz is messaging based. Don't worry, we're paying for everything.
+						Your students will read the content, then answer the questions you selected.
 					</p>
-					<div 
-					style={{
-						margin: '7.5px 0px',
-						padding: '7.5px 5px',
-						borderTop: '1px solid',
-						borderBottom: '1px solid',
-						borderColor: error ? '#FE3034' : '#EEEEEE',
-						width: isMobile ? '100%' : '78%',
-						fontSize: isMobile ? '16px' : '18px'
-					}} 
-					className="input_wrapper flex_horizontal">
-						<span style={{padding: '7.5px 5px', color: error ? '#FE3034' : ''}}>
-							+1
-						</span>
-						<input 
-						style={{
-							background: '#fff',
-							padding: '0px 0 0 10px',
-							width: '100%',
-							fontSize: isMobile ? '16px' : '18px',
-							lineHeight: isMobile ? '17px' : '19px',
-							color: error ? '#FE3034' : '',
-						}}
-						onChange={(e) => {
-							var number = e.target.value;
-							number = number.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
-							this.setState({
-								phoneNumber: number,
-								error: false
-							});
-						}}
-						onKeyDown={(e) => {
-							if(e.which === 13) {
-								e.preventDefault()
-								this.submitPhoneNumber()
-							}
-						}}
-						value={phoneNumber}
-						ref="phone_number"
-						placeholder="Phone Number #"
-						type="text"
-						pattern="[0-9]*"
-						autoFocus={true}/>
-					</div>
-					{error && <p style={{color: error ? '#FE3034' : '', marginBottom: '5px'}}>Oops! Please enter a valid phone number</p>}
-					<button 
-					onClick={::this.submitPhoneNumber}
-					style={{
-						margin: '5px 0px',
-						width: '80%'
-					}} 
-					className="button primary_green">
-						Start
-					</button>
+					<input
+					onClick={() => this.refs.link_to_homework.select()}
+					ref="link_to_homework"
+					readOnly={true}
+					style={{background: '#F9FAFC', width: '95%', margin: '10px 0', border: '1px solid #DAE0E7!important'}}
+					value={`https://nightly.com/homework/${linkToHomework}/read`}
+					/>
 				</div>
 			</div>
 		);
 	}
 }
+
+/*
+<button 
+onClick={::this.submitPhoneNumber}
+style={{
+	margin: '5px 0px',
+	width: '95%'
+}} 
+className="button primary_blue">
+	Copy Link!
+</button>
+*/

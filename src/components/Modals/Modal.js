@@ -14,6 +14,7 @@ import CreateAssignment from './CreateAssignment';
 
 @connect(
   state => ({
+  	path: state.router.location.pathname,
   	open: state.overlays.modalOpen,
   	type: state.overlays.modalType,
   	title: state.quiz.title,
@@ -73,6 +74,7 @@ export default class DefaultModal extends Component {
 							isMobile={isMobile}
 							close={::this.close}
 							startQuiz={startQuiz}
+							path={this.props.path}
 						/>
 					}
 					{

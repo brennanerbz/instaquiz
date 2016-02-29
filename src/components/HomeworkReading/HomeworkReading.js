@@ -11,29 +11,37 @@ export default class HomeworkReading extends Component {
 	}
 
 	tooltip() {
-		// add node getboundingrect
-		return (
-			<div style={{top: '95px', left: '65px'}} className="tooltip bottom in">
-				<div style={{left: '12%'}} className="tooltip-arrow">
+		const node = this.refs.name_input
+		const rect = node ? node.getBoundingClientRect() : null
+		if(rect) {
+			const style = {
+				top: rect.top + rect.height - 10,
+				left: rect.left
+			}
+			return (
+				<div style={style} className="tooltip bottom in">
+					<div style={{left: '12%'}} className="tooltip-arrow">
+					</div>
+					<div style={{maxWidth: '350px'}} className="tooltip-inner">
+						Oops! Add your name to continue!
+					</div>
 				</div>
-				<div style={{maxWidth: '350px'}} className="tooltip-inner">
-					Oops! Add your name to continue!
-				</div>
-			</div>
-		)
+			)
+		}		
 	}
 
 	render() {
 		const { isMobile } = this.props;
 		const { reading } = this.props;
 		const { invalid } = this.props;
+		const { token } = this.props;
 		return (
 			<div id="reading">
 				<div 
 					className="display_flex flex_horizontal flex_nowrap" 
-					style={{padding: isMobile ? '0' : '15px', borderBottom: '1px solid #DAE0E7'}}>
+					style={{padding: isMobile ? '0' : '15px 15px 0 15px', borderBottom: isMobile ? '1px solid #DAE0E7' : ''}}>
 					<label 
-					style={{marginLeft: '1em', fontSize: '16px', fontWeight: '500', color: '#3C4858', width: '15%', lineHeight: '50px'}}>
+					style={{marginLeft: '1em', fontSize: '16px', fontWeight: '500', color: '#3C4858', width: isMobile ? '15%' : '10%', lineHeight: '50px'}}>
 						Name
 					</label>
 					<input
@@ -80,7 +88,18 @@ export default class HomeworkReading extends Component {
 					{reading}
 					</article>
 				</section>
-				
+				{!isMobile &&
+					<button 
+					style={{
+						marginLeft: '1em'
+					}}
+					onClick={() => {
+						if(this.refs.name_input.value.length === 0) this.props.nameError()
+						else this.props.pushState(null, `/homework/${token}/questions`)
+					}}
+					className="button primary_blue">
+						Continue to questions
+					</button>}
 			</div>
 		);
 	}

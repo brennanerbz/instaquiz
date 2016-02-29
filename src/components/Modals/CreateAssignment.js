@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import cookie from 'react-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
@@ -11,7 +12,6 @@ import EditingList from '../EditingList/EditingList';
 
 @connect(
   state => ({
-  	teacher_token: state.user.token,
   	user_id: state.user.id,
   	title: state.assignments.title,
   	text: state.assignments.text,
@@ -57,13 +57,15 @@ export default class CreateAssignment extends Component {
 	}
 
 	handleCreateAssignment() {
-		const { createAssignment, user_id, teacher_token} = this.props;
+		const token = cookie.load('token', {path: '/'})
+		const { createAssignment, user_id} = this.props;
 		const { title, text } = this.state;
-		createAssignment(teacher_token, title, text)
+		createAssignment(token, title, text)
 	}
 
 	handleFinishAssignment() {
-		const { items, assignment, teacher_token } = this.props;
+		const token = cookie.load('token', {path: '/'})
+		const { items, assignment } = this.props;
 		var delete_ids = [];
 		items.forEach((item, i) => {
 			if(!item.selected) {
@@ -71,7 +73,7 @@ export default class CreateAssignment extends Component {
 			}
 		})
 		if(delete_ids.length > 0) {
-			this.props.deleteItems(delete_ids, teacher_token)
+			this.props.deleteItems(delete_ids, token)
 		} else {
 			this.props.close()
 			this.props.pushState(null, `/assignment/${assignment.token}/questions`)

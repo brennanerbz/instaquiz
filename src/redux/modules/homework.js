@@ -24,7 +24,7 @@ export const SUBMIT_ANSWER_FAILURE = 'NightlyCode/homework/SUBMIT_ANSWER_FAILURE
 export const SELECTED_CHOICE = 'NightlyCode/homework/SELECTED_CHOICE';
 
 const initialState = {
-	title: '',
+	title: 'Ms.smith History text',
 	reading: 'Finally, in addition to adjusting for hardware and data, we should also adjust for effort in assessing how significant an AI milestone is. With Deep Blue, for example, significant domain expertise was used to develop the AI that beat Gary Kasparov, rather than a system learning from scratch and thus demonstrating domain-general intelligence. Hassabis at AAAI and elsewhere has argued that AlphaGo represents more general progress in AI than did Deep Blue, and that the techniques used were general purpose. However, the very development of the policy and value network ideas for this project, as well as the specific training regimen used (a sequence of supervised learning and self-play, rather than end-to-end learning), was itself informed by the domain-specific expertise of researchers like David Silver and Aja Huang, who have substantial computer Go and Go expertise. While AlphaGo ultimately exceeded their skill levels, the search for algorithms in this case was informed by this specific domain (and, as mentioned earlier, part of the algorithm encoded domain-specific knowledge – namely, the MCTS component). Also, the team was large –15-20 people, significantly more than prior Go engines that I’m aware of, and more comparable to large projects like Deep Blue or Watson in terms of effort than anything else in computer Go history. So, if we should reasonably expect a large team of some of the smartest, most expert people in a given area working on a problem to yield progress on that problem, then the scale of this effort suggests we should slightly update downwards our impression of the significance of the AlphaGo milestone. This is in contrast to what we should have thought if, e.g. DeepMind had simply taken their existing DQN algorithm, applied it to Go, and achieved the same result. At the same time, innovations inspired by a specific domain may have broad relevance, and value/policy networks may be a case of this. It\'s still a bit early to say.',
 	identifier: '',
 	sequence: {
@@ -142,10 +142,10 @@ export function newSequence(token) {
 	}
 }
 
-export function fetchSequence(id) {
+export function fetchSequence(token) {
 	return {
 		types: [FETCH_SEQUENCE, FETCH_SEQUENCE_SUCCESS, FETCH_SEQUENCE_FAILURE],
-		promise: (client) => client.get(`/sequences/${id}`)
+		promise: (client) => client.get(`/sequences/${token}`)
 	}
 }
 
@@ -159,16 +159,16 @@ export function updateSequence(name, token) {
 	}
 }
 
-export function fetchQuestion(id) {
+export function fetchQuestion(token) {
 	return {
 		types: [FETCH_QUESTION, FETCH_QUESTION_SUCCESS, FETCH_QUESTION_FAILURE],
-		promise: (client) => client.put(`/sequences/${id}/question`)
+		promise: (client) => client.put(`/sequences/${token}/question`)
 	}
 }
 
-export function submitAnswer(answer) {
+export function submitAnswer(answer, token) {
 	return {
 		types: [SUBMIT_ANSWER, SUBMIT_ANSWER_SUCCESS, SUBMIT_ANSWER_FAILURE],
-		promise: (client) => client.put(`/sequences/${id}/answer`, {input: answer})
+		promise: (client) => client.put(`/sequences/${token}/answer`, {input: answer})
 	}
 }

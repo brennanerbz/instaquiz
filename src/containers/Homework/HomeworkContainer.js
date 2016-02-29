@@ -21,6 +21,7 @@ function fetchData(getState, dispatch) {
 
 // @connectData(fetchData)
 @connect(state => ({
+		location: state.router.location,
 		route: state.router.location.pathname,
 		route_token: state.router.params.token,
 		title: state.homework.title,
@@ -39,6 +40,10 @@ function fetchData(getState, dispatch) {
 )
 export default class HomeworkContainer extends Component {
 	static propTypes = {
+	}
+
+	state = {
+		answer: ''
 	}
 
 	componentDidMount() {
@@ -71,6 +76,25 @@ export default class HomeworkContainer extends Component {
 		if(previousRoute == 'questions' && nextRoute == 'read') {
 			this.props.pushState(null, `/homework/${token}/questions`)
 		}
+
+		if((!this.props.question.completed && nextProps.question.completed) ||
+			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
+			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed)) {
+			this.props.fetchQuestion(this.props.sequence.token)
+		}
+
+
+	}
+
+	submitAnswer() {
+		const { sequence } = this.props;
+		const { answer } = this.state;
+		if(answer.length > 0) {
+			this.props.submitAnswer(answer, sequence.token)
+			this.setState({
+				answer: ''
+			});
+		}
 	}
 
 	render() {
@@ -85,7 +109,15 @@ export default class HomeworkContainer extends Component {
 				question: this.props.question,
 				updateName: this.props.updateName,
 				invalid: this.props.invalid,
-				selected: this.props.selected
+				selected: this.props.selected,
+				nameError: this.props.nameError,
+				fetchSequence: this.props.fetchSequence,
+				updateSequence: this.props.updateSequence,
+				newSequence: this.props.newSequence,
+				fetchQuestion: this.props.fetchQuestion,
+				selectAnswer: (answer) => this.setState({answer: answer}),
+				submitAnswer: ::this.submitAnswer,
+				location: this.props.location
 			})
 		})
 		return (<div style={{height: '100%'}}>{homeworkChildrenWithProps}</div>);

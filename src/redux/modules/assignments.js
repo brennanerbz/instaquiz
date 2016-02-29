@@ -1,11 +1,17 @@
 import request from 'superagent';
 import cookie from 'react-cookie';
 
-import { FETCH_USER_SUCCESS } from './user';
+export const FETCH_ASSIGNMENTS = 'nightly/assignments/FETCH_ASSIGNMENTS';
+export const FETCH_ASSIGNMENTS_SUCCESS = 'nightly/assignments/FETCH_ASSIGNMENTS_SUCCESS';
+export const FETCH_ASSIGNMENTS_FAILURE = 'nightly/assignments/FETCH_ASSIGNMENTS_FAILURE';
 
 export const CREATE_ASSIGNMENT = 'nightly/assignments/CREATE_ASSIGNMENT';
 export const CREATE_ASSIGNMENT_SUCCESS = 'nightly/assignments/CREATE_ASSIGNMENT_SUCCESS';
 export const CREATE_ASSIGNMENT_FAILURE = 'nightly/assignments/CREATE_ASSIGNMENT_FAILURE';
+
+export const FETCH_ASSIGNMENT = 'nightly/assignments/FETCH_ASSIGNMENT';
+export const FETCH_ASSIGNMENT_SUCCESS = 'nightly/assignments/FETCH_ASSIGNMENT_SUCCESS';
+export const FETCH_ASSIGNMENT_FAILURE = 'nightly/assignments/FETCH_ASSIGNMENT_FAILURE';
 
 export const UPDATE_TITLE = 'nightly/assignments/UPDATE_TITLE';
 export const UPDATE_TEXT = 'nightly/assignments/UPDATE_TEXT';
@@ -22,74 +28,33 @@ const initialState = {
 	title: '',
 	text: '',
 	//
+	loading: false,
 	creating: false,
 	editing: false,
 	finished: false,
-	assignment: {
-		token: '134hvbhdjajan5573618nshs',
-		id: 1,
-		title: 'Ms. smith History text',
-		text: 'Blah!'
-	},
-	items: [
-		{selected: true, id: 1, target: 'Series A round', cue: 'What is the name typically given to a company\'s first round of fundraising?'},
-		{selected: true, id: 2, target: 'Angel investor', cue: 'What is an affluent individual who provides capital for start ups?'},
-		{selected: true, id: 3, target: 'Seed money', cue: 'What is a form of securities offering in which an investor invests capital in exchange for an equity stake in the company?'},
-		{selected: true, id: 4, target: 'Initial public offering', cue: 'What is it called when a company\'s shares are initially sold to the public?'}
-	],
-	sequences: [
-		{
-			id: 1,
-			identifier: 'Brennan Erbeznik',
-			correct_count: 3,
-			incorrect_count: 1,
-			reading_completed: true,
-			questions_remaining: 0
-		},
-		{
-			id: 2,
-			identifier: 'Nathan Lomeli',
-			correct_count: 2,
-			incorrect_count: 2,
-			reading_completed: true,
-			questions_remaining: 0
-		},
-		{
-			id: 3,
-			identifier: 'Paige Woolen',
-			correct_count: 1,
-			incorrect_count: 3,
-			reading_completed: true,
-			questions_remaining: 0
-		},
-		{
-			id: 4,
-			identifier: 'Brandon Iribe',
-			correct_count: 3,
-			incorrect_count: 1,
-			reading_completed: true,
-			questions_remaining: 0
-		},
-		{
-			id: 5,
-			identifier: 'Chris Sacca',
-			correct_count: 1,
-			incorrect_count: 2,
-			reading_completed: true,
-			questions_remaining: 1
-		}
-	],
-	items_count: 4,
+	assignment: {},
+	items: [],
+	sequences: [],
+	items_count: 0,
 	assignments: [],
 	error: null
 }
 
 export default function reducer(state = initialState, action) {
 	switch(action.type) {
-		case FETCH_USER_SUCCESS:
+		case FETCH_ASSIGNMENTS:
 			return {
 				...state,
-				assignments: action.result.user.assignments
+			}
+		case FETCH_ASSIGNMENTS_SUCCESS:
+			return {
+				...state,
+				assignments: [...action.result.assignments]
+			}
+		case FETCH_ASSIGNMENTS_FAILURE:
+			return {
+				...state,
+				error: action.error
 			}
 		case CREATE_ASSIGNMENT:
 			return {
@@ -97,18 +62,49 @@ export default function reducer(state = initialState, action) {
 				creating: true
 			}
 		case CREATE_ASSIGNMENT_SUCCESS:
-			if(state.assignments === 0) cookie.save('teacher', true, {path: '/'})
+			if(state.assignments.length === 0) cookie.save('teacher', true, {path: '/'})
 			return {
 				...state,
 				creating: false,
-				assignments: [...state.assignments, ...action.result.assignment]
+				editing: true,
+				assignments: [...state.assignments, action.result.assignment],
+				assignment: action.result,
+				items: action.result.items.items.map(item => {
+					item.selected = true
+					return item;
+				}),
+				items_count: action.result.items.items.length,
+				title: action.result.title,
+				token: action.result.token
 			}
 		case CREATE_ASSIGNMENT_FAILURE:
-			if(state.assignments === 0) cookie.save('teacher', true, {path: '/'})
 			return {
 				...state,
-				// creating: false,
-				editing: true, // temp
+				creating: false,
+				error: action.error
+			}
+		case FETCH_ASSIGNMENT:
+			return {
+				...state,
+				loading: true
+			}
+		case FETCH_ASSIGNMENT_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				editing: false,
+				assignment: action.result,
+				items: action.result.items.items,
+				items_count: action.result.items.items.length,
+				title: action.result.title,
+				text: action.result.text,
+				token: action.result.token,
+				sequences: action.result.sequences.sequences
+			}
+		case FETCH_ASSIGNMENT_FAILURE:
+			return {
+				...state,
+				loading: false,
 				error: action.error
 			}
 		case UPDATE_TITLE:
@@ -159,13 +155,27 @@ export default function reducer(state = initialState, action) {
 	}
 }
 
+export function fetchAssignments(token) {
+	return {
+		types: [FETCH_ASSIGNMENTS, FETCH_ASSIGNMENTS_SUCCESS, FETCH_ASSIGNMENTS_FAILURE],
+		promise: (client) => client.get('/assignments/', null, token)
+	}
+}
+
 export function createAssignment(token, title, text) {
 	return {
 		types: [CREATE_ASSIGNMENT, CREATE_ASSIGNMENT_SUCCESS, CREATE_ASSIGNMENT_FAILURE],
-		promise: (client) => client.post('/assignments', {
+		promise: (client) => client.post('/assignments/', {
 			title: title,
 			text: text
 		}, token)
+	}
+}
+
+export function fetchAssignment(token, user_token) {
+	return {
+		types: [FETCH_ASSIGNMENT, FETCH_ASSIGNMENT_SUCCESS, FETCH_ASSIGNMENT_FAILURE],
+		promise: (client) => client.get(`/assignments/${token}`, null, user_token)
 	}
 }
 
@@ -179,8 +189,8 @@ export function selectItem(item_id) {
 export function deleteItems(list, token) {
 	return {
 		types: [DELETE_ITEMS, DELETE_ITEMS_SUCCESS, DELETE_ITEMS_FAILURE],
-		promise: (client) => client.del('/items', {
-			items: list
+		promise: (client) => client.del('/items/', {
+			item_ids: list
 		}, token)
 	}
 }

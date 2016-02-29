@@ -17,6 +17,8 @@ import Modal from '../../components/Modals/Modal';
 // API calls
 import { fetchUser } from '../../redux/modules/user';
 import { nameError } from '../../redux/modules/homework';
+import { fetchAssignments } from '../../redux/modules/assignments';
+import { openModal } from '../../redux/modules/overlays';
 
 function fetchData(getState, dispatch) {
 	const promises = [];
@@ -27,20 +29,24 @@ function fetchData(getState, dispatch) {
 	return Promise.all(promises)
 }
 
-@connectData(fetchData)
+// @connectData(fetchData)
 @connect(state => ({
+	loaded: state.user.loaded,
 	params: state.router.params,
 	location: state.router.location,
 	query: state.router.location.query,
 	modalOpen: state.overlays.modalOpen,
 	student_name: state.homework.identifier,
+	homework_title: state.homework.title,
 	selected: state.homework.selected
 	}),
 	dispatch => ({
 		...bindActionCreators({
 			pushState,
 			nameError,
-			fetchUser
+			fetchUser,
+			openModal,
+			fetchAssignments
 		}, dispatch)
 	})
 )
@@ -54,6 +60,14 @@ export default class App extends Component {
 		isMobile: false,
 		howItWorksOpen: false,
 		scrolling: false,
+	}
+
+	componentWillMount() {
+		const token = cookie.load('token', {path: '/'})
+		const { loaded } = this.props;
+		if(token && !loaded) {
+			this.props.fetchUser(token)
+		}
 	}
 
 	componentDidMount() {
@@ -83,16 +97,20 @@ export default class App extends Component {
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState, params, location, query } = this.props;
-		const { nameError, student_name, selected } = this.props;
+		const { nameError, student_name, homework_title, selected } = this.props;
+		const { openModal } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
+		const { userLoaded } = this.props;
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
 		var appChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				userLoaded: userLoaded,
 				isMobile: isMobile,
 				location: location,
 				scrolling: scrolling,
 				user: user,
+				teacher: teacher,
 				openHowItWorks: () => this.setState({howItWorksOpen: true})
 			})
 		})
@@ -100,9 +118,11 @@ export default class App extends Component {
 			<div id={style.app}>
 				<Helmet {...config.app.head}/>
 				<Header 
+					openModal={openModal}
 					pushState={pushState}
 					nameError={nameError}
 					student_name={student_name}
+					homework_title={homework_title}
 					selected={selected}
 					params={params}
 					location={location}

@@ -12,7 +12,7 @@ const environment = {
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
-  herokuApi: 'https://nightlytext.herokuapp.com',
+  herokuApi: 'https://nightly-server.herokuapp.com/api/v1.0',
   apiHost: '127.0.0.1',
   apiPort: '5000',
   app: {

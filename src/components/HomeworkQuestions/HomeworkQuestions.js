@@ -5,7 +5,8 @@ export default class HomeworkQuestions extends Component {
 	}
 
 	state = {
-		selected: ''
+		selected: '',
+		answer: ''
 	}
 
 	render() {
@@ -33,7 +34,10 @@ export default class HomeworkQuestions extends Component {
 							return (
 								<li 
 								onClick={() => {
-									this.setState({selected: i})
+									this.setState({
+										selected: i
+									});
+									this.props.selectAnswer(choice)
 									this.props.selected()
 								}}
 								className="display_flex"

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import cookie from 'react-cookie';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
@@ -34,7 +36,9 @@ export default class Assignment extends Component {
 	}
 
 	componentDidMount() {
+		const token = cookie.load('token', {path: '/'})
 		const { params } = this.props;
+		this.props.fetchAssignment(params.token, token)
 		this.setState({
 			activeTab: params.tab ? params.tab.charAt(0).toUpperCase() + params.tab.slice(1) : 'Questions'
 		});

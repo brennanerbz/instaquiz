@@ -27,6 +27,7 @@ class _ApiClient {
         }
         
         request.end((err, res) => {
+          console.log(res)
           if(err) {
             reject(res)
           } else {

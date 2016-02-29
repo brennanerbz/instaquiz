@@ -82,9 +82,16 @@ export default class PhoneModal extends Component {
 					</p>
 					<input
 					onClick={() => this.refs.link_to_homework.select()}
+					onTouchStart={() => this.refs.link_to_homework.select()}
 					ref="link_to_homework"
 					readOnly={true}
-					style={{background: '#F9FAFC', width: '95%', margin: '10px 0', border: '1px solid #DAE0E7!important'}}
+					style={{
+						background: '#F9FAFC', 
+						width: '95%', 
+						margin: '10px 0', 
+						border: '1px solid #DAE0E7!important',
+						lineHeight: '18px'
+					}}
 					value={`https://nightly.com/homework/${linkToHomework}/read`}
 					/>
 				</div>

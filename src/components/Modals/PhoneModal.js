@@ -60,28 +60,15 @@ export default class PhoneModal extends Component {
 					}}>
 						Your students will read the content, then answer the questions you selected.
 					</p>
-					<input
-					onClick={() => {
-						if(!isMobile) {
-							this.refs.link_to_homework.select()
-						}
-					}}
-					onTouchStart={() => {
-						if(isMobile) {
-							this.refs.link_to_homework.setSelectionRange(0, this.refs.link_to_homework.value.length)
-						}						
-					}}
-					ref="link_to_homework"
-					readOnly={true}
-					style={{
-						background: '#F9FAFC', 
-						width: '95%', 
-						margin: '10px 0', 
-						border: '1px solid #DAE0E7!important',
-						lineHeight: '18px'
-					}}
-					value={`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`}
-					/>
+					<a style={{
+						fontWeight: '500',
+						fontSize: isMobile ? '15.5px' : '19px',
+						margin: isMobile ? '5px 0 10px 0!important' : '10px 0 15px 0',
+						width: isMobile ? '100%' : '75%',
+						wordWrap: 'break-word'
+					}} className="link">
+					{`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`}
+					</a>
 					<CopyToClipboard 
 					text={`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`} 
 					onCopy={() => this.props.copy()}>

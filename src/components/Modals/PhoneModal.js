@@ -11,7 +11,8 @@ export default class PhoneModal extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			this.refs.link_to_homework.select()
+			// this.refs.link_to_homework.select()
+			this.refs.link_to_homework.setSelectionRange(0, 9999)
 		}, 100)
 	}
 
@@ -81,8 +82,14 @@ export default class PhoneModal extends Component {
 						Your students will read the content, then answer the questions you selected.
 					</p>
 					<input
-					onClick={() => this.refs.link_to_homework.select()}
-					onTouchStart={() => this.refs.link_to_homework.select()}
+					onClick={() => {
+						// this.refs.link_to_homework.select()
+						this.refs.link_to_homework.setSelectionRange(0, 9999)
+					}}
+					onTouchStart={() => {
+						// this.refs.link_to_homework.select()
+						this.refs.link_to_homework.setSelectionRange(0, 9999)
+					}}
 					ref="link_to_homework"
 					readOnly={true}
 					style={{

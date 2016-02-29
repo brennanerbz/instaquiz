@@ -39,6 +39,9 @@ export default class DefaultModal extends Component {
 
 	close() {
 		const { closeModal } = this.props;
+		this.setState({
+			copied: false
+		});
 		closeModal()
 	}
 

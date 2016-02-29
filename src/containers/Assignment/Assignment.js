@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cookie from 'react-cookie';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
-
 
 // Actions
 import * as assignmentActions from '../../redux/modules/assignments';
@@ -47,6 +45,10 @@ export default class Assignment extends Component {
 	state = {
 		tabs: ['Reading', 'Questions', 'Scores'],
 		activeTab: ''
+	}
+
+	componentWillUnmount() {
+		this.props.clearAssignment()
 	}
 
 	render() {

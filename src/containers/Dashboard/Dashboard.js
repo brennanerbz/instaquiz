@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
 
 	render() {
 		return (
-			<AssignmentList assignments={this.props.assignments}/>
+			<AssignmentList assignments={this.props.assignments} pushState={this.props.pushState}/>
 		);
 	}
 }

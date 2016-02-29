@@ -23,6 +23,7 @@ export const DELETE_ITEMS_SUCCESS = 'nightly/assignments/DELETE_ITEMS_SUCCESS';
 export const DELETE_ITEMS_FAILURE = 'nightly/assignments/DELETE_ITEMS_FAILURE';
 
 export const CLEAR_DRAFT = 'nightly/assignments/CLEAR_DRAFT';
+export const CLEAR_ASSIGNMENT = 'nightly/assignments/CLEAR_ASSIGNMENT';
 
 const initialState = {
 	title: '',
@@ -67,7 +68,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				creating: false,
 				editing: true,
-				assignments: [...state.assignments, action.result.assignment],
+				assignments: [...state.assignments, action.result],
 				assignment: action.result,
 				items: action.result.items.items.map(item => {
 					item.selected = true
@@ -142,11 +143,21 @@ export default function reducer(state = initialState, action) {
 			}
 		case CLEAR_DRAFT:
 			return {
+				...state,
 				title: '',
 				text: '',
 				editing: false,
 				creating: false,
 				finished: false
+			}
+		case CLEAR_ASSIGNMENT:
+			return {
+				...state,
+				assignment: {},
+				items: [],
+				sequences: [],
+				title: '',
+				text: ''
 			}
 		default:
 			return {
@@ -210,5 +221,10 @@ export function updateText(text) {
 export function clearDraft() {
 	return {
 		type: CLEAR_DRAFT
+	}
+}
+export function clearAssignment() {
+	return {
+		type: CLEAR_ASSIGNMENT
 	}
 }

@@ -80,10 +80,10 @@ export default class PhoneModal extends Component {
 						border: '1px solid #DAE0E7!important',
 						lineHeight: '18px'
 					}}
-					value={`https://nightly.com/homework/${linkToHomework}/read`}
+					value={`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`}
 					/>
 					<CopyToClipboard 
-					text={`https://nightly.com/homework/${linkToHomework}/read`} 
+					text={`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`} 
 					onCopy={() => this.props.copy()}>
 						<button 
 						style={{

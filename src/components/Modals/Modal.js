@@ -65,7 +65,16 @@ export default class DefaultModal extends Component {
 				{
 					copied
 					&&
-					<div className="display_flex flex_center" style={{width: '100%', padding: '0.75em 1em', background: '#1FB6FF', color: '#fff'}}>
+					<div
+					className="display_flex flex_center" 
+					style={{
+						width: '100%', 
+						padding: '0.75em 1em', 
+						background: '#1FB6FF',
+						color: '#fff',
+						borderTopLeftRadius: !isMobile ? '4px' : '',
+						borderTopRightRadius: !isMobile ? '4px' : ''
+					}}>
 						Copied!
 					</div>
 				}

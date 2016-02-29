@@ -45,6 +45,14 @@ export default class DefaultModal extends Component {
 		closeModal()
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.open && nextProps.open) {
+			if(nextProps.isMobile) {
+				$('.modal-backdrop').addClass('mobile')
+			}
+		}
+	}
+
 	render() {
 		const style = require('./Modals.scss');
 		const { open, type, isMobile, startQuiz, loaded, title, error } = this.props;

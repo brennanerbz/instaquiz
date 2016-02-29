@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+
 export default class Homework extends Component {
 	static propTypes = {
 	}
@@ -9,6 +11,7 @@ export default class Homework extends Component {
 		var homeworkChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, ...this.props)
 		})
+		const { loading } = this.props;
 		// Header
 		const forwardArrow = require('../../../static/icons/forwardArrow.png')
 		const forwardArrowGrey = require('../../../static/icons/forwardArrowGrey.png')
@@ -30,7 +33,8 @@ export default class Homework extends Component {
 						<img src={selected ? forwardArrow : forwardArrowGrey} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					<div style={{padding: isMobile ? '3.5em 0 0' : '5em 25px', height: '100%'}}>
-					{homeworkChildrenWithProps}
+					{loading && <LoadingSpinner size={4}/>}
+					{!loading && homeworkChildrenWithProps}
 					</div>
 				</div>
 			</div>

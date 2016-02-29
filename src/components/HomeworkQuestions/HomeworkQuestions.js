@@ -10,7 +10,7 @@ export default class HomeworkQuestions extends Component {
 	}
 
 	render() {
-		const choices = ['Series A Round', "Seed round", 'Angel investor', 'Initial public offering']
+		const { question } = this.props;
 		return (
 			<div id="questions" style={{background: '#fff', height: '100%'}} className="display_flex flex_vertical">
 				<div 
@@ -25,11 +25,11 @@ export default class HomeworkQuestions extends Component {
 					boxShadow: '0 1px 7px 0 rgba(31,45,61,0.1)',
 					fontSize: '17px'
 				}}>
-					What is a form of securities offering in which an investor invests capital in exchange for an equity stake in the company?
+				{question && question.cue}
 				</div>
 				<ul id="choices" style={{margin: 'auto 1em 1em', listStyleType: 'none'}} className="">
 					{
-						choices.map((choice, i) => {
+						question && question.choices && question.choices.map((choice, i) => {
 							const selected = this.state.selected === i
 							return (
 								<li 

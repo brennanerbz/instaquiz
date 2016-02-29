@@ -7,20 +7,8 @@ import connectData from 'helpers/connectData';
 
 import * as homeworkActions from '../../redux/modules/homework';
 
-function fetchData(getState, dispatch) {
-	const promises = [];
-	const token = getState().router.params.token;
-	const sequences = cookie.load('sequences', {path: '/'})
-	if(sequences && sequences[token]) {
-		promises.push(dispatch(fetchSequence(sequences[token])))
-	} else {
-		promises.push(dispatch(newSequence(token)))
-	}
-	return Promise.all(promises)
-}
-
-// @connectData(fetchData)
 @connect(state => ({
+		loading: state.homework.loading,
 		location: state.router.location,
 		route: state.router.location.pathname,
 		route_token: state.router.params.token,
@@ -48,8 +36,11 @@ export default class HomeworkContainer extends Component {
 
 	componentDidMount() {
 		const { route_token } = this.props;
+		this.props.setRouteToken(route_token)
 		const { fetchSequence, newSequence } = this.props;
 		const sequences = cookie.load('sequences', {path: '/'})
+		const teacher = cookie.load('teacher', {path: '/'})
+		if(!teacher) cookie.save('student', true, {path: '/'})
 		if(sequences && sequences[route_token]) {
 			fetchSequence(sequences[route_token])
 		} else {
@@ -66,24 +57,22 @@ export default class HomeworkContainer extends Component {
 	componentWillReceiveProps(nextProps) {
 		const previousRoute = this.props.route.split('/')[3]
 		const nextRoute = nextProps.route.split('/')[3]
-		const token = nextProps.route.split('/')[2]
+		const route_token = nextProps.route.split('/')[2]
 		if(previousRoute == 'read' && nextRoute == 'questions') {
 			if(nextProps.sequence && !nextProps.sequence.reading_completed) {
-				this.props.updateSequence(nextProps.identifier, token)
+				this.props.updateSequence(nextProps.identifier, nextProps.sequence.token)
 			} 
 		}
 		// Route control to prevent cheating
 		if(previousRoute == 'questions' && nextRoute == 'read') {
 			this.props.pushState(null, `/homework/${token}/questions`)
 		}
-
-		if((!this.props.question.completed && nextProps.question.completed) ||
+		// Fetch the latest question
+		if((!this.props.question.outcome && nextProps.question.outcome) ||
 			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
 			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed)) {
 			this.props.fetchQuestion(this.props.sequence.token)
 		}
-
-
 	}
 
 	submitAnswer() {
@@ -100,6 +89,7 @@ export default class HomeworkContainer extends Component {
 	render() {
 		var homeworkChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				loading: this.props.loading,
 				isMobile: this.props.isMobile,
 				pushState: this.props.pushState,
 				title: this.props.title,

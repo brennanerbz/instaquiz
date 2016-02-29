@@ -1,3 +1,7 @@
+import cookie from 'react-cookie';
+
+export const SET_ROUTE_TOKEN = 'NightlyCode/homework/SET_ROUTE_TOKEN';
+
 export const NEW_SEQUENCE = 'NightlyCode/homework/NEW_SEQUENCE';
 export const NEW_SEQUENCE_SUCCESS = 'NightlyCode/homework/NEW_SEQUENCE_SUCCESS';
 export const NEW_SEQUENCE_FAILURE = 'NightlyCode/homework/NEW_SEQUENCE_FAILURE';
@@ -24,12 +28,13 @@ export const SUBMIT_ANSWER_FAILURE = 'NightlyCode/homework/SUBMIT_ANSWER_FAILURE
 export const SELECTED_CHOICE = 'NightlyCode/homework/SELECTED_CHOICE';
 
 const initialState = {
-	title: 'Ms.smith History text',
-	reading: 'Finally, in addition to adjusting for hardware and data, we should also adjust for effort in assessing how significant an AI milestone is. With Deep Blue, for example, significant domain expertise was used to develop the AI that beat Gary Kasparov, rather than a system learning from scratch and thus demonstrating domain-general intelligence. Hassabis at AAAI and elsewhere has argued that AlphaGo represents more general progress in AI than did Deep Blue, and that the techniques used were general purpose. However, the very development of the policy and value network ideas for this project, as well as the specific training regimen used (a sequence of supervised learning and self-play, rather than end-to-end learning), was itself informed by the domain-specific expertise of researchers like David Silver and Aja Huang, who have substantial computer Go and Go expertise. While AlphaGo ultimately exceeded their skill levels, the search for algorithms in this case was informed by this specific domain (and, as mentioned earlier, part of the algorithm encoded domain-specific knowledge – namely, the MCTS component). Also, the team was large –15-20 people, significantly more than prior Go engines that I’m aware of, and more comparable to large projects like Deep Blue or Watson in terms of effort than anything else in computer Go history. So, if we should reasonably expect a large team of some of the smartest, most expert people in a given area working on a problem to yield progress on that problem, then the scale of this effort suggests we should slightly update downwards our impression of the significance of the AlphaGo milestone. This is in contrast to what we should have thought if, e.g. DeepMind had simply taken their existing DQN algorithm, applied it to Go, and achieved the same result. At the same time, innovations inspired by a specific domain may have broad relevance, and value/policy networks may be a case of this. It\'s still a bit early to say.',
+	route_token: '',
+	loading: false,
+	loaded: false,
+	title: '',
+	reading: '',
 	identifier: '',
-	sequence: {
-		reading_completed: false
-	},
+	sequence: {},
 	question: {},
 	selected: false
 }
@@ -38,30 +43,65 @@ export default function reducer (state = initialState, action) {
 	var { items } = state;
 
 	switch(action.type) {
+		// Route
+		case SET_ROUTE_TOKEN:
+			return {
+				...state,
+				route_token: action.token
+			}
 		// Sequence
 		case NEW_SEQUENCE:
 			return {
-				...state
+				...state,
+				loading: true
 			}
 		case NEW_SEQUENCE_SUCCESS:
+			const { route_token } = state;
+			var sequences = cookie.load('sequences', {path: '/'})
+			var sequence = {};
+			sequence[route_token] = action.result.token
+			if(sequences) {
+				sequences = [...sequences, sequence]
+			} else {
+				sequences = [sequence]
+			}
+			cookie.save('sequences', sequences, {path: '/'})
 			return {
-				...state
+				...state,
+				loading: false,
+				loaded: true,
+				token: action.result.token,
+				sequence: action.result,
+				title: action.result.assignment.title,
+				reading: action.result.assignment.text
 			}
 		case NEW_SEQUENCE_FAILURE:
 			return {
-				...state
+				...state,
+				// loading: false,
+				error: action.error
 			}
 		case FETCH_SEQUENCE:
 			return {
-				...state
+				...state,
+				loading: true
 			}
 		case FETCH_SEQUENCE_SUCCESS:
 			return {
-				...state
+				...state,
+				loading: false,
+				loaded: true,
+				identifier: action.result.identifier,
+				token: action.result.token,
+				sequence: action.result,
+				title: action.result.assignment.title,
+				reading: action.result.assignment.text
 			}
 		case FETCH_SEQUENCE_FAILURE:
 			return {
-				...state
+				...state,
+				// loading: false,
+				error: action.error
 			}
 		case UPDATE_SEQUENCE:
 			return {
@@ -69,24 +109,34 @@ export default function reducer (state = initialState, action) {
 			}
 		case UPDATE_SEQUENCE_SUCCESS:
 			return {
-				...state
+				...state,
+				identifier: action.result.identifier,
+				token: action.result.token,
+				sequence: action.result,
+				title: action.result.assignment.title,
+				reading: action.result.assignment.text
 			}
 		case UPDATE_SEQUENCE_FAILURE:
 			return {
-				...state
+				...state,
+				error: action.error
 			}
 		// Question
 		case FETCH_QUESTION:
 			return {
-				...state
+				...state,
+				loading: true
 			}
 		case FETCH_QUESTION_SUCCESS:
 			return {
-				...state
+				...state,
+				loading: false,
+				question: action.result
 			}
 		case FETCH_QUESTION_FAILURE:
 			return {
-				...state
+				...state,
+				error: action.error
 			}
 		// Answer
 		case SUBMIT_ANSWER:
@@ -95,7 +145,9 @@ export default function reducer (state = initialState, action) {
 			}
 		case SUBMIT_ANSWER_SUCCESS:
 			return {
-				...state
+				...state,
+				question: action.result,
+				sequence: action.result.sequence
 			}
 		case SUBMIT_ANSWER_FAILURE:
 			return {
@@ -125,6 +177,9 @@ export default function reducer (state = initialState, action) {
 	}
 }
 
+export function setRouteToken(token) {
+	return {type: SET_ROUTE_TOKEN, token}
+}
 export function nameError() {
 	return {type: ERROR_ON_NAME}
 }

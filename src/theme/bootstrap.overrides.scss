@@ -86,6 +86,9 @@ button {
 	&.in {
 		opacity: 0.95!important;
 	}
+	&.mobile {
+		opacity: 1!important;
+	}
 }
 
 // Modal 

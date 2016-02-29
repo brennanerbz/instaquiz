@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import cookie from 'react-cookie';
 import { isEmpty } from '../../utils/helperfunctions';
 import WikiForm from '../WikiForm/WikiForm';
 
@@ -34,6 +35,7 @@ export default class Header extends Component {
 		const readingView = location.pathname.match(/read/gi);
 		const questionsView = location.pathname.match(/questions/gi);
 		const { student_name, selected } = this.props;
+		const student = cookie.load('student', {path: '/'})
 		return (
 			<div 
 				style={{
@@ -50,11 +52,15 @@ export default class Header extends Component {
 					{(isMobile && isNotHomeView) || assignmentsView
 					? null
 					: <img 
-					onClick={() => pushState(null, '/')} 
+					onClick={() => {
+						if(!student) {
+							pushState(null, '/')
+						}
+					}} 
 					src={blueLogo} 
 					style={{
 						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
-						cursor: 'pointer',
+						cursor: !student && 'pointer',
 						position: 'absolute',
 						left: '25px'
 					}}/>}

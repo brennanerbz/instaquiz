@@ -81,6 +81,7 @@
     "react-autosuggest": "^3.4.0",
     "react-bootstrap": "^0.28.2",
     "react-cookie": "^0.4.3",
+    "react-copy-to-clipboard": "^4.0.2",
     "react-dom": "^0.14.1",
     "react-file-input": "^0.2.5",
     "react-helmet": "^2.2.0",

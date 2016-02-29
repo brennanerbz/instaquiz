@@ -1,41 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 export default class PhoneModal extends Component {
 	static propTypes = {
 	}
 
-	state = {
-		phoneNumber: '',
-		error: false
-	}
-
 	componentDidMount() {
 		setTimeout(() => {
-			// this.refs.link_to_homework.select()
-			this.refs.link_to_homework.setSelectionRange(0, 9999)
+			this.refs.link_to_homework.setSelectionRange(0, this.refs.link_to_homework.value.length)
 		}, 100)
-	}
-
-	submitPhoneNumber() {
-		const { startQuiz } = this.props;
-		var { phoneNumber } = this.state;
-		var phoneNumberRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-		if(phoneNumber.match(phoneNumberRegExp)) {
-			phoneNumber = phoneNumber.replace(/-/g, '')
-			startQuiz(phoneNumber)
-		}
-		else {
-			this.setState({
-				error: true
-			});
-		}
 	}
 
 	render() {
 		const style = require('./Modals.scss');
 		const chatBubbles = require('../../../static/ChatBubbles.png');
 		const { isMobile } = this.props;
-		const { phoneNumber, error } = this.state;
 		const linkToHomework = this.props.path.split('/')[2]
 		return(
 			<div className="">
@@ -83,12 +62,14 @@ export default class PhoneModal extends Component {
 					</p>
 					<input
 					onClick={() => {
-						// this.refs.link_to_homework.select()
-						this.refs.link_to_homework.setSelectionRange(0, 9999)
+						if(!isMobile) {
+							this.refs.link_to_homework.select()
+						}
 					}}
 					onTouchStart={() => {
-						// this.refs.link_to_homework.select()
-						this.refs.link_to_homework.setSelectionRange(0, 9999)
+						if(isMobile) {
+							this.refs.link_to_homework.setSelectionRange(0, this.refs.link_to_homework.value.length)
+						}						
 					}}
 					ref="link_to_homework"
 					readOnly={true}
@@ -101,6 +82,18 @@ export default class PhoneModal extends Component {
 					}}
 					value={`https://nightly.com/homework/${linkToHomework}/read`}
 					/>
+					<CopyToClipboard 
+					text={`https://nightly.com/homework/${linkToHomework}/read`} 
+					onCopy={() => this.props.copy()}>
+						<button 
+						style={{
+							margin: '5px 0px',
+							width: '95%'
+						}} 
+						className="button primary_blue">
+							Copy Link!
+						</button>
+					</CopyToClipboard>
 				</div>
 			</div>
 		);
@@ -108,13 +101,5 @@ export default class PhoneModal extends Component {
 }
 
 /*
-<button 
-onClick={::this.submitPhoneNumber}
-style={{
-	margin: '5px 0px',
-	width: '95%'
-}} 
-className="button primary_blue">
-	Copy Link!
-</button>
+
 */

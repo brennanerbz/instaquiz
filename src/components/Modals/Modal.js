@@ -33,6 +33,10 @@ export default class DefaultModal extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		copied: false
+	}
+
 	close() {
 		const { closeModal } = this.props;
 		closeModal()
@@ -44,6 +48,7 @@ export default class DefaultModal extends Component {
 		let bodyPadding;
 		if(type == 'processing') bodyPadding = '2em 0 2.75em 0'
 		if(type == 'create_assignment') bodyPadding = '0'
+		const { copied } = this.state;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -54,6 +59,13 @@ export default class DefaultModal extends Component {
 				+ ' ' + 'modal-dialog'}
 			show={open}
 			onHide={::this.close}>
+				{
+					copied
+					&&
+					<div className="display_flex flex_center" style={{width: '100%', padding: '0.75em 1em', background: '#1FB6FF', color: '#fff'}}>
+						Copied!
+					</div>
+				}
 				<Modal.Body 
 				style={{
 					padding: bodyPadding,
@@ -75,6 +87,7 @@ export default class DefaultModal extends Component {
 							close={::this.close}
 							startQuiz={startQuiz}
 							path={this.props.path}
+							copy={() => this.setState({copied: true})}
 						/>
 					}
 					{

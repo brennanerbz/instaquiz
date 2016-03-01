@@ -37,6 +37,7 @@ function fetchData(getState, dispatch) {
 	query: state.router.location.query,
 	modalOpen: state.overlays.modalOpen,
 	student_name: state.homework.identifier,
+	homework_sequence: state.homework.sequence,
 	homework_title: state.homework.title,
 	selected: state.homework.selected
 	}),
@@ -97,7 +98,7 @@ export default class App extends Component {
 	render() {
 		const style = require('./App.scss');
 		const { children, pushState, params, location, query } = this.props;
-		const { nameError, student_name, homework_title, selected } = this.props;
+		const { nameError, student_name, homework_title, homework_sequence, selected } = this.props;
 		const { openModal } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const { userLoaded } = this.props;
@@ -123,6 +124,7 @@ export default class App extends Component {
 					nameError={nameError}
 					student_name={student_name}
 					homework_title={homework_title}
+					homework_sequence={homework_sequence}
 					selected={selected}
 					params={params}
 					location={location}

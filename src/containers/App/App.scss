@@ -15,7 +15,7 @@ $secondary-grey: #A8B6C1;
 	left: 0;
 	right: 0;
 	top: 0;
-	font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
+	font-family: "Lato","Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
 	text-rendering: optimizeSpeed;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
@@ -235,7 +235,9 @@ $secondary-grey: #A8B6C1;
 	border-radius: 5px;
 	cursor: pointer;
 	display: inline-block!important;
-	border: none;
+	background: #fff;
+	border: 1px solid #E0E6ED;
+	color: $primary-black;
 	outline: none;
 	font-weight: 500;
 	-webkit-appearance: none;
@@ -253,10 +255,12 @@ $secondary-grey: #A8B6C1;
 		box-shadow: none!important;
 	}
 	&.primary_blue {
+		border: none;
 		background: $primary-blue;
 		color: #fff;
 	}
 	&.primary_green {
+		border: none;
 		background: $primary-green;
 		color: #fff;
 	}

@@ -5,7 +5,7 @@ export default class HomeworkQuestions extends Component {
 	}
 
 	state = {
-		selected: ''
+		selected: -1
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -14,8 +14,9 @@ export default class HomeworkQuestions extends Component {
 
 	render() {
 		const { question } = this.props;
+		const { isMobile } = this.props;
 		return (
-			<div id="questions" style={{background: '#fff', height: '100%'}} className="display_flex flex_vertical">
+			<div id="questions" style={{background: '#fff', height: '100%', fontSize: isMobile ? '16px' : '18px'}} className="display_flex flex_vertical">
 				<div 
 				id="cue" 
 				style={{
@@ -26,7 +27,6 @@ export default class HomeworkQuestions extends Component {
 					border: '1px solid #E4E4E4', 
 					borderRadius: '4px',
 					boxShadow: '0 1px 7px 0 rgba(31,45,61,0.1)',
-					fontSize: '17px'
 				}}>
 				{question && question.cue}
 				</div>
@@ -50,7 +50,8 @@ export default class HomeworkQuestions extends Component {
 									borderColor: selected ? '#1FB6FF' : '#E4E4E4',
 									borderRadius: '4px', 
 									margin: '1em 0 0',
-									boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)'
+									boxShadow: '0 1px 1px 0 rgba(31,45,61,0.05)',
+									cursor: 'pointer'
 								}} 
 								key={choice + i}>
 									<a style={{
@@ -66,6 +67,18 @@ export default class HomeworkQuestions extends Component {
 						})
 					}
 				</ul>
+				{!isMobile &&
+				<button 
+				onClick={() => this.props.submitAnswer()}
+				style={{
+					width: '150px', 
+					marginLeft: '1em', 
+					marginRight: 'auto', 
+					boxShadow: this.state.selected < 0 ? 'none' : ''}} 
+				type="button" 
+				className={'button' + ' ' + (this.state.selected > -1 ? 'primary_blue' : '')}>
+					Next
+				</button>}
 			</div>
 		);
 	}

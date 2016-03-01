@@ -48,7 +48,12 @@ export default class Header extends Component {
 				className={'display_flex flex_center'}>
 				<div 
 				className="flex_horizontal relative" 
-				style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'}}>
+				style={{
+					maxWidth: homeworkView ? '750px' : '1050px', 
+					minWidth: isMobile || homeworkView ? '' : '950px', 
+					width: '100%', 
+					padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'
+				}}>
 
 
 					{(isMobile && isNotHomeView) || assignmentsView
@@ -88,19 +93,24 @@ export default class Header extends Component {
 
 
 					{homeworkView && isMobile &&
-					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '500', color: '#3C4858'}}>
-						{readingView && 'Reading'}{questionsView && 'Questions'}
+					<span 
+					className="flex_item_align_center" 
+					style={{height: '30px', lineHeight: '25px', fontSize: '16.5px', maxWidth: '200px'}}>
+						<p style={{fontWeight: '600', color: '#3C4858'}} className="overflow_ellipsis">
+						{this.props.homework_title}
 						</p>
 					</span>}
 					{homeworkView && !isMobile && 
 					<span 
 					className="flex_item_align_center" 
 					style={{
-						height: isMobile ? '30px' : '45px', lineHeight: isMobile ? '25px' : '40px', fontSize: isMobile ? '16.5px' : '18.5px'
+						height: isMobile ? '30px' : '45px', lineHeight: isMobile ? '25px' : '40px', fontSize: isMobile ? '16.5px' : '18.5px',
+						maxWidth: '200px'
 					}}>
-						<p style={{fontWeight: '500', color: '#3C4858'}}>
-						{readingView && 'Reading: '}{questionsView && 'Questions: '}{this.props.homework_title}
+						<p 
+						style={{fontWeight: '600', color: '#3C4858'}} 
+						className="overflow_ellipsis">
+						{this.props.homework_title}
 						</p>
 					</span>}
 					{homeworkView && readingView && isMobile &&

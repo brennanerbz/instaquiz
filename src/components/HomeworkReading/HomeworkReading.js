@@ -36,12 +36,12 @@ export default class HomeworkReading extends Component {
 		const { invalid } = this.props;
 		const { route_token } = this.props;
 		return (
-			<div id="reading">
+			<div id="reading" style={{fontSize: isMobile ? '16px' : '18px'}}>
 				<div 
 					className="display_flex flex_horizontal flex_nowrap" 
 					style={{padding: isMobile ? '0' : '15px 15px 0 15px', borderBottom: isMobile ? '1px solid #DAE0E7' : ''}}>
 					<label 
-					style={{marginLeft: '1em', fontSize: '16px', fontWeight: '500', color: '#3C4858', width: isMobile ? '15%' : '10%', lineHeight: '50px'}}>
+					style={{marginLeft: '1em', fontWeight: '500', color: '#3C4858', width: isMobile ? '15%' : '10%', lineHeight: '50px'}}>
 						Name
 					</label>
 					<input
@@ -50,7 +50,8 @@ export default class HomeworkReading extends Component {
 						style={{
 							border: 'none',
 							width: '85%',
-							lineHeight: '18px'
+							lineHeight: '18px',
+							fontSize: 'inherit'
 						}}
 						onChange={(e) => {
 							this.props.updateName(e.target.value)
@@ -82,7 +83,7 @@ export default class HomeworkReading extends Component {
 						borderRadius: '4px', 
 						border: '1px solid #DAE0E7', 
 						padding: '1em', 
-						lineHeight: '1.5em'
+						lineHeight: '1.5',
 					}}>
 					<b style={{color: '#3C4858'}}>Reading:</b><br/>
 					{reading}
@@ -91,10 +92,16 @@ export default class HomeworkReading extends Component {
 				{!isMobile &&
 					<button 
 					style={{
-						marginLeft: '1em'
+						marginLeft: '1em',
+						marginBottom: '2em',
+						fontSize: '16px',
+						fontWeight: '600'
 					}}
 					onClick={() => {
-						if(this.refs.name_input.value.length === 0) this.props.nameError()
+						if(this.refs.name_input.value.length === 0) {
+							document.body.scrollTop = 0
+							this.props.nameError()
+						}
 						else this.props.pushState(null, `/homework/${route_token}/questions`)
 					}}
 					className="button primary_blue">

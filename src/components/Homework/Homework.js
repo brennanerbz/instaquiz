@@ -19,7 +19,7 @@ export default class Homework extends Component {
 		const readingView = location.pathname.match(/read/gi);
 		const questionsView = location.pathname.match(/questions/gi);
 		return (
-			<div style={{maxWidth: '1050px', height: '100%'}} 
+			<div style={{maxWidth: '750px', height: '100%'}} 
 				 className="display_flex flex_container_center">
 				<div style={{width: '100%', height: '100%'}} className="flex_vertical">
 					{homeworkView && questionsView && isMobile &&
@@ -27,7 +27,7 @@ export default class Homework extends Component {
 					onClick={() => {
 						if(selected) this.props.submitAnswer()
 					}}
-					style={{position: 'absolute', right: '10px', top: '18px', zIndex: '1000'}}>
+					style={{position: 'fixed', right: '10px', top: '18px', zIndex: '1000'}}>
 						<a style={{marginRight: '27px'}} 
 							className={(!selected ? 'grey' : '') + ' ' + 'link'}>Next</a>
 						<img src={selected ? forwardArrow : forwardArrowGrey} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>

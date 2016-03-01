@@ -85,7 +85,7 @@ export default class HomeworkReading extends Component {
 						padding: '1em', 
 						lineHeight: '1.5',
 					}}>
-					<b style={{color: '#3C4858'}}>Reading:</b><br/>
+					<b style={{color: '#3C4858', wordWrap: 'pre-wrap'}}>Reading:</b><br/>
 					{reading}
 					</article>
 				</section>

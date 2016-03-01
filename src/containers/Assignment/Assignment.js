@@ -58,7 +58,6 @@ export default class Assignment extends Component {
 		const { error } = this.props;
 		const { tabs, activeTab } = this.state;
 		const { sequences } = this.props;
-		console.log(error)
 		return (
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
@@ -184,12 +183,15 @@ export default class Assignment extends Component {
 															style={{
 																borderRadius: '50%',
 																border: '1px solid #1FB6FF',
-																padding: '11px',
+																height: '40px',
+																width: '40px',
+																lineHeight: '35px',
 																color: '#1FB6FF',
 																fontWeight: '500',
+																textAlign: 'center'
 															}}
 															className={isMobile ? 'flex_item_align_right' : ''}>
-															{score}
+															{score.toFixed(0)}
 															</span>
 															:
 															<span className={isMobile ? 'flex_item_align_right' : ''}>

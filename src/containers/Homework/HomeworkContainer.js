@@ -69,6 +69,10 @@ export default class HomeworkContainer extends Component {
 		if(previousRoute == 'read' && nextRoute == 'questions') {
 			this.props.updateSequence(nextProps.identifier, sequence_token)
 		}
+		// Completed homework
+		if(nextProps.sequence.questions_remaining === 0) {
+			alert('Finished!')
+		}
 		// Route control to prevent cheating
 		if(previousRoute == 'questions' && nextRoute == 'read') {
 			this.props.pushState(null, `/homework/${token}/questions`)
@@ -78,17 +82,18 @@ export default class HomeworkContainer extends Component {
 			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
 			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
 			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
-
 			this.props.fetchQuestion(sequence_token)
-
 		}
 	}
 
 	submitAnswer() {
-		const { sequence } = this.props;
+		// Sequence Token
+		const { route_token } = this.props;
+		const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
+		const sequence_token = sequences[route_token]
 		const { answer } = this.state;
 		if(answer.length > 0) {
-			this.props.submitAnswer(answer, sequence.token)
+			this.props.submitAnswer(answer, sequence_token)
 			this.setState({
 				answer: ''
 			});

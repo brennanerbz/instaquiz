@@ -5,8 +5,11 @@ export default class HomeworkQuestions extends Component {
 	}
 
 	state = {
-		selected: '',
-		answer: ''
+		selected: ''
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(this.props.question.cue !== nextProps.question.cue) this.setState({selected: ''})
 	}
 
 	render() {

@@ -8,6 +8,7 @@ import connectData from 'helpers/connectData';
 import * as homeworkActions from '../../redux/modules/homework';
 
 @connect(state => ({
+		mounted: state.homework.mounted,
 		loading: state.homework.loading,
 		location: state.router.location,
 		route: state.router.location.pathname,
@@ -35,21 +36,25 @@ export default class HomeworkContainer extends Component {
 	}
 
 	componentDidMount() {
-		const { route_token } = this.props;
-		this.props.setRouteToken(route_token)
-		const { fetchSequence, newSequence } = this.props;
-		const sequences = cookie.load('sequences', {path: '/'})
-		const teacher = cookie.load('teacher', {path: '/'})
-		if(!teacher) cookie.save('student', true, {path: '/'})
-		if(sequences && sequences[route_token]) {
-			fetchSequence(sequences[route_token])
-		} else {
-			newSequence(route_token)
-		}
-		// Route control to prevent cheating
-		if(this.props.sequence && this.props.sequence.reading_completed) {
-			if(this.props.route.split('/')[3] == 'read') {
-				this.props.pushState(null, `/homework/${route_token}/questions`)
+		const { route_token, mounted } = this.props;
+		if(!mounted) {
+			this.props.setRouteToken(route_token)
+			const { fetchSequence, newSequence } = this.props;
+
+			const teacher = cookie.load('teacher', {path: '/'})
+			if(!teacher) cookie.save('student', true, {path: '/'})
+			const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
+			console.log(sequences)
+			if(sequences && sequences[route_token]) {
+				fetchSequence(sequences[route_token])
+			} else {
+				newSequence(route_token)
+			}
+			// Route control to prevent cheating
+			if(this.props.sequence && this.props.sequence.reading_completed) {
+				if(this.props.route.split('/')[3] == 'read') {
+					this.props.pushState(null, `/homework/${route_token}/questions`)
+				}
 			}
 		}
 	}

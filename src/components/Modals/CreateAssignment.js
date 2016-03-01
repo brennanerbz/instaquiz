@@ -39,10 +39,10 @@ export default class CreateAssignment extends Component {
 
 	componentDidMount() {
 		const node = this.refs.assignment_text;
-		$(node).on('input', function() {
-			this.style.height = 'auto'
-			this.style.height = (this.scrollHeight) + 'px'
-		})
+		// $(node).on('input', function() {
+		// 	this.style.height = 'auto'
+		// 	this.style.height = (this.scrollHeight) + 'px'
+		// })
 		const { title, text } = this.props;
 		if(title) this.setState({title: title});
 		if(text) this.setState({text: text});
@@ -158,8 +158,8 @@ export default class CreateAssignment extends Component {
 						name="text"
 						ariaLabel="Assignment text"
 						ref="assignment_text"
-						style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0'}} 
-						placeholder={'Paste text here to...\n\n1. Process text\n2. Generate questions\n3. Create automatic assignment for you'}
+						style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0', overflowY: 'scroll'}} 
+						placeholder={'Paste text here...'}
 						className={isMobile ? 'mobile' : ''}
 						onChange={(e) => this.setState({text: e.target.value})}
 						onBlur={() => this.props.updateText(text)}

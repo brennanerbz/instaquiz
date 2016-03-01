@@ -28,6 +28,7 @@ export const SUBMIT_ANSWER_FAILURE = 'NightlyCode/homework/SUBMIT_ANSWER_FAILURE
 export const SELECTED_CHOICE = 'NightlyCode/homework/SELECTED_CHOICE';
 
 const initialState = {
+	mounted: false,
 	route_token: '',
 	loading: false,
 	loaded: false,
@@ -47,7 +48,8 @@ export default function reducer (state = initialState, action) {
 		case SET_ROUTE_TOKEN:
 			return {
 				...state,
-				route_token: action.token
+				route_token: action.token, 
+				mounted: true
 			}
 		// Sequence
 		case NEW_SEQUENCE:
@@ -57,15 +59,9 @@ export default function reducer (state = initialState, action) {
 			}
 		case NEW_SEQUENCE_SUCCESS:
 			const { route_token } = state;
-			var sequences = cookie.load('sequences', {path: '/'})
-			var sequence = {};
+			var sequence = {}
 			sequence[route_token] = action.result.token
-			if(sequences) {
-				sequences = [...sequences, sequence]
-			} else {
-				sequences = [sequence]
-			}
-			cookie.save('sequences', sequences, {path: '/'})
+			cookie.save('sequences', sequence, {path: '/'})
 			return {
 				...state,
 				loading: false,
@@ -193,7 +189,7 @@ export function selected() {
 export function newSequence(token) {
 	return {
 		types: [NEW_SEQUENCE, NEW_SEQUENCE_SUCCESS, NEW_SEQUENCE_FAILURE],
-		promise: (client) => client.post('/sequences', null, token)
+		promise: (client) => client.post('/sequences/', {assignment_token: token})
 	}
 }
 

@@ -14,6 +14,7 @@ export default class Header extends Component {
 	}
 
 	state = {
+		progress: 0,
 		length: 0
 	}
 
@@ -33,6 +34,7 @@ export default class Header extends Component {
 		const windowWidth = window ? window.innerWidth : 0;
 		const progress = homework_sequence.questions_completed / (homework_sequence.questions_completed + homework_sequence.questions_remaining)
 		this.setState({
+			progress: progress,
 			length: windowWidth * progress
 		});
 	}
@@ -61,7 +63,7 @@ export default class Header extends Component {
 		const { student_name, selected } = this.props;
 		const student = cookie.load('student', {path: '/'})
 		// Progress length
-		const { length } = this.state;
+		const { progress, length } = this.state;
 		return (
 			<div 
 				style={{
@@ -72,11 +74,13 @@ export default class Header extends Component {
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_center'}>
+
 				{isMobile && 
 				<div 
 				className="animate_width"
 				style={{position: 'fixed', top: '0', width: isNaN(length) ? 0 : length, height: '3px', background: '#1FB7FF'}}>
 				</div>}
+
 				<div 
 				className="flex_horizontal relative" 
 				style={{
@@ -85,7 +89,6 @@ export default class Header extends Component {
 					width: '100%', 
 					padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'
 				}}>
-
 
 					{(isMobile && isNotHomeView) || assignmentsView
 					? null
@@ -99,7 +102,7 @@ export default class Header extends Component {
 					style={{
 						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
 						cursor: !student && 'pointer',
-						position: 'absolute',
+						position: homeworkView ? '' : 'absolute',
 						left: '25px'
 					}}/>}
 					{
@@ -144,6 +147,28 @@ export default class Header extends Component {
 						{this.props.homework_title}
 						</p>
 					</span>}
+					{
+						!isMobile && questionsView &&
+						<span 
+							style={{
+								background: '#e4e4e4', 
+								height: '8px', 
+								width: '150px', 
+								borderRadius: '4px',
+								margin: '1em 1em 0 0'
+							}}>
+							<span 
+							className="display_flex" 
+							style={{
+								background: '#1FB7FF', 
+								width: progress * 150 + 'px', 
+								height: '8px',
+								borderTopLeftRadius: '4px',
+								borderBottomLeftRadius: '4px'
+							}}>
+							</span>
+						</span>
+					}
 					{homeworkView && readingView && isMobile &&
 					<span style={{position: 'absolute', right: '10px', top: '18px'}}>
 						<a onClick={() => {

@@ -116,7 +116,7 @@ export default class App extends Component {
 			})
 		})
 		return (
-			<div id={style.app}>
+			<div id={style.app} style={{background: isMobile || !teacher || true ? '#fff' : '#f9fafc'}}>
 				<Helmet {...config.app.head}/>
 				<Header 
 					openModal={openModal}

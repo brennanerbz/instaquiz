@@ -95,7 +95,7 @@ export default class Landing extends Component {
 						openModal('create_assignment')
 					}} 
 					className="button" 
-					style={{background: '#009CEE', color: '#fff'}}>
+					style={{background: '#009CEE', color: '#fff', border: 'none'}}>
 						Create a new assignment
 					</button>
 				</div>

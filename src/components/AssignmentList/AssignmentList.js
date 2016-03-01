@@ -33,9 +33,14 @@ export default class AssignmentList extends Component {
 					listStyleType: 'none',  
 					width: '100%',
 					border: isMobile ? '' : '1px solid #e4e4e4',
-					borderRadius: '4px'
+					borderRadius: '4px',
+					background: '#fff',
+					boxShadow: isMobile ? '' : '0 1px 1px 0 rgba(31,45,61,0.05)'
 				}}>
 					{assignments && assignments.map((assignment, i) => {
+						const length = assignments.length - 1;
+						let renderBorder = true;
+						if(length > 6 && i === length) renderBorder = false;
 						return (
 							<li 
 							onTouchStart={() => this.setState({touching: i})}
@@ -44,10 +49,12 @@ export default class AssignmentList extends Component {
 							onMouseLeave={() => this.setState({hovering: -1})}
 							onClick={() => this.props.pushState(null, `/assignment/${assignment.token}/questions`)}
 							style={{
+								borderTopLeftRadius: '4px',
+								borderTopRightRadius: '4px',
 								padding: isMobile ? '1em 0 1em 0em' : '1em', 
 								margin: isMobile ? '0 0 0 1em' : '0', 
-								borderBottom: (i !== assignments.length - 1) || (i === 0) ? '1px solid #e4e4e4' : '',
-								background: ((touching === i) || (hovering === i)) ? '#F5FAFE' : '#fff',
+								borderBottom: renderBorder ? '1px solid #e4e4e4' : '',
+								background: (touching === i) ? '#F5FAFE' : '#fff',
 								cursor: 'pointer'
 							}}
 							key={assignment.title + i} 
@@ -83,8 +90,14 @@ export default class AssignmentList extends Component {
 					})}
 					{
 						Array.from({length: emptyRows}).map((a, i) => {
+							const last = i === emptyRows - 1
 							return (
-								<li key={i} style={{height: '67px', marginLeft: '1em', borderBottom: '1px solid #e4e4e4'}}>
+								<li 
+								key={i} 
+								style={{
+									height: '67px', 
+									marginLeft: isMobile ? '1em' : '0', 
+									borderBottom: last ? '' : '1px solid #e4e4e4'}}>
 								</li>
 							)
 						})

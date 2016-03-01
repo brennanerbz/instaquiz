@@ -93,7 +93,7 @@ export default class Header extends Component {
 					padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'
 				}}>
 
-					{(isMobile && isNotHomeView) || assignmentsView
+					{isMobile
 					? null
 					: <img 
 					onClick={() => {
@@ -103,9 +103,9 @@ export default class Header extends Component {
 					}} 
 					src={blueLogo} 
 					style={{
-						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
+						height: isMobile ? '40px' : (teacher ? '45px' : '55px'),
 						cursor: teacher && 'pointer',
-						position: homeworkView ? '' : 'absolute',
+						position: homeworkView || assignmentsView ? '' : 'absolute',
 						left: '25px'
 					}}/>}
 					{
@@ -114,9 +114,9 @@ export default class Header extends Component {
 					}
 					{<span style={{minHeight: isMobile ? '30px' : '40px'}}>&nbsp;</span>}
 
-					{assignmentsView && isMobile && 
+					{assignmentsView && 
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '600', color: '#3C4858'}}>
+						<p style={{fontWeight: '600', color: '#3C4858', fontSize: isMobile ? '' : '19px'}}>
 						Assignments
 						</p>
 					</span>}
@@ -161,14 +161,15 @@ export default class Header extends Component {
 						</p>
 					</span>}
 					{
-						!isMobile && questionsView && homeworkView &&
+						!isMobile && homeworkView &&
 						<span 
 							style={{
 								background: '#e4e4e4', 
 								height: '8px', 
 								width: '150px', 
 								borderRadius: '4px',
-								margin: '1em 1em 0 0'
+								margin: '1em 1em 0 0',
+								visibility: questionsView ? 'visible' : 'hidden'
 							}}>
 							<span 
 							className="display_flex" 
@@ -205,6 +206,13 @@ export default class Header extends Component {
 							</li>
 						</ul>
 
+					}
+					{
+						assignmentsView && !isMobile
+						&&
+						<button onClick={() => this.props.openModal('create_assignment')} style={{fontWeight: '600'}} className="button primary_blue">
+							Create assignment
+						</button>
 					}
 				</div>
 			</div>

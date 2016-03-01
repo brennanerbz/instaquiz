@@ -134,7 +134,8 @@ export default class Assignment extends Component {
 														color: active ? '#fff' : '',
 														cursor: active ? 'default' : 'pointer',
 														textDecoration: 'none',
-														fontSize: isMobile ? '15px' : '16px'
+														fontSize: isMobile ? '15px' : '16px',
+														fontWeight: active ? '600' : '500'
 													}}>
 														{tab}
 													</a>
@@ -151,7 +152,9 @@ export default class Assignment extends Component {
 									borderRadius: '4px', 
 									border: '1px solid #DAE0E7', 
 									padding: '1em',
-									whiteSpace: 'pre-wrap'
+									lineHeight: '1.5em',
+									whiteSpace: 'pre-wrap',
+									background: '#fff'
 								}}>
 								{assignment && assignment.text}
 								</div>

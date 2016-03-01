@@ -46,7 +46,7 @@ export default class AssignmentList extends Component {
 							style={{
 								padding: isMobile ? '1em 0 1em 0em' : '1em', 
 								margin: isMobile ? '0 0 0 1em' : '0', 
-								borderBottom: i !== assignments.length - 1 ? '1px solid #e4e4e4' : '',
+								borderBottom: (i !== assignments.length - 1) && (i !== 0) ? '1px solid #e4e4e4' : '',
 								background: ((touching === i) || (hovering === i)) ? '#F5FAFE' : '#fff',
 								cursor: 'pointer'
 							}}

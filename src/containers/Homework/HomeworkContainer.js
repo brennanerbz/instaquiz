@@ -18,7 +18,8 @@ import * as homeworkActions from '../../redux/modules/homework';
 		identifier: state.homework.identifier,
 		sequence: state.homework.sequence,
 		question: state.homework.question,
-		invalid: state.homework.invalid
+		invalid: state.homework.invalid,
+		question_selected: state.homework.question_selected
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -120,6 +121,7 @@ export default class HomeworkContainer extends Component {
 				question: this.props.question,
 				updateName: this.props.updateName,
 				invalid: this.props.invalid,
+				question_selected: this.props.question_selected,
 				selected: this.props.selected,
 				nameError: this.props.nameError,
 				fetchSequence: this.props.fetchSequence,

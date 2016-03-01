@@ -3,6 +3,7 @@ import cookie from 'react-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
+import $ from 'jquery';
 
 // Actions
 import * as assignmentActions from '../../redux/modules/assignments';
@@ -128,8 +129,14 @@ export default class Assignment extends Component {
 							</div>
 							{activeTab === 'Reading' &&
 							<div id="reading" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
-								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '1em'}}>
-								{assignment.text}
+								<div 
+								style={{
+									borderRadius: '4px', 
+									border: '1px solid #DAE0E7', 
+									padding: '1em',
+									whiteSpace: 'pre-wrap'
+								}}>
+								{assignment && assignment.text}
 								</div>
 							</div>
 							}

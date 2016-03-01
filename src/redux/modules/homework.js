@@ -37,7 +37,7 @@ const initialState = {
 	identifier: '',
 	sequence: {},
 	question: {},
-	selected: false
+	question_selected: false
 }
 
 export default function reducer (state = initialState, action) {
@@ -143,7 +143,8 @@ export default function reducer (state = initialState, action) {
 			return {
 				...state,
 				question: action.result,
-				sequence: action.result.sequence
+				sequence: action.result.sequence,
+				question_selected: false
 			}
 		case SUBMIT_ANSWER_FAILURE:
 			return {
@@ -163,7 +164,7 @@ export default function reducer (state = initialState, action) {
 		case SELECTED_CHOICE:
 			return {
 				...state,
-				selected: true
+				question_selected: true
 			}
 		default:		
 			return {

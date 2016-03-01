@@ -154,7 +154,7 @@ export default class CreateAssignment extends Component {
 
 					{!creating && !editing &&
 						<textarea 
-						type="submit"
+						type="text"
 						name="text"
 						ariaLabel="Assignment text"
 						ref="assignment_text"

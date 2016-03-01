@@ -75,7 +75,7 @@ export default class Header extends Component {
 				{isMobile && 
 				<div 
 				className="animate_width"
-				style={{position: 'fixed', top: '0', width: isNaN(length) ? 0 : length, height: '4px', background: '#1FB7FF'}}>
+				style={{position: 'fixed', top: '0', width: isNaN(length) ? 0 : length, height: '3px', background: '#1FB7FF'}}>
 				</div>}
 				<div 
 				className="flex_horizontal relative" 

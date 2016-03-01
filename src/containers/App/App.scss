@@ -289,12 +289,9 @@ $secondary-grey: #A8B6C1;
 	color: $primary-blue;
 	cursor: pointer;
 	font-weight: 500;
+	text-decoration: none!important;
 	&.grey {
 		color: $primary-grey;
-	}
-	&:hover {
-		color: $primary-blue;
-		text-decoration: none;
 	}
 }
 

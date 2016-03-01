@@ -25,8 +25,9 @@ class _ApiClient {
         if (data) {
           request.send(data);
         }
-        
+        console.log(request)
         request.end((err, res) => {
+          console.log(res)
           if(err) {
             reject(res)
           } else {

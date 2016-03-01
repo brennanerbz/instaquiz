@@ -392,3 +392,11 @@ $secondary-grey: #A8B6C1;
   padding: 0;
   list-style-type: none;
 }
+
+// Animations
+:global .animate_width {
+	-webkit-transition: width 0.1s ease-out;
+	-moz-transition: width 0.1s ease-out;
+	-o-transition: width 0.1s ease-out;
+	transition: width 0.1s ease-out;
+}

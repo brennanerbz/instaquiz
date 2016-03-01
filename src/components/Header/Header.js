@@ -13,6 +13,30 @@ export default class Header extends Component {
 		pushState: PropTypes.func
 	}
 
+	state = {
+		length: 0
+	}
+
+	componentDidMount() {
+		this.setProgressWidth(this.props)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(this.props.homework_sequence.questions_completed !== nextProps.questions_completed) {
+			this.setProgressWidth(nextProps)
+		}
+	}
+
+	setProgressWidth(props) {
+		// Progress
+		const { homework_sequence } = props;
+		const windowWidth = window ? window.innerWidth : 0;
+		const progress = homework_sequence.questions_completed / (homework_sequence.questions_completed + homework_sequence.questions_remaining)
+		this.setState({
+			length: windowWidth * progress
+		});
+	}
+
 	render() {
 		const blueLogo = require('../../../static/logo/nightlyLogoBlue.png');
 		const soloLogo = require('../../../static/logo/nightlySolo.png');
@@ -36,6 +60,8 @@ export default class Header extends Component {
 		const questionsView = location.pathname.match(/questions/gi);
 		const { student_name, selected } = this.props;
 		const student = cookie.load('student', {path: '/'})
+		// Progress length
+		const { length } = this.state;
 		return (
 			<div 
 				style={{
@@ -46,6 +72,11 @@ export default class Header extends Component {
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_center'}>
+				{isMobile && 
+				<div 
+				className="animate_width"
+				style={{position: 'fixed', top: '0', width: isNaN(length) ? 0 : length, height: '4px', background: '#1FB7FF'}}>
+				</div>}
 				<div 
 				className="flex_horizontal relative" 
 				style={{
@@ -126,7 +157,6 @@ export default class Header extends Component {
 							className="link">Questions</a>
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
-
 
 					{
 						!isNotHomeView && !assignmentsView

@@ -58,17 +58,18 @@ export default class Assignment extends Component {
 		const { error } = this.props;
 		const { tabs, activeTab } = this.state;
 		const { sequences } = this.props;
+		console.log(error)
 		return (
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
 					{
-						(error && error === 404)
+						error && error.text == 'Unauthorized Access'
 						?
 						<div className="display_flex flex_vertical flex_center">
 							<img style={{height: isMobile ? '95px' : '130px'}} src={sadFace}/>
 							<h1 
 							style={{marginTop: '0.95em!important', fontSize: isMobile ? '30px' : '34px', fontWeight: '600', color: '#2C3239', textAlign: 'center'}}>
-							Oh no, we couldn't find that article!
+							Oh no, you don't have permission to view! 
 							</h1>
 						</div>
 						:

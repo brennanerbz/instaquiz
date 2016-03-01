@@ -7,9 +7,11 @@ export default class AssignmentList extends Component {
 
 	render() {
 		const { assignments } = this.props;
+		const assignmentsLength = assignments && assignments.length;
+		const emptyRows = assignmentsLength < 6 ? (6 - assignmentsLength) : 0
 		const forwardArrow = require('../../../static/icons/forwardArrowGrey.png')
 		return (
-			<ul style={{padding: '3.5em 0 0'}}>
+			<ul style={{padding: '3.5em 0 0', listStyleType: 'none'}}>
 				{assignments && assignments.map((assignment, i) => {
 					return (
 						<li 
@@ -54,6 +56,14 @@ export default class AssignmentList extends Component {
 						</li>
 					)
 				})}
+				{
+					Array.from({length: emptyRows}).map(a => {
+						return (
+							<li style={{height: '67px', marginLeft: '1em', borderBottom: '1px solid #e4e4e4'}}>
+							</li>
+						)
+					})
+				}
 			</ul>
 		);
 	}

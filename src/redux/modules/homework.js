@@ -213,7 +213,7 @@ export function updateSequence(name, token) {
 export function fetchQuestion(token) {
 	return {
 		types: [FETCH_QUESTION, FETCH_QUESTION_SUCCESS, FETCH_QUESTION_FAILURE],
-		promise: (client) => client.put(`/sequences/${token}/question`)
+		promise: (client) => client.get(`/sequences/${token}/question`)
 	}
 }
 

@@ -46,7 +46,9 @@ export default class Header extends Component {
 					zIndex: '2'
 				}} 
 				className={'display_flex flex_center'}>
-				<div className="flex_horizontal relative" style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'}}>
+				<div 
+				className="flex_horizontal relative" 
+				style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', width: '100%', padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'}}>
 
 
 					{(isMobile && isNotHomeView) || assignmentsView
@@ -65,10 +67,10 @@ export default class Header extends Component {
 						left: '25px'
 					}}/>}
 					{
-						isMobile && homeworkView &&
+						isMobile && (homeworkView || assignmentsView) &&
 						<img src={soloLogo} style={{height: '31px', position: 'absolute', left: '1em'}}/>
 					}
-
+					{<span style={{minHeight: isMobile ? '30px' : '40px'}}>&nbsp;</span>}
 
 					{assignmentsView && isMobile && 
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>

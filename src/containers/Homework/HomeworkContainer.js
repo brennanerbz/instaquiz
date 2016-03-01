@@ -43,8 +43,8 @@ export default class HomeworkContainer extends Component {
 
 			const teacher = cookie.load('teacher', {path: '/'})
 			if(!teacher) cookie.save('student', true, {path: '/'})
-			const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
-			console.log(sequences)
+			var sequences = cookie.load('sequences', {path: '/'})
+			if(sequences) sequences = JSON.parse(sequences)
 			if(sequences && sequences[route_token]) {
 				fetchSequence(sequences[route_token])
 			} else {
@@ -62,11 +62,12 @@ export default class HomeworkContainer extends Component {
 	componentWillReceiveProps(nextProps) {
 		const previousRoute = this.props.route.split('/')[3]
 		const nextRoute = nextProps.route.split('/')[3]
-		const route_token = nextProps.route.split('/')[2]
+		// Sequence Token
+		const { route_token } = nextProps;
+		const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
+		const sequence_token = sequences[route_token]
 		if(previousRoute == 'read' && nextRoute == 'questions') {
-			if(nextProps.sequence && !nextProps.sequence.reading_completed) {
-				this.props.updateSequence(nextProps.identifier, nextProps.sequence.token)
-			} 
+			this.props.updateSequence(nextProps.identifier, sequence_token)
 		}
 		// Route control to prevent cheating
 		if(previousRoute == 'questions' && nextRoute == 'read') {
@@ -75,8 +76,11 @@ export default class HomeworkContainer extends Component {
 		// Fetch the latest question
 		if((!this.props.question.outcome && nextProps.question.outcome) ||
 			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
-			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed)) {
-			this.props.fetchQuestion(this.props.sequence.token)
+			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
+			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
+
+			this.props.fetchQuestion(sequence_token)
+
 		}
 	}
 
@@ -94,6 +98,7 @@ export default class HomeworkContainer extends Component {
 	render() {
 		var homeworkChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				route_token: this.props.route_token,
 				loading: this.props.loading,
 				isMobile: this.props.isMobile,
 				pushState: this.props.pushState,

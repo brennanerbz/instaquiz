@@ -34,7 +34,7 @@ export default class HomeworkReading extends Component {
 		const { isMobile } = this.props;
 		const { reading } = this.props;
 		const { invalid } = this.props;
-		const { token } = this.props;
+		const { route_token } = this.props;
 		return (
 			<div id="reading">
 				<div 
@@ -95,7 +95,7 @@ export default class HomeworkReading extends Component {
 					}}
 					onClick={() => {
 						if(this.refs.name_input.value.length === 0) this.props.nameError()
-						else this.props.pushState(null, `/homework/${token}/questions`)
+						else this.props.pushState(null, `/homework/${route_token}/questions`)
 					}}
 					className="button primary_blue">
 						Continue to questions

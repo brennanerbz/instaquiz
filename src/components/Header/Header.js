@@ -97,14 +97,14 @@ export default class Header extends Component {
 					? null
 					: <img 
 					onClick={() => {
-						if(!student) {
+						if(teacher) {
 							pushState(null, '/')
 						}
 					}} 
 					src={blueLogo} 
 					style={{
 						height: isMobile ? '40px' : (isNotHomeView ? '45px' : '55px'),
-						cursor: !student && 'pointer',
+						cursor: teacher && 'pointer',
 						position: homeworkView ? '' : 'absolute',
 						left: '25px'
 					}}/>}
@@ -161,7 +161,7 @@ export default class Header extends Component {
 						</p>
 					</span>}
 					{
-						!isMobile && questionsView &&
+						!isMobile && questionsView && homeworkView &&
 						<span 
 							style={{
 								background: '#e4e4e4', 

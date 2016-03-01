@@ -64,39 +64,45 @@ export default class HomeworkContainer extends Component {
 		const nextRoute = nextProps.route.split('/')[3]
 		// Sequence Token
 		const { route_token } = nextProps;
-		const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
-		const sequence_token = sequences[route_token]
-		if(previousRoute == 'read' && nextRoute == 'questions') {
-			this.props.updateSequence(nextProps.identifier, sequence_token)
-		}
-		// Completed homework
-		if(nextProps.sequence.questions_remaining === 0) {
-			alert('Finished!')
-		}
-		// Route control to prevent cheating
-		if(previousRoute == 'questions' && nextRoute == 'read') {
-			this.props.pushState(null, `/homework/${token}/questions`)
-		}
-		// Fetch the latest question
-		if((!this.props.question.outcome && nextProps.question.outcome) ||
-			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
-			(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
-			(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
-			this.props.fetchQuestion(sequence_token)
+		var sequences = cookie.load('sequences', {path: '/'})
+		if(sequences) sequences = JSON.parse(sequences)
+		if(sequences) {
+			const sequence_token = sequences[route_token] 
+			if(previousRoute == 'read' && nextRoute == 'questions') {
+				this.props.updateSequence(nextProps.identifier, sequence_token)
+			}
+			// Completed homework
+			if(nextProps.sequence.questions_remaining === 0) {
+				alert('Finished!')
+			}
+			// Route control to prevent cheating
+			if(previousRoute == 'questions' && nextRoute == 'read') {
+				this.props.pushState(null, `/homework/${token}/questions`)
+			}
+			// Fetch the latest question
+			if((!this.props.question.outcome && nextProps.question.outcome) ||
+				(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
+				(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
+				(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
+				this.props.fetchQuestion(sequence_token)
+			}
 		}
 	}
 
 	submitAnswer() {
 		// Sequence Token
 		const { route_token } = this.props;
-		const sequences = JSON.parse(cookie.load('sequences', {path: '/'}))
-		const sequence_token = sequences[route_token]
-		const { answer } = this.state;
-		if(answer.length > 0) {
-			this.props.submitAnswer(answer, sequence_token)
-			this.setState({
-				answer: ''
-			});
+		var sequences = cookie.load('sequences', {path: '/'})
+		if(sequences) sequences = JSON.parse(sequences)
+		if(sequences) {
+			const sequence_token = sequences[route_token]
+			const { answer } = this.state;
+			if(answer.length > 0) {
+				this.props.submitAnswer(answer, sequence_token)
+				this.setState({
+					answer: ''
+				});
+			}
 		}
 	}
 

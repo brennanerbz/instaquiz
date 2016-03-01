@@ -34,7 +34,8 @@ export default class CreateAssignment extends Component {
 
 	state = {
 		title: '',
-		text: ''
+		text: '',
+		touching: ''
 	}
 
 	componentDidMount() {
@@ -93,9 +94,14 @@ export default class CreateAssignment extends Component {
 		const { creating } = this.props;
 		// Items
 		const { items, editing } = this.props;
+		// Touch
+		const { touching } = this.state;
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
+				onTouchStart={() => this.setState({touching: 'close'})}
+				onTouchEnd={() => this.setState({touching: ''})}
+				className={touching === 'close' ? 'touching' : ''}
 				onClick={() => {
 					this.props.close()
 					this.props.clearDraft()
@@ -116,13 +122,16 @@ export default class CreateAssignment extends Component {
 					className={isMobile ? '' : 'flex_item_align_left'}
 					style={{
 						fontSize: isMobile ? '17px' : '19px',
-						fontWeight: '500',
+						fontWeight: '600',
 						color: '#283643'
 					}}>
 					{(editing ? 'Edit' : 'Create') + ' Assignment'}
 					</h1>
 					{isMobile &&
 					<a
+					onTouchStart={() => this.setState({touching: 'submit'})}
+					onTouchEnd={() => this.setState({touching: ''})}
+					className={touching === 'submit' ? 'touching' : ''}
 					onClick={() => {
 						if(!editing) this.handleCreateAssignment()
 						if(editing) this.handleFinishAssignment()

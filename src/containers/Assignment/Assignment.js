@@ -34,6 +34,14 @@ export default class Assignment extends Component {
 	static propTypes = {
 	}
 
+	scorePoll = {}
+
+	state = {
+		tabs: ['Reading', 'Questions', 'Scores'],
+		activeTab: '',
+		touchingTab: -1
+	}
+
 	componentDidMount() {
 		const token = cookie.load('token', {path: '/'})
 		const { params } = this.props;
@@ -41,14 +49,20 @@ export default class Assignment extends Component {
 		this.setState({
 			activeTab: params.tab ? params.tab.charAt(0).toUpperCase() + params.tab.slice(1) : 'Questions'
 		});
+		this.scorePoll = setInterval(() => {
+			this.props.fetchAssignment(params.token, token)
+		}, 60000)
 	}
 
-	state = {
-		tabs: ['Reading', 'Questions', 'Scores'],
-		activeTab: ''
-	}
+	componentWillReceiveProps(nextProps) {
+		const token = cookie.load('token', {path: '/'})
+		if(this.props.params.tab !== 'scores' && nextProps.params.tab == 'scores') {
+			this.props.fetchAssignment(nextProps.params.token, token)
+		}
+	}	
 
 	componentWillUnmount() {
+		clearInterval(this.scorePoll)
 		this.props.clearAssignment()
 	}
 
@@ -57,7 +71,7 @@ export default class Assignment extends Component {
 		const { isMobile } = this.props;
 		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
-		const { tabs, activeTab } = this.state;
+		const { tabs, activeTab, touchingTab } = this.state;
 		const { sequences } = this.props;
 		return (
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
@@ -96,6 +110,8 @@ export default class Assignment extends Component {
 											const active = tab === activeTab
 											return (
 												<li 
+													onTouchStart={() => this.setState({touchingTab: i})}
+													onTouchEnd={() => this.setState({touchingTab: -1})}
 													style={{
 													}}
 													onClick={() => {
@@ -105,8 +121,8 @@ export default class Assignment extends Component {
 													key={tab + i}>
 													<a 
 													style={{
-														padding: '10px 20px',
-														background: active ? '#1FB6FF' : '#fff',
+														padding: isMobile ? '7px 20px' : '10px 20px',
+														background: active ? '#1FB6FF' : (touchingTab === i ? '#fafafa' : '#fff'),
 														borderRadius: first || last ? '4px' : '',
 														border: '1px solid #1FB6FF',
 														borderLeft: !first && !last ? 'none' : '',
@@ -117,7 +133,8 @@ export default class Assignment extends Component {
 														borderBottomLeftRadius: last ? '0px' : '',
 														color: active ? '#fff' : '',
 														cursor: active ? 'default' : 'pointer',
-														textDecoration: 'none'
+														textDecoration: 'none',
+														fontSize: isMobile ? '15px' : '16px'
 													}}>
 														{tab}
 													</a>

@@ -400,3 +400,12 @@ $secondary-grey: #A8B6C1;
 	-o-transition: width 0.1s ease-out;
 	transition: width 0.1s ease-out;
 }
+
+// Touch opacity
+:global .touching {
+	opacity: 0.6;
+	-webkit-transition: opacity 0.1s ease-out;
+	-moz-transition: opacity 0.1s ease-out;
+	-o-transition: opacity 0.1s ease-out;
+	transition: opacity 0.1s ease-out;
+}

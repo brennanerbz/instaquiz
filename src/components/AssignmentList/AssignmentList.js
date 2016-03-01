@@ -5,18 +5,31 @@ export default class AssignmentList extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		touching: -1
+	}
+
 	render() {
 		const { assignments } = this.props;
 		const assignmentsLength = assignments && assignments.length;
 		const emptyRows = assignmentsLength < 6 ? (6 - assignmentsLength) : 0
 		const forwardArrow = require('../../../static/icons/forwardArrowGrey.png')
+		// Touch
+		const { touching } = this.state;
 		return (
 			<ul style={{padding: '3.5em 0 0', listStyleType: 'none'}}>
 				{assignments && assignments.map((assignment, i) => {
 					return (
 						<li 
+						onTouchStart={() => this.setState({touching: i})}
+						onTouchEnd={() => this.setState({touching: -1})}
 						onClick={() => this.props.pushState(null, `/assignment/${assignment.token}/questions`)}
-						style={{padding: '1em 0 1em 0em', margin: '0 0 0 1em', borderBottom: '1px solid #e4e4e4'}}
+						style={{
+							padding: '1em 0 1em 0em', 
+							margin: '0 0 0 1em', 
+							borderBottom: '1px solid #e4e4e4',
+							background: touching === i ? '#fafafa' : '#fff'
+						}}
 						key={assignment.title + i} 
 						className="display_flex flex_horizontal flex_nowrap">
 							<span style={{
@@ -57,9 +70,9 @@ export default class AssignmentList extends Component {
 					)
 				})}
 				{
-					Array.from({length: emptyRows}).map(a => {
+					Array.from({length: emptyRows}).map((a, i) => {
 						return (
-							<li style={{height: '67px', marginLeft: '1em', borderBottom: '1px solid #e4e4e4'}}>
+							<li key={i} style={{height: '67px', marginLeft: '1em', borderBottom: '1px solid #e4e4e4'}}>
 							</li>
 						)
 					})

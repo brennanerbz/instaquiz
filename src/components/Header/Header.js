@@ -15,7 +15,8 @@ export default class Header extends Component {
 
 	state = {
 		progress: 0,
-		length: 0
+		length: 0,
+		touching: ''
 	}
 
 	componentDidMount() {
@@ -64,7 +65,9 @@ export default class Header extends Component {
 		const student = cookie.load('student', {path: '/'})
 		// Progress length
 		const { progress, length } = this.state;
-		return (
+		// Touch
+		const { touching } = this.state;
+ 		return (
 			<div 
 				style={{
 					position: isNotHomeView || assignmentsView ? 'fixed' : '',
@@ -113,14 +116,24 @@ export default class Header extends Component {
 
 					{assignmentsView && isMobile && 
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '500', color: '#3C4858'}}>
+						<p style={{fontWeight: '600', color: '#3C4858'}}>
 						Assignments
 						</p>
 					</span>}
 					{assignmentsView && isMobile &&
-					<img onClick={() => this.props.openModal('create_assignment')} src={add} style={{height: '18.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
+					<img 
+					onTouchStart={() => this.setState({touching: 'add'})}
+					onTouchEnd={() => this.setState({touching: ''})}
+					onClick={() => this.props.openModal('create_assignment')} 
+					src={add} 
+					className={touching === 'add' ? 'touching' : ''}
+					style={{height: '18.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
 					{assignmentView && isMobile &&
-					<span onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
+					<span 
+					onTouchStart={() => this.setState({touching: 'assignments'})}
+					onTouchEnd={() => this.setState({touching: ''})}
+					className={touching === 'assignments' ? 'touching' : ''}
+					onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
 						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '18px'}}/>
 						<a style={{marginLeft: '17px'}} className="link">Assignments</a>
 					</span>}

@@ -169,7 +169,7 @@ export default class CreateAssignment extends Component {
 						name="text"
 						ariaLabel="Assignment text"
 						ref="assignment_text"
-						style={{margin: isMobile ? '10px 0 0' : '20px 0', overflowY: 'scroll'}} 
+						style={{margin: isMobile ? '10px 0 0' : '20px 0 0', overflowY: 'scroll'}} 
 						placeholder={'Paste text here...'}
 						className={(isMobile ? 'mobile' : '') + ' ' + style.textarea}
 						onChange={(e) => this.setState({text: e.target.value})}
@@ -194,7 +194,7 @@ export default class CreateAssignment extends Component {
 						/>
 					}
 					<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
-						<div style={{margin: '10px auto', background: '#F9FAFC', zIndex: '1', padding: '0 1em'}} className="display_flex">
+						<div style={{margin: '10px auto', background: isMobile ? '#F9FAFC' : '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
 						or
 						</div>
 						<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
@@ -205,13 +205,13 @@ export default class CreateAssignment extends Component {
 						background: '#fff', 
 						width: '100%', 
 						textAlign: 'center', 
-						margin: '0.25em 0 0', 
-						padding: '1em',
-						borderTop: '1px solid #DFE6ED'
+						margin: isMobile ? '0.25em 0 0' : '', 
+						padding: isMobile ? '1em' : '10px',
+						borderTop: isMobile ? '1px solid #DFE6ED' : ''
 					}}>
 						<h3 style={{fontWeight: '600', margin: '0 auto'}}>Trending Articles</h3>
 						<ul
-						style={{listStyleType: 'none', margin: '1em 0 0em'}}
+						style={{listStyleType: 'none', margin: '0.5em 0 0em'}}
 						className="">
 							{
 								trending.map((trending, i) => {

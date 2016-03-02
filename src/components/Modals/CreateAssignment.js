@@ -35,7 +35,8 @@ export default class CreateAssignment extends Component {
 	state = {
 		title: '',
 		text: '',
-		touching: ''
+		touching: '',
+		trending: ['Wikipedia', 'CNN', 'Bloomberg Business', 'People']
 	}
 
 	componentDidMount() {
@@ -90,6 +91,7 @@ export default class CreateAssignment extends Component {
 		const question = require('../../../static/icons/question.png');
 		// State
 		const { title, text } = this.state;
+		const { trending } = this.state;
 		// Loading
 		const { creating } = this.props;
 		// Items
@@ -153,7 +155,7 @@ export default class CreateAssignment extends Component {
 					type="text"
 					name="title"
 					ariaLabel="Assignment title"
-					autoFocus={true}
+					// autoFocus={true}
 					style={{height: '50px', lineHeight: isMobile ? '18px' : '50px'}}
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
@@ -167,9 +169,9 @@ export default class CreateAssignment extends Component {
 						name="text"
 						ariaLabel="Assignment text"
 						ref="assignment_text"
-						style={{minHeight: '350px', margin: isMobile ? '10px 0' : '20px 0', overflowY: 'scroll'}} 
+						style={{margin: isMobile ? '10px 0 0' : '20px 0', overflowY: 'scroll'}} 
 						placeholder={'Paste text here...'}
-						className={isMobile ? 'mobile' : ''}
+						className={(isMobile ? 'mobile' : '') + ' ' + style.textarea}
 						onChange={(e) => this.setState({text: e.target.value})}
 						onBlur={() => this.props.updateText(text)}
 						onKeyDown={(e) => {
@@ -191,6 +193,37 @@ export default class CreateAssignment extends Component {
 							}}
 						/>
 					}
+					<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
+						<div style={{margin: '10px auto', background: '#F9FAFC', zIndex: '1', padding: '0 1em'}} className="display_flex">
+						or
+						</div>
+						<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
+					</div>
+					<div 
+					className="display_flex flex_vertical flex_center" 
+					style={{
+						background: '#fff', 
+						width: '100%', 
+						textAlign: 'center', 
+						margin: '0.25em 0 0', 
+						padding: '1em',
+						borderTop: '1px solid #DFE6ED'
+					}}>
+						<h3 style={{fontWeight: '600', margin: '0 auto'}}>Trending Articles</h3>
+						<ul
+						style={{listStyleType: 'none', margin: '1em 0 0em'}}
+						className="">
+							{
+								trending.map((trending, i) => {
+									return (
+										<li className="">
+											<a style={{display: 'block', padding: '8px 12px'}} className="link">{trending}</a>
+										</li>
+									)
+								})
+							}
+						</ul>
+					</div>
 
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">

@@ -108,6 +108,7 @@ export default class DefaultModal extends Component {
 							startQuiz={startQuiz}
 							path={this.props.path}
 							copy={() => this.setState({copied: true})}
+							pushState={this.props.pushState}
 						/>
 					}
 					{

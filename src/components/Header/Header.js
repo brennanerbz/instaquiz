@@ -93,9 +93,8 @@ export default class Header extends Component {
 					padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'
 				}}>
 
-					{isMobile
-					? null
-					: <img 
+					{!isMobile || (isMobile && !isNotHomeView && !assignmentsView)
+					? <img 
 					onClick={() => {
 						if(teacher) {
 							pushState(null, '/')
@@ -107,7 +106,8 @@ export default class Header extends Component {
 						cursor: teacher && 'pointer',
 						position: homeworkView || assignmentsView ? '' : 'absolute',
 						left: '25px'
-					}}/>}
+					}}/>
+					: null}
 					{
 						isMobile && (homeworkView || assignmentsView) &&
 						<img src={soloLogo} style={{height: '31px', position: 'absolute', left: '1em'}}/>

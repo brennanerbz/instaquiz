@@ -27,7 +27,7 @@ export default class Homework extends Component {
 		const questionsView = location.pathname.match(/questions/gi);
 		const { touching } = this.state;
 		// Finished
-		const { showFinished } = this.props;
+		const { showFinished, sequence } = this.props;
 		const party = require('../../../static/icons/party.png')
 		return (
 			<div style={{maxWidth: '750px', height: '100%'}} 
@@ -56,9 +56,25 @@ export default class Homework extends Component {
 					{!loading && !showFinished && homeworkChildrenWithProps}
 					{showFinished && 
 					<div style={{height: '90%'}} className="display_flex flex_vertical flex_center flex_container_center">
-						<h3 style={{fontSize: '21px', fontWeight: '600'}}>You're all done!</h3>
-						<img src={party} style={{height: '100px', margin: '2em'}}/>
+						<h3 style={{fontSize: '21px', fontWeight: '600'}}>Here's your final score!</h3>
+						<span 
+						style={{
+							borderRadius: '50%',
+							border: '1px solid #1FB6FF',
+							height: '100px',
+							width: '100px',
+							lineHeight: '95px',
+							color: '#1FB6FF',
+							fontWeight: '600',
+							textAlign: 'center',
+							fontSize: '24px',
+							margin: '1em'
+						}}
+						className={{}}>
+						{(sequence.correct_count / (sequence.correct_count + sequence.incorrect_count) * 100).toFixed(0)}
+						</span>
 						<h3 style={{fontSize: '21px', fontWeight: '600'}}>See you soon!</h3>
+						<img src={party} style={{height: '100px', margin: '2em'}}/>
 					</div>}
 					</div>
 				</div>

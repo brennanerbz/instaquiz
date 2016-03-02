@@ -84,7 +84,7 @@ export default class HomeworkContainer extends Component {
 				this.props.pushState(null, `/homework/${token}/questions`)
 			}
 			// Fetch the latest question
-			if(!nextProps.sequence.questions_remaining === 0) {
+			if(nextProps.sequence.questions_remaining > 0) {
 				if((this.props.question.finish == null && nextProps.question.finish !== null) ||
 					(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
 					(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||

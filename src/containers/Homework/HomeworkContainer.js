@@ -33,7 +33,8 @@ export default class HomeworkContainer extends Component {
 	}
 
 	state = {
-		answer: ''
+		answer: '',
+		showFinished: false
 	}
 
 	componentDidMount() {
@@ -74,18 +75,22 @@ export default class HomeworkContainer extends Component {
 			}
 			// Completed homework
 			if(nextProps.sequence.questions_remaining === 0) {
-				alert('Finished!')
+				this.setState({
+					showFinished: true
+				});
 			}
 			// Route control to prevent cheating
 			if(previousRoute == 'questions' && nextRoute == 'read') {
 				this.props.pushState(null, `/homework/${token}/questions`)
 			}
 			// Fetch the latest question
-			if((this.props.question.finish == null && nextProps.question.finish !== null) ||
-				(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
-				(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
-				(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
-				this.props.fetchQuestion(sequence_token)
+			if(!nextProps.sequence.questions_remaining === 0) {
+				if((this.props.question.finish == null && nextProps.question.finish !== null) ||
+					(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed) ||
+					(!this.props.sequence.reading_completed && nextProps.sequence.reading_completed) ||
+					(!this.props.sequence && nextProps.sequence && nextProps.sequence.reading_completed)) {
+					this.props.fetchQuestion(sequence_token)
+				}
 			}
 		}
 	}
@@ -130,7 +135,8 @@ export default class HomeworkContainer extends Component {
 				fetchQuestion: this.props.fetchQuestion,
 				selectAnswer: (answer) => this.setState({answer: answer}),
 				submitAnswer: ::this.submitAnswer,
-				location: this.props.location
+				location: this.props.location,
+				showFinished: this.state.showFinished
 			})
 		})
 		return (<div style={{height: '100%'}}>{homeworkChildrenWithProps}</div>);

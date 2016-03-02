@@ -26,6 +26,9 @@ export default class Homework extends Component {
 		const readingView = location.pathname.match(/read/gi);
 		const questionsView = location.pathname.match(/questions/gi);
 		const { touching } = this.state;
+		// Finished
+		const { showFinished } = this.props;
+		const party = require('../../../static/icons/party.png')
 		return (
 			<div style={{maxWidth: '750px', height: '100%'}} 
 				 className="display_flex flex_container_center">
@@ -50,7 +53,13 @@ export default class Homework extends Component {
 					</span>}
 					<div style={{padding: isMobile ? '3.5em 0 0' : '5em 25px', height: '100%'}}>
 					{loading && <LoadingSpinner size={4}/>}
-					{!loading && homeworkChildrenWithProps}
+					{!loading && !showFinished && homeworkChildrenWithProps}
+					{showFinished && 
+					<div style={{height: '90%'}} className="display_flex flex_vertical flex_center flex_container_center">
+						<h3 style={{fontSize: '21px', fontWeight: '600'}}>You're all done!</h3>
+						<img src={party} style={{height: '100px', margin: '2em'}}/>
+						<h3 style={{fontSize: '21px', fontWeight: '600'}}>See you soon!</h3>
+					</div>}
 					</div>
 				</div>
 			</div>

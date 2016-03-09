@@ -10,6 +10,8 @@ import PhoneModal from './PhoneModal';
 import Success from './SuccessModal';
 import Processing from './ProcessingModal';
 import CreateAssignment from './CreateAssignment';
+import Login from './LoginModal';
+import Signup from './SignupModal';
 
 
 @connect(
@@ -91,6 +93,20 @@ export default class DefaultModal extends Component {
 					padding: bodyPadding,
 					background: type == 'create_assignment' && isMobile ? '#F9FAFC' : ''
 				}}>
+					{
+						type == 'login'
+						&&
+						<Login
+						isMobile={isMobile}
+						close={::this.close}/>
+					}
+					{
+						type == 'signup'
+						&&
+						<Signup
+						isMobile={isMobile}
+						close={::this.close}/>
+					}
 					{
 						type == 'create_assignment'
 						&&

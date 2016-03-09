@@ -62,6 +62,23 @@ input, textarea {
 		}
 	}
 }
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #A8B6C1;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #A8B6C1;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #A8B6C1;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #A8B6C1;
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+  color: #A8B6C1;
+}
 input {
 	height: 50px;
 	line-height: 50px;

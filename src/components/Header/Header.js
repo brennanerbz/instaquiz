@@ -205,7 +205,22 @@ export default class Header extends Component {
 								<a href="#features" className="grey link">How It Works</a>
 							</li>
 						</ul>
-
+					}
+					{
+						<span>
+							<button 
+							onClick={() => this.props.openModal('login')}
+							style={{height: '41px', margin: '6px 0 0 10px'}}
+							className="button primary_white">
+								Sign In
+							</button>
+							<button 
+							onClick={() => this.props.openModal('signup')}
+							style={{height: '41px', margin: '6px 0 0 10px'}}
+							className="button primary_blue">
+								Sign Up
+							</button>
+						</span>
 					}
 					{
 						assignmentsView && !isMobile

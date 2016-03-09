@@ -7,9 +7,11 @@ export default class QuizHeader extends Component {
 	render() {
 		const style = require('./QuizHeader.scss');
 		const { isMobile, title, count } = this.props;
+		const { promptOpen } = this.props;
 		return (
 			<div 
-				style={{textAlign: isMobile ? 'center' : '', padding: !isMobile ? '6em 25px 0 25px' : '5em 0 0 0'}} 
+				style={{textAlign: isMobile ? 'center' : '', 
+				padding: !isMobile ? `${promptOpen ? '1em' : '6em'} 25px 0 25px` : `${promptOpen ? '1em' : '5em'} 0 0 0`}} 
 				className={isMobile ? 'flex_container_center' : ''}>
 				<h1
 				style={{

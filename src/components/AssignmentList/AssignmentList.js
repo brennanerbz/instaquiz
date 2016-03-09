@@ -17,7 +17,8 @@ export default class AssignmentList extends Component {
 		const emptyRows = assignmentsLength < 6 ? (6 - assignmentsLength) : 0
 		const forwardArrow = require('../../../static/icons/forwardArrowGrey.png')
 		const setIcon = require('../../../static/icons/set_icon_lines.png')
-
+		// Prompt
+		const { promptOpen } = this.props;
 		// Touch
 		const { touching } = this.state;
 		// Hover
@@ -28,7 +29,7 @@ export default class AssignmentList extends Component {
 			style={{maxWidth: !isMobile ? '1050px' : '', padding: isMobile ? '' : '0 25px'}}>
 				<ul 
 				style={{
-					padding: isMobile ? '3.5em 0 0' : '',
+					padding: isMobile ? `${promptOpen ? '0em' : '3.5em'} 0 0` : '',
 					margin: isMobile ? '0' : '6em 0',
 					listStyleType: 'none',  
 					width: '100%',

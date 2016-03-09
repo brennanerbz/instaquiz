@@ -39,7 +39,8 @@ export default class Assignment extends Component {
 	state = {
 		tabs: ['Reading', 'Questions', 'Scores'],
 		activeTab: '',
-		touchingTab: -1
+		touchingTab: -1,
+		promptOpen: true
 	}
 
 	componentDidMount() {
@@ -68,14 +69,54 @@ export default class Assignment extends Component {
 
 	render() {
 		const sadFace = require('./SadFace.png');
+		const deleteIcon = require('../../../static/icons/deleteWhite.png');
 		const { isMobile } = this.props;
 		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
 		const { tabs, activeTab, touchingTab } = this.state;
 		const { sequences } = this.props;
+
+		const { promptOpen } = this.state;
+		const promptStyles = {
+			container: {
+				flex: '1',
+				background: '#00B5FF',
+				padding: '5em 0 2em 0',
+				display: promptOpen ? '' : 'none'
+			}, 
+			text: {
+				color: '#fff',
+				fontSize: '19px',
+				margin: '5px 0 10px 0'
+			}
+		}
 		return (
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
+					{
+						true &&
+						<div style={promptStyles.container} className="display_flex flex_center flex_vertical">
+							<img 
+							onClick={() => {
+								this.setState({promptOpen: false})
+							}} 
+							src={deleteIcon} 
+							style={{
+								height: isMobile ? '14px' : '16px',
+								position: 'absolute',
+								top: isMobile ? '4.25em' : '2em',
+								right: '1em',
+								cursor: 'pointer'
+							}}/>
+							<h1 style={promptStyles.text}>Want to save this assignment?</h1>
+							<button 
+							onClick={() => this.props.openModal('signup')} 
+							style={{border: 'none'}} 
+							className="button primary_white">
+							Create free account
+							</button>
+						</div>
+					}
 					{
 						error && error.text == 'Unauthorized Access'
 						?
@@ -93,6 +134,7 @@ export default class Assignment extends Component {
 								title={title} 
 								count={items_count} 
 								isMobile={isMobile}
+								promptOpen={promptOpen}
 								/>
 							<div className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 								<ul 

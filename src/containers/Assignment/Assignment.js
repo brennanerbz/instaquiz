@@ -70,6 +70,8 @@ export default class Assignment extends Component {
 	render() {
 		const sadFace = require('./SadFace.png');
 		const deleteIcon = require('../../../static/icons/deleteWhite.png');
+		const moon = require('../../../static/icons/moon.png');
+
 		const { isMobile } = this.props;
 		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
@@ -81,13 +83,17 @@ export default class Assignment extends Component {
 			container: {
 				flex: '1',
 				background: '#00B5FF',
-				padding: '5em 0 2em 0',
-				display: promptOpen ? '' : 'none'
+				padding: isMobile ? '2em 0 2em 0' : '2em',
+				margin: isMobile ? '3.5em auto 0 auto' : '5.5em auto 1em auto',
+				display: promptOpen ? '' : 'none',
+				maxWidth: '1000px',
+				width: '100%',
+				borderRadius: !isMobile && '5px'
 			}, 
 			text: {
 				color: '#fff',
-				fontSize: '19px',
-				margin: '5px 0 10px 0'
+				fontSize: isMobile ? '19px' : '20px',
+				margin: isMobile ? '10px 0 10px 0' : '15px 0 15px 0'
 			}
 		}
 		return (
@@ -95,7 +101,8 @@ export default class Assignment extends Component {
 				<div style={{width: '100%'}} className="flex_vertical">
 					{
 						true &&
-						<div style={promptStyles.container} className="display_flex flex_center flex_vertical">
+						<div style={promptStyles.container} 
+						className={'display_flex flex_vertical relative' + ' ' + (isMobile ? 'flex_center' : 'flex_container_left')}>
 							<img 
 							onClick={() => {
 								this.setState({promptOpen: false})
@@ -104,11 +111,29 @@ export default class Assignment extends Component {
 							style={{
 								height: isMobile ? '14px' : '16px',
 								position: 'absolute',
-								top: isMobile ? '4.25em' : '2em',
+								top: '1em',
 								right: '1em',
 								cursor: 'pointer'
 							}}/>
-							<h1 style={promptStyles.text}>Want to save this assignment?</h1>
+							{
+								!isMobile
+								&&
+								<img 
+								src={moon} 
+								style={{
+									height: '65px',
+									position: 'absolute',
+									bottom: '1.5em',
+									right: '7em',
+								}}/>
+							}
+							<h1 style={promptStyles.text}>
+							{
+								isMobile 
+								? 'Want to save this assignment?'
+								: 'Don\'t want to lose this assignment? Create a free account to save it.'
+							}
+							</h1>
 							<button 
 							onClick={() => this.props.openModal('signup')} 
 							style={{border: 'none'}} 

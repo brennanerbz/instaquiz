@@ -90,7 +90,7 @@ export default class Header extends Component {
 					maxWidth: homeworkView ? '750px' : '1050px', 
 					minWidth: isMobile || homeworkView ? '' : '950px', 
 					width: '100%', 
-					padding: isMobile ? '15px 10px 10px' : '15px 25px 10px'
+					padding: isMobile ? '15px 10px 10px' : '10px 25px 10px'
 				}}>
 
 					{!isMobile || (isMobile && !isNotHomeView && !assignmentsView)

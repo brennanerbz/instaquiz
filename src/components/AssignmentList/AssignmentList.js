@@ -30,7 +30,7 @@ export default class AssignmentList extends Component {
 				<ul 
 				style={{
 					padding: isMobile ? `${promptOpen ? '0em' : '3.5em'} 0 0` : '',
-					margin: isMobile ? '0' : '6em 0',
+					margin: isMobile ? '0' : `${promptOpen ? '0' : '6em'} 0`,
 					listStyleType: 'none',  
 					width: '100%',
 					border: isMobile ? '' : '1px solid #e4e4e4',

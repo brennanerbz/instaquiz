@@ -39,10 +39,10 @@ export default class MenuModal extends Component {
 				textAlign: 'center'
 			},
 			link: {
-				fontSize: '20px',
+				fontSize: '22px',
 				color: '#fff',
 				textAlign: 'center',
-				padding: '20px 15px',
+				padding: '25px 15px',
 				display: 'block'
 			}
 		}
@@ -63,14 +63,33 @@ export default class MenuModal extends Component {
 					cursor: 'pointer'
 				}}/>
 				<ul style={styles.list} className="link_list">
-					<li>
+					<li 
+					onClick={() => {
+						this.props.closeFsModal()
+						this.props.pushState(null, '/#features')
+					}}>
 						<a style={styles.link}>How It Works</a>
 					</li>
-					<li>
+					<li
+					onClick={() => {
+						this.props.closeFsModal()
+						this.props.openModal('signup')
+					}}>
 						<a style={styles.link}>Sign Up</a>
 					</li>
-					<li>
+					<li
+					onClick={() => {
+						this.props.closeFsModal()
+						this.props.openModal('login')
+					}}>
 						<a style={styles.link}>Log In</a>
+					</li>
+					<li
+					onClick={() => {
+						this.props.closeFsModal()
+						this.props.openModal('create_assignment')
+					}}>
+						<a style={styles.link}>Create Assignment</a>
 					</li>
 				</ul>
 			</div>

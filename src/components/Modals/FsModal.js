@@ -63,12 +63,12 @@ export default class MenuModal extends Component {
 					cursor: 'pointer'
 				}}/>
 				<ul style={styles.list} className="link_list">
-					<li 
+					<li
 					onClick={() => {
 						this.props.closeFsModal()
-						this.props.pushState(null, '/#features')
+						this.props.openModal('login')
 					}}>
-						<a style={styles.link}>How It Works</a>
+						<a style={styles.link}>Log In</a>
 					</li>
 					<li
 					onClick={() => {
@@ -76,13 +76,6 @@ export default class MenuModal extends Component {
 						this.props.openModal('signup')
 					}}>
 						<a style={styles.link}>Sign Up</a>
-					</li>
-					<li
-					onClick={() => {
-						this.props.closeFsModal()
-						this.props.openModal('login')
-					}}>
-						<a style={styles.link}>Log In</a>
 					</li>
 					<li
 					onClick={() => {

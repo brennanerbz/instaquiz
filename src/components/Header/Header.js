@@ -209,7 +209,7 @@ export default class Header extends Component {
 						</ul>
 					}
 					{
-						!isMobile &&
+						!isMobile && !isNotHomeView && !assignmentsView  &&
 						<span>
 							<button 
 							onClick={() => this.props.openModal('login')}
@@ -226,7 +226,7 @@ export default class Header extends Component {
 						</span>
 					}
 					{
-						isMobile && 
+						isMobile && !isNotHomeView && !assignmentsView &&
 						<button onClick={() => this.props.openFsModal('menu')} className="button primary_white">
 							Menu
 						</button>

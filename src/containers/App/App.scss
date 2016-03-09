@@ -295,6 +295,9 @@ $secondary-grey: #A8B6C1;
 	}
 	&.grey {
 		color: $primary-grey;
+		&:hover {
+			color: $primary-blue;
+		}
 	}
 }
 
@@ -310,7 +313,6 @@ $secondary-grey: #A8B6C1;
 
 
 // Fade
-/*
 :global .fade {
 	opacity: 0;
 	-webkit-transition: opacity .05s linear;
@@ -318,10 +320,13 @@ $secondary-grey: #A8B6C1;
 	-o-transition: opacity .05s linear;
 	transition: opacity .05s linear;
 	&.in {
+		-webkit-transition: opacity .05s linear;
+		-moz-transition: opacity .05s linear;
+		-o-transition: opacity .05s linear;
+		transition: opacity .05s linear;
 		opacity: 1;	
 	}
 }
-*/
 
 :global .small {
 	.react-autosuggest__suggestions-container {

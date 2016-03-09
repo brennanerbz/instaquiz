@@ -13,12 +13,15 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import WorksList from '../../components/WorksList/WorksList';
 import Modal from '../../components/Modals/Modal';
+import FsModal from '../../components/Modals/FsModal';
+
 
 // API calls
 import { fetchUser } from '../../redux/modules/user';
 import { nameError } from '../../redux/modules/homework';
 import { fetchAssignments } from '../../redux/modules/assignments';
 import { openModal } from '../../redux/modules/overlays';
+import { openFsModal } from '../../redux/modules/overlays';
 
 function fetchData(getState, dispatch) {
 	const promises = [];
@@ -47,6 +50,7 @@ function fetchData(getState, dispatch) {
 			nameError,
 			fetchUser,
 			openModal,
+			openFsModal,
 			fetchAssignments
 		}, dispatch)
 	})
@@ -99,7 +103,7 @@ export default class App extends Component {
 		const style = require('./App.scss');
 		const { children, pushState, params, location, query } = this.props;
 		const { nameError, student_name, homework_title, homework_sequence, selected } = this.props;
-		const { openModal } = this.props;
+		const { openModal, openFsModal } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const { userLoaded } = this.props;
 		const user = cookie.load('token', {path: '/'}) ? true : false
@@ -120,6 +124,7 @@ export default class App extends Component {
 				<Helmet {...config.app.head}/>
 				<Header 
 					openModal={openModal}
+					openFsModal={openFsModal}
 					pushState={pushState}
 					nameError={nameError}
 					student_name={student_name}
@@ -138,6 +143,7 @@ export default class App extends Component {
 				/>
 				{appChildrenWithProps}
 				<Modal isMobile={isMobile}/>
+				<FsModal isMobile={isMobile}/>
 			</div>
 		);
 	}

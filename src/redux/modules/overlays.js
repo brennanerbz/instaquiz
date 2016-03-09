@@ -1,6 +1,9 @@
 
-export const OPEN_MODAL = 'Instaquiz/quiz/OPEN_MODAL';
-export const CLOSE_MODAL = 'Instaquiz/quiz/CLOSE_MODAL';
+export const OPEN_MODAL = 'Instaquiz/overlays/OPEN_MODAL';
+export const CLOSE_MODAL = 'Instaquiz/overlays/CLOSE_MODAL';
+
+export const OPEN_FS_MODAL = 'Instaquiz/overlays/OPEN_FS_MODAL';
+export const CLOSE_FS_MODAL = 'Instaquiz/overlays/CLOSE_FS_MODAL';
 
 import {
 	ADD_TOPIC,
@@ -11,7 +14,9 @@ import {
 
 const initialState = {
 	modalOpen: false,
-	modalType: ''
+	modalType: '',
+	fsModalOpen: false,
+	fsModalType: ''
 }
 
 export default function reducer (state = initialState, action) {
@@ -36,6 +41,18 @@ export default function reducer (state = initialState, action) {
 				modalOpen: false,
 				modalType: ''
 			}
+		case OPEN_FS_MODAL:
+			return {
+				...state,
+				fsModalOpen: true,
+				fsModalType: action.fsModalType
+			}
+		case CLOSE_FS_MODAL:
+			return {
+				...state,
+				fsModalOpen: false,
+				fsModalType: ''
+			}
 		case START_QUIZ_SUCCESS:
 			return {
 				modalOpen: true,
@@ -59,5 +76,17 @@ export function openModal(modalType) {
 export function closeModal() {
 	return {
 		type: CLOSE_MODAL
+	}
+}
+export function openFsModal(modalType) {
+	return {
+		type: OPEN_FS_MODAL,
+		modalType
+	}
+}
+
+export function closeFsModal() {
+	return {
+		type: CLOSE_FS_MODAL
 	}
 }

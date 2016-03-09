@@ -91,7 +91,9 @@ export default class DefaultModal extends Component {
 				<Modal.Body 
 				style={{
 					padding: bodyPadding,
-					background: type == 'create_assignment' && isMobile ? '#F9FAFC' : ''
+					background: isMobile 
+					? (type == 'create_assignment' && '#F9FAFC')
+					: '' 
 				}}>
 					{
 						type == 'login'

@@ -198,15 +198,18 @@ export default class Header extends Component {
 					</span>}
 
 					{
-						!isNotHomeView && !assignmentsView
+						!isNotHomeView && !assignmentsView 
 						&&
 						<ul style={{lineHeight: isMobile ? '45px' : '55px'}} className="flex_container_right link_list">
-							<li className="link_list_item">
-								<a href="#features" className="grey link">How It Works</a>
-							</li>
+							{!isMobile &&
+								<li className="link_list_item">
+									<a href="#features" className="grey link">How It Works</a>
+								</li> 
+							}
 						</ul>
 					}
 					{
+						!isMobile &&
 						<span>
 							<button 
 							onClick={() => this.props.openModal('login')}
@@ -221,6 +224,12 @@ export default class Header extends Component {
 								Sign Up
 							</button>
 						</span>
+					}
+					{
+						isMobile && 
+						<button onClick={() => this.props.openFsModal('menu')} className="button primary_white">
+							Menu
+						</button>
 					}
 					{
 						assignmentsView && !isMobile

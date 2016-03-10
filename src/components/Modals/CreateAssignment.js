@@ -36,7 +36,7 @@ export default class CreateAssignment extends Component {
 		title: '',
 		text: '',
 		touching: '',
-		trending: ['Wikipedia', 'CNN', 'Bloomberg Business', 'People']
+		trending: ['Wikipedia', 'CNN', 'Bloomberg Business']
 	}
 
 	componentDidMount() {
@@ -211,7 +211,7 @@ export default class CreateAssignment extends Component {
 					}}>
 						<h3 style={{fontWeight: '600', margin: '0 auto'}}>Trending Articles</h3>
 						<ul
-						style={{listStyleType: 'none', margin: '0.5em 0 0em'}}
+						style={{listStyleType: 'none', margin: '0.5em 0 0.5em'}}
 						className="">
 							{
 								trending.map((trending, i) => {
@@ -227,19 +227,25 @@ export default class CreateAssignment extends Component {
 
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">
-						<span style={{lineHeight: '45px'}}>
-							<img src={question} style={{height: '16px', marginRight: '15px'}}/>
-							<a className="grey link">Wondering how this works?</a>
-						</span>
-						<button 
-						onClick={() => {
-							if(!editing) this.handleCreateAssignment()
-							if(editing) this.handleFinishAssignment()
-						}}
-						style={{height: '50px', lineHeight: '50px', padding: '0 25px'}} 
-						className="button primary_blue flex_item_align_right">
-							{editing ? 'Finish' : 'Submit'}
-						</button>
+						<div className="flex_container_right">
+							<button 
+							onClick={() => {
+								this.props.close()
+							}}
+							style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 
+							className="button primary_white">
+								Cancel
+							</button>
+							<button 
+							onClick={() => {
+								if(!editing) this.handleCreateAssignment()
+								if(editing) this.handleFinishAssignment()
+							}}
+							style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}} 
+							className="button primary_blue">
+								{editing ? 'Finish' : 'Submit'}
+							</button>
+						</div>
 					</div>}
 
 				</div>

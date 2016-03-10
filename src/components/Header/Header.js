@@ -205,11 +205,11 @@ export default class Header extends Component {
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					{
-						!isNotHomeView && !isMobile
+						!isMobile
 						&&
 						<ul style={{lineHeight: isMobile ? '45px' : '40px'}} 
-						className="link_list flex_horizontal">
-							{!isMobile && !assignmentsView &&
+						className={'link_list flex_horizontal' + ' ' + (isNotHomeView && 'flex_container_right')}>
+							{!isMobile && !assignmentsView && !isNotHomeView &&
 								<li className="link_list_item">
 									<a href="#features" className="grey link">How It Works</a>
 								</li> 
@@ -221,7 +221,7 @@ export default class Header extends Component {
 								delayHide={0} 
 								placement="bottom" 
 								overlay={::this.tooltip('Create new assignment')}>
-									<li style={{lineHeight: '46px', margin: '0 15px 0 0'}} className="link_list_item">
+									<li style={{lineHeight: '45px', margin: '0 15px 0 0'}} className="link_list_item">
 										<img 
 										onTouchStart={() => this.setState({touching: 'add'})}
 										onTouchEnd={() => this.setState({touching: ''})}
@@ -229,7 +229,7 @@ export default class Header extends Component {
 										src={add} 
 										className={touching === 'add' ? 'touching' : ''}
 										style={{
-											height: '18.5px',
+											height: '17.5px',
 											cursor: 'pointer'
 										}}/>
 									</li>
@@ -237,13 +237,13 @@ export default class Header extends Component {
 							}
 							{
 								!isMobile && 
-								<li onClick={() => this.props.openModal('signup')} className="link_list_item">
+								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('signup')} className="link_list_item">
 									<a className="grey link">Sign Up</a>
 								</li>
 							}
 							{
 								!isMobile &&
-								<li onClick={() => this.props.openModal('login')} className="link_list_item">
+								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('login')} className="link_list_item">
 									<a className="grey link">Log In</a>
 								</li>
 							}

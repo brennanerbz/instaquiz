@@ -205,7 +205,7 @@ export default class Header extends Component {
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
 					{
-						!isMobile
+						!isMobile && !homeworkView
 						&&
 						<ul style={{lineHeight: isMobile ? '45px' : '40px'}} 
 						className={'link_list flex_horizontal' + ' ' + ((isNotHomeView || (!isNotHomeView && !teacher)) && 'flex_container_right')}>

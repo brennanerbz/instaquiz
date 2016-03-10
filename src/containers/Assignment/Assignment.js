@@ -247,7 +247,7 @@ export default class Assignment extends Component {
 														fontSize: isMobile ? '15px' : '16px',
 														fontWeight: active ? '600' : '500'
 													}}>
-														{tab}
+														{tab}&nbsp;{tab == 'Scores' ? `(${sequences.length})` : ''}
 													</a>
 												</li>
 											)

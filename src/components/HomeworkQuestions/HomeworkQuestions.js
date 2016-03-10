@@ -27,6 +27,7 @@ export default class HomeworkQuestions extends Component {
 					border: '1px solid #E4E4E4', 
 					borderRadius: '4px',
 					boxShadow: '0 1px 7px 0 rgba(31,45,61,0.1)',
+					overflow: 'scroll'
 				}}>
 				{question && question.cue}
 				</div>

@@ -118,7 +118,14 @@ export default class Header extends Component {
 					: null}
 					{
 						isMobile && (homeworkView || assignmentsView) &&
-						<img src={soloLogo} style={{height: '31px', position: 'absolute', left: '1em'}}/>
+						<img 
+						onClick={() => {
+							if(teacher) {
+								pushState(null, '/')
+							}
+						}}
+						src={soloLogo} 
+						style={{height: '31px', position: 'absolute', left: '1em'}}/>
 					}
 					{<span style={{minHeight: isMobile ? '30px' : '40px'}}>&nbsp;</span>}
 

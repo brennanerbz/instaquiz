@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
 	componentDidMount() {
 		const { isMobile } = this.props;
 		this.setState({
-			promptOpen: isMobile
+			// promptOpen: isMobile
 		});
 	}
 
@@ -67,7 +67,7 @@ export default class Dashboard extends Component {
 		return (
 			<div>
 				{
-					isMobile &&
+					promptOpen &&
 					<div 
 					style={promptStyles.container} 
 					className={'display_flex flex_center flex_vertical relative' + ' ' + (isMobile ? 'flex_container_center' : 'flex_container_left')}>

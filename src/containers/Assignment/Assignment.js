@@ -84,7 +84,7 @@ export default class Assignment extends Component {
 				flex: '1',
 				background: '#00B5FF',
 				padding: isMobile ? '2em 0 2em 0' : '2em',
-				margin: isMobile ? '3.5em auto 0 auto' : '5.5em auto 1em auto',
+				margin: isMobile ? '3.5em auto 0 auto' : '1em auto 1em auto',
 				display: promptOpen ? '' : 'none',
 				maxWidth: '1000px',
 				width: '100%',
@@ -100,7 +100,7 @@ export default class Assignment extends Component {
 			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
 					{
-						true &&
+						isMobile && promptOpen &&
 						<div style={promptStyles.container} 
 						className={'display_flex flex_vertical relative' + ' ' + (isMobile ? 'flex_center' : 'flex_container_left')}>
 							<img 
@@ -161,6 +161,49 @@ export default class Assignment extends Component {
 								isMobile={isMobile}
 								promptOpen={promptOpen}
 								/>
+							{
+								!isMobile && promptOpen &&
+								<div style={promptStyles.container} 
+								className={'display_flex flex_vertical relative' + ' ' + (isMobile ? 'flex_center' : 'flex_container_left')}>
+									<img 
+									onClick={() => {
+										this.setState({promptOpen: false})
+									}} 
+									src={deleteIcon} 
+									style={{
+										height: isMobile ? '14px' : '16px',
+										position: 'absolute',
+										top: '1em',
+										right: '1em',
+										cursor: 'pointer'
+									}}/>
+									{
+										!isMobile
+										&&
+										<img 
+										src={moon} 
+										style={{
+											height: '65px',
+											position: 'absolute',
+											bottom: '1.5em',
+											right: '7em',
+										}}/>
+									}
+									<h1 style={promptStyles.text}>
+									{
+										isMobile 
+										? 'Want to save this assignment?'
+										: 'Don\'t want to lose this assignment? Create a free account to save it.'
+									}
+									</h1>
+									<button 
+									onClick={() => this.props.openModal('signup')} 
+									style={{border: 'none'}} 
+									className="button primary_white">
+									Create free account
+									</button>
+								</div>
+							}
 							<div className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 								<ul 
 								style={{

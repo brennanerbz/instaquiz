@@ -3,6 +3,8 @@ import cookie from 'react-cookie';
 import { isEmpty } from '../../utils/helperfunctions';
 import WikiForm from '../WikiForm/WikiForm';
 
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+
 export default class Header extends Component {
 
 	static propTypes = {
@@ -27,6 +29,12 @@ export default class Header extends Component {
 		if(this.props.homework_sequence.questions_completed !== nextProps.questions_completed) {
 			this.setProgressWidth(nextProps)
 		}
+	}
+
+	tooltip(text) {
+		return (
+			<Tooltip id={'header' + text}><b>{text}</b></Tooltip>
+		)
 	}
 
 	setProgressWidth(props) {
@@ -114,7 +122,7 @@ export default class Header extends Component {
 					}
 					{<span style={{minHeight: isMobile ? '30px' : '40px'}}>&nbsp;</span>}
 
-					{assignmentsView && 
+					{assignmentsView &&
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
 						<p style={{fontWeight: '600', color: '#3C4858', fontSize: isMobile ? '' : '19px'}}>
 						Assignments
@@ -196,20 +204,53 @@ export default class Header extends Component {
 							className="link">Questions</a>
 						<img src={forwardArrow} style={{height: '18.5px', position: 'absolute', right: '10px', top: '0'}}/>
 					</span>}
-
 					{
-						!isNotHomeView && !assignmentsView 
+						!isNotHomeView && !isMobile
 						&&
-						<ul style={{lineHeight: isMobile ? '45px' : '55px'}} className="flex_container_right link_list">
-							{!isMobile &&
+						<ul style={{lineHeight: isMobile ? '45px' : '40px'}} 
+						className="link_list flex_horizontal">
+							{!isMobile && !assignmentsView &&
 								<li className="link_list_item">
 									<a href="#features" className="grey link">How It Works</a>
 								</li> 
 							}
+							{
+								!isMobile && 
+								<OverlayTrigger 
+								delayShow={500} 
+								delayHide={0} 
+								placement="bottom" 
+								overlay={::this.tooltip('Create new assignment')}>
+									<li style={{lineHeight: '46px', margin: '0 15px 0 0'}} className="link_list_item">
+										<img 
+										onTouchStart={() => this.setState({touching: 'add'})}
+										onTouchEnd={() => this.setState({touching: ''})}
+										onClick={() => this.props.openModal('create_assignment')} 
+										src={add} 
+										className={touching === 'add' ? 'touching' : ''}
+										style={{
+											height: '18.5px',
+											cursor: 'pointer'
+										}}/>
+									</li>
+								</OverlayTrigger>
+							}
+							{
+								!isMobile && 
+								<li onClick={() => this.props.openModal('signup')} className="link_list_item">
+									<a className="grey link">Sign Up</a>
+								</li>
+							}
+							{
+								!isMobile &&
+								<li onClick={() => this.props.openModal('login')} className="link_list_item">
+									<a className="grey link">Log In</a>
+								</li>
+							}
 						</ul>
 					}
 					{
-						!isMobile && !isNotHomeView && !assignmentsView  &&
+						!isMobile && !isNotHomeView && !assignmentsView &&
 						<span>
 							<button 
 							onClick={() => this.props.openModal('login')}
@@ -229,13 +270,6 @@ export default class Header extends Component {
 						isMobile && !isNotHomeView && !assignmentsView &&
 						<button onClick={() => this.props.openFsModal('menu')} className="button primary_white">
 							Menu
-						</button>
-					}
-					{
-						assignmentsView && !isMobile
-						&&
-						<button onClick={() => this.props.openModal('create_assignment')} style={{fontWeight: '600'}} className="button primary_blue">
-							Create assignment
 						</button>
 					}
 				</div>

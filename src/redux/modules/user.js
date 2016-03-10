@@ -24,7 +24,9 @@ export default function reducer(state = initialState, action) {
 				...state
 			}
 		case CREATE_USER_SUCCESS:
-			cookie.save('token', action.result.token, { path: '/'});
+			var d = new Date();
+		    d.setTime(d.getTime() + (365*24*60*60*1000));
+			cookie.save('token', action.result.token, { path: '/', expires: d});
 			return {
 				...state,
 				token: action.result.token

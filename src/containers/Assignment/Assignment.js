@@ -143,7 +143,7 @@ export default class Assignment extends Component {
 						</div>
 					}
 					{
-						error && error.text == 'Unauthorized Access'
+						error && (400 < error.statusCode < 500)
 						?
 						<div className="display_flex flex_vertical flex_center">
 							<img style={{height: isMobile ? '95px' : '130px'}} src={sadFace}/>
@@ -300,7 +300,7 @@ export default class Assignment extends Component {
 													padding: '0.75em 0',
 													fontSize: isMobile ? '14px' : '16px'
 												}}
-												key={sequence.id + i} 
+												key={sequence.identifier + i} 
 												className="display_flex flex_horizontal">
 													<span 
 													style={{width: '50%', lineHeight: '40px', paddingLeft: !isMobile ? '1em' : ''}}>

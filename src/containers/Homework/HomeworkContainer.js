@@ -47,6 +47,7 @@ export default class HomeworkContainer extends Component {
 			if(!teacher) cookie.save('student', true, {path: '/'})
 			var sequences = cookie.load('sequences', {path: '/'})
 			if(sequences) sequences = JSON.parse(sequences)
+			console.log('seq:   ', sequences)
 			if(sequences && sequences[route_token]) {
 				fetchSequence(sequences[route_token])
 			} else {
@@ -73,6 +74,7 @@ export default class HomeworkContainer extends Component {
 			if(previousRoute == 'read' && nextRoute == 'questions') {
 				this.props.updateSequence(nextProps.identifier, sequence_token)
 			}
+			// Check for cheaters
 			// Completed homework
 			if(nextProps.sequence.questions_remaining === 0) {
 				this.setState({
@@ -80,8 +82,10 @@ export default class HomeworkContainer extends Component {
 				});
 			}
 			// Route control to prevent cheating
-			if(previousRoute == 'questions' && nextRoute == 'read') {
-				this.props.pushState(null, `/homework/${token}/questions`)
+			if((previousRoute == 'questions' && nextRoute == 'read') 
+				|| (nextProps.sequence.reading_completed && nextRoute == 'read')) {
+				alert('Sorry! You can\'t go back to the reading')
+				this.props.pushState(null, `/homework/${route_token}/questions`)
 			}
 			// Fetch the latest question
 			if(nextProps.sequence.questions_remaining > 0) {
@@ -93,6 +97,10 @@ export default class HomeworkContainer extends Component {
 				}
 			}
 		}
+	}
+
+	componentWillUnmount() {
+		this.props.clearHomework()
 	}
 
 	submitAnswer() {

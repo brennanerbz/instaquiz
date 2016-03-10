@@ -63,7 +63,11 @@ export default function reducer(state = initialState, action) {
 				creating: true
 			}
 		case CREATE_ASSIGNMENT_SUCCESS:
-			if(state.assignments.length === 0) cookie.save('teacher', true, {path: '/'})
+			var d = new Date();
+		    d.setTime(d.getTime() + (365*24*60*60*1000));
+			if(state.assignments.length === 0) {
+				cookie.save('teacher', true, {path: '/', expires: d})
+			}
 			return {
 				...state,
 				creating: false,
@@ -154,11 +158,18 @@ export default function reducer(state = initialState, action) {
 		case CLEAR_ASSIGNMENT:
 			return {
 				...state,
+				title: '',
+				text: '',
+				loading: false,
+				creating: false,
+				editing: false,
+				finished: false,
 				assignment: {},
 				items: [],
 				sequences: [],
-				title: '',
-				text: ''
+				items_count: 0,
+				assignments: [],
+				error: null
 			}
 		default:
 			return {

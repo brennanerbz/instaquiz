@@ -27,6 +27,8 @@ export const SUBMIT_ANSWER_FAILURE = 'NightlyCode/homework/SUBMIT_ANSWER_FAILURE
 
 export const SELECTED_CHOICE = 'NightlyCode/homework/SELECTED_CHOICE';
 
+export const CLEAR_HOMEWORK = 'NightlyCode/homework/CLEAR_HOMEWORK';
+
 const initialState = {
 	mounted: false,
 	route_token: '',
@@ -61,7 +63,9 @@ export default function reducer (state = initialState, action) {
 			const { route_token } = state;
 			var sequence = {}
 			sequence[route_token] = action.result.token
-			cookie.save('sequences', sequence, {path: '/'})
+			var d = new Date();
+		    d.setTime(d.getTime() + (365*24*60*60*1000));
+			cookie.save('sequences', sequence, {path: '/', expires: d})
 			return {
 				...state,
 				loading: false,
@@ -166,6 +170,21 @@ export default function reducer (state = initialState, action) {
 				...state,
 				question_selected: true
 			}
+		case CLEAR_HOMEWORK:
+			return {
+				...state,
+				mounted: false,
+				route_token: '',
+				token: '',
+				loading: false,
+				loaded: false,
+				title: '',
+				reading: '',
+				identifier: '',
+				sequence: {},
+				question: {},
+				question_selected: false
+			}
 		default:		
 			return {
 				...state,
@@ -185,6 +204,9 @@ export function updateName(name) {
 }
 export function selected() {
 	return {type: SELECTED_CHOICE}
+}
+export function clearHomework() {
+	return {type: CLEAR_HOMEWORK}
 }
 
 export function newSequence(token) {
@@ -224,3 +246,4 @@ export function submitAnswer(answer, token) {
 		promise: (client) => client.put(`/sequences/${token}/answer`, {input: answer})
 	}
 }
+

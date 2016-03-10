@@ -45,9 +45,9 @@ export default class CreateAssignment extends Component {
 		// 	this.style.height = 'auto'
 		// 	this.style.height = (this.scrollHeight) + 'px'
 		// })
-		const { title, text } = this.props;
-		if(title) this.setState({title: title});
-		if(text) this.setState({text: text});
+		// const { title, text } = this.props;
+		// if(title) this.setState({title: title});
+		// if(text) this.setState({text: text});
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -168,6 +168,7 @@ export default class CreateAssignment extends Component {
 						<textarea 
 						type="text"
 						name="text"
+						autoFocus={!isMobile}
 						ariaLabel="Assignment text"
 						ref="assignment_text"
 						style={{margin: isMobile ? '10px 0 0' : '20px 0 0', overflowY: 'scroll'}} 

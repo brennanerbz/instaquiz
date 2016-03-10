@@ -128,7 +128,8 @@ export default function reducer(state = initialState, action) {
 			}
 		case DELETE_ITEMS:
 			return {
-				...state
+				...state,
+				finished: false
 			}
 		case DELETE_ITEMS_SUCCESS:
 			return {
@@ -174,7 +175,6 @@ export function fetchAssignments(token) {
 }
 
 export function createAssignment(token, title, text) {
-	console.log(text)
 	return {
 		types: [CREATE_ASSIGNMENT, CREATE_ASSIGNMENT_SUCCESS, CREATE_ASSIGNMENT_FAILURE],
 		promise: (client) => client.post('/assignments/', {

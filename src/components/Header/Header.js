@@ -208,14 +208,14 @@ export default class Header extends Component {
 						!isMobile
 						&&
 						<ul style={{lineHeight: isMobile ? '45px' : '40px'}} 
-						className={'link_list flex_horizontal' + ' ' + (isNotHomeView && 'flex_container_right')}>
+						className={'link_list flex_horizontal' + ' ' + ((isNotHomeView || (!isNotHomeView && !teacher)) && 'flex_container_right')}>
 							{!isMobile && !assignmentsView && !isNotHomeView &&
 								<li className="link_list_item">
 									<a href="#features" className="grey link">How It Works</a>
 								</li> 
 							}
 							{
-								!isMobile && 
+								!isMobile && teacher && 
 								<OverlayTrigger 
 								delayShow={500} 
 								delayHide={0} 
@@ -236,13 +236,13 @@ export default class Header extends Component {
 								</OverlayTrigger>
 							}
 							{
-								!isMobile && 
+								!isMobile && teacher &&
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('signup')} className="link_list_item">
 									<a className="grey link">Sign Up</a>
 								</li>
 							}
 							{
-								!isMobile &&
+								!isMobile && teacher && 
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('login')} className="link_list_item">
 									<a className="grey link">Log In</a>
 								</li>
@@ -268,7 +268,7 @@ export default class Header extends Component {
 					}
 					{
 						isMobile && !isNotHomeView && !assignmentsView &&
-						<button onClick={() => this.props.openFsModal('menu')} className="button primary_white">
+						<button onClick={() => this.props.openFsModal('menu')} className="button primary_white display_flex flex_item_align_right">
 							Menu
 						</button>
 					}

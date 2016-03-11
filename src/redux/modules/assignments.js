@@ -191,8 +191,8 @@ export function createAssignment(token, title, text, subject, readingLevel) {
 		promise: (client) => client.post('/assignments/', {
 			title: title,
 			text: text,
-			// subject: subject,
-			// reading_level: readingLevel
+			subject: subject,
+			level: readingLevel
 		}, token)
 	}
 }

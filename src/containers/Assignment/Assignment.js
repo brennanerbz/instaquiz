@@ -77,6 +77,7 @@ export default class Assignment extends Component {
 		const sadFace = require('./SadFace.png');
 		const deleteIcon = require('../../../static/icons/deleteWhite.png');
 		const moon = require('../../../static/icons/moon.png');
+		const trophy = require('../../../static/icons/trophy.png');
 
 		const { isMobile } = this.props;
 		const { token, assignment, title, items, items_count } = this.props;
@@ -301,7 +302,7 @@ export default class Assignment extends Component {
 								<div style={{borderRadius: '4px', border: '1px solid #E6E8EA', padding: '0 1em 0em'}}>
 								<ul id="score_list">
 									{
-										sequences.map((sequence, i) => {
+										sequences.length > 0 && sequences.map((sequence, i) => {
 											const score = (sequence.correct_count / items_count) * 100
 											const first = i === 0;
 											const completed = sequence.questions_remaining === 0;
@@ -356,6 +357,14 @@ export default class Assignment extends Component {
 												)
 											}
 										})
+									}
+									{
+										sequences.length === 0
+										&&
+										<div style={{padding: '2em'}} className="display_flex flex_center flex_vertical">
+											<p style={{margin: '15px', fontSize: '21px', fontWeight: '600', color: '#333333'}}>No scores yet</p>
+											<img src={trophy} style={{height: '100px'}}/>
+										</div>
 									}
 								</ul>
 								</div>

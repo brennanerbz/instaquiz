@@ -173,7 +173,7 @@ export function fetchToken(email, password) {
 		.get(`https://nightly-server.herokuapp.com/api/v1.0/token`)
 		.auth(email, password)
 		.end((err, res) => {
-			const result = res.body;
+			const result = res.body.token;
 			if(res.ok) {
 				dispatch({type: FETCH_TOKEN_SUCCESS, result})
 			} else {

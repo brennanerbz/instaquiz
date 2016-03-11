@@ -1,12 +1,91 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium';
+import color from 'color';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { pushState } from 'redux-router';
+import cookie from 'react-cookie';
 
+import * as userActions from '../../redux/modules/user';
+import { validateEmail, isEmpty } from '../../utils/helperfunctions';
+
+@connect(
+  state => ({
+  	user: state.user.user,
+  	error: state.user.error
+  }),
+  dispatch => ({
+    ...bindActionCreators({
+      ...userActions,
+      pushState
+    }, dispatch)
+  })
+)
+@Radium
 export default class SignupModal extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		empty: {
+			username: false,
+			email: false,
+			password: false
+		},
+		error: {
+			username: null,
+			email: null
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(!this.props.error && nextProps.error) {
+			this.setState({
+				error: {
+					username: nextProps.error.match(/username/g) ? nextProps.error : null,
+					email: nextProps.error.match(/email/g) && nextProps.error,
+				}
+			});
+		}
+	}
+
+	signUp() {
+		const token = cookie.load('token', {path: '/'})
+		const username = this.refs.username.value
+		const email = this.refs.email.value
+		const password = this.refs.password.value
+		if(isEmpty(username) || isEmpty(email) || isEmpty(password)) {
+			this.setState({
+				empty: {
+					username: isEmpty(username),
+					email: isEmpty(email),
+					password: isEmpty(password)
+				}})
+			return;
+		}
+		if(validateEmail(email) && password.length > 5) {
+			if(token) this.props.updateUser(username, email, password, token) 
+			else this.props.createUser(username, email, password)
+		} else {
+			this.setState({
+				error: {
+					email: !validateEmail(email) && 'Please enter a valid email address',
+					password: password.length < 6 && 'Your password needs to be 6 characters or longer'
+				} 
+			});
+		}
+	}	
+
 	render() {
 		const { isMobile } = this.props;
 		const deleteIcon = require('../../../static/icons/delete.png');
+		const closeStyle = {
+			height: isMobile ? '15px' : '16px',
+			position: 'absolute',
+			top: isMobile ? '1.25em' : '2em',
+			right: '2em',
+			cursor: 'pointer'
+		}
 		const headerStyle = {
 			color: '#2C3239',
 			fontWeight: '600',
@@ -28,41 +107,102 @@ export default class SignupModal extends Component {
 			height: '50px',
 			margin: '10px 0 10px 0'
 		}
+		// Validation 
+		const successIcon = require('../../../static/icons/success.png');
+		const errorIcon = require('../../../static/icons/error.png');
+		const { empty, error } = this.state;
 		const inputStyle = {
-			lineHeight: '17px',
-			margin: '10px 0 10px 0'
+			input: {
+				lineHeight: isMobile ? '18px' : '40px',
+				margin: '10px 0 10px 0'
+			},
+			success: {
+
+			},
+			error: {
+				border: '1px solid red'
+			}
+		}
+		const errorMessage = {
+			fontSize: '14px',
+			lineHeight: '14px',
+			color: 'red'
 		}
 		return (
 			<div className="display_flex flex_center flex_vertical">
 				<img 
-				onClick={() => {
-					this.props.close()
-				}} 
+				onClick={() => {this.props.close()}} 
 				src={deleteIcon} 
-				style={{
-					height: isMobile ? '15px' : '16px',
-					position: 'absolute',
-					top: isMobile ? '1.25em' : '2em',
-					right: '2em',
-					cursor: 'pointer'
-				}}/>
+				style={closeStyle}/>
 				<h1 style={headerStyle}>Sign up for free!</h1>
 				<p style={noteStyle}>Nightly is free as long as you want for an unlimited amount of assignments.</p>
 				<div style={formWrapper} className="flex_vertical">
 					<input 
+						ref="email"
 						autoFocus={true}
-						style={inputStyle}
+						onChange={(e) => {
+							this.setState({
+								empty: {
+									email: false,
+									username: this.state.empty.username,
+									password: this.state.empty.password
+								},
+								error: {
+									email: null,
+									username: this.state.empty.username,
+								},
+							});
+						}}
+						style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
 						type="text"
 						placeholder="Email address"/>
+					{empty.email && <p style={errorMessage}>Oops! You didn't enter your email!</p>}
+					{error.email && <p style={errorMessage}>{error.email}</p>}
 					<input 
-						style={inputStyle}
+						ref="username"
+						onChange={(e) => {
+							this.setState({
+								empty: {
+									email: this.state.empty.email,
+									username: false,
+									password: this.state.empty.password
+								},
+								error: {
+									email: this.state.error.email,
+									username: null
+								},
+							});
+						}}
+						style={[inputStyle.input, (empty.username || error.username) && inputStyle.error]}
 						type="text"
 						placeholder="Username (your students will see)"/>
+					{empty.username && <p style={errorMessage}>Oh no! You didn't enter your username!</p>}
+					{error.username && <p style={errorMessage}>{error.username}</p>}
 					<input 
-						style={inputStyle}
+						ref="password"
+						onChange={(e) => {
+							this.setState({
+								empty: {
+									email: this.state.empty.email,
+									username: this.state.empty.username,
+									password: false
+								},
+								error: {
+									email: this.state.error.email,
+									username: this.state.error.username,
+									password: null
+								}
+							});
+						}}
+						style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
 						type="password"
 						placeholder="Password"/>
-					<button style={bigButton} className="button primary_blue">
+					{empty.password && <p style={errorMessage}>No password? You need a password!</p>}
+					{error.password && <p style={errorMessage}>{error.password}</p>}
+					<button 
+						onClick={() => this.signUp()}
+						style={bigButton} 
+						className="button primary_blue">
 					Create your free account
 					</button>
 				</div>
@@ -70,3 +210,5 @@ export default class SignupModal extends Component {
 		);
 	}
 }
+
+

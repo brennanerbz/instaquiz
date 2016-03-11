@@ -35,12 +35,13 @@ export default class CreateAssignment extends Component {
 	state = {
 		title: '',
 		text: '',
+		isTextLink: false,
 		subject: null,
 		readingLevel: null,
 		touching: '',
 		trending: ['Wikipedia', 'CNN', 'Bloomberg Business'],
 		subjects: [
-			{text: 'Subject', value: ''},
+			{text: 'Subject', value: null},
 			{text: 'English', value: 'english'},
 			{text: 'Math', value: 'math'},
 			{text: 'Science', value: 'science'},
@@ -49,10 +50,10 @@ export default class CreateAssignment extends Component {
 			{text: 'Spanish', value: 'spanish'},
 			{text: 'French', value: 'french'},
 			{text: 'German', value: 'german'},
-			{text: 'Latin', value: 'Latin'},
+			{text: 'Latin', value: 'latin'},
 		],
 		readingLevels: [
-			{text: 'Reading level', value: ''},
+			{text: 'Grade level', value: null},
 			{text: 'Adult', value: 'adult'},
 			{text: 'Graduate', value: 'graduate'},
 			{text: 'College', value: 'college'},
@@ -68,7 +69,7 @@ export default class CreateAssignment extends Component {
 			{text: '3rd', value: '3'},
 			{text: '2nd', value: '2'},
 			{text: '1st', value: '1'},
-			{text: 'Kindergarten', value: 'K'},
+			{text: 'Kindergarten', value: 'K'}
 		]
 	}
 
@@ -88,6 +89,34 @@ export default class CreateAssignment extends Component {
 		if(!this.props.finished && nextProps.finished) {
 			this.props.pushState(null, `/assignment/${assignment.token}/questions`)
 			this.props.close()
+		}
+		// Incoming text & title from link
+		const { title, text } = nextProps;
+		const { isTextLink } = this.state;
+		if(isTextLink && (text !== this.state.text)) {
+			this.setState({
+				title: title,
+				text: text,
+				isTextLink: false
+			});
+		}
+	}
+
+	findLink(text) {
+		var linkText = text.match(
+			/((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi
+		)
+		if(linkText) {
+			const link = text;
+			const token = cookie.load('token', {path: '/'})
+			this.props.fetchArticle(link, token)
+			this.setState({
+				isTextLink: true
+			});
+		} else {
+			this.setState({
+				text: text
+			});
 		}
 	}
 
@@ -135,7 +164,7 @@ export default class CreateAssignment extends Component {
 		// Subject and reading level
 		const selectStyles = {
 			container: {
-				margin: isMobile ? '10px 0 0' : '20px 0 0',
+				margin: isMobile ? '10px 0 0' : '20px 0 20px',
 				padding: '0 0em'
 			},
 			label: {
@@ -237,9 +266,11 @@ export default class CreateAssignment extends Component {
 						ariaLabel="Assignment text"
 						ref="assignment_text"
 						style={{margin: isMobile ? '10px 0 0' : '20px 0 0', overflowY: 'scroll'}} 
-						placeholder={'Paste text here...'}
+						placeholder={isMobile ? 'Paste URL here...' : 'Paste website URL or text here...'}
 						className={(isMobile ? 'mobile' : '') + ' ' + style.textarea}
-						onChange={(e) => this.setState({text: e.target.value})}
+						onChange={(e) => {
+							this.findLink(e.target.value)
+						}}
 						onBlur={() => this.props.updateText(text)}
 						onKeyDown={(e) => {
 							if(e.which === 13) {
@@ -287,7 +318,7 @@ export default class CreateAssignment extends Component {
 								}}>
 								{readingLevels.map((level, i) => {
 									return (
-										<option key={level.value + i} value={level.value}>
+										<option key={level.text + level.value + i} value={level.value}>
 											{level.text}
 										</option>
 									)
@@ -295,41 +326,6 @@ export default class CreateAssignment extends Component {
 							</select>
 							<i style={selectStyles.icon} className="fa fa-caret-down"></i>
 						</label>
-					</div>
-
-					{/* Divider */}
-					<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
-						<div style={{margin: '10px auto', background: isMobile ? '#F9FAFC' : '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
-						or
-						</div>
-						<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
-					</div>
-
-					{/* Trending List */}
-					<div 
-					className="display_flex flex_vertical flex_center" 
-					style={{
-						background: '#fff', 
-						width: '100%', 
-						textAlign: 'center', 
-						margin: isMobile ? '0.25em 0 0' : '', 
-						padding: isMobile ? '1em' : '10px',
-						borderTop: isMobile ? '1px solid #DFE6ED' : ''
-					}}>
-						<h3 style={{fontWeight: '600', margin: '0 auto'}}>Trending Articles</h3>
-						<ul
-						style={{listStyleType: 'none', margin: '0.5em 0 0.5em'}}
-						className="">
-							{
-								trending.map((trending, i) => {
-									return (
-										<li key={i} className="">
-											<a style={{display: 'block', padding: '8px 12px'}} className="link">{trending}</a>
-										</li>
-									)
-								})
-							}
-						</ul>
 					</div>
 
 					{!isMobile &&
@@ -361,3 +357,38 @@ export default class CreateAssignment extends Component {
 		);
 	}
 }
+
+
+/*
+<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
+	<div style={{margin: '10px auto', background: isMobile ? '#F9FAFC' : '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
+	or
+	</div>
+	<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
+</div>
+<div 
+className="display_flex flex_vertical flex_center" 
+style={{
+	background: '#fff', 
+	width: '100%', 
+	textAlign: 'center', 
+	margin: isMobile ? '0.25em 0 0' : '', 
+	padding: isMobile ? '1em' : '10px',
+	borderTop: isMobile ? '1px solid #DFE6ED' : ''
+}}>
+	<h3 style={{fontWeight: '600', margin: '0 auto'}}>Trending Articles</h3>
+	<ul
+	style={{listStyleType: 'none', margin: '0.5em 0 0.5em'}}
+	className="">
+		{
+			trending.map((trending, i) => {
+				return (
+					<li key={i} className="">
+						<a style={{display: 'block', padding: '8px 12px'}} className="link">{trending}</a>
+					</li>
+				)
+			})
+		}
+	</ul>
+</div>
+*/

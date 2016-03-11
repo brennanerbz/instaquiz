@@ -5,6 +5,10 @@ export const FETCH_ASSIGNMENTS = 'nightly/assignments/FETCH_ASSIGNMENTS';
 export const FETCH_ASSIGNMENTS_SUCCESS = 'nightly/assignments/FETCH_ASSIGNMENTS_SUCCESS';
 export const FETCH_ASSIGNMENTS_FAILURE = 'nightly/assignments/FETCH_ASSIGNMENTS_FAILURE';
 
+export const FETCH_ARTICLE = 'nightly/assignments/FETCH_ARTICLE';
+export const FETCH_ARTICLE_SUCCESS = 'nightly/assignments/FETCH_ARTICLE_SUCCESS';
+export const FETCH_ARTICLE_FAILURE = 'nightly/assignments/FETCH_ARTICLE_FAILURE';
+
 export const CREATE_ASSIGNMENT = 'nightly/assignments/CREATE_ASSIGNMENT';
 export const CREATE_ASSIGNMENT_SUCCESS = 'nightly/assignments/CREATE_ASSIGNMENT_SUCCESS';
 export const CREATE_ASSIGNMENT_FAILURE = 'nightly/assignments/CREATE_ASSIGNMENT_FAILURE';
@@ -53,6 +57,23 @@ export default function reducer(state = initialState, action) {
 				assignments: [...action.result.assignments]
 			}
 		case FETCH_ASSIGNMENTS_FAILURE:
+			return {
+				...state,
+				error: action.error
+			}
+		case FETCH_ARTICLE:
+			return {
+				...state,
+				creating: true
+			}
+		case FETCH_ARTICLE_SUCCESS:
+			return {
+				...state,
+				creating: false,
+				title: action.result.title,
+				text: action.result.text
+			}
+		case FETCH_ARTICLE_FAILURE:
 			return {
 				...state,
 				error: action.error
@@ -182,6 +203,13 @@ export function fetchAssignments(token) {
 	return {
 		types: [FETCH_ASSIGNMENTS, FETCH_ASSIGNMENTS_SUCCESS, FETCH_ASSIGNMENTS_FAILURE],
 		promise: (client) => client.get('/assignments/', null, token)
+	}
+}
+
+export function fetchArticle(link, token) {
+	return {
+		types: [FETCH_ARTICLE, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE],
+		promise: (client) => client.post('/article/', {link: link}, token)
 	}
 }
 

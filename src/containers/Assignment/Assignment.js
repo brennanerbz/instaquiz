@@ -54,6 +54,11 @@ export default class Assignment extends Component {
 		this.scorePoll = setInterval(() => {
 			this.props.fetchAssignment(params.token, token)
 		}, 60000)
+		// Show prompt
+		const teacher = cookie.load('teacher', {path: '/'})
+		this.setState({
+			promptOpen: !teacher
+		});
 	}
 
 	componentWillReceiveProps(nextProps) {

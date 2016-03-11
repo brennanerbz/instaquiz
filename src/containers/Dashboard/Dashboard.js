@@ -35,9 +35,9 @@ export default class Dashboard extends Component {
 	}
 
 	componentDidMount() {
-		const { isMobile } = this.props;
+		const teacher = cookie.load('teacher', {path: '/'})
 		this.setState({
-			// promptOpen: isMobile
+			promptOpen: !teacher
 		});
 	}
 

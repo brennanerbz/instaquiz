@@ -248,15 +248,21 @@ export default class Header extends Component {
 								</OverlayTrigger>
 							}
 							{
-								!isMobile && teacher &&
+								!isMobile && !teacher && (assignmentsView || isNotHomeView) &&
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('signup')} className="link_list_item">
 									<a className="grey link">Sign Up</a>
 								</li>
 							}
 							{
-								!isMobile && teacher && 
+								!isMobile && !teacher && (assignmentsView || isNotHomeView) &&
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('login')} className="link_list_item">
 									<a className="grey link">Log In</a>
+								</li>
+							}
+							{
+								!isMobile && teacher && 
+								<li style={{lineHeight: '45px'}} onClick={() => this.props.logOut()} className="link_list_item">
+									<a className="grey link">Log Out</a>
 								</li>
 							}
 						</ul>
@@ -268,7 +274,7 @@ export default class Header extends Component {
 							onClick={() => this.props.openModal('login')}
 							style={{height: '41px', margin: '6px 0 0 10px'}}
 							className="button primary_white">
-								Sign In
+								Log In
 							</button>
 							<button 
 							onClick={() => this.props.openModal('signup')}

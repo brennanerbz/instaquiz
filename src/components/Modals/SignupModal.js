@@ -12,7 +12,8 @@ import { validateEmail, isEmpty } from '../../utils/helperfunctions';
 @connect(
   state => ({
   	user: state.user.user,
-  	error: state.user.error
+  	error: state.user.error,
+  	loaded: state.user.loaded
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -34,7 +35,8 @@ export default class SignupModal extends Component {
 		},
 		error: {
 			username: null,
-			email: null
+			email: null,
+			password: null
 		}
 	}
 
@@ -43,9 +45,12 @@ export default class SignupModal extends Component {
 			this.setState({
 				error: {
 					username: nextProps.error.match(/username/g) ? nextProps.error : null,
-					email: nextProps.error.match(/email/g) && nextProps.error,
+					email: nextProps.error.match(/email/g) ? nextProps.error : null,
 				}
 			});
+		}
+		if(!this.props.loaded && nextProps.loaded) {
+			this.props.close()
 		}
 	}
 
@@ -194,6 +199,7 @@ export default class SignupModal extends Component {
 								}
 							});
 						}}
+						onKeyDown={(e) => {if(e.which === 13) this.signUp()}}
 						style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
 						type="password"
 						placeholder="Password"/>

@@ -18,6 +18,7 @@ import FsModal from '../../components/Modals/FsModal';
 
 // API calls
 import { fetchUser } from '../../redux/modules/user';
+import { logOut } from '../../redux/modules/user';
 import { nameError } from '../../redux/modules/homework';
 import { fetchAssignments } from '../../redux/modules/assignments';
 import { openModal } from '../../redux/modules/overlays';
@@ -49,6 +50,7 @@ function fetchData(getState, dispatch) {
 			pushState,
 			nameError,
 			fetchUser,
+			logOut,
 			openModal,
 			openFsModal,
 			fetchAssignments
@@ -104,6 +106,7 @@ export default class App extends Component {
 		const { children, pushState, params, location, query } = this.props;
 		const { nameError, student_name, homework_title, homework_sequence, selected } = this.props;
 		const { openModal, openFsModal } = this.props;
+		const { logOut } = this.props;
 		const { isMobile, howItWorksOpen, scrolling } = this.state;
 		const { userLoaded } = this.props;
 		const user = cookie.load('token', {path: '/'}) ? true : false
@@ -125,6 +128,7 @@ export default class App extends Component {
 				<Header 
 					openModal={openModal}
 					openFsModal={openFsModal}
+					logOut={logOut}
 					pushState={pushState}
 					nameError={nameError}
 					student_name={student_name}

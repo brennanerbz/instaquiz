@@ -15,55 +15,79 @@ export const FETCH_USER = 'nightly/user/FETCH_USER';
 export const FETCH_USER_SUCCESS = 'nightly/user/FETCH_USER_SUCCESS';
 export const FETCH_USER_FAILURE = 'nightly/user/FETCH_USER_FAILURE';
 
+export const FETCH_TOKEN = 'nightly/user/FETCH_TOKEN';
+export const FETCH_TOKEN_SUCCESS = 'nightly/user/FETCH_TOKEN_SUCCESS';
+export const FETCH_TOKEN_FAILURE = 'nightly/user/FETCH_TOKEN_FAILURE';
+
+export const LOG_OUT = 'nightly/user/LOG_OUT';
+
 const initialState = {
 	loaded: false,
 	loading: false,
-	token: '',
+	token: null,
 	user: null
 }
 
 export default function reducer(state = initialState, action) {
+	var d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
 	switch(action.type) {
 		case CREATE_USER:
 			return {
-				...state
+				...state,
+				loaded: false,
 			}
 		case CREATE_USER_SUCCESS:
-			var d = new Date();
-		    d.setTime(d.getTime() + (365*24*60*60*1000));
 			cookie.save('token', action.result.token, { path: '/', expires: d});
+			if(action.result.email) {
+				cookie.save('teacher', true, {path: '/', expires: d})
+			}
 			return {
 				...state,
 				token: action.result.token,
-				user: action.result
+				user: action.result,
+				loaded: true
 			}
 		case CREATE_USER_FAILURE:
 			return {
-				...state
+				...state,
+				error: action.error
 			}
 		case UPDATE_USER:
 			return {
 				...state,
-				loading: true
+				loading: true,
+				loaded: false
 			}
 		case UPDATE_USER_SUCCESS:
+			if(!cookie.load('teacher', {path: '/'})) {
+				cookie.save('teacher', true, {path: '/', expires: d})
+			}
 			return {
 				...state,
 				loaded: true,
-				loading: false
+				loading: false,
+				user: action.result
 			}
 		case UPDATE_USER_FAILURE:
 			return {
 				...state,
 				loaded: false,
-				loading: false
+				loading: false,
+				error: action.error
 			}
 		case FETCH_USER:
 			return {
 				...state,
+				loaded: false,
 				loading: true
 			}
 		case FETCH_USER_SUCCESS:
+			if(!cookie.load('teacher', {path: '/'})) {
+				if(action.result.email) {
+					cookie.save('teacher', true, {path: '/', expires: d})
+				}
+			}
 			return {
 				...state,
 				loaded: true,
@@ -75,6 +99,31 @@ export default function reducer(state = initialState, action) {
 				...state,
 				loaded: false,
 				loading: false
+			}
+		case FETCH_TOKEN:
+			return {
+				...state
+			}
+		case FETCH_TOKEN_SUCCESS:
+			cookie.save('token', action.result, { path: '/', expires: d});
+			return {
+				...state,
+				token: action.result
+			}
+		case FETCH_TOKEN_FAILURE:
+			return {
+				...state
+			}
+		case LOG_OUT:
+			cookie.remove('token', {path: '/'})
+			cookie.remove('teacher', {path: '/'})
+			cookie.remove('student', {path: '/'})
+			cookie.remove('sequences', {path: '/'})
+			return {
+				...state,
+				loaded: false,
+				token: '',
+				user: null
 			}
 		default:
 			return {
@@ -95,7 +144,6 @@ export function createUser(username, email, password) {
 		})
 	}
 }
-
 export function updateUser(username, email, password, token) {
 	return {
 		types: [UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE],
@@ -106,10 +154,20 @@ export function updateUser(username, email, password, token) {
 		}, token)
 	}
 }
-
 export function fetchUser(token) {
 	return {
 		types: [FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE],
 		promise: (client) => client.get('/users/', null, token)
+	}
+}
+export function fetchToken(email, password) {
+	return {
+		types: [FETCH_TOKEN, FETCH_TOKEN_SUCCESS, FETCH_TOKEN_FAILURE],
+		promise: (client) => client.get('/token', null, {email: email, password: password})
+	}
+}
+export function logOut() {
+	return {
+		type: LOG_OUT
 	}
 }

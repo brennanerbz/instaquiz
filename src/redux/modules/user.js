@@ -105,10 +105,16 @@ export default function reducer(state = initialState, action) {
 				...state
 			}
 		case FETCH_TOKEN_SUCCESS:
-			cookie.save('token', action.result, { path: '/', expires: d});
-			return {
-				...state,
-				token: action.result
+			if(action.result) {
+				cookie.save('token', action.result, { path: '/', expires: d});
+				return {
+					...state,
+					token: action.result
+				}
+			} else {
+				return {
+					...state
+				}
 			}
 		case FETCH_TOKEN_FAILURE:
 			return {

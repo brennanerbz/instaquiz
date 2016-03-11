@@ -209,7 +209,7 @@ export function fetchAssignments(token) {
 export function fetchArticle(link, token) {
 	return {
 		types: [FETCH_ARTICLE, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE],
-		promise: (client) => client.post('/article/', {link: link}, token)
+		promise: (client) => client.post('/scrape-url', {url: link}, token)
 	}
 }
 

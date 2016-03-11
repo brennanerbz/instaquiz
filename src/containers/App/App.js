@@ -35,6 +35,7 @@ function fetchData(getState, dispatch) {
 
 // @connectData(fetchData)
 @connect(state => ({
+	user: state.user.user,
 	loaded: state.user.loaded,
 	params: state.router.params,
 	location: state.router.location,
@@ -93,6 +94,9 @@ export default class App extends Component {
 			const node = document.body;
 			node.scrollTop = 0
 		}
+		if(this.props.user && !nextProps.user) {
+			this.props.pushState(null, '/')
+		}
 	}
 
 	handleScroll() {
@@ -111,6 +115,7 @@ export default class App extends Component {
 		const { userLoaded } = this.props;
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
+		const account = cookie.load('account', {path: '/'})
 		var appChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
 				userLoaded: userLoaded,
@@ -144,6 +149,7 @@ export default class App extends Component {
 					openHowItWorks={(value) => this.setState({howItWorksOpen: value})}
 					user={user}
 					teacher={teacher}
+					account={account}
 				/>
 				{appChildrenWithProps}
 				<Modal isMobile={isMobile}/>

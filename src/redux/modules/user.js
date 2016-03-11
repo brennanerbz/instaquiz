@@ -41,6 +41,7 @@ export default function reducer(state = initialState, action) {
 			cookie.save('token', action.result.token, { path: '/', expires: d});
 			if(action.result.email) {
 				cookie.save('teacher', true, {path: '/', expires: d})
+				cookie.save('account', true, {path: '/', expires: d})
 			}
 			return {
 				...state,
@@ -60,8 +61,9 @@ export default function reducer(state = initialState, action) {
 				loaded: false
 			}
 		case UPDATE_USER_SUCCESS:
-			if(!cookie.load('teacher', {path: '/'})) {
-				cookie.save('teacher', true, {path: '/', expires: d})
+			cookie.save('teacher', true, {path: '/', expires: d})
+			if(action.result.email) {
+				cookie.save('account', true, {path: '/', expires: d})
 			}
 			return {
 				...state,
@@ -83,10 +85,9 @@ export default function reducer(state = initialState, action) {
 				loading: true
 			}
 		case FETCH_USER_SUCCESS:
-			if(!cookie.load('teacher', {path: '/'})) {
-				if(action.result.email) {
-					cookie.save('teacher', true, {path: '/', expires: d})
-				}
+			cookie.save('teacher', true, {path: '/', expires: d})
+			if(action.result.email) {
+				cookie.save('account', true, {path: '/', expires: d})
 			}
 			return {
 				...state,
@@ -122,6 +123,7 @@ export default function reducer(state = initialState, action) {
 			}
 		case LOG_OUT:
 			cookie.remove('token', {path: '/'})
+			cookie.remove('account', {path: '/'})
 			cookie.remove('teacher', {path: '/'})
 			cookie.remove('student', {path: '/'})
 			cookie.remove('sequences', {path: '/'})

@@ -86,9 +86,9 @@ export default function reducer(state = initialState, action) {
 		case CREATE_ASSIGNMENT_SUCCESS:
 			var d = new Date();
 		    d.setTime(d.getTime() + (365*24*60*60*1000));
-			if(state.assignments.length === 0) {
-				cookie.save('teacher', true, {path: '/', expires: d})
-			}
+		    if(!cookie.load('teacher', {path: '/'})) {
+		    	cookie.save('teacher', true, {path: '/', expires: d})
+		    }
 			return {
 				...state,
 				creating: false,

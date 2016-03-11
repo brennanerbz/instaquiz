@@ -11,6 +11,7 @@ import * as overlayActions from '../../redux/modules/overlays';
 import { AssignmentList } from '../../components';
 
 @connect(state => ({
+		user: state.user.user,
 		assignments: state.assignments.assignments,
 	}),
 	dispatch => ({
@@ -35,13 +36,16 @@ export default class Dashboard extends Component {
 	}
 
 	componentDidMount() {
-		const teacher = cookie.load('teacher', {path: '/'})
+		const account = cookie.load('account', {path: '/'})
 		this.setState({
-			promptOpen: !teacher
+			promptOpen: !account
 		});
 	}
 
-	
+	componentWillReceiveProps(nextProps) {
+		if(this.props.user && !this.props.user.email && nextProps.user.email) this.setState({promptOpen: false})
+	}
+
 	render() {
 		const { isMobile } = this.props;
 		const deleteIcon = require('../../../static/icons/deleteWhite.png');

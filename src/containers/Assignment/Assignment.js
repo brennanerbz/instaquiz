@@ -15,6 +15,7 @@ import QuizHeader from '../../components/QuizHeader/QuizHeader';
 import QuizContent from '../../components/QuizContent/QuizContent';
 
 @connect(state => ({
+		user: state.user.user,
 		assignment: state.assignments.assignment,
 		token: state.assignments.assignment.token,
 		title: state.assignments.assignment.title,
@@ -55,9 +56,9 @@ export default class Assignment extends Component {
 			this.props.fetchAssignment(params.token, token)
 		}, 60000)
 		// Show prompt
-		const teacher = cookie.load('teacher', {path: '/'})
+		const account = cookie.load('account', {path: '/'})
 		this.setState({
-			promptOpen: !teacher
+			promptOpen: !account
 		});
 	}
 
@@ -66,6 +67,7 @@ export default class Assignment extends Component {
 		if(this.props.params.tab !== 'scores' && nextProps.params.tab == 'scores') {
 			this.props.fetchAssignment(nextProps.params.token, token)
 		}
+		if(this.props.user && !this.props.user.email && nextProps.user.email) this.setState({promptOpen: false})
 	}	
 
 	componentWillUnmount() {

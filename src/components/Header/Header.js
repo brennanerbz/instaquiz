@@ -63,7 +63,7 @@ export default class Header extends Component {
 		// Assignment | Teacher
 		const assignmentView = location.pathname.match(/assignment/gi);
 		// Assignment | Index | Teacher
-		const { user, teacher } = this.props;
+		const { user, teacher, account } = this.props;
 		const assignmentsView = user && teacher && location.pathname == "/"
 		// Homework | Student
 		const homeworkView = location.pathname.match(/homework/gi);
@@ -248,19 +248,19 @@ export default class Header extends Component {
 								</OverlayTrigger>
 							}
 							{
-								!isMobile && !teacher && (assignmentsView || isNotHomeView) &&
+								!isMobile && !account && (assignmentsView || isNotHomeView) &&
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('signup')} className="link_list_item">
 									<a className="grey link">Sign Up</a>
 								</li>
 							}
 							{
-								!isMobile && !teacher && (assignmentsView || isNotHomeView) &&
+								!isMobile && !account && (assignmentsView || isNotHomeView) &&
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.openModal('login')} className="link_list_item">
 									<a className="grey link">Log In</a>
 								</li>
 							}
 							{
-								!isMobile && teacher && 
+								!isMobile && account && 
 								<li style={{lineHeight: '45px'}} onClick={() => this.props.logOut()} className="link_list_item">
 									<a className="grey link">Log Out</a>
 								</li>

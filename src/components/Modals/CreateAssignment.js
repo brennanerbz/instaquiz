@@ -135,7 +135,7 @@ export default class CreateAssignment extends Component {
 		// Subject and reading level
 		const selectStyles = {
 			container: {
-				margin: '20px 0 0',
+				margin: isMobile ? '10px 0 0' : '20px 0 0',
 				padding: '0 0em'
 			},
 			label: {
@@ -222,8 +222,7 @@ export default class CreateAssignment extends Component {
 					type="text"
 					name="title"
 					ariaLabel="Assignment title"
-					// autoFocus={true}
-					style={{height: '40px', lineHeight: isMobile ? '18px' : '40px'}}
+					style={{height: '42px', lineHeight: isMobile ? '18px' : '40px'}}
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
 					value={title}

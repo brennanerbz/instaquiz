@@ -219,6 +219,9 @@ export default class Assignment extends Component {
 											const first = i === 0;
 											const last = i === tabs.length - 1;
 											const active = tab === activeTab
+											const scoresIn = sequences
+															.filter(seq => {return seq.identifier && seq.identifier.length > 0})
+															.length > 0
 											return (
 												<li 
 													onTouchStart={() => this.setState({touchingTab: i})}
@@ -249,8 +252,8 @@ export default class Assignment extends Component {
 														fontWeight: active ? '600' : '500'
 													}}>
 														{tab}
-														{tab == 'Scores' && ` `}
-														{tab == 'Scores' ? `(${sequences.length})` : ''}
+														{tab == 'Scores' && scoresIn && ` `}
+														{(tab == 'Scores' && scoresIn) ? `(${sequences.length})` : ''}
 													</a>
 												</li>
 											)
@@ -297,54 +300,56 @@ export default class Assignment extends Component {
 											const score = (sequence.correct_count / items_count) * 100
 											const first = i === 0;
 											const completed = sequence.questions_remaining === 0;
-											return (
-												<li 
-												style={{
-													borderTop: !first ? '1px solid #E6E8EA' : '',
-													padding: '0.75em 0',
-													fontSize: isMobile ? '14px' : '16px',
-													color: '#333333'
-												}}
-												key={sequence.identifier + i} 
-												className="display_flex flex_horizontal">
-													<span 
-													style={{width: '50%', lineHeight: '20px', paddingLeft: !isMobile ? '1em' : ''}}>
-														<b style={{fontSize: '17px'}}>{sequence.identifier}</b>
-														{!completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Started {moment.utc(sequence.start).fromNow()}</p>}
-														{completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Finished {moment.utc(sequence.finish).fromNow()}</p>}
-													</span>
-													<span 
-													className="display_flex" 
+											if(sequence.identifier && sequence.identifier.length > 0) {
+												return (
+													<li 
 													style={{
-														width: '50%', 
-														lineHeight: !completed ? '40px' : '',
-														paddingRight: !isMobile ? '1em' : ''
-													}}>
-														{
-															completed
-															?
-															<span 
-															style={{
-																borderRadius: '50%',
-																border: '1px solid #1FB6FF',
-																height: '40px',
-																width: '40px',
-																lineHeight: '35px',
-																color: '#1FB6FF',
-																fontWeight: '500',
-																textAlign: 'center'
-															}}
-															className={isMobile ? 'flex_item_align_right' : ''}>
-															<b>{score.toFixed(0)}</b>
-															</span>
-															:
-															<span className={isMobile ? 'flex_item_align_right' : ''}>
-																In progress...
-															</span>
-														}
-													</span>
-												</li>
-											)
+														borderTop: !first ? '1px solid #E6E8EA' : '',
+														padding: '0.75em 0',
+														fontSize: isMobile ? '14px' : '16px',
+														color: '#333333'
+													}}
+													key={sequence.identifier + i} 
+													className="display_flex flex_horizontal">
+														<span 
+														style={{width: '50%', lineHeight: '20px', paddingLeft: !isMobile ? '1em' : ''}}>
+															<b style={{fontSize: '17px'}}>{sequence.identifier}</b>
+															{!completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Started {moment.utc(sequence.start).fromNow()}</p>}
+															{completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Finished {moment.utc(sequence.finish).fromNow()}</p>}
+														</span>
+														<span 
+														className="display_flex" 
+														style={{
+															width: '50%', 
+															lineHeight: !completed ? '40px' : '',
+															paddingRight: !isMobile ? '1em' : ''
+														}}>
+															{
+																completed
+																?
+																<span 
+																style={{
+																	borderRadius: '50%',
+																	border: '1px solid #1FB6FF',
+																	height: '40px',
+																	width: '40px',
+																	lineHeight: '35px',
+																	color: '#1FB6FF',
+																	fontWeight: '500',
+																	textAlign: 'center'
+																}}
+																className={isMobile ? 'flex_item_align_right' : ''}>
+																<b>{score.toFixed(0)}</b>
+																</span>
+																:
+																<span className={isMobile ? 'flex_item_align_right' : ''}>
+																	In progress...
+																</span>
+															}
+														</span>
+													</li>
+												)
+											}
 										})
 									}
 								</ul>

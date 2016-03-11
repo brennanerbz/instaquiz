@@ -338,6 +338,7 @@ export default class CreateAssignment extends Component {
 							<button 
 							onClick={() => {
 								this.props.close()
+								this.props.clearDraft()
 							}}
 							style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 
 							className="button primary_white">

@@ -131,7 +131,7 @@ export default class Header extends Component {
 
 					{assignmentsView &&
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '600', color: '#333333', fontSize: isMobile ? '' : '19px'}}>
+						<p style={{fontWeight: '600', color: '#333333', fontSize: isMobile ? '17px' : '19px'}}>
 						Assignments
 						</p>
 					</span>}

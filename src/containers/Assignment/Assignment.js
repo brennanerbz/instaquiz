@@ -84,7 +84,7 @@ export default class Assignment extends Component {
 				flex: '1',
 				background: '#00B5FF',
 				padding: isMobile ? '2em 0 2em 0' : '2em',
-				margin: isMobile ? '3.5em auto 0 auto' : '1em auto 1em auto',
+				margin: isMobile ? '3.5em auto 0 auto' : '1em auto 0em auto',
 				display: promptOpen ? '' : 'none',
 				maxWidth: '1000px',
 				width: '100%',
@@ -247,7 +247,9 @@ export default class Assignment extends Component {
 														fontSize: isMobile ? '15px' : '16px',
 														fontWeight: active ? '600' : '500'
 													}}>
-														{tab}&nbsp;{tab == 'Scores' ? `(${sequences.length})` : ''}
+														{tab}
+														{tab == 'Scores' && ` `}
+														{tab == 'Scores' ? `(${sequences.length})` : ''}
 													</a>
 												</li>
 											)

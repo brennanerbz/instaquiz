@@ -262,11 +262,12 @@ export default class Assignment extends Component {
 								<div 
 								style={{
 									borderRadius: '4px', 
-									border: '1px solid #DAE0E7', 
+									border: '1px solid #E6E8EA', 
 									padding: '1em',
-									lineHeight: '1.5em',
+									lineHeight: '1.35em',
 									whiteSpace: 'pre-wrap',
-									background: '#fff'
+									background: '#fff',
+									color: '#333333'
 								}}>
 								{assignment && assignment.text}
 								</div>
@@ -288,7 +289,7 @@ export default class Assignment extends Component {
 							</div>}
 							{activeTab === 'Scores' &&
 							<div id="scores" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
-								<div style={{borderRadius: '4px', border: '1px solid #DAE0E7', padding: '0 1em 0em'}}>
+								<div style={{borderRadius: '4px', border: '1px solid #E6E8EA', padding: '0 1em 0em'}}>
 								<ul id="score_list">
 									{
 										sequences.map((sequence, i) => {
@@ -298,9 +299,10 @@ export default class Assignment extends Component {
 											return (
 												<li 
 												style={{
-													borderTop: !first ? '1px solid #DAE0E7' : '',
+													borderTop: !first ? '1px solid #E6E8EA' : '',
 													padding: '0.75em 0',
-													fontSize: isMobile ? '14px' : '16px'
+													fontSize: isMobile ? '14px' : '16px',
+													color: '#333333'
 												}}
 												key={sequence.identifier + i} 
 												className="display_flex flex_horizontal">

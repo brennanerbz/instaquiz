@@ -131,7 +131,7 @@ export default class Header extends Component {
 
 					{assignmentsView &&
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '600', color: '#3C4858', fontSize: isMobile ? '' : '19px'}}>
+						<p style={{fontWeight: '600', color: '#333333', fontSize: isMobile ? '' : '19px'}}>
 						Assignments
 						</p>
 					</span>}
@@ -158,7 +158,7 @@ export default class Header extends Component {
 					<span 
 					className="flex_item_align_center" 
 					style={{height: '30px', lineHeight: '25px', fontSize: '16.5px', maxWidth: '200px'}}>
-						<p style={{fontWeight: '600', color: '#3C4858'}} className="overflow_ellipsis">
+						<p style={{fontWeight: '600', color: '#333333'}} className="overflow_ellipsis">
 						{this.props.homework_title}
 						</p>
 					</span>}
@@ -170,7 +170,7 @@ export default class Header extends Component {
 						maxWidth: '200px'
 					}}>
 						<p 
-						style={{fontWeight: '600', color: '#3C4858'}} 
+						style={{fontWeight: '600', color: '#333333'}} 
 						className="overflow_ellipsis">
 						{this.props.homework_title}
 						</p>

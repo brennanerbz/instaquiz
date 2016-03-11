@@ -49,7 +49,8 @@ export default class QuizContent extends Component {
 				border: '1px solid #DAE0E7', 
 				borderRadius: '0.25em', 
 				width: '100%', 
-				fontSize: isMobile ? '14px' : ''}}>
+				fontSize: isMobile ? '14px' : '',
+				color: '#333333'}}>
 				{itemList}
 			</ul>
 		);

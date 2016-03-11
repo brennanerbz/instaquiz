@@ -33,7 +33,7 @@ export default class AssignmentList extends Component {
 					margin: isMobile ? '0' : `${promptOpen ? '0' : '6em'} 0`,
 					listStyleType: 'none',  
 					width: '100%',
-					border: isMobile ? '' : '1px solid #e4e4e4',
+					border: isMobile ? '' : '1px solid #E6E8EA',
 					borderRadius: '4px',
 					background: '#fff',
 					boxShadow: isMobile ? '' : '0 1px 1px 0 rgba(31,45,61,0.05)'
@@ -52,9 +52,9 @@ export default class AssignmentList extends Component {
 							style={{
 								borderTopLeftRadius: '4px',
 								borderTopRightRadius: '4px',
-								padding: isMobile ? '1em 0 1em 0em' : '1em', 
-								margin: isMobile ? '0 0 0 1em' : '0', 
-								borderBottom: renderBorder ? '1px solid #e4e4e4' : '',
+								padding: isMobile ? '1em 0 1em 0em' : '1em 1em 1em 0', 
+								margin: isMobile ? '0 0 0 1em' : '0 0 0 1em', 
+								borderBottom: renderBorder ? '1px solid #E6E8EA' : '',
 								background: (touching === i) ? '#F5FAFE' : '#fff',
 								cursor: 'pointer'
 							}}
@@ -62,19 +62,20 @@ export default class AssignmentList extends Component {
 							className="display_flex flex_horizontal flex_nowrap">
 								<img src={setIcon} style={{height: '32px', width: '27px'}}/>
 								<span style={{marginLeft: '20px', fontSize: isMobile ? '16px' : '17px'}}>
-									<p style={{fontWeight: '600', color: '#3C4858'}}>
+									<p style={{fontSize: '18px', fontWeight: '600', color: '#333333'}}>
 									{assignment.title.slice(0, 28) + (assignment.title.length > 28 ? '...' : '')}
 									</p>
-									<p style={{fontWeight: '400', color: '#8492A6', lineHeight: '1.25em'}}>
-									{assignment.text.slice(0, 35) + (assignment.text.length > 35 ? '...' : '')}
+									<p style={{fontSize: '15px', fontWeight: '400', color: '#AEB6BD', lineHeight: '1.75em'}}>
+									{!isMobile && assignment.text.slice(0, 105) + (assignment.text.length > 105 ? '...' : '')}
+									{isMobile && assignment.text.slice(0, 35) + (assignment.text.length > 35 ? '...' : '')}
 									</p> 
 								</span>
 								<span 
 								style={{
 									position: 'absolute', 
 									right: isMobile ? '1em' : '3em', 
-									fontSize: isMobile ? '15px' : '16px', 
-									color: '#8492A6'
+									fontSize: isMobile ? '14px' : '15px', 
+									color: '#AEB6BD'
 								}} className="display_flex flex_horizontal">
 									<p style={{marginRight: '5px'}}>
 									{moment.utc(assignment.created).calendar(null, {
@@ -99,7 +100,7 @@ export default class AssignmentList extends Component {
 								key={i} 
 								style={{
 									height: '67px', 
-									marginLeft: isMobile ? '1em' : '0', 
+									marginLeft: '1em', 
 									borderBottom: last ? '' : '1px solid #e4e4e4'}}>
 								</li>
 							)

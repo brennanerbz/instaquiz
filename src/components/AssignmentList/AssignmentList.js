@@ -62,9 +62,11 @@ export default class AssignmentList extends Component {
 							className="display_flex flex_horizontal flex_nowrap">
 								<img src={setIcon} style={{height: '32px', width: '27px'}}/>
 								<span style={{marginLeft: '20px', fontSize: isMobile ? '16px' : '17px'}}>
-									<p style={{fontWeight: '600', color: '#3C4858'}}>{assignment.title}</p>
+									<p style={{fontWeight: '600', color: '#3C4858'}}>
+									{assignment.title.slice(0, 28) + (assignment.title.length > 28 ? '...' : '')}
+									</p>
 									<p style={{fontWeight: '400', color: '#8492A6', lineHeight: '1.25em'}}>
-									{assignment.text.slice(0, 30) + (assignment.text.length > 30 && '...')}
+									{assignment.text.slice(0, 35) + (assignment.text.length > 35 ? '...' : '')}
 									</p> 
 								</span>
 								<span 

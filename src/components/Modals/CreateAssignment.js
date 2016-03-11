@@ -139,10 +139,12 @@ export default class CreateAssignment extends Component {
 				padding: '0 0em'
 			},
 			label: {
+				position: 'relative',
 				width: '50%'
 			},
 			select: {
 				fontSize: '1em',
+				lineHeight: 'normal',
 				background: '#fff',
 				border: '1px solid #DFE6ED',
 				borderRadius: '0.25em',
@@ -152,8 +154,12 @@ export default class CreateAssignment extends Component {
 				boxShadow: 'none',
 				height: 'auto',
 				padding: '0.45rem 0.75rem 0.55rem',
-				height: '40px',
-				lineHeight: '40px'
+				height: '40px'
+			},
+			icon: {
+				position: 'absolute', 
+				right: '18px', 
+				top: '12px'
 			}
 		}
 		const { subjects, readingLevels } = this.state;
@@ -272,6 +278,7 @@ export default class CreateAssignment extends Component {
 									)
 								})}
 							</select>
+							<i style={selectStyles.icon} className="fa fa-caret-down"></i>
 						</label>
 						<label style={selectStyles.label}>
 							<select 
@@ -287,6 +294,7 @@ export default class CreateAssignment extends Component {
 									)
 								})}
 							</select>
+							<i style={selectStyles.icon} className="fa fa-caret-down"></i>
 						</label>
 					</div>
 

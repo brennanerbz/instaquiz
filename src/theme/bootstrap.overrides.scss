@@ -38,6 +38,11 @@ a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, d
     vertical-align: baseline;
 }
 
+input, textarea, select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
 
 // Input 
 input, textarea {
@@ -48,9 +53,6 @@ input, textarea {
 	padding: 0 15px;
 	color: #3c4858;
 	box-shadow: none!important;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
 	&:focus {
 		border-color: #00BBFD;
 		outline: none;

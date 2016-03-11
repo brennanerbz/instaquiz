@@ -71,7 +71,8 @@ export default class Homework extends Component {
 							margin: '1em'
 						}}
 						className={{}}>
-						{(sequence.correct_count / (sequence.correct_count + sequence.incorrect_count) * 100).toFixed(0)}
+						{/*sequence.correct_count} / {sequence.correct_count + sequence.incorrect_count*/}
+						{(sequence.correct_count / (sequence.correct_count + sequence.incorrect_count) * 100).toFixed(0)}%
 						</span>
 						<h3 style={{fontSize: '21px', fontWeight: '600'}}>See you soon!</h3>
 						<img src={party} style={{height: '100px', margin: '2em'}}/>

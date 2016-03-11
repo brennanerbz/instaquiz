@@ -57,7 +57,7 @@ export default class HomeworkReading extends Component {
 							this.props.updateName(e.target.value)
 						}}
 						type="text"
-						placeholder="Enter your real name for credit..."
+						placeholder="Enter your name or ID for credit..."
 					/>
 				</div>
 				<div className={'fade' + ' ' + (invalid && 'in')}>

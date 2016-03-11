@@ -228,17 +228,22 @@ export default class Header extends Component {
 								delayHide={0} 
 								placement="bottom" 
 								overlay={::this.tooltip('Create new assignment')}>
-									<li style={{lineHeight: '45px', margin: '0 15px 0 0'}} className="link_list_item">
+									<li 
+										onClick={() => this.props.openModal('create_assignment')} 
+										style={{lineHeight: '45px', margin: '0', cursor: 'pointer'}} 
+										className="link_list_item">
 										<img 
 										onTouchStart={() => this.setState({touching: 'add'})}
 										onTouchEnd={() => this.setState({touching: ''})}
-										onClick={() => this.props.openModal('create_assignment')} 
 										src={add} 
 										className={touching === 'add' ? 'touching' : ''}
 										style={{
-											height: '17.5px',
+											height: '16px',
 											cursor: 'pointer'
 										}}/>
+										<a style={{color: '#00B5FF!important', padding: '0px 10px 5px', textDecoration: 'none'}}>
+											Create
+										</a>
 									</li>
 								</OverlayTrigger>
 							}

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import $ from 'jquery';
+import moment from 'moment';
 
 // Actions
 import * as assignmentActions from '../../redux/modules/assignments';
@@ -307,8 +308,10 @@ export default class Assignment extends Component {
 												key={sequence.identifier + i} 
 												className="display_flex flex_horizontal">
 													<span 
-													style={{width: '50%', lineHeight: '40px', paddingLeft: !isMobile ? '1em' : ''}}>
-														<b>{sequence.identifier}</b>
+													style={{width: '50%', lineHeight: '20px', paddingLeft: !isMobile ? '1em' : ''}}>
+														<b style={{fontSize: '17px'}}>{sequence.identifier}</b>
+														{!completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Started {moment.utc(sequence.start).fromNow()}</p>}
+														{completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Finished {moment.utc(sequence.finish).fromNow()}</p>}
 													</span>
 													<span 
 													className="display_flex" 
@@ -332,7 +335,7 @@ export default class Assignment extends Component {
 																textAlign: 'center'
 															}}
 															className={isMobile ? 'flex_item_align_right' : ''}>
-															{score.toFixed(0)}
+															<b>{score.toFixed(0)}</b>
 															</span>
 															:
 															<span className={isMobile ? 'flex_item_align_right' : ''}>

@@ -35,8 +35,41 @@ export default class CreateAssignment extends Component {
 	state = {
 		title: '',
 		text: '',
+		subject: '',
+		readingLevel: '',
 		touching: '',
-		trending: ['Wikipedia', 'CNN', 'Bloomberg Business']
+		trending: ['Wikipedia', 'CNN', 'Bloomberg Business'],
+		subjects: [
+			{text: 'Subject', value: ''},
+			{text: 'English', value: 'english'},
+			{text: 'Math', value: 'math'},
+			{text: 'Science', value: 'science'},
+			{text: 'History & Social Sciences', value: 'history&ss'},
+			{text: 'Technology & Computer Science', value: 'tech&cs'},
+			{text: 'Spanish', value: 'spanish'},
+			{text: 'French', value: 'french'},
+			{text: 'German', value: 'german'},
+			{text: 'Latin', value: 'Latin'},
+		],
+		readingLevels: [
+			{text: 'Reading level', value: ''},
+			{text: 'Adult', value: 'adult'},
+			{text: 'Graduate', value: 'graduate'},
+			{text: 'College', value: 'college'},
+			{text: '12th', value: '12'},
+			{text: '11th', value: '11'},
+			{text: '10th', value: '10'},
+			{text: '9th', value: '9'},
+			{text: '8th', value: '8'},
+			{text: '7th', value: '7'},
+			{text: '6th', value: '6'},
+			{text: '5th', value: '5'},
+			{text: '4th', value: '4'},
+			{text: '3rd', value: '3'},
+			{text: '2nd', value: '2'},
+			{text: '1st', value: '1'},
+			{text: 'Kindergarten', value: 'K'},
+		]
 	}
 
 	componentDidMount() {
@@ -61,8 +94,8 @@ export default class CreateAssignment extends Component {
 	handleCreateAssignment() {
 		const token = cookie.load('token', {path: '/'})
 		const { createAssignment, user_id} = this.props;
-		const { title, text } = this.state;
-		createAssignment(token, title, text)
+		const { title, text, subject, readingLevel } = this.state;
+		createAssignment(token, title, text, subject, readingLevel)
 	}
 
 	handleFinishAssignment() {
@@ -99,6 +132,31 @@ export default class CreateAssignment extends Component {
 		const { items, editing } = this.props;
 		// Touch
 		const { touching } = this.state;
+		// Subject and reading level
+		const selectStyles = {
+			container: {
+				margin: '20px 0 0',
+				padding: '0 0em'
+			},
+			label: {
+				width: '50%'
+			},
+			select: {
+				fontSize: '1em',
+				background: '#fff',
+				border: '1px solid #DFE6ED',
+				borderRadius: '0.25em',
+				outline: 'none',
+				width: '100%',
+				margin: '0 0 .5rem',
+				boxShadow: 'none',
+				height: 'auto',
+				padding: '0.45rem 0.75rem 0.55rem',
+				height: '40px',
+				lineHeight: '40px'
+			}
+		}
+		const { subjects, readingLevels } = this.state;
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
@@ -149,15 +207,17 @@ export default class CreateAssignment extends Component {
 						{editing ? 'Finish' : 'Submit'}
 					</a>}
 				</div>
+
+				{/* Title and text */}
 				<div 
 				className="flex_vertical" 
-				style={{padding: isMobile ? '' : '2em'}}>
+				style={{padding: isMobile ? '' : '2em 2em 2em'}}>
 					<input 
 					type="text"
 					name="title"
 					ariaLabel="Assignment title"
 					// autoFocus={true}
-					style={{height: '50px', lineHeight: isMobile ? '18px' : '50px'}}
+					style={{height: '40px', lineHeight: isMobile ? '18px' : '40px'}}
 					placeholder="Assignment name"
 					className={isMobile ? 'mobile' : ''}
 					value={title}
@@ -195,12 +255,50 @@ export default class CreateAssignment extends Component {
 							}}
 						/>
 					}
+
+					{/* Subject and Reading Level */}
+					<div style={selectStyles.container} className="display_flex flex_horizontal">
+						<label style={Object.assign({...selectStyles.label}, {margin: '0 10px 0 0'})}>
+							<select 
+								style={selectStyles.select}
+								onChange={(e) => {
+									this.setState({subject: e.target.value})
+								}}>
+								{subjects.map((subject, i) => {
+									return (
+										<option key={subject.value + i} value={subject.value}>
+											{subject.text}
+										</option>
+									)
+								})}
+							</select>
+						</label>
+						<label style={selectStyles.label}>
+							<select 
+								style={selectStyles.select}
+								onChange={(e) => {
+									this.setState({readingLevel: e.target.value})
+								}}>
+								{readingLevels.map((level, i) => {
+									return (
+										<option key={level.value + i} value={level.value}>
+											{level.text}
+										</option>
+									)
+								})}
+							</select>
+						</label>
+					</div>
+
+					{/* Divider */}
 					<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
 						<div style={{margin: '10px auto', background: isMobile ? '#F9FAFC' : '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
 						or
 						</div>
 						<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
 					</div>
+
+					{/* Trending List */}
 					<div 
 					className="display_flex flex_vertical flex_center" 
 					style={{
@@ -218,7 +316,7 @@ export default class CreateAssignment extends Component {
 							{
 								trending.map((trending, i) => {
 									return (
-										<li className="">
+										<li key={i} className="">
 											<a style={{display: 'block', padding: '8px 12px'}} className="link">{trending}</a>
 										</li>
 									)

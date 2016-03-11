@@ -185,12 +185,14 @@ export function fetchAssignments(token) {
 	}
 }
 
-export function createAssignment(token, title, text) {
+export function createAssignment(token, title, text, subject, readingLevel) {
 	return {
 		types: [CREATE_ASSIGNMENT, CREATE_ASSIGNMENT_SUCCESS, CREATE_ASSIGNMENT_FAILURE],
 		promise: (client) => client.post('/assignments/', {
 			title: title,
-			text: text
+			text: text,
+			// subject: subject,
+			// reading_level: readingLevel
 		}, token)
 	}
 }

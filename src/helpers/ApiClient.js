@@ -19,11 +19,7 @@ class _ApiClient {
         const request = superagent[method](formatUrl(path));
 
         if(token) {
-          if(typeof token === 'object') {
-            request.auth(token.email, token.password)
-          } else {
-            request.auth(token, '')
-          }
+          request.auth(token, '')
         }
 
         if (data) {

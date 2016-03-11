@@ -167,9 +167,19 @@ export function fetchUser(token) {
 	}
 }
 export function fetchToken(email, password) {
-	return {
-		types: [FETCH_TOKEN, FETCH_TOKEN_SUCCESS, FETCH_TOKEN_FAILURE],
-		promise: (client) => client.get('/token', null, {email: email, password: password})
+	return (dispatch, getState) => {
+		dispatch({type: FETCH_TOKEN})
+		request
+		.get(`https://nightly-server.herokuapp.com/api/v1.0/token`)
+		.auth(email, password)
+		.end((err, res) => {
+			const result = res.body;
+			if(res.ok) {
+				dispatch({type: FETCH_TOKEN_SUCCESS, result})
+			} else {
+				dispatch({type: FETCH_TOKEN_FAILURE, err})
+			}
+		})
 	}
 }
 export function logOut() {

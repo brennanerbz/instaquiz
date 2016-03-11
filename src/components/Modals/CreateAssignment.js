@@ -243,7 +243,7 @@ export default class CreateAssignment extends Component {
 						onBlur={() => this.props.updateText(text)}
 						onKeyDown={(e) => {
 							if(e.which === 13) {
-								this.handleCreateAssignment()
+								// this.handleCreateAssignment()
 							}
 						}}
 						value={text}/>}

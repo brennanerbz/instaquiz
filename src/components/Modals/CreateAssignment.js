@@ -35,8 +35,8 @@ export default class CreateAssignment extends Component {
 	state = {
 		title: '',
 		text: '',
-		subject: '',
-		readingLevel: '',
+		subject: null,
+		readingLevel: null,
 		touching: '',
 		trending: ['Wikipedia', 'CNN', 'Bloomberg Business'],
 		subjects: [

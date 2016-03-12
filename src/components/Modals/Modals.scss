@@ -1,11 +1,14 @@
 .textarea {
 	@media screen and (min-width: 320px) {
-		min-height: 130px;
+		min-height: 305px;
 	}
 	@media screen and (min-width: 375px) {
-		min-height: 200px;
+		min-height: 405px;
 	}
 	@media screen and (min-width: 405px) {
-		min-height: 225px;
+		min-height: 555px;
+	}
+	@media screen and (min-width: 505px) {
+		min-height: 305px;
 	}
 }

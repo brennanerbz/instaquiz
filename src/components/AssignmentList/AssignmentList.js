@@ -63,7 +63,7 @@ export default class AssignmentList extends Component {
 								<img src={setIcon} style={{height: '32px', width: '27px'}}/>
 								<span style={{marginLeft: '20px', fontSize: isMobile ? '16px' : '17px'}}>
 									<p style={{fontSize: isMobile ? '17px' : '18px', fontWeight: '600', color: '#333333'}}>
-									{assignment.title.slice(0, 28) + (assignment.title.length > 28 ? '...' : '')}
+									{assignment.title.slice(0, 27) + (assignment.title.length > 27 ? '...' : '')}
 									</p>
 									<p style={{fontSize: isMobile ? '14px' : '15px', fontWeight: '400', color: '#AEB6BD', lineHeight: '1.75em'}}>
 									{!isMobile && assignment.text.slice(0, 105) + (assignment.text.length > 105 ? '...' : '')}

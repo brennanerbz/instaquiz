@@ -248,7 +248,50 @@ export default class CreateAssignment extends Component {
 				{/* Title and text */}
 				<div 
 				className="flex_vertical" 
-				style={{padding: isMobile ? '' : (editing ? '0.5em 2em 2em' : '2em 2em 2em')}}>
+				style={{
+					padding: isMobile ? '' : (editing ? '0.5em 2em 2em' : '2em 2em 2em'),
+					borderTop: isMobile ? '1px solid #DFE6ED' : ''
+				}}>
+					{
+						!editing && isMobile
+						&&
+						<div style={selectStyles.container} className="display_flex flex_horizontal">
+							<label style={Object.assign({...selectStyles.label}, {margin: '0 10px 0 0'})}>
+								<select 
+									style={selectStyles.select}
+									disabled={editing}
+									onChange={(e) => {
+										this.setState({subject: e.target.value})
+									}}>
+									{subjects.map((subject, i) => {
+										return (
+											<option key={subject.value + i} value={subject.value}>
+												{subject.text}
+											</option>
+										)
+									})}
+								</select>
+								<i style={selectStyles.icon} className="fa fa-caret-down"></i>
+							</label>
+							<label style={selectStyles.label}>
+								<select 
+									style={selectStyles.select}
+									disabled={editing}
+									onChange={(e) => {
+										this.setState({readingLevel: e.target.value})
+									}}>
+									{readingLevels.map((level, i) => {
+										return (
+											<option key={level.text + level.value + i} value={level.value}>
+												{level.text}
+											</option>
+										)
+									})}
+								</select>
+								<i style={selectStyles.icon} className="fa fa-caret-down"></i>
+							</label>
+						</div>
+					}
 					{
 						!editing &&
 						<input 
@@ -299,7 +342,7 @@ export default class CreateAssignment extends Component {
 
 					{/* Subject and Reading Level */}
 					{
-						!editing
+						!editing && !isMobile
 						&&
 						<div style={selectStyles.container} className="display_flex flex_horizontal">
 							<label style={Object.assign({...selectStyles.label}, {margin: '0 10px 0 0'})}>

@@ -18,7 +18,8 @@ export default class QuizHeader extends Component {
 					fontSize: isMobile ? '21px' : '32px',
 					fontWeight: '600',
 					color: '#333333',
-					marginBottom: '5px'
+					marginBottom: '5px',
+					padding: isMobile ? '0 1em' : ''
 				}}>
 					{title}
 				</h1>

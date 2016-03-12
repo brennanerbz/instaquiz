@@ -113,8 +113,6 @@ export default class SignupModal extends Component {
 			margin: '10px 0 10px 0'
 		}
 		// Validation 
-		const successIcon = require('../../../static/icons/success.png');
-		const errorIcon = require('../../../static/icons/error.png');
 		const { empty, error } = this.state;
 		const inputStyle = {
 			input: {

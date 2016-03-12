@@ -9,6 +9,7 @@ import cookie from 'react-cookie';
 import * as userActions from '../../redux/modules/user';
 import { validateEmail, isEmpty } from '../../utils/helperfunctions';
 
+// @Radium
 @connect(
   state => ({
   	token: state.user.token,
@@ -16,14 +17,13 @@ import { validateEmail, isEmpty } from '../../utils/helperfunctions';
   	error: state.user.error,
   	loaded: state.user.loaded
   }),
-  dispatch => ({
+  dispatch => ({ 
     ...bindActionCreators({
       ...userActions,
       pushState
     }, dispatch)
   })
 )
-@Radium
 export default class LoginModal extends Component {
 	static propTypes = {
 	}
@@ -152,7 +152,7 @@ export default class LoginModal extends Component {
 							});
 						}}
 						autoFocus={true}
-						style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
+						// style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
 						type="text"
 						placeholder="Email address"/>
 					{empty.email && <p style={errorMessage}>Oops! You didn't enter your email!</p>}
@@ -171,7 +171,7 @@ export default class LoginModal extends Component {
 								}
 							})
 						}}
-						style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
+						// style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
 						type="password"
 						placeholder="Password"
 						/>

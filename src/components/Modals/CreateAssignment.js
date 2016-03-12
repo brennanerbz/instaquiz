@@ -133,12 +133,13 @@ export default class CreateAssignment extends Component {
 		var delete_ids = [];
 		items.forEach((item, i) => {
 			if(!item.selected) {
-				delete_ids.push(item.id)
+				item.deleted = true;
+				delete_ids.push(item)
 			}
 		})
 		if(delete_ids.length > 0) {
 			// this.props.close()
-			this.props.deleteItems(delete_ids, token)
+			this.props.deleteItems(delete_ids, assignment.id, token)
 		} else {
 			this.props.close()
 			this.props.pushState(null, `/assignment/${assignment.token}/questions`)

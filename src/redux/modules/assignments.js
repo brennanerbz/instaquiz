@@ -239,11 +239,11 @@ export function selectItem(item_id) {
 	}
 }
 
-export function deleteItems(list, token) {
+export function deleteItems(list, id, token) {
 	return {
 		types: [DELETE_ITEMS, DELETE_ITEMS_SUCCESS, DELETE_ITEMS_FAILURE],
-		promise: (client) => client.del('/items/', {
-			item_ids: list
+		promise: (client) => client.put(`/assignments/${id}`, {
+			items: list
 		}, token)
 	}
 }

@@ -56,13 +56,19 @@ export default class EditingList extends Component {
 							</span>
 							<span id="target" style={{
 								padding: (i == 0 && '0 0 1em 0') || (i == items.length - 1 && '1em 0 0 0') || '1em 0', 
-								width: '45%', borderBottom: (i !== items.length - 1 && '1px solid #DFE6ED')
+								width: '45%', borderBottom: (i !== items.length - 1 && '1px solid #DFE6ED'),
+								overflow: 'hidden',
+								wordWrap: 'break-word',
+								whiteSpace: 'pre-line'
 							}}>
 								<b>{item.target}</b>
 							</span>
 							<span id="cue" style={{
 								padding: (i == 0 && '0 0 1em 0') || (i == items.length - 1 && '1em 0 0 0') || '1em 0', 
-								width: '45%', borderBottom: (i !== items.length - 1 && '1px solid #DFE6ED')
+								width: '45%', borderBottom: (i !== items.length - 1 && '1px solid #DFE6ED'),
+								overflow: 'hidden',
+								wordWrap: 'break-word',
+								whiteSpace: 'pre-line'
 							}}>
 								{item.cue}
 							</span>

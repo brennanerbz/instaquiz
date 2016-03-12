@@ -103,18 +103,18 @@ export default class CreateAssignment extends Component {
 	}
 
 	findLink(text) {
-		var linkText = text.match(
-			/((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi
-		)
+		var linkText = text.match(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig)
 		if(linkText) {
 			const link = text;
 			const token = cookie.load('token', {path: '/'})
 			this.props.fetchArticle(link, token)
 			this.setState({
-				isTextLink: true
+				isTextLink: true,
+				text: text
 			});
 		} else {
 			this.setState({
+				isTextLink: false,
 				text: text
 			});
 		}
@@ -182,7 +182,7 @@ export default class CreateAssignment extends Component {
 				margin: '0 0 .5rem',
 				boxShadow: 'none',
 				height: 'auto',
-				padding: '0.45rem 0.75rem 0.55rem',
+				padding: '0.45rem 2rem 0.55rem 0.75rem',
 				height: '40px'
 			},
 			icon: {
@@ -192,6 +192,7 @@ export default class CreateAssignment extends Component {
 			}
 		}
 		const { subjects, readingLevels } = this.state;
+		const { subject, readingLevel } = this.state;
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
@@ -221,7 +222,8 @@ export default class CreateAssignment extends Component {
 						fontWeight: '600',
 						color: '#283643'
 					}}>
-					{(editing ? 'Edit' : 'Create') + ' Assignment'}
+					{!editing && 'Create Assignment'}
+					{editing && 'Select Questions'}
 					</h1>
 					{isMobile &&
 					<a
@@ -246,17 +248,20 @@ export default class CreateAssignment extends Component {
 				{/* Title and text */}
 				<div 
 				className="flex_vertical" 
-				style={{padding: isMobile ? '' : '2em 2em 2em'}}>
-					<input 
-					type="text"
-					name="title"
-					ariaLabel="Assignment title"
-					style={{height: '42px', lineHeight: isMobile ? '18px' : '40px'}}
-					placeholder="Assignment name"
-					className={isMobile ? 'mobile' : ''}
-					value={title}
-					onChange={(e) => this.setState({title: e.target.value})}
-					onBlur={() => this.props.updateTitle(title)}/>
+				style={{padding: isMobile ? '' : (editing ? '0.5em 2em 2em' : '2em 2em 2em')}}>
+					{
+						!editing &&
+						<input 
+						type="text"
+						name="title"
+						ariaLabel="Assignment title"
+						style={{height: '42px', lineHeight: isMobile ? '18px' : '40px'}}
+						placeholder="Assignment name"
+						className={isMobile ? 'mobile' : ''}
+						value={title}
+						onChange={(e) => this.setState({title: e.target.value})}
+						onBlur={() => this.props.updateTitle(title)}/>
+					}
 
 					{!creating && !editing &&
 						<textarea 
@@ -293,40 +298,47 @@ export default class CreateAssignment extends Component {
 					}
 
 					{/* Subject and Reading Level */}
-					<div style={selectStyles.container} className="display_flex flex_horizontal">
-						<label style={Object.assign({...selectStyles.label}, {margin: '0 10px 0 0'})}>
-							<select 
-								style={selectStyles.select}
-								onChange={(e) => {
-									this.setState({subject: e.target.value})
-								}}>
-								{subjects.map((subject, i) => {
-									return (
-										<option key={subject.value + i} value={subject.value}>
-											{subject.text}
-										</option>
-									)
-								})}
-							</select>
-							<i style={selectStyles.icon} className="fa fa-caret-down"></i>
-						</label>
-						<label style={selectStyles.label}>
-							<select 
-								style={selectStyles.select}
-								onChange={(e) => {
-									this.setState({readingLevel: e.target.value})
-								}}>
-								{readingLevels.map((level, i) => {
-									return (
-										<option key={level.text + level.value + i} value={level.value}>
-											{level.text}
-										</option>
-									)
-								})}
-							</select>
-							<i style={selectStyles.icon} className="fa fa-caret-down"></i>
-						</label>
-					</div>
+					{
+						!editing
+						&&
+						<div style={selectStyles.container} className="display_flex flex_horizontal">
+							<label style={Object.assign({...selectStyles.label}, {margin: '0 10px 0 0'})}>
+								<select 
+									style={selectStyles.select}
+									disabled={editing}
+									onChange={(e) => {
+										this.setState({subject: e.target.value})
+									}}>
+									{subjects.map((subject, i) => {
+										return (
+											<option key={subject.value + i} value={subject.value}>
+												{subject.text}
+											</option>
+										)
+									})}
+								</select>
+								<i style={selectStyles.icon} className="fa fa-caret-down"></i>
+							</label>
+							<label style={selectStyles.label}>
+								<select 
+									style={selectStyles.select}
+									disabled={editing}
+									onChange={(e) => {
+										this.setState({readingLevel: e.target.value})
+									}}>
+									{readingLevels.map((level, i) => {
+										return (
+											<option key={level.text + level.value + i} value={level.value}>
+												{level.text}
+											</option>
+										)
+									})}
+								</select>
+								<i style={selectStyles.icon} className="fa fa-caret-down"></i>
+							</label>
+						</div>
+					}
+					
 
 					{!isMobile &&
 					<div style={{width: '100%'}} className="display_flex">

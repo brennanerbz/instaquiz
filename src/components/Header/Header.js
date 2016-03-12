@@ -231,7 +231,7 @@ export default class Header extends Component {
 									<li 
 										onClick={() => this.props.openModal('create_assignment')} 
 										style={{lineHeight: '45px', margin: '0', cursor: 'pointer'}} 
-										className="link_list_item">
+										className="link_list_item relative">
 										<img 
 										onTouchStart={() => this.setState({touching: 'add'})}
 										onTouchEnd={() => this.setState({touching: ''})}
@@ -239,9 +239,16 @@ export default class Header extends Component {
 										className={touching === 'add' ? 'touching' : ''}
 										style={{
 											height: '16px',
-											cursor: 'pointer'
+											cursor: 'pointer',
+											position: 'absolute',
+											top: '14.25px',
+											left: '0'
 										}}/>
-										<a style={{color: '#00B5FF!important', padding: '0px 10px 5px', textDecoration: 'none'}}>
+										<a 
+										style={{
+											color: '#00B5FF!important', 
+											padding: '0px 10px 5px 25px', 
+											textDecoration: 'none'}}>
 											Create
 										</a>
 									</li>

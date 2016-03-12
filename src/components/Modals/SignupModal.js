@@ -9,7 +9,7 @@ import cookie from 'react-cookie';
 import * as userActions from '../../redux/modules/user';
 import { validateEmail, isEmpty } from '../../utils/helperfunctions';
 
-// @Radium
+
 @connect(
   state => ({
   	user: state.user.user,
@@ -23,6 +23,7 @@ import { validateEmail, isEmpty } from '../../utils/helperfunctions';
     }, dispatch)
   })
 )
+@Radium
 export default class SignupModal extends Component {
 	static propTypes = {
 	}
@@ -156,7 +157,7 @@ export default class SignupModal extends Component {
 								},
 							});
 						}}
-						// style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
+						style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
 						type="text"
 						placeholder="Email address"/>
 					{empty.email && <p style={errorMessage}>Oops! You didn't enter your email!</p>}
@@ -176,7 +177,7 @@ export default class SignupModal extends Component {
 								},
 							});
 						}}
-						// style={[inputStyle.input, (empty.username || error.username) && inputStyle.error]}
+						style={[inputStyle.input, (empty.username || error.username) && inputStyle.error]}
 						type="text"
 						placeholder="Username (your students will see)"/>
 					{empty.username && <p style={errorMessage}>Oh no! You didn't enter your username!</p>}
@@ -198,7 +199,7 @@ export default class SignupModal extends Component {
 							});
 						}}
 						onKeyDown={(e) => {if(e.which === 13) this.signUp()}}
-						// style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
+						style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
 						type="password"
 						placeholder="Password"/>
 					{empty.password && <p style={errorMessage}>No password? You need a password!</p>}

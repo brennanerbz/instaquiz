@@ -241,7 +241,7 @@ export default class Header extends Component {
 											height: '16px',
 											cursor: 'pointer',
 											position: 'absolute',
-											top: '14.25px',
+											top: '14.5px',
 											left: '0'
 										}}/>
 										<a 

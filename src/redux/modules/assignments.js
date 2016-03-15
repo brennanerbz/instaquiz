@@ -96,7 +96,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				creating: false,
 				editing: true,
-				assignments: [...state.assignments, action.result],
+				assignments: [action.result, ...state.assignments],
 				assignment: action.result,
 				items: action.result.items.items.map(item => {
 					item.selected = true

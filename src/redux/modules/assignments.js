@@ -28,12 +28,14 @@ export const DELETE_ITEMS_FAILURE = 'nightly/assignments/DELETE_ITEMS_FAILURE';
 
 export const CLEAR_DRAFT = 'nightly/assignments/CLEAR_DRAFT';
 export const CLEAR_ASSIGNMENT = 'nightly/assignments/CLEAR_ASSIGNMENT';
+export const CLEAR_DASHBOARD = 'nightly/assignments/CLEAR_DASHBOARD';
 
 const initialState = {
 	title: '',
 	text: '',
 	//
 	loading: false,
+	loaded: false,
 	creating: false,
 	editing: false,
 	finished: false,
@@ -54,6 +56,7 @@ export default function reducer(state = initialState, action) {
 		case FETCH_ASSIGNMENTS_SUCCESS:
 			return {
 				...state,
+				loaded: true,
 				assignments: [...action.result.assignments]
 			}
 		case FETCH_ASSIGNMENTS_FAILURE:
@@ -192,6 +195,11 @@ export default function reducer(state = initialState, action) {
 				assignments: [],
 				error: null
 			}
+		case CLEAR_DASHBOARD:
+			return {
+				...state,
+				loaded: false
+			}
 		default:
 			return {
 				...state
@@ -268,5 +276,10 @@ export function clearDraft() {
 export function clearAssignment() {
 	return {
 		type: CLEAR_ASSIGNMENT
+	}
+}
+export function clearDashboard() {
+	return {
+		type: CLEAR_DASHBOARD
 	}
 }

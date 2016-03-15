@@ -11,6 +11,7 @@ import * as overlayActions from '../../redux/modules/overlays';
 import { AssignmentList } from '../../components';
 
 @connect(state => ({
+		loaded: state.assignments.loaded,
 		user: state.user.user,
 		assignments: state.assignments.assignments,
 	}),
@@ -32,7 +33,10 @@ export default class Dashboard extends Component {
 
 	componentWillMount() {
 		const token = cookie.load('token', {path: '/'})
-		this.props.fetchAssignments(token)
+		const { loaded } = this.props;
+		if(!loaded) {
+			this.props.fetchAssignments(token)
+		}		
 	}
 
 	componentDidMount() {
@@ -44,6 +48,10 @@ export default class Dashboard extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if(this.props.user && !this.props.user.email && nextProps.user.email) this.setState({promptOpen: false})
+	}
+
+	componentWillUnmount() {
+		this.props.clearDashboard()
 	}
 
 	render() {

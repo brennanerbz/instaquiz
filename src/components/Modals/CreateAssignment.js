@@ -134,6 +134,8 @@ export default class CreateAssignment extends Component {
 		items.forEach((item, i) => {
 			if(!item.selected) {
 				item.deleted = true;
+			} else {
+				item.deleted = false;
 			}
 			delete_ids.push(item)
 		})

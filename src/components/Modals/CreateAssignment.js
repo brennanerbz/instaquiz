@@ -134,11 +134,10 @@ export default class CreateAssignment extends Component {
 		items.forEach((item, i) => {
 			if(!item.selected) {
 				item.deleted = true;
-				delete_ids.push(item)
 			}
+			delete_ids.push(item)
 		})
 		if(delete_ids.length > 0) {
-			// this.props.close()
 			this.props.deleteItems(delete_ids, assignment.id, token)
 		} else {
 			this.props.close()

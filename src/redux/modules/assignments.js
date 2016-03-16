@@ -70,11 +70,18 @@ export default function reducer(state = initialState, action) {
 				creating: true
 			}
 		case FETCH_ARTICLE_SUCCESS:
+			let error = null
+			if(action.result.error) {
+				error = action.result.error
+			} else if(action.result.text.length < 50) {
+				error = 'No Content. Error: 204'
+			}
 			return {
 				...state,
 				creating: false,
-				title: action.result.title,
-				text: action.result.text
+				title: error ? '' : action.result.title,
+				text: error ? '' : action.result.text,
+				error: error
 			}
 		case FETCH_ARTICLE_FAILURE:
 			return {
@@ -104,7 +111,8 @@ export default function reducer(state = initialState, action) {
 				}),
 				items_count: action.result.items.items.length,
 				title: action.result.title,
-				token: action.result.token
+				token: action.result.token,
+				error: null
 			}
 		case CREATE_ASSIGNMENT_FAILURE:
 			return {
@@ -144,7 +152,8 @@ export default function reducer(state = initialState, action) {
 		case UPDATE_TEXT:
 			return {
 				...state,
-				text: action.text
+				text: action.text,
+				error: null 
 			}
 		case SELECT_ITEM:
 			return {

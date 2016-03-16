@@ -172,6 +172,11 @@ export default class LoginModal extends Component {
 								}
 							})
 						}}
+						onKeyDown={(e) => {
+							if(e.which === 13) {
+								this.handleFetchToken()
+							}
+						}}
 						style={[inputStyle.input, (empty.password || error.password) && inputStyle.error]}
 						type="password"
 						placeholder="Password"

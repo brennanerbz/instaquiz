@@ -14,7 +14,7 @@ module.exports = Object.assign({
   port: process.env.PORT,
   herokuApi: 'https://nightly-server.herokuapp.com/api/v1.0',
   apiHost: '127.0.0.1',
-  apiPort: '5000',
+  apiPort: '5000/api/v1.0',
   app: {
     title: 'Nightly',
     description: 'Homework. Automated.',

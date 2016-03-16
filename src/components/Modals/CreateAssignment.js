@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import $ from 'jquery';
+import Radium from 'radium';
+import color from 'color';
+import LaddaButton from 'react-ladda';
 
 import * as assignmentActions from '../../redux/modules/assignments';
 
@@ -19,7 +22,8 @@ import EditingList from '../EditingList/EditingList';
   	editing: state.assignments.editing,
   	finished: state.assignments.finished,
   	items: state.assignments.items,
-  	assignment: state.assignments.assignment
+  	assignment: state.assignments.assignment,
+  	error: state.assignments.error
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -28,6 +32,7 @@ import EditingList from '../EditingList/EditingList';
     }, dispatch)
   })
 )
+@Radium
 export default class CreateAssignment extends Component {
 	static propTypes = {
 	}
@@ -45,8 +50,8 @@ export default class CreateAssignment extends Component {
 			{text: 'English', value: 'english'},
 			{text: 'Math', value: 'math'},
 			{text: 'Science', value: 'science'},
-			{text: 'History & Social Sciences', value: 'history&ss'},
-			{text: 'Technology & Computer Science', value: 'tech&cs'},
+			{text: 'History & Social Sciences', value: 'history and social sciences'},
+			{text: 'Technology & Computer Science', value: 'technology and computer science'},
 			{text: 'Spanish', value: 'spanish'},
 			{text: 'French', value: 'french'},
 			{text: 'German', value: 'german'},
@@ -70,18 +75,15 @@ export default class CreateAssignment extends Component {
 			{text: '2nd', value: '2'},
 			{text: '1st', value: '1'},
 			{text: 'Kindergarten', value: 'K'}
-		]
+		],
+		error: {
+			code: null,
+			no_content: 'It looks like that site has too many ads. Try pasting the text?', // 204
+			no_url: 'Oh no! That URL is protected. Try pasting the text?' // 303
+		}
 	}
 
 	componentDidMount() {
-		const node = this.refs.assignment_text;
-		// $(node).on('input', function() {
-		// 	this.style.height = 'auto'
-		// 	this.style.height = (this.scrollHeight) + 'px'
-		// })
-		// const { title, text } = this.props;
-		// if(title) this.setState({title: title});
-		// if(text) this.setState({text: text});
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -99,6 +101,26 @@ export default class CreateAssignment extends Component {
 				text: text,
 				isTextLink: false
 			});
+		}
+		// Error
+		const { error } = nextProps;
+		let errorMessage = ''
+		if(error) {
+			if(error.match(/303/g)) {
+				this.setState({
+					error: {
+						...this.state.error,
+						code: 303
+					}
+				});
+			} else if(error.match(/204/g)) {
+				this.setState({
+					error: {
+						...this.state.error,
+						code: 204
+					}
+				});
+			}
 		}
 	}
 
@@ -124,7 +146,12 @@ export default class CreateAssignment extends Component {
 		const token = cookie.load('token', {path: '/'})
 		const { createAssignment, user_id} = this.props;
 		const { title, text, subject, readingLevel } = this.state;
-		createAssignment(token, title, text, subject, readingLevel)
+		if(title.length > 0 && text.length > 0) {
+			createAssignment(token, title, text, subject, readingLevel)
+		} else {
+			if((title.length === 0 && text.length === 0) || text.length === 0) this.refs.assignment_text.focus() 
+			else if(title.length === 0) this.refs.assignment_title.focus()
+		}
 	}
 
 	handleFinishAssignment() {
@@ -195,6 +222,23 @@ export default class CreateAssignment extends Component {
 		}
 		const { subjects, readingLevels } = this.state;
 		const { subject, readingLevel } = this.state;
+		// Textare and Error
+		const { error } = this.state;
+		const textAreaStyle = {
+			text: {
+				margin: isMobile ? '10px 0 0' : '20px 0 0', 
+				overflowY: 'scroll'
+			},
+			error: {
+				border: isMobile ? '' : '1px solid red'
+			}
+		}
+		const errorMessage = {
+			margin: isMobile ? '10px 0 0px 10px' : '10px 0 0 0',
+			fontSize: '14px',
+			lineHeight: '14px',
+			color: 'red'
+		}
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
@@ -299,6 +343,7 @@ export default class CreateAssignment extends Component {
 						<input 
 						type="text"
 						name="title"
+						ref="assignment_title"
 						ariaLabel="Assignment title"
 						style={{height: '42px', lineHeight: isMobile ? '18px' : '40px'}}
 						placeholder="Assignment name"
@@ -308,6 +353,12 @@ export default class CreateAssignment extends Component {
 						onBlur={() => this.props.updateTitle(title)}/>
 					}
 
+					{isMobile && error.code && 
+					<p style={errorMessage}>
+					{error.code === 303 && error.no_url}
+					{error.code === 204 && error.no_content}
+					</p>}
+
 					{!creating && !editing &&
 						<textarea 
 						type="text"
@@ -315,19 +366,26 @@ export default class CreateAssignment extends Component {
 						autoFocus={!isMobile}
 						ariaLabel="Assignment text"
 						ref="assignment_text"
-						style={{margin: isMobile ? '10px 0 0' : '20px 0 0', overflowY: 'scroll'}} 
-						placeholder={isMobile ? 'Paste URL here...' : 'Paste website URL or text here...'}
+						style={[textAreaStyle.text, error.code && textAreaStyle.error]} 
+						placeholder={isMobile ? 'Paste URL or text here...' : 'Paste website URL or text here...'}
 						className={(isMobile ? 'mobile' : '') + ' ' + style.textarea}
 						onChange={(e) => {
+							this.setState({
+								error: {
+									...this.state.error,
+									code: null
+								}
+							})
 							this.findLink(e.target.value)
 						}}
 						onBlur={() => this.props.updateText(text)}
-						onKeyDown={(e) => {
-							if(e.which === 13) {
-								// this.handleCreateAssignment()
-							}
-						}}
 						value={text}/>}
+
+					{!isMobile && error.code && 
+					<p style={errorMessage}>
+					{error.code === 303 && error.no_url}
+					{error.code === 204 && error.no_content}
+					</p>}
 
 					{creating && !editing &&
 					<LoadingSpinner size={4}/>}
@@ -397,15 +455,19 @@ export default class CreateAssignment extends Component {
 							className="button primary_white">
 								Cancel
 							</button>
-							<button 
+							<LaddaButton 
+							loading={creating && !editing}
+							spinnerSize={30}
+							className={'button primary_blue' + ' ' + (creating && !editing && 'open')}
+							spinnerColor='#fff'
+							buttonStyle="expand-left"
+							style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}}
 							onClick={() => {
 								if(!editing) this.handleCreateAssignment()
 								if(editing) this.handleFinishAssignment()
-							}}
-							style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}} 
-							className="button primary_blue">
-								{editing ? 'Finish' : 'Submit'}
-							</button>
+							}}>
+							{editing ? 'Finish' : 'Submit'}
+							</LaddaButton>
 						</div>
 					</div>}
 
@@ -415,7 +477,17 @@ export default class CreateAssignment extends Component {
 	}
 }
 
-
+/*
+<button 
+onClick={() => {
+	if(!editing) this.handleCreateAssignment()
+	if(editing) this.handleFinishAssignment()
+}}
+style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}} 
+className="button primary_blue">
+	{editing ? 'Finish' : 'Submit'}
+</button>
+*/
 /*
 <div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
 	<div style={{margin: '10px auto', background: isMobile ? '#F9FAFC' : '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">

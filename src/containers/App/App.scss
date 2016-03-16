@@ -414,3 +414,42 @@ $secondary-grey: #A8B6C1;
 	-o-transition: opacity 0.1s ease-out;
 	transition: opacity 0.1s ease-out;
 }
+
+
+// Ladda
+:global .ladda-button {
+	-webkit-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	-moz-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	-ms-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	-o-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	&.open {
+		padding-right: 50px!important;
+	}
+	.ladda-label, .ladda-spinner {
+		-webkit-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-moz-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-ms-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		-o-transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+		transition: .3s cubic-bezier(.175,.885,.32,1.275) padding!important;
+	}
+	.ladda-label {
+		position: relative;
+		z-index: 3;
+	}
+	.ladda-spinner {
+		z-index: 2;
+		display: inline-block;
+		width: 2pc;
+		height: 2pc;
+		pointer-events: none;
+		position: absolute;
+		right: -6px;
+		top: 22px;
+	}
+	&[data-style="expand-right"] {
+		.ladda-spinner {
+			right: 15px;
+		}
+	}
+}

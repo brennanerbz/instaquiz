@@ -84,7 +84,7 @@ export default class HomeworkContainer extends Component {
 			// Route control to prevent cheating
 			if((previousRoute == 'questions' && nextRoute == 'read') 
 				|| (nextProps.sequence.reading_completed && nextRoute == 'read')) {
-				alert('Sorry! You can\'t go back to the reading')
+				alert('Sorry! You can\'t go back to the reading. Taking you to the questions.')
 				this.props.pushState(null, `/homework/${route_token}/questions`)
 			}
 			// Fetch the latest question

@@ -61,11 +61,12 @@ export default function reducer (state = initialState, action) {
 			}
 		case NEW_SEQUENCE_SUCCESS:
 			const { route_token } = state;
-			var sequence = {}
-			sequence[route_token] = action.result.token
+			var cookieSequences = cookie.load('sequences', {path: '/'})
+			var sequences = cookieSequences ? JSON.parse(cookie.load('sequences', {path: '/'})) : {}
+			sequences[route_token] = action.result.token
 			var d = new Date();
 		    d.setTime(d.getTime() + (365*24*60*60*1000));
-			cookie.save('sequences', sequence, {path: '/', expires: d})
+			cookie.save('sequences', sequences, {path: '/', expires: d})
 			return {
 				...state,
 				loading: false,

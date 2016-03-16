@@ -49,7 +49,7 @@ export default class Assignment extends Component {
 
 	componentDidMount() {
 		const token = cookie.load('token', {path: '/'})
-		const { params } = this.props;
+		const { params, modalOpen } = this.props;
 		this.props.fetchAssignment(params.token, token)
 		this.setState({
 			activeTab: params.tab ? params.tab.charAt(0).toUpperCase() + params.tab.slice(1) : 'Questions'

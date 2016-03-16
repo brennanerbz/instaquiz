@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import cookie from 'react-cookie';
+import LaddaButton from 'react-ladda';
 
 import * as userActions from '../../redux/modules/user';
 import { validateEmail, isEmpty } from '../../utils/helperfunctions';
@@ -15,7 +16,8 @@ import { validateEmail, isEmpty } from '../../utils/helperfunctions';
   	token: state.user.token,
   	user: state.user.user,
   	error: state.user.error,
-  	loaded: state.user.loaded
+  	loaded: state.user.loaded,
+  	loading: state.user.loading
   }),
   dispatch => ({ 
     ...bindActionCreators({
@@ -41,11 +43,11 @@ export default class LoginModal extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(!this.props.error && nextProps.error) {
+		if(nextProps.error) {
 			this.setState({
 				error: {
-					email: nextProps.error.match(/email/g) ? nextProps.error : null,
-					password: nextProps.error.match(/password/g) ? nextProps.error : null,
+					email: nextProps.error.match(/401/g) ? 'Sorry, looks like the entererd the wrong email.' : null,
+					password: nextProps.error.match(/401/g) ? 'Oops, you entered an incorrect password.' : null,
 				}
 			});
 		}
@@ -103,6 +105,7 @@ export default class LoginModal extends Component {
 			height: '50px',
 			margin: '10px 0 10px 0'
 		}
+		// Input && Error
 		const { empty, error } = this.state;
 		const inputStyle = {
 			input: {
@@ -121,6 +124,8 @@ export default class LoginModal extends Component {
 			lineHeight: '14px',
 			color: 'red'
 		}
+		// Loading
+		const { loading } = this.props;
 		return (
 			<div className="display_flex flex_center flex_vertical">
 				<img 
@@ -140,6 +145,7 @@ export default class LoginModal extends Component {
 				<div style={formWrapper} className="flex_vertical">
 					<input 
 						ref="email"
+						type="email"
 						onChange={(e) => {
 							this.setState({
 								empty: {
@@ -154,7 +160,6 @@ export default class LoginModal extends Component {
 						}}
 						autoFocus={true}
 						style={[inputStyle.input, (empty.email || error.email) && inputStyle.error]}
-						type="text"
 						placeholder="Email address"/>
 					{empty.email && <p style={errorMessage}>Oops! You didn't enter your email!</p>}
 					{error.email && <p style={errorMessage}>{error.email}</p>}
@@ -183,12 +188,18 @@ export default class LoginModal extends Component {
 						/>
 					{empty.password && <p style={errorMessage}>No password? You need a password!</p>}
 					{error.password && <p style={errorMessage}>{error.password}</p>}
-					<button 
-					onClick={() => this.handleFetchToken()}
-					style={bigButton} 
-					className="button primary_blue">
+					<LaddaButton 
+					loading={loading}
+					spinnerSize={30}
+					className={'button primary_blue full_width' + ' ' + (loading && 'open')}
+					spinnerColor='#fff'
+					buttonStyle="expand-left"
+					style={bigButton}
+					onClick={() => {
+						this.handleFetchToken()
+					}}>
 					Sign in
-					</button>
+					</LaddaButton>
 				</div>
 			</div>
 		);

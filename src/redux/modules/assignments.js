@@ -54,6 +54,9 @@ export default function reducer(state = initialState, action) {
 				...state,
 			}
 		case FETCH_ASSIGNMENTS_SUCCESS:
+			if(action.result.assignments.length > 0) {
+				cookie.save('teacher', true, {path: '/', expires: d})
+			}
 			return {
 				...state,
 				loaded: true,
@@ -193,6 +196,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				title: '',
 				text: '',
+				loaded: false,
 				loading: false,
 				creating: false,
 				editing: false,

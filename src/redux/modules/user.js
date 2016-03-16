@@ -25,7 +25,8 @@ const initialState = {
 	loaded: false,
 	loading: false,
 	token: null,
-	user: null
+	user: null,
+	error: null
 }
 
 export default function reducer(state = initialState, action) {
@@ -36,6 +37,8 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				loaded: false,
+				loading: true,
+				error: null
 			}
 		case CREATE_USER_SUCCESS:
 			cookie.save('token', action.result.token, { path: '/', expires: d});
@@ -47,18 +50,21 @@ export default function reducer(state = initialState, action) {
 				...state,
 				token: action.result.token,
 				user: action.result,
-				loaded: true
+				loaded: true,
+				loading: false
 			}
 		case CREATE_USER_FAILURE:
 			return {
 				...state,
-				error: action.error
+				error: action.error.text,
+				loading: false
 			}
 		case UPDATE_USER:
 			return {
 				...state,
 				loading: true,
-				loaded: false
+				loaded: false,
+				error: null
 			}
 		case UPDATE_USER_SUCCESS:
 			cookie.save('teacher', true, {path: '/', expires: d})
@@ -76,17 +82,18 @@ export default function reducer(state = initialState, action) {
 				...state,
 				loaded: false,
 				loading: false,
-				error: action.error
+				error: action.error.text
 			}
 		case FETCH_USER:
 			return {
 				...state,
 				loaded: false,
-				loading: true
+				loading: true,
+				error: null
 			}
 		case FETCH_USER_SUCCESS:
-			cookie.save('teacher', true, {path: '/', expires: d})
 			if(action.result.email) {
+				cookie.save('teacher', true, {path: '/', expires: d})
 				cookie.save('account', true, {path: '/', expires: d})
 			}
 			return {
@@ -99,11 +106,14 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				loaded: false,
-				loading: false
+				loading: false,
+				error: action.error
 			}
 		case FETCH_TOKEN:
 			return {
-				...state
+				...state,
+				loading: true,
+				error: null
 			}
 		case FETCH_TOKEN_SUCCESS:
 			if(action.result) {
@@ -119,7 +129,9 @@ export default function reducer(state = initialState, action) {
 			}
 		case FETCH_TOKEN_FAILURE:
 			return {
-				...state
+				...state,
+				loading: false,
+				error: action.error.message
 			}
 		case LOG_OUT:
 			cookie.remove('token', {path: '/'})
@@ -131,7 +143,8 @@ export default function reducer(state = initialState, action) {
 				...state,
 				loaded: false,
 				token: '',
-				user: null
+				user: null,
+				error: null
 			}
 		default:
 			return {
@@ -175,11 +188,12 @@ export function fetchToken(email, password) {
 		.get(`https://nightly-server.herokuapp.com/api/v1.0/token`)
 		.auth(email, password)
 		.end((err, res) => {
-			const result = res.body.token;
 			if(res.ok) {
+				const result = res.body.token;
 				dispatch({type: FETCH_TOKEN_SUCCESS, result})
 			} else {
-				dispatch({type: FETCH_TOKEN_FAILURE, err})
+				const error = res.error
+				dispatch({type: FETCH_TOKEN_FAILURE, error})
 			}
 		})
 	}

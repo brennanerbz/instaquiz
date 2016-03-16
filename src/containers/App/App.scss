@@ -437,6 +437,12 @@ $secondary-grey: #A8B6C1;
 		position: relative;
 		z-index: 3;
 	}
+	&.full_width {
+		.ladda-spinner {
+			right: 33%;
+			top: 25px;
+		}
+	}
 	.ladda-spinner {
 		z-index: 2;
 		display: inline-block;

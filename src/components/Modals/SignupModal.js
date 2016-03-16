@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import cookie from 'react-cookie';
+import LaddaButton from 'react-ladda';
+
 
 import * as userActions from '../../redux/modules/user';
 import { validateEmail, isEmpty } from '../../utils/helperfunctions';
@@ -14,7 +16,8 @@ import { validateEmail, isEmpty } from '../../utils/helperfunctions';
   state => ({
   	user: state.user.user,
   	error: state.user.error,
-  	loaded: state.user.loaded
+  	loaded: state.user.loaded,
+  	loading: state.user.loading
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -42,11 +45,11 @@ export default class SignupModal extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(!this.props.error && nextProps.error) {
+		if(nextProps.error) {
 			this.setState({
 				error: {
-					username: nextProps.error.match(/username/g) ? nextProps.error : null,
-					email: nextProps.error.match(/email/g) ? nextProps.error : null,
+					username: nextProps.error.match(/username/g) ? 'Sorry, that username is already taken.' : null,
+					email: nextProps.error.match(/email/g) ? 'Oops, someone is already using that email.' : null,
 				}
 			});
 		}
@@ -132,6 +135,8 @@ export default class SignupModal extends Component {
 			lineHeight: '14px',
 			color: 'red'
 		}
+		// Loading
+		const { loading } = this.props;
 		return (
 			<div className="display_flex flex_center flex_vertical">
 				<img 
@@ -204,12 +209,18 @@ export default class SignupModal extends Component {
 						placeholder="Password"/>
 					{empty.password && <p style={errorMessage}>No password? You need a password!</p>}
 					{error.password && <p style={errorMessage}>{error.password}</p>}
-					<button 
-						onClick={() => this.signUp()}
-						style={bigButton} 
-						className="button primary_blue">
+					<LaddaButton 
+					loading={loading}
+					spinnerSize={30}
+					className={'button primary_blue' + ' ' + (loading && 'open')}
+					spinnerColor='#fff'
+					buttonStyle="expand-left"
+					style={bigButton}
+					onClick={() => {
+						this.signUp()
+					}}>
 					Create your free account
-					</button>
+					</LaddaButton>
 				</div>
 			</div>
 		);

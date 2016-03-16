@@ -75,7 +75,9 @@ export default class HomeworkQuestions extends Component {
 					width: '150px', 
 					marginLeft: '1em', 
 					marginRight: 'auto', 
-					boxShadow: this.state.selected < 0 ? 'none' : ''}} 
+					boxShadow: this.state.selected < 0 ? 'none' : '',
+					cursor: this.state.selected < 0 ? 'default' : 'pointer'
+				}} 
 				type="button" 
 				className={'button' + ' ' + (this.state.selected > -1 ? 'primary_blue' : '')}>
 					Next

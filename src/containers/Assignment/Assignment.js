@@ -22,7 +22,9 @@ import QuizContent from '../../components/QuizContent/QuizContent';
 		items: state.assignments.items,
 		items_count: state.assignments.items_count,
 		sequences: state.assignments.sequences,
-		error: state.assignments.error
+		error: state.assignments.error,
+		modalOpen: state.overlays.modalOpen,
+		modalType: state.overlays.modalType
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -52,9 +54,6 @@ export default class Assignment extends Component {
 		this.setState({
 			activeTab: params.tab ? params.tab.charAt(0).toUpperCase() + params.tab.slice(1) : 'Questions'
 		});
-		this.scorePoll = setInterval(() => {
-			this.props.fetchAssignment(params.token, token)
-		}, 60000)
 		// Show prompt
 		const account = cookie.load('account', {path: '/'})
 		this.setState({
@@ -67,11 +66,13 @@ export default class Assignment extends Component {
 		if(this.props.params.tab !== 'scores' && nextProps.params.tab == 'scores') {
 			this.props.fetchAssignment(nextProps.params.token, token)
 		}
+		if(this.props.params.token !== nextProps.params.token) {
+			this.props.fetchAssignment(nextProps.params.token, token)
+		}
 		if(this.props.user && !this.props.user.email && nextProps.user.email) this.setState({promptOpen: false})
 	}	
 
 	componentWillUnmount() {
-		clearInterval(this.scorePoll)
 		this.props.clearAssignment()
 	}
 

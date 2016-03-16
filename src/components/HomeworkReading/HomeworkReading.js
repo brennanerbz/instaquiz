@@ -15,7 +15,7 @@ export default class HomeworkReading extends Component {
 		const rect = node ? node.getBoundingClientRect() : null
 		if(rect) {
 			const style = {
-				top: rect.top + rect.height - 10,
+				top: rect.top > 0 ? rect.top + rect.height - 10 : 135,
 				left: rect.left
 			}
 			return (

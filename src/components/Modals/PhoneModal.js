@@ -14,22 +14,23 @@ export default class PhoneModal extends Component {
 	render() {
 		const style = require('./Modals.scss');
 		const chatBubbles = require('../../../static/ChatBubbles.png');
+		const deleteIcon = require('../../../static/icons/delete.png');
 		const { isMobile } = this.props;
 		const linkToHomework = this.props.path.split('/')[2]
 		return(
 			<div className="">
-				<i 
-				onClick={() => this.props.close()}
-				style={{
-					fontSize: '1em',
-					position: 'absolute',
-					top: '20px',
-					right: '20px',
-					color: '#A8B6C1',
-					cursor: 'pointer'
+				<img 
+				onClick={() => {
+					this.props.close()
 				}} 
-				className="fa fa-times">
-				</i>
+				src={deleteIcon} 
+				style={{
+					height: isMobile ? '15px' : '16px',
+					position: 'absolute',
+					top: isMobile ? '1.25em' : '2em',
+					right: '2em',
+					cursor: 'pointer'
+				}}/>
 				<div
 				style={{
 					textAlign: 'center'

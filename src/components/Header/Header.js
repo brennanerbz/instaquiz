@@ -72,7 +72,7 @@ export default class Header extends Component {
 		const { student_name, selected } = this.props;
 		const student = cookie.load('student', {path: '/'})
 		// Progress length
-		const { progress, length } = this.state;
+		const { progress, length } = this.state; 
 		// Touch
 		const { touching } = this.state;
  		return (
@@ -80,11 +80,11 @@ export default class Header extends Component {
 				style={{
 					position: isNotHomeView || assignmentsView ? 'fixed' : '',
 					background: '#fff',
-					width: '100%', 
+					width: '100%' , 
 					boxShadow: isNotHomeView || assignmentsView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
 					zIndex: '2'
 				}} 
-				className={'display_flex flex_center'}>
+				className={'display_flex'}>
 
 				{isMobile && 
 				<div 
@@ -93,7 +93,7 @@ export default class Header extends Component {
 				</div>}
 
 				<div 
-				className="flex_horizontal relative" 
+				className="flex_container_center flex_horizontal relative" 
 				style={{
 					maxWidth: homeworkView ? '750px' : '1050px', 
 					minWidth: isMobile || homeworkView ? '' : '950px', 

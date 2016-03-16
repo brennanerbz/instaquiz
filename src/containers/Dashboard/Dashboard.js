@@ -60,6 +60,9 @@ export default class Dashboard extends Component {
 
 		const { promptOpen } = this.state;
 		const promptStyles = {
+			wrapper: { 
+				margin: '0 25px',
+			},
 			container: {
 				flex: '1',
 				background: '#00B5FF',
@@ -67,6 +70,7 @@ export default class Dashboard extends Component {
 				margin: isMobile ? '3.5em auto 0 auto' : '5.5em auto 1em auto',
 				display: promptOpen ? '' : 'none',
 				maxWidth: '1000px',
+				minWidth: isMobile ? '' : '900px',
 				borderRadius: !isMobile && '5px'
 			}, 
 			text: {
@@ -79,6 +83,7 @@ export default class Dashboard extends Component {
 			<div>
 				{
 					promptOpen &&
+					<div style={promptStyles.wrapper}>
 					<div 
 					style={promptStyles.container} 
 					className={'display_flex flex_center flex_vertical relative' + ' ' + (isMobile ? 'flex_container_center' : 'flex_container_left')}>
@@ -119,6 +124,7 @@ export default class Dashboard extends Component {
 						className="button primary_white">
 						Create free account
 						</button>
+					</div>
 					</div>
 				}
 				<AssignmentList 

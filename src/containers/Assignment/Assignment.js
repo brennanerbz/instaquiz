@@ -90,6 +90,9 @@ export default class Assignment extends Component {
 
 		const { promptOpen } = this.state;
 		const promptStyles = {
+			wrapper: { 
+				margin: '0 25px',
+			},
 			container: {
 				flex: '1',
 				background: '#00B5FF',
@@ -97,6 +100,7 @@ export default class Assignment extends Component {
 				margin: isMobile ? '3.5em auto 0 auto' : '1em auto 0em auto',
 				display: promptOpen ? '' : 'none',
 				maxWidth: '1000px',
+				minWidth: isMobile ? '' : '900px',
 				width: '100%',
 				borderRadius: !isMobile && '5px'
 			}, 
@@ -107,7 +111,7 @@ export default class Assignment extends Component {
 			}
 		}
 		return (
-			<div style={{maxWidth: '1050px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
+			<div style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
 					{
 						isMobile && promptOpen &&
@@ -173,6 +177,7 @@ export default class Assignment extends Component {
 								/>
 							{
 								!isMobile && promptOpen &&
+								<div style={promptStyles.wrapper}>
 								<div style={promptStyles.container} 
 								className={'display_flex flex_vertical relative' + ' ' + (isMobile ? 'flex_center' : 'flex_container_left')}>
 									<img 
@@ -212,6 +217,7 @@ export default class Assignment extends Component {
 									className="button primary_white">
 									Create free account
 									</button>
+								</div>
 								</div>
 							}
 							<div className={'display_flex ' + (isMobile ? 'flex_center' : '')}>

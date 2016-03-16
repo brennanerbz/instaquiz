@@ -26,7 +26,7 @@ export default class AssignmentList extends Component {
 		return (
 			<div 
 			className="display_flex flex_vertical flex_container_center relative" 
-			style={{maxWidth: !isMobile ? '1050px' : '', padding: isMobile ? '' : '0 25px'}}>
+			style={{maxWidth: !isMobile ? '1050px' : '', minWidth: isMobile ? '' : '950px', padding: isMobile ? '' : '0 25px'}}>
 				<ul 
 				style={{
 					padding: isMobile ? `${promptOpen ? '0em' : '3.5em'} 0 0` : '',

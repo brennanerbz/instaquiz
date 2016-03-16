@@ -345,7 +345,7 @@ export default class CreateAssignment extends Component {
 						name="title"
 						ref="assignment_title"
 						ariaLabel="Assignment title"
-						style={{height: '42px', lineHeight: isMobile ? '18px' : '40px'}}
+						style={{height: '42px', lineHeight: '18px',}}
 						placeholder="Assignment name"
 						className={isMobile ? 'mobile' : ''}
 						value={title}

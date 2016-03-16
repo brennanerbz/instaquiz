@@ -4,6 +4,7 @@ require('babel/polyfill');
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
@@ -76,6 +77,7 @@ module.exports = {
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
+  postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
   progress: true,
   resolve: {
     modulesDirectories: [
@@ -92,7 +94,7 @@ module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true, // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: false, // <-------- DISABLE redux-devtools HERE
       __HEROKUSERVER__: false
     }),
     webpackIsomorphicToolsPlugin.development()

@@ -109,7 +109,7 @@ export default class LoginModal extends Component {
 		const { empty, error } = this.state;
 		const inputStyle = {
 			input: {
-				lineHeight: isMobile ? '18px' : '40px',
+				lineHeight: '18px',
 				margin: '10px 0 10px 0'
 			},
 			success: {

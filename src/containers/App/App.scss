@@ -17,8 +17,8 @@ $secondary-grey: #A8B6C1;
 	top: 0;
 	font-family: "Lato","Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;
 	text-rendering: optimizeSpeed;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale!important;
+	-webkit-font-smoothing: antialiased!important;
 }
 
 // Backgrounds
@@ -69,9 +69,9 @@ $secondary-grey: #A8B6C1;
 // Flexbox
 :global .display_flex {
 	display: -webkit-box;
+	display: -moz-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: box;
     display: flex;
 }
 :global .flex_center {

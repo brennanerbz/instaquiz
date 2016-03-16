@@ -61,7 +61,7 @@ export default class Dashboard extends Component {
 		const { promptOpen } = this.state;
 		const promptStyles = {
 			wrapper: { 
-				margin: '0 25px',
+				margin: isMobile ? '' : '0 25px',
 			},
 			container: {
 				flex: '1',

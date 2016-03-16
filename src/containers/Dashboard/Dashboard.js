@@ -14,6 +14,8 @@ import { AssignmentList } from '../../components';
 		loaded: state.assignments.loaded,
 		user: state.user.user,
 		assignments: state.assignments.assignments,
+		modalOpen: state.overlays.modalOpen,
+		modalType: state.overlays.modalType
 	}),
 	dispatch => ({
 		...bindActionCreators({
@@ -31,19 +33,16 @@ export default class Dashboard extends Component {
 		promptOpen: true
 	}
 
-	componentWillMount() {
-		const token = cookie.load('token', {path: '/'})
-		const { loaded } = this.props;
-		if(!loaded) {
-			this.props.fetchAssignments(token)
-		}		
-	}
-
 	componentDidMount() {
 		const account = cookie.load('account', {path: '/'})
+		const token = cookie.load('token', {path: '/'})
 		this.setState({
 			promptOpen: !account
 		});
+		const { loaded, modalOpen } = this.props;
+		if(!modalOpen) {
+			this.props.fetchAssignments(token)
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {

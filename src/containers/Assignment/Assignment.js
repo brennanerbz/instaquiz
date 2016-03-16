@@ -228,9 +228,9 @@ export default class Assignment extends Component {
 											const first = i === 0;
 											const last = i === tabs.length - 1;
 											const active = tab === activeTab
-											const scoresIn = sequences
+											const seq = sequences
 															.filter(seq => {return seq.identifier && seq.identifier.length > 0})
-															.length > 0
+											const scoresIn = seq.length > 0
 											return (
 												<li 
 													onTouchStart={() => this.setState({touchingTab: i})}
@@ -262,7 +262,7 @@ export default class Assignment extends Component {
 													}}>
 														{tab}
 														{tab == 'Scores' && scoresIn && ` `}
-														{(tab == 'Scores' && scoresIn) ? `(${sequences.length})` : ''}
+														{(tab == 'Scores' && scoresIn) ? `(${seq.length})` : ''}
 													</a>
 												</li>
 											)

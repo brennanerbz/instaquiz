@@ -10,7 +10,7 @@ export default class ProcessingModal extends Component {
 
 	state = {
 		fetchMessage: 'Fetching article...',
-		messages: ['Reading...', 'Finding key concepts...', 'Transforming material...'],
+		messages: ['Reading text...', 'Finding key concepts...', 'Creating questions...'],
 		currentMessage: 0,
 		width: 0
 	}
@@ -21,10 +21,14 @@ export default class ProcessingModal extends Component {
 		this.setState({
 			width: window.innerWidth,
 		});
+		const { text } = this.props;
+		const textLength = text.length;
+		const time = (textLength * 0.02) + (textLength < 5000 ? 750 : 1000)
 		this.processingTimer = setInterval(() => {
 			const { currentMessage, messages } = this.state;
-			this.setState({currentMessage : currentMessage + 1});
-		}, 1000)
+			const length = messages.length - 1;
+			this.setState({currentMessage : currentMessage < length ? currentMessage + 1 : length});
+		}, time)
 	}
 
 	componentDidUpdate(prevProps, prevState) {

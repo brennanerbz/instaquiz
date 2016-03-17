@@ -391,7 +391,12 @@ export default class CreateAssignment extends Component {
 
 					{/* Loading Spinner and Messages */}
 					{(creating || fetching) && !editing &&
-					<ProcessingModal size={isMobile ? 4 : 5} fetching={fetching} creating={creating} isMobile={isMobile}/>}
+					<ProcessingModal 
+					text={text} 
+					size={isMobile ? 4 : 5} 
+					fetching={fetching} 
+					creating={creating} 
+					isMobile={isMobile}/>}
 
 					{editing &&
 						<EditingList 

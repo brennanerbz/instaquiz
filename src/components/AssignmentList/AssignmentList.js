@@ -126,7 +126,7 @@ export default class AssignmentList extends Component {
 						})
 					}
 					{
-						true && Array.from({length: 6}).map((a, i) => {
+						loading && Array.from({length: 6}).map((a, i) => {
 							const last = i === 5
 							return (
 								<li 

@@ -36,6 +36,7 @@ const initialState = {
 	//
 	loading: false,
 	loaded: false,
+	fetching: false,
 	creating: false,
 	editing: false,
 	finished: false,
@@ -70,7 +71,7 @@ export default function reducer(state = initialState, action) {
 		case FETCH_ARTICLE:
 			return {
 				...state,
-				creating: true
+				fetching: true
 			}
 		case FETCH_ARTICLE_SUCCESS:
 			let error = null
@@ -81,7 +82,7 @@ export default function reducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				creating: false,
+				fetching: false,
 				title: error ? '' : action.result.title,
 				text: error ? '' : action.result.text,
 				error: error
@@ -89,7 +90,8 @@ export default function reducer(state = initialState, action) {
 		case FETCH_ARTICLE_FAILURE:
 			return {
 				...state,
-				error: action.error
+				error: action.error,
+				fetching: false
 			}
 		case CREATE_ASSIGNMENT:
 			return {

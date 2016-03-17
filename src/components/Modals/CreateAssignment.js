@@ -12,12 +12,14 @@ import * as assignmentActions from '../../redux/modules/assignments';
 
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import EditingList from '../EditingList/EditingList';
+import ProcessingModal from './ProcessingModal';
 
 @connect(
   state => ({
   	user_id: state.user.id,
   	title: state.assignments.title,
   	text: state.assignments.text,
+  	fetching: state.assignments.fetching,
   	creating: state.assignments.creating,
   	editing: state.assignments.editing,
   	finished: state.assignments.finished,
@@ -185,7 +187,7 @@ export default class CreateAssignment extends Component {
 		const { title, text } = this.state;
 		const { trending } = this.state;
 		// Loading
-		const { creating } = this.props;
+		const { creating, fetching } = this.props;
 		// Items
 		const { items, editing } = this.props;
 		// Touch
@@ -359,7 +361,7 @@ export default class CreateAssignment extends Component {
 					{error.code === 204 && error.no_content}
 					</p>}
 
-					{!creating && !editing &&
+					{!creating && !fetching && !editing &&
 						<textarea 
 						type="text"
 						name="text"
@@ -387,8 +389,9 @@ export default class CreateAssignment extends Component {
 					{error.code === 204 && error.no_content}
 					</p>}
 
-					{creating && !editing &&
-					<LoadingSpinner size={4}/>}
+					{/* Loading Spinner and Messages */}
+					{(creating || fetching) && !editing &&
+					<ProcessingModal size={isMobile ? 4 : 5} fetching={fetching} creating={creating} isMobile={isMobile}/>}
 
 					{editing &&
 						<EditingList 

@@ -9,7 +9,7 @@ export default class LoadingSpinner extends Component {
 		const style = require('./LoadingSpinner.scss');
 		const { size } = this.props;
 		return (
-			<div style={{fontSize: size + 'px'}} className={style.loader}>
+			<div style={{fontSize: size + 'px', margin: '15px auto'}} className={style.loader}>
 			</div>
 		);
 	}

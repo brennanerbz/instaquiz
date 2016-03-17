@@ -126,7 +126,7 @@ export default class CreateAssignment extends Component {
 
 	findLink(text) {
 		var linkText = text.match(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig)
-		if(linkText) {
+		if(linkText && text.length < 400) {
 			const link = text;
 			const token = cookie.load('token', {path: '/'})
 			this.props.fetchArticle(link, token)

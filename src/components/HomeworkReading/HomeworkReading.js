@@ -77,14 +77,26 @@ export default class HomeworkReading extends Component {
 					</article>
 				</section>
 				<section id="reading_section" style={{margin: '1em'}}>
-					<article id="text" 
+					<article 
+					oncopy="return false;"
+					oncut="return false;"
+					onpaste="return false;"
+					unselectable="on"
+					onselectstart="return false;" 
+					onmousedown="return false;"
+					id="text" 
 					style={{
 						color: '#002735', 
 						borderRadius: '4px', 
 						border: '1px solid #DAE0E7', 
 						padding: '1em', 
 						lineHeight: '1.5',
-						whiteSpace: 'pre-wrap!important'
+						whiteSpace: 'pre-wrap!important',
+						MozUserSelect: 'none',
+						WebkitUserSelect: 'none',
+						msUserSelect: 'none',
+						userSelect: 'none',
+						OUserSelect: 'none'
 					}}>
 					<b style={{color: '#3C4858'}}>Reading:</b><br/>
 					{reading}

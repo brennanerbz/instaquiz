@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import cookie from 'react-cookie';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import * as overlayActions from '../../redux/modules/overlays';
+import { logOut } from '../../redux/modules/user'
 
 @connect(
   state => ({
@@ -12,6 +14,7 @@ import * as overlayActions from '../../redux/modules/overlays';
   dispatch => ({
     ...bindActionCreators({
       ...overlayActions,
+      logOut,
       pushState
     }, dispatch)
   })
@@ -47,6 +50,7 @@ export default class MenuModal extends Component {
 				display: 'block'
 			}
 		}
+		const account = cookie.load('account', {path: '/'})
 		return (
 			<div 
 			style={styles.container} 
@@ -64,20 +68,28 @@ export default class MenuModal extends Component {
 					cursor: 'pointer'
 				}}/>
 				<ul style={styles.list} className="link_list">
-					<li
+					{!account && <li
 					onClick={() => {
 						this.props.closeFsModal()
 						this.props.openModal('login')
 					}}>
 						<a style={styles.link}>Log In</a>
-					</li>
-					<li
+					</li>}
+					{!account && <li
 					onClick={() => {
 						this.props.closeFsModal()
 						this.props.openModal('signup')
 					}}>
 						<a style={styles.link}>Sign Up</a>
+					</li>}
+					{account && <li
+					onClick={() => {
+						this.props.closeFsModal()
+						this.props.logOut()
+					}}>
+						<a style={styles.link}>Log Out</a>
 					</li>
+					}
 					<li
 					onClick={() => {
 						this.props.closeFsModal()

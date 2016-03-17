@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
+import { LoadingSpinner } from '../';
+
 export default class AssignmentList extends Component {
 	static propTypes = {
 	}
@@ -23,6 +25,13 @@ export default class AssignmentList extends Component {
 		const { touching } = this.state;
 		// Hover
 		const { hovering } = this.state;
+		// Loading
+		const { loading } = this.props;
+		const loadingStyles = {
+			container: {
+				margin: '3em 0'
+			}
+		}
 		return (
 			<div 
 			className="display_flex flex_vertical flex_container_center relative" 
@@ -38,7 +47,8 @@ export default class AssignmentList extends Component {
 					background: '#fff',
 					boxShadow: isMobile ? '' : '0 1px 1px 0 rgba(31,45,61,0.05)'
 				}}>
-					{assignments && assignments.map((assignment, i) => {
+					{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+					{!loading && assignments && assignments.map((assignment, i) => {
 						const length = assignments.length - 1;
 						let renderBorder = true;
 						if(length > 6 && i === length) renderBorder = false;
@@ -93,7 +103,7 @@ export default class AssignmentList extends Component {
 						)
 					})}
 					{
-						Array.from({length: emptyRows}).map((a, i) => {
+						!loading && Array.from({length: emptyRows}).map((a, i) => {
 							const last = i === emptyRows - 1
 							return (
 								<li 

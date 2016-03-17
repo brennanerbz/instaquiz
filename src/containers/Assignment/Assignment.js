@@ -13,9 +13,11 @@ import * as overlayActions from '../../redux/modules/overlays';
 // Components 
 import QuizHeader from '../../components/QuizHeader/QuizHeader';
 import QuizContent from '../../components/QuizContent/QuizContent';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 @connect(state => ({
 		user: state.user.user,
+		loading: state.assignments.loading,
 		assignment: state.assignments.assignment,
 		token: state.assignments.assignment.token,
 		title: state.assignments.assignment.title,
@@ -108,6 +110,13 @@ export default class Assignment extends Component {
 				color: '#fff',
 				fontSize: isMobile ? '19px' : '20px',
 				margin: isMobile ? '10px 0 10px 0' : '15px 0 15px 0'
+			}
+		}
+		// Loading
+		const { loading } = this.props;
+		const loadingStyles = {
+			container: {
+				margin: '3em 0'
 			}
 		}
 		return (
@@ -288,7 +297,8 @@ export default class Assignment extends Component {
 									background: '#fff',
 									color: '#333333'
 								}}>
-								{assignment && assignment.text}
+								{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+								{!loading && assignment && assignment.text}
 								</div>
 							</div>
 							}
@@ -304,12 +314,13 @@ export default class Assignment extends Component {
 										Questions
 									</p>
 								</div>
-								<QuizContent isMobile={isMobile} pushState={pushState}/>
+								<QuizContent isMobile={isMobile} pushState={pushState} loading={loading}/>
 							</div>}
 							{activeTab === 'Scores' &&
 							<div id="scores" style={{padding: isMobile ? '' : '0 25px', margin: '30px 0'}}>
 								<div style={{borderRadius: '4px', border: '1px solid #E6E8EA', padding: '0 1em 0em'}}>
-								<ul id="score_list">
+								{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+								{!loading && <ul id="score_list">
 									{
 										sequences.length > 0 && sequences.map((sequence, i) => {
 											const score = (sequence.correct_count / items_count) * 100
@@ -375,7 +386,7 @@ export default class Assignment extends Component {
 											<img src={trophy} style={{height: '100px'}}/>
 										</div>
 									}
-								</ul>
+								</ul>}
 								</div>
 							</div>}
 						</div>

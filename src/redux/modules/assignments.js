@@ -53,6 +53,7 @@ export default function reducer(state = initialState, action) {
 		case FETCH_ASSIGNMENTS:
 			return {
 				...state,
+				loading: true,
 			}
 		case FETCH_ASSIGNMENTS_SUCCESS:
 			if(action.result.assignments.length > 0) {
@@ -60,12 +61,14 @@ export default function reducer(state = initialState, action) {
 			}
 			return {
 				...state,
+				loading: false,
 				loaded: true,
 				assignments: [...action.result.assignments]
 			}
 		case FETCH_ASSIGNMENTS_FAILURE:
 			return {
 				...state,
+				loading: false,
 				error: action.error
 			}
 		case FETCH_ARTICLE:

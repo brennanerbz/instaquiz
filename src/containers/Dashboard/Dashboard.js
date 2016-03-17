@@ -11,6 +11,7 @@ import * as overlayActions from '../../redux/modules/overlays';
 import { AssignmentList } from '../../components';
 
 @connect(state => ({
+		loading: state.assignments.loading,
 		loaded: state.assignments.loaded,
 		user: state.user.user,
 		assignments: state.assignments.assignments,
@@ -79,6 +80,8 @@ export default class Dashboard extends Component {
 				margin: isMobile ? '10px 0 10px 0' : '15px 0 15px 0'
 			}
 		}
+		// Loading
+		const { loading } = this.props;
 		return (
 			<div>
 				{
@@ -88,9 +91,7 @@ export default class Dashboard extends Component {
 					style={promptStyles.container} 
 					className={'display_flex flex_center flex_vertical relative' + ' ' + (isMobile ? 'flex_container_center' : 'flex_container_left')}>
 						<img 
-						onClick={() => {
-							this.setState({promptOpen: false})
-						}} 
+						onClick={() => {this.setState({promptOpen: false})}} 
 						src={deleteIcon} 
 						style={{
 							height: isMobile ? '14px' : '16px',
@@ -131,7 +132,8 @@ export default class Dashboard extends Component {
 				promptOpen={promptOpen}
 				isMobile={this.props.isMobile}
 				assignments={this.props.assignments} 
-				pushState={this.props.pushState}/>
+				pushState={this.props.pushState}
+				loading={loading}/>
 			</div>
 		);
 	}

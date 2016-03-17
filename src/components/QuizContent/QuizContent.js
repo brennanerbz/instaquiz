@@ -41,6 +41,13 @@ export default class QuizContent extends Component {
 				</li>
 			)
 		})
+		// Loading
+		const { loading } = this.props;
+		const loadingStyles = {
+			container: {
+				margin: '3em 0'
+			}
+		}
 		return (
 			<ul 
 			style={{
@@ -51,7 +58,8 @@ export default class QuizContent extends Component {
 				width: '100%', 
 				fontSize: isMobile ? '14px' : '',
 				color: '#333333'}}>
-				{itemList}
+				{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+				{!loading && itemList}
 			</ul>
 		);
 	}

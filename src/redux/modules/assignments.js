@@ -39,6 +39,7 @@ const initialState = {
 	fetching: false,
 	creating: false,
 	editing: false,
+	deleting: false,
 	finished: false,
 	assignment: {},
 	items: [],
@@ -174,18 +175,21 @@ export default function reducer(state = initialState, action) {
 		case DELETE_ITEMS:
 			return {
 				...state,
-				finished: false
+				finished: false,
+				deleting: true,
 			}
 		case DELETE_ITEMS_SUCCESS:
 			return {
 				...state,
-				finished: true
+				finished: true,
+				deleting: false,
 			}
 		case DELETE_ITEMS_FAILURE:
 			return {
 				...state,
 				finished: true,
-				error: action.error
+				error: action.error,
+				deleting: false,
 			}
 		case CLEAR_DRAFT:
 			return {

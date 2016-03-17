@@ -9,6 +9,7 @@ export default class ProcessingModal extends Component {
 	}
 
 	state = {
+		createMessage: 'Creating assignment...',
 		fetchMessage: 'Fetching article...',
 		messages: ['Reading text...', 'Finding key concepts...', 'Creating questions...'],
 		currentMessage: 0,
@@ -54,10 +55,12 @@ export default class ProcessingModal extends Component {
 		const { messages, currentMessage } = this.state;
 		// Fetching
 		const { fetchMessage } = this.state;
+		// Deleting items, but creating assignment
+		const { createMessage } = this.state;
 		// Size of spinner
 		const { size } = this.props;
 		// Fetching or creating messages
-		const { fetching, creating } = this.props;
+		const { fetching, creating, deleting } = this.props;
 		// Height
 		const { width } = this.state;
 		var minHeight = 0;
@@ -74,7 +77,7 @@ export default class ProcessingModal extends Component {
 			container: {
 				width: '100%', 
 				margin: '2em 0',
-				height: minHeight - 75 + 'px'
+				height: deleting ? minHeight + 80 + 'px' : minHeight - 75 + 'px'
 			}
 		}
 		return (
@@ -85,6 +88,7 @@ export default class ProcessingModal extends Component {
 				<h1 style={{display: 'block', margin: '-10px 0 0px 0', fontSize: '19px', fontWeight: '600', color: '#2C3239'}}>
 				{creating && messages[currentMessage]}
 				{fetching && fetchMessage}
+				{deleting && createMessage}
 				</h1>
 			</div>
 		);

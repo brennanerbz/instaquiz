@@ -22,6 +22,7 @@ import ProcessingModal from './ProcessingModal';
   	fetching: state.assignments.fetching,
   	creating: state.assignments.creating,
   	editing: state.assignments.editing,
+  	deleting: state.assignments.deleting,
   	finished: state.assignments.finished,
   	items: state.assignments.items,
   	assignment: state.assignments.assignment,
@@ -168,12 +169,13 @@ export default class CreateAssignment extends Component {
 			}
 			delete_ids.push(item)
 		})
-		if(delete_ids.length > 0) {
-			this.props.deleteItems(delete_ids, assignment.id, token)
-		} else {
-			this.props.close()
-			this.props.pushState(null, `/assignment/${assignment.token}/questions`)
-		}
+		this.props.deleteItems(delete_ids, assignment.id, token)
+		// if(delete_ids.length > 0) {
+			
+		// } else {
+		// 	this.props.close()
+		// 	this.props.pushState(null, `/assignment/${assignment.token}/questions`)
+		// }
 	}
 
 	render() {
@@ -187,7 +189,7 @@ export default class CreateAssignment extends Component {
 		const { title, text } = this.state;
 		const { trending } = this.state;
 		// Loading
-		const { creating, fetching } = this.props;
+		const { creating, fetching, deleting } = this.props;
 		// Items
 		const { items, editing } = this.props;
 		// Touch
@@ -390,15 +392,16 @@ export default class CreateAssignment extends Component {
 					</p>}
 
 					{/* Loading Spinner and Messages */}
-					{(creating || fetching) && !editing &&
+					{(creating || fetching || deleting) &&
 					<ProcessingModal 
 					text={text} 
 					size={isMobile ? 4 : 5} 
 					fetching={fetching} 
 					creating={creating} 
+					deleting={deleting} 
 					isMobile={isMobile}/>}
 
-					{editing &&
+					{!deleting && editing &&
 						<EditingList 
 							isMobile={isMobile}
 							items={items}
@@ -464,9 +467,9 @@ export default class CreateAssignment extends Component {
 								Cancel
 							</button>
 							<LaddaButton 
-							loading={creating && !editing}
+							loading={fetching || creating || deleting}
 							spinnerSize={30}
-							className={'button primary_blue' + ' ' + (creating && !editing && 'open')}
+							className={'button primary_blue' + ' ' + ((fetching || creating || deleting) && 'open')}
 							spinnerColor='#fff'
 							buttonStyle="expand-left"
 							style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}}

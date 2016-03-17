@@ -135,7 +135,7 @@ export default class Header extends Component {
 						Assignments
 						</p>
 					</span>}
-					{assignmentsView && isMobile &&
+					{(assignmentsView || assignmentView) && isMobile &&
 					<img 
 					onTouchStart={() => this.setState({touching: 'add'})}
 					onTouchEnd={() => this.setState({touching: ''})}

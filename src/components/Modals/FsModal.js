@@ -32,7 +32,8 @@ export default class MenuModal extends Component {
 				position: 'absolute',
 				left: '0',
 				top: '0',
-				visibility: open ? 'visible' : 'hidden'
+				visibility: open ? 'visible' : 'hidden',
+				zIndex: '100'
 			},
 			list: {
 				margin: '20px 0 0 0',

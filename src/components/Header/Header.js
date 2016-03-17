@@ -56,6 +56,7 @@ export default class Header extends Component {
 		const forwardArrow = require('../../../static/icons/forwardArrow.png')
 		const forwardArrowGrey = require('../../../static/icons/forwardArrowGrey.png')
 		const add = require('../../../static/icons/add.png')
+		const hamburger = require('../../../static/icons/hamburger.png')
 
 		const { isMobile, show, params, location, pushState, scrolling } = this.props;
 		const route = location.pathname.split('/')[2]
@@ -135,6 +136,7 @@ export default class Header extends Component {
 						Assignments
 						</p>
 					</span>}
+
 					{(assignmentsView || assignmentView) && isMobile &&
 					<img 
 					onTouchStart={() => this.setState({touching: 'add'})}
@@ -142,7 +144,16 @@ export default class Header extends Component {
 					onClick={() => this.props.openModal('create_assignment')} 
 					src={add} 
 					className={touching === 'add' ? 'touching' : ''}
-					style={{height: '18.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
+					style={{height: '18.5px', position: 'absolute', right: '45px', top: '18px'}}/>}
+
+					{(assignmentsView || assignmentView) && isMobile &&
+					<img 
+					onTouchStart={() => this.setState({touching: 'add'})}
+					onTouchEnd={() => this.setState({touching: ''})}
+					onClick={() => this.props.openFsModal('menu')} 
+					src={hamburger} 
+					className={touching === 'add' ? 'touching' : ''}
+					style={{height: '16.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
 					{assignmentView && isMobile &&
 					<span 
 					onTouchStart={() => this.setState({touching: 'assignments'})}

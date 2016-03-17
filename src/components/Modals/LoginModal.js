@@ -191,14 +191,14 @@ export default class LoginModal extends Component {
 					<LaddaButton 
 					loading={loading}
 					spinnerSize={30}
-					className={'button primary_blue full_width' + ' ' + (loading && 'open')}
+					className={'button primary_blue' + ' ' + (!isMobile && 'full_width') + ' ' + (loading && 'open')}
 					spinnerColor='#fff'
 					buttonStyle="expand-left"
 					style={bigButton}
 					onClick={() => {
 						this.handleFetchToken()
 					}}>
-					Sign in
+					Log in
 					</LaddaButton>
 				</div>
 			</div>

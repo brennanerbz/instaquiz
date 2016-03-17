@@ -19,7 +19,7 @@ export default class AssignmentList extends Component {
 			this.setState({
 				loading: false
 			});
-		}, 3000)
+		},  Math.random() * (4000 - 750) + 750)
 	}
 
 	render() {
@@ -36,7 +36,12 @@ export default class AssignmentList extends Component {
 		// Hover
 		const { hovering } = this.state;
 		// Loading
-		const { loading } = this.state;
+		var loading;
+		if(isMobile) {
+			loading = this.state.loading;
+		} else {
+			loading = this.props.loading;
+		}
 		const loadingStyles = {
 			container: {
 				margin: '3em 0'
@@ -126,7 +131,7 @@ export default class AssignmentList extends Component {
 						})
 					}
 					{
-						loading && Array.from({length: 6}).map((a, i) => {
+						isMobile && loading && Array.from({length: 6}).map((a, i) => {
 							const last = i === 5
 							return (
 								<li 
@@ -150,6 +155,7 @@ export default class AssignmentList extends Component {
 							)
 						})
 					}
+					{!isMobile && loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
 				</ul>
 			</div>
 		);

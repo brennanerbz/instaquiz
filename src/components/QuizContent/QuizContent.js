@@ -57,8 +57,36 @@ export default class QuizContent extends Component {
 				borderRadius: '0.25em', 
 				width: '100%', 
 				fontSize: isMobile ? '14px' : '',
-				color: '#333333'}}>
-				{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+				color: '#333333',
+				listStyleType: 'none'
+			}}>
+				{!isMobile && loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
+				{
+					isMobile && loading && Array.from({length: 6}).map((a, i) => {
+						const last = i === 5
+						return (
+							<li 
+							key={i} 
+							style={{
+								position: 'relative', 
+								padding: '0.5em', 
+								borderTop: i !== 0 ? '1px solid #DAE0E7' : '', 
+								lineHeight: '1.15em'}}>
+								<div className="loading-item">
+									<div className="animated-background">
+									  <div className="question_item background-masker header-top"></div>
+								      <div className="question_item background-masker header-left"></div>
+								      <div className="question_item background-masker header-right"></div>
+								      <div className="question_item background-masker header-bottom"></div>
+								      <div className="question_item background-masker subheader-left"></div>
+								      <div className="question_item background-masker subheader-right"></div>
+								      <div className="question_item background-masker subheader-bottom"></div>
+									</div>
+								</div>
+							</li>
+						)
+					})
+				}
 				{!loading && itemList}
 			</ul>
 		);

@@ -9,7 +9,17 @@ export default class AssignmentList extends Component {
 
 	state = {
 		touching: -1,
-		hovering: -1
+		hovering: -1,
+		loading: true
+	}
+
+	componentDidMount() {
+		const { loading } = this.props;
+		setTimeout(() => {
+			this.setState({
+				loading: false
+			});
+		}, 3000)
 	}
 
 	render() {
@@ -26,7 +36,7 @@ export default class AssignmentList extends Component {
 		// Hover
 		const { hovering } = this.state;
 		// Loading
-		const { loading } = this.props;
+		const { loading } = this.state;
 		const loadingStyles = {
 			container: {
 				margin: '3em 0'
@@ -47,7 +57,6 @@ export default class AssignmentList extends Component {
 					background: '#fff',
 					boxShadow: isMobile ? '' : '0 1px 1px 0 rgba(31,45,61,0.05)'
 				}}>
-					{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
 					{!loading && assignments && assignments.map((assignment, i) => {
 						const length = assignments.length - 1;
 						let renderBorder = true;
@@ -112,6 +121,31 @@ export default class AssignmentList extends Component {
 									height: '67px', 
 									marginLeft: '1em', 
 									borderBottom: last ? '' : '1px solid #e4e4e4'}}>
+								</li>
+							)
+						})
+					}
+					{
+						true && Array.from({length: 6}).map((a, i) => {
+							const last = i === 5
+							return (
+								<li 
+								key={i} 
+								style={{
+									height: '67px', 
+									marginLeft: '1em', 
+									borderBottom: last ? '' : '1px solid #e4e4e4'}}>
+									<div className="loading-item">
+										<div className="animated-background">
+										  <div className="background-masker header-top"></div>
+									      <div className="background-masker header-left"></div>
+									      <div className="background-masker header-right"></div>
+									      <div className="background-masker header-bottom"></div>
+									      <div className="background-masker subheader-left"></div>
+									      <div className="background-masker subheader-right"></div>
+									      <div className="background-masker subheader-bottom"></div>
+										</div>
+									</div>
 								</li>
 							)
 						})

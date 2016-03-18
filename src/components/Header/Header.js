@@ -178,7 +178,7 @@ export default class Header extends Component {
 					className="flex_item_align_center" 
 					style={{
 						height: isMobile ? '30px' : '45px', lineHeight: isMobile ? '25px' : '40px', fontSize: isMobile ? '16.5px' : '18.5px',
-						maxWidth: '200px'
+						maxWidth: '345px'
 					}}>
 						<p 
 						style={{fontWeight: '600', color: '#333333'}} 
@@ -194,7 +194,7 @@ export default class Header extends Component {
 								height: '8px', 
 								width: '150px', 
 								borderRadius: '4px',
-								margin: '1em 1em 0 0',
+								margin: '0em 1em 0 0',
 								visibility: questionsView ? 'visible' : 'hidden'
 							}}>
 							<span 

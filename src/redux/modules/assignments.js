@@ -17,6 +17,10 @@ export const FETCH_ASSIGNMENT = 'nightly/assignments/FETCH_ASSIGNMENT';
 export const FETCH_ASSIGNMENT_SUCCESS = 'nightly/assignments/FETCH_ASSIGNMENT_SUCCESS';
 export const FETCH_ASSIGNMENT_FAILURE = 'nightly/assignments/FETCH_ASSIGNMENT_FAILURE';
 
+export const DELETE_ASSIGNMENT = 'nightly/assignments/DELETE_ASSIGNMENT';
+export const DELETE_ASSIGNMENT_SUCCESS = 'nightly/assignments/DELETE_ASSIGNMENT_SUCCESS';
+export const DELETE_ASSIGNMENT_FAILURE = 'nightly/assignments/DELETE_ASSIGNMENT_FAILURE';
+
 export const UPDATE_TITLE = 'nightly/assignments/UPDATE_TITLE';
 export const UPDATE_TEXT = 'nightly/assignments/UPDATE_TEXT';
 
@@ -191,6 +195,20 @@ export default function reducer(state = initialState, action) {
 				error: action.error,
 				deleting: false,
 			}
+		case DELETE_ASSIGNMENT:
+			return {
+				...state,
+			}
+		case DELETE_ASSIGNMENT_SUCCESS:
+			console.log(action.result)
+			return {
+				...state,
+			}
+		case DELETE_ASSIGNMENT_FAILURE:
+			return {
+				...state,
+				error: action.error,
+			}
 		case CLEAR_DRAFT:
 			return {
 				...state,
@@ -275,6 +293,13 @@ export function deleteItems(list, id, token) {
 		promise: (client) => client.put(`/assignments/${id}`, {
 			items: list
 		}, token)
+	}
+}
+
+export function deleteAssignment(id, token) {
+	return {
+		types: [DELETE_ASSIGNMENT, DELETE_ASSIGNMENT_SUCCESS, DELETE_ASSIGNMENT_FAILURE],
+		promise: (client) => client.del(`/assignments/${id}`, null, token)
 	}
 }
 

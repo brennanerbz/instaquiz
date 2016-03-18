@@ -44,7 +44,8 @@ function fetchData(getState, dispatch) {
 	student_name: state.homework.identifier,
 	homework_sequence: state.homework.sequence,
 	homework_title: state.homework.title,
-	selected: state.homework.selected
+	selected: state.homework.selected,
+	assignments: state.assignments.assignments
 	}),
 	dispatch => ({
 		...bindActionCreators({

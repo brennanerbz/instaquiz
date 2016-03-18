@@ -182,6 +182,9 @@ export default class CreateAssignment extends Component {
 		const style = require('./Modals.scss')
 		const { isMobile } = this.props;
 		const { createAssignment } = this.props;
+		// Assignment 
+		const { assignment } = this.props;
+		const token = cookie.load('token', {path: '/'})
 		// Icons
 		const deleteIcon = require('../../../static/icons/delete.png');
 		const question = require('../../../static/icons/question.png');
@@ -252,6 +255,9 @@ export default class CreateAssignment extends Component {
 				onClick={() => {
 					this.props.close()
 					this.props.clearDraft()
+					if(assignment) {
+						this.props.deleteAssignment(assignment.id, token)
+					}
 				}} 
 				src={deleteIcon} 
 				style={{
@@ -260,7 +266,8 @@ export default class CreateAssignment extends Component {
 					top: isMobile ? '1.25em' : '2em',
 					left: isMobile ? '1em' : '',
 					right: isMobile ? '' : '2em',
-					cursor: 'pointer'
+					cursor: 'pointer',
+					display: !isMobile && editing && 'none'
 				}}/>
 				<div 
 				style={{padding: isMobile ? '1.25em 0' : '2em 2em 0', background: '#fff'}} 
@@ -295,7 +302,36 @@ export default class CreateAssignment extends Component {
 						{editing ? 'Finish' : 'Submit'}
 					</a>}
 				</div>
-
+				{editing && !isMobile &&
+				<div style={{width: '100%', position: 'absolute', right: '2em', top: '1em'}} className="display_flex">
+					<div className="flex_container_right">
+						<button 
+						onClick={() => {
+							this.props.close()
+							this.props.clearDraft()
+							if(assignment) {
+								this.props.deleteAssignment(assignment.id, token)
+							}
+						}}
+						style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 
+						className="button primary_white">
+							Cancel
+						</button>
+						<LaddaButton 
+						loading={fetching || creating || deleting}
+						spinnerSize={30}
+						className={'button primary_blue' + ' ' + ((fetching || creating || deleting) && 'open')}
+						spinnerColor='#fff'
+						buttonStyle="expand-left"
+						style={{height: '44px', lineHeight: '44px', padding: '0 25px', margin: '0 0 0 10px'}}
+						onClick={() => {
+							if(!editing) this.handleCreateAssignment()
+							if(editing) this.handleFinishAssignment()
+						}}>
+						{editing ? 'Finish' : 'Submit'}
+						</LaddaButton>
+					</div>
+				</div>}
 				{/* Title and text */}
 				<div 
 				className="flex_vertical" 
@@ -454,14 +490,16 @@ export default class CreateAssignment extends Component {
 						</div>
 					}
 					
-
-					{!isMobile &&
+					{!isMobile && !editing &&
 					<div style={{width: '100%'}} className="display_flex">
 						<div className="flex_container_right">
 							<button 
 							onClick={() => {
 								this.props.close()
 								this.props.clearDraft()
+								if(assignment) {
+									this.props.deleteAssignment(assignment.id, token)
+								}
 							}}
 							style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 
 							className="button primary_white">

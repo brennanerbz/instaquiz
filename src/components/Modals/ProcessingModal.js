@@ -51,6 +51,7 @@ export default class ProcessingModal extends Component {
 	}
 
 	render() {
+		const { isMobile } = this.props;
 		// Creating
 		const { messages, currentMessage } = this.state;
 		// Fetching
@@ -77,7 +78,7 @@ export default class ProcessingModal extends Component {
 			container: {
 				width: '100%', 
 				margin: '2em 0',
-				height: deleting ? minHeight + 80 + 'px' : minHeight - 75 + 'px'
+				height: (deleting && isMobile) ? minHeight + 80 + 'px' : minHeight - 75 + 'px'
 			}
 		}
 		return (

@@ -17,9 +17,10 @@ export default class EditingList extends Component {
 		const { isMouseOver, hovering } = this.state;
 		return (
 			<ul style={{
-				border: '1px solid #DFE6ED', 
+				// border: '1px solid #DFE6ED', 
+				border: 'none',
 				borderRadius: isMobile ? '1px' : '4px', 
-				padding: '1em', 
+				padding: isMobile ? '1em' : '1em 0', 
 				margin: isMobile ? '10px 0' : '20px 0', 
 				background: '#fff'}}>
 				{items.map((item, i)=> {

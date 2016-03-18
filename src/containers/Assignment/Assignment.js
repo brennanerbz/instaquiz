@@ -339,9 +339,9 @@ export default class Assignment extends Component {
 													className="display_flex flex_horizontal">
 														<span 
 														style={{width: '50%', lineHeight: '20px', paddingLeft: !isMobile ? '1em' : ''}}>
-															<b style={{fontSize: '17px'}}>{sequence.identifier}</b>
-															{!completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Started {moment.utc(sequence.start).fromNow()}</p>}
-															{completed && <p style={{color: '#AEB6BD', fontSize: '15px'}}>Finished {moment.utc(sequence.finish).fromNow()}</p>}
+															<b style={{fontSize: isMobile ? '15px' : '17px'}}>{sequence.identifier}</b>
+															{!completed && <p style={{color: '#AEB6BD', fontSize: isMobile ? '14px' : '15px'}}>Started {moment.utc(sequence.start).fromNow()}</p>}
+															{completed && <p style={{color: '#AEB6BD',  fontSize: isMobile ? '14px' : '15px'}}>Finished {moment.utc(sequence.finish).fromNow()}</p>}
 														</span>
 														<span 
 														className="display_flex" 

@@ -88,9 +88,8 @@ export default class AssignmentList extends Component {
 								<span 
 								className="flex_spacer" 
 								style={{display: 'block', margin: '0 0 0 20px', fontSize: isMobile ? '16px' : '17px'}}>
-									<p className="overflow_ellipsis" style={{margin: '0 95px 0 0', fontSize: isMobile ? '17px' : '18px', fontWeight: '600', color: '#333333'}}>
+									<p className="overflow_ellipsis" style={{margin: '0 95px 0 0', fontSize: isMobile ? '17px' : '18px', fontWeight: '600', color: '#333333', lineHeight: '18px'}}>
 									{assignment.title}
-									{/*isMobile && assignment.title.slice(0, 27) + (assignment.title.length > 27 ? '...' : '')*/}
 									</p>
 									<p style={{fontSize: isMobile ? '14px' : '15px', fontWeight: '400', color: '#AEB6BD', lineHeight: '1.75em'}}>
 									{assignment.items_count} questions

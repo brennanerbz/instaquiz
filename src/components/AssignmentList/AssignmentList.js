@@ -14,12 +14,7 @@ export default class AssignmentList extends Component {
 	}
 
 	componentDidMount() {
-		const { loading } = this.props;
-		setTimeout(() => {
-			this.setState({
-				loading: false
-			});
-		},  Math.random() * (4000 - 750) + 750)
+		
 	}
 
 	render() {
@@ -36,12 +31,7 @@ export default class AssignmentList extends Component {
 		// Hover
 		const { hovering } = this.state;
 		// Loading
-		var loading;
-		if(false) {
-			loading = this.state.loading;
-		} else {
-			loading = this.props.loading;
-		}
+		var loading = this.props.loading;
 		const loadingStyles = {
 			container: {
 				margin: '3em 0'

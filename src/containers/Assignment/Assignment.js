@@ -134,8 +134,8 @@ export default class Assignment extends Component {
 							style={{
 								height: isMobile ? '14px' : '16px',
 								position: 'absolute',
-								top: '1em',
-								right: '1em',
+								top: '0.75em',
+								right: '0.75em',
 								cursor: 'pointer'
 							}}/>
 							{

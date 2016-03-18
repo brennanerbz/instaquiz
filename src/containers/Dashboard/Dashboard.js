@@ -77,7 +77,7 @@ export default class Dashboard extends Component {
 			text: {
 				color: '#fff',
 				fontSize: isMobile ? '19px' : '20px',
-				margin: isMobile ? '10px 0 10px 0' : '15px 0 15px 0'
+				margin: isMobile ? '15px 0 10px 0' : '15px 0 15px 0'
 			}
 		}
 		// Loading
@@ -96,8 +96,8 @@ export default class Dashboard extends Component {
 						style={{
 							height: isMobile ? '14px' : '16px',
 							position: 'absolute',
-							top: '1em',
-							right: '1em',
+							top: '0.75em',
+							right: '0.75em',
 							cursor: 'pointer'
 						}}/>
 						{

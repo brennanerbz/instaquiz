@@ -21,7 +21,7 @@ export default class HomeworkQuestions extends Component {
 				id="cue" 
 				style={{
 					lineHeight: '1.25em', 
-					margin: '1em', 
+					margin: '1em 1em 0', 
 					padding: '1em', 
 					background: '#fff', 
 					border: '1px solid #E4E4E4', 

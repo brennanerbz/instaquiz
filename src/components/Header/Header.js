@@ -126,13 +126,13 @@ export default class Header extends Component {
 							}
 						}}
 						src={soloLogo} 
-						style={{height: '31px', position: 'absolute', left: '1em'}}/>
+						style={{height: '32.5px', position: 'absolute', left: '1em'}}/>
 					}
 					{<span style={{minHeight: isMobile ? '30px' : '40px'}}>&nbsp;</span>}
 
 					{assignmentsView &&
 					<span className="flex_item_align_center" style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
-						<p style={{fontWeight: '600', color: '#333333', fontSize: isMobile ? '17px' : '19px'}}>
+						<p style={{fontWeight: '600', color: '#333333', fontSize: isMobile ? '18px' : '19px'}}>
 						Assignments
 						</p>
 					</span>}
@@ -144,22 +144,22 @@ export default class Header extends Component {
 					onClick={() => this.props.openModal('create_assignment')} 
 					src={add} 
 					className={touching === 'add' ? 'touching' : ''}
-					style={{height: '18.5px', position: 'absolute', right: '45px', top: '18px'}}/>}
+					style={{height: '17.5px', position: 'absolute', right: '50px', top: '17px'}}/>}
 
 					{(assignmentsView || assignmentView) && isMobile &&
 					<img 
-					onTouchStart={() => this.setState({touching: 'add'})}
+					onTouchStart={() => this.setState({touching: 'more'})}
 					onTouchEnd={() => this.setState({touching: ''})}
 					onClick={() => this.props.openFsModal('menu')} 
 					src={hamburger} 
-					className={touching === 'add' ? 'touching' : ''}
-					style={{height: '16.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
+					className={touching === 'more' ? 'touching' : ''}
+					style={{height: '15.5px', position: 'absolute', right: '10px', top: '18px'}}/>}
 					{assignmentView && isMobile &&
 					<span 
 					onTouchStart={() => this.setState({touching: 'assignments'})}
 					onTouchEnd={() => this.setState({touching: ''})}
 					className={touching === 'assignments' ? 'touching' : ''}
-					onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '16.5px' }}>
+					onClick={() => pushState(null, '/')} style={{height: '30px', lineHeight: '25px', fontSize: '18px' }}>
 						<img src={backArrow} style={{height: '18.5px', position: 'absolute', top: '18px'}}/>
 						<a style={{marginLeft: '17px'}} className="link">Assignments</a>
 					</span>}
@@ -167,9 +167,9 @@ export default class Header extends Component {
 
 					{homeworkView && isMobile &&
 					<span 
-					className="flex_item_align_center" 
+					className="flex_item_align_center flex_spacer" 
 					style={{height: '30px', lineHeight: '25px', fontSize: '16.5px', maxWidth: '200px'}}>
-						<p style={{fontWeight: '600', color: '#333333'}} className="overflow_ellipsis">
+						<p style={{margin: '0 50px 0 50px', fontWeight: '600', color: '#333333'}} className="overflow_ellipsis">
 						{this.props.homework_title}
 						</p>
 					</span>}

@@ -37,7 +37,7 @@ export default class AssignmentList extends Component {
 		const { hovering } = this.state;
 		// Loading
 		var loading;
-		if(isMobile) {
+		if(false) {
 			loading = this.state.loading;
 		} else {
 			loading = this.props.loading;
@@ -85,10 +85,12 @@ export default class AssignmentList extends Component {
 							key={assignment.title + i} 
 							className="display_flex flex_horizontal flex_nowrap">
 								<img src={setIcon} style={{height: '32px', width: '27px'}}/>
-								<span style={{marginLeft: '20px', fontSize: isMobile ? '16px' : '17px'}}>
-									<p style={{fontSize: isMobile ? '17px' : '18px', fontWeight: '600', color: '#333333'}}>
-									{!isMobile && assignment.title}
-									{isMobile && assignment.title.slice(0, 27) + (assignment.title.length > 27 ? '...' : '')}
+								<span 
+								className="flex_spacer" 
+								style={{display: 'block', margin: '0 0 0 20px', fontSize: isMobile ? '16px' : '17px'}}>
+									<p className="overflow_ellipsis" style={{margin: '0 95px 0 0', fontSize: isMobile ? '17px' : '18px', fontWeight: '600', color: '#333333'}}>
+									{assignment.title}
+									{/*isMobile && assignment.title.slice(0, 27) + (assignment.title.length > 27 ? '...' : '')*/}
 									</p>
 									<p style={{fontSize: isMobile ? '14px' : '15px', fontWeight: '400', color: '#AEB6BD', lineHeight: '1.75em'}}>
 									{assignment.items_count} questions

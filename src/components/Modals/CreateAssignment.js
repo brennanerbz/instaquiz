@@ -288,7 +288,8 @@ export default class CreateAssignment extends Component {
 						position: 'absolute',
 						top: '1.25em',
 						right: '1em',
-						fontSize: '17px'
+						fontSize: '17px',
+						fontWeight: '600'
 					}}
 					className="link">
 						{editing ? 'Finish' : 'Submit'}

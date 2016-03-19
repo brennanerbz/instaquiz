@@ -95,20 +95,6 @@ export default class PhoneModal extends Component {
 							Copy Link!
 						</button>
 					</CopyToClipboard>
-					<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
-						<div style={{margin: '10px auto', background: '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
-						or
-						</div>
-						<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
-					</div>
-					<button 
-					onClick={() => {
-						this.props.close()
-						this.props.pushState(null, `/homework/${linkToHomework}/read`)
-					}}
-					style={{width: '95%'}} className="button primary_white">
-						See preview
-					</button>
 				</div>
 			</div>
 		);
@@ -116,5 +102,18 @@ export default class PhoneModal extends Component {
 }
 
 /*
-
+<div style={{textAlign: 'center', clear: 'both', width: '90%'}} className="display_flex flex_container_center relative">
+	<div style={{margin: '10px auto', background: '#fff', zIndex: '1', padding: '0 1em'}} className="display_flex">
+	or
+	</div>
+	<hr style={{position: 'absolute', top: '0rem', left: '0', right: '0', borderTop: '1px solid #e8e8e8'}} className="separator"/>
+</div>
+<button 
+onClick={() => {
+	this.props.close()
+	this.props.pushState(null, `/homework/${linkToHomework}/read`)
+}}
+style={{width: '95%'}} className="button primary_white">
+	See preview
+</button>
 */

@@ -90,16 +90,16 @@ export default class LoginModal extends Component {
 			color: '#2C3239',
 			fontWeight: '600',
 			fontSize: isMobile ? '21px' : '22px',
-			margin: '25px 0 15px 0!important'
+			margin: isMobile ? '15px 0 10px 0!important' : '25px 0 15px 0!important'
 		}
 		const noteStyle = {
 			color: '#8492A6',
 			fontWeight: '400',
 			fontSize: isMobile ? '16px' : '17px',
-			margin: '0 0 25px 0'
+			margin: isMobile ? '0 0 10px 0' : '0 0 25px 0'
 		}
 		const formWrapper = {
-			width: '95%'
+			width: isMobile ? '100%' : '90%'
 		}
 		const bigButton = {
 			height: '50px',
@@ -110,7 +110,7 @@ export default class LoginModal extends Component {
 		const inputStyle = {
 			input: {
 				lineHeight: '18px',
-				margin: '10px 0 10px 0'
+				margin: isMobile ? '5px 0 5px 0' : '10px 0 10px 0'
 			},
 			success: {
 

@@ -99,18 +99,18 @@ export default class SignupModal extends Component {
 			color: '#2C3239',
 			fontWeight: '600',
 			fontSize: isMobile ? '21px' : '22px',
-			margin: '25px 0 15px 0!important'
+			margin: isMobile ? '15px 0 10px 0!important' : '25px 0 15px 0!important'
 		}
 		const noteStyle = {
 			color: '#8492A6',
 			fontWeight: '400',
 			fontSize: isMobile ? '16px' : '17px',
-			margin: '0 0 25px 0',
+			margin: isMobile ? '0 0 10px 0' : '0 0 25px 0',
 			textAlign: 'center',
 			lineHeight: '1.2'
 		}
 		const formWrapper = {
-			width: '95%'
+			width: isMobile ? '100%' : '90%'
 		}
 		const bigButton = {
 			height: '50px',
@@ -121,7 +121,7 @@ export default class SignupModal extends Component {
 		const inputStyle = {
 			input: {
 				lineHeight: '18px',
-				margin: '10px 0 10px 0'
+				margin: isMobile ? '5px 0 5px 0' : '10px 0 10px 0'
 			},
 			success: {
 
@@ -144,7 +144,7 @@ export default class SignupModal extends Component {
 				src={deleteIcon} 
 				style={closeStyle}/>
 				<h1 style={headerStyle}>Sign up for free!</h1>
-				<p style={noteStyle}>Nightly is free as long as you want for an unlimited amount of assignments.</p>
+				{!isMobile && <p style={noteStyle}>Nightly is free as long as you want for an unlimited amount of assignments.</p>}
 				<div style={formWrapper} className="flex_vertical">
 					<input 
 						ref="email"

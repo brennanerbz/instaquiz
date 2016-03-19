@@ -36,7 +36,11 @@ export default class DefaultModal extends Component {
 	}
 
 	state = {
-		copied: false
+		copied: false,
+		height: 0
+	}
+
+	componentDidMount() {
 	}
 
 	close() {
@@ -51,6 +55,9 @@ export default class DefaultModal extends Component {
 		if(!this.props.open && nextProps.open) {
 			if(nextProps.isMobile) {
 				$('.modal-backdrop').addClass('mobile')
+				this.setState({
+					height: window.innerHeight
+				});
 			}
 		}
 	}
@@ -60,8 +67,10 @@ export default class DefaultModal extends Component {
 		const { open, type, isMobile, startQuiz, loaded, title, error } = this.props;
 		let bodyPadding;
 		if(type == 'processing') bodyPadding = '2em 0 2.75em 0'
-		if(type == 'create_assignment') bodyPadding = '0'
+		else if(type == 'create_assignment') bodyPadding = '0'
+		else if(isMobile) bodyPadding = '0.5rem 1.5rem 1.5rem'
 		const { copied } = this.state;
+		const { height } = this.state;
 		return (
 			<Modal
 			bsClass={(isMobile ? 'mobile' : 'desktop') + ' ' + 'modal'}
@@ -89,11 +98,13 @@ export default class DefaultModal extends Component {
 					</div>
 				}
 				<Modal.Body 
+				bsClass={(type === 'phone' ? 'display_flex flex_container_center' : '') + ' '  + 'modal-body'} 
 				style={{
 					padding: bodyPadding,
 					background: isMobile 
 					? (type == 'create_assignment' && '#F9FAFC')
-					: '' 
+					: '',
+					height: isMobile ? height + 'px' : ''
 				}}>
 					{
 						type == 'login'

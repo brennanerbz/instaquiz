@@ -207,7 +207,6 @@ export default function reducer(state = initialState, action) {
 				...state,
 				assignments: state.assignments.filter(a => a.id !== action.result.id),
 				workingAssignment: {},
-				items: [],
 				title: '',
 				text: '',
 				creating: false,
@@ -311,6 +310,7 @@ export function deleteItems(list, id, token) {
 export function deleteAssignment(id, token, pushState) {
 	return(dispatch, getState) => {
 		dispatch({type: DELETE_ASSIGNMENT})
+		var currentRoute = getState().router.location.pathname;
 		request
 		.del(`https://nightly-server.herokuapp.com/api/v1.0/assignments/${id}`)
 		.auth(token, '')
@@ -318,7 +318,7 @@ export function deleteAssignment(id, token, pushState) {
 			if(res.ok) {
 				const result = res.body
 				dispatch({type: DELETE_ASSIGNMENT_SUCCESS, result})
-				pushState(null, '/')
+				pushState(null, currentRoute)
 			} else {
 				const error = err;
 				dispatch({type: DELETE_ASSIGNMENT_FAILURE, error})

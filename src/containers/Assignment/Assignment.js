@@ -120,6 +120,9 @@ export default class Assignment extends Component {
 				margin: '3em 0'
 			}
 		}
+		const seq = sequences
+					.filter(seq => {return seq.identifier && seq.identifier.length > 0})
+		const scoresIn = seq.length > 0
 		return (
 			<div style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
@@ -246,9 +249,6 @@ export default class Assignment extends Component {
 											const first = i === 0;
 											const last = i === tabs.length - 1;
 											const active = tab === activeTab
-											const seq = sequences
-															.filter(seq => {return seq.identifier && seq.identifier.length > 0})
-											const scoresIn = seq.length > 0
 											return (
 												<li 
 													onTouchStart={() => this.setState({touchingTab: i})}
@@ -325,7 +325,7 @@ export default class Assignment extends Component {
 								{loading && <div style={loadingStyles.container}><LoadingSpinner size={4}/></div>}
 								{!loading && <ul id="score_list">
 									{
-										sequences.length > 0 && sequences.map((sequence, i) => {
+										scoresIn && seq.map((sequence, i) => {
 											const score = (sequence.correct_count / items_count) * 100
 											const first = i === 0;
 											const completed = sequence.questions_remaining === 0;
@@ -382,7 +382,8 @@ export default class Assignment extends Component {
 										})
 									}
 									{
-										sequences.length === 0
+										
+										!scoresIn
 										&&
 										<div style={{padding: '2em'}} className="display_flex flex_center flex_vertical">
 											<p style={{margin: '15px', fontSize: '21px', fontWeight: '600', color: '#333333'}}>No scores yet</p>

@@ -84,7 +84,8 @@ export default class Assignment extends Component {
 		const moon = require('../../../static/icons/moon.png');
 		const trophy = require('../../../static/icons/trophy.png');
 
-		const { isMobile } = this.props;
+		const { isMobile, pushState } = this.props;
+		const { params } = this.props;
 		const { token, assignment, title, items, items_count } = this.props;
 		const { error } = this.props;
 		const { tabs, activeTab, touchingTab } = this.state;
@@ -183,6 +184,8 @@ export default class Assignment extends Component {
 								count={items_count} 
 								isMobile={isMobile}
 								promptOpen={promptOpen}
+								params={params}
+								pushState={pushState}
 								/>
 							{
 								!isMobile && promptOpen &&

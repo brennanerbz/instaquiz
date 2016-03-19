@@ -23,6 +23,9 @@ import { nameError } from '../../redux/modules/homework';
 import { fetchAssignments } from '../../redux/modules/assignments';
 import { openModal } from '../../redux/modules/overlays';
 import { openFsModal } from '../../redux/modules/overlays';
+// Clear 
+import { clearAssignment, clearDraft } from '../../redux/modules/assignments';
+import { clearHomework } from '../../redux/modules/homework';
 
 function fetchData(getState, dispatch) {
 	const promises = [];
@@ -55,7 +58,10 @@ function fetchData(getState, dispatch) {
 			logOut,
 			openModal,
 			openFsModal,
-			fetchAssignments
+			fetchAssignments,
+			clearAssignment,
+			clearDraft,
+			clearHomework
 		}, dispatch)
 	})
 )
@@ -97,6 +103,9 @@ export default class App extends Component {
 		}
 		if(this.props.user && !nextProps.user) {
 			this.props.pushState(null, '/')
+			this.props.clearHomework()
+			this.props.clearDraft()
+			this.props.clearAssignment()
 		}
 	}
 

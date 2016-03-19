@@ -223,6 +223,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				title: '',
 				text: '',
+				token: null,
 				loaded: false,
 				loading: false,
 				creating: false,

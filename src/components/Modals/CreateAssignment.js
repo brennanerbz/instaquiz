@@ -280,7 +280,7 @@ export default class CreateAssignment extends Component {
 						color: '#283643'
 					}}>
 					{!editing && 'Create Assignment'}
-					{editing && 'Select Questions'}
+					{editing && `Select Questions (${items.filter(i => i.selected).length})`}
 					</h1>
 					{isMobile &&
 					<a

@@ -26,6 +26,9 @@ export default class Header extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if(!this.props.homework_sequence && nextProps.homework_sequence) {
+			this.setProgressWidth(nextProps)
+		}
 		if(this.props.homework_sequence.questions_completed !== nextProps.questions_completed) {
 			this.setProgressWidth(nextProps)
 		}

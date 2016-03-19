@@ -113,14 +113,21 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				loading: true,
-				error: null
+				token: null,
+				error: null,
 			}
 		case FETCH_TOKEN_SUCCESS:
+			cookie.remove('token', {path: '/'})
+			cookie.remove('account', {path: '/'})
+			cookie.remove('teacher', {path: '/'})
+			cookie.remove('student', {path: '/'})
+			cookie.remove('sequences', {path: '/'})
 			if(action.result) {
 				cookie.save('token', action.result, { path: '/', expires: d});
 				return {
 					...state,
-					token: action.result
+					token: action.result,
+					user: null
 				}
 			} else {
 				return {

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium'
 
+@Radium
 export default class QuizHeader extends Component {
 	static propTypes = {
 	}
@@ -32,6 +34,8 @@ export default class QuizHeader extends Component {
 			 },
 			 button: {
 			 	zIndex: '0',
+			 },
+			 secondButton: {
 			 	margin: '0 0 0 10px'
 			 }
 		}
@@ -52,7 +56,7 @@ export default class QuizHeader extends Component {
 					</button>
 					<button 
 						onClick={() => this.props.pushState(null, `/homework/${params.token}/read`)}
-						style={styles.button}
+						style={[styles.button, styles.secondButton]}
 						className="button primary_white">
 						Preview
 					</button>

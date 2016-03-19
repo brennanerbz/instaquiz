@@ -11,6 +11,7 @@ import * as overlayActions from '../../redux/modules/overlays';
 import { AssignmentList } from '../../components';
 
 @connect(state => ({
+		fetchingAssignments: state.assignments.fetchingAssignments,
 		loading: state.assignments.loading,
 		loaded: state.assignments.loaded,
 		user: state.user.user,
@@ -41,7 +42,8 @@ export default class Dashboard extends Component {
 			promptOpen: !account
 		});
 		const { loaded, modalOpen } = this.props;
-		if(!modalOpen) {
+		
+		if(!loaded) {
 			this.props.fetchAssignments(token)
 		}
 	}
@@ -81,7 +83,7 @@ export default class Dashboard extends Component {
 			}
 		}
 		// Loading
-		const { loading } = this.props;
+		const { fetchingAssignments } = this.props;
 		return (
 			<div>
 				{
@@ -133,7 +135,7 @@ export default class Dashboard extends Component {
 				isMobile={this.props.isMobile}
 				assignments={this.props.assignments} 
 				pushState={this.props.pushState}
-				loading={loading}/>
+				loading={fetchingAssignments}/>
 			</div>
 		);
 	}

@@ -38,6 +38,7 @@ const initialState = {
 	title: '',
 	text: '',
 	//
+	fetchingAssignments: false,
 	loading: false,
 	loaded: false,
 	fetching: false,
@@ -58,7 +59,7 @@ export default function reducer(state = initialState, action) {
 		case FETCH_ASSIGNMENTS:
 			return {
 				...state,
-				loading: true,
+				fetchingAssignments: true,
 			}
 		case FETCH_ASSIGNMENTS_SUCCESS:
 			if(action.result.assignments.length > 0) {
@@ -66,14 +67,15 @@ export default function reducer(state = initialState, action) {
 			}
 			return {
 				...state,
-				loading: false,
+				fetchingAssignments: false,
 				loaded: true,
 				assignments: [...action.result.assignments]
 			}
 		case FETCH_ASSIGNMENTS_FAILURE:
 			return {
 				...state,
-				loading: false,
+				fetchingAssignments: false,
+				loaded: false,
 				error: action.error
 			}
 		case FETCH_ARTICLE:

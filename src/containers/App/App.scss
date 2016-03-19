@@ -5,6 +5,7 @@ $primary-blue: #1FB6FF;
 $primary-grey: #8492A6;
 $primary-grey-border: #DAE0E7;
 $secondary-grey: #A8B6C1;
+$primary-red: #F75352;
 
 
 #app {
@@ -268,6 +269,11 @@ $secondary-grey: #A8B6C1;
 		padding: 7px 15px;
 		font-size: 14px;
 		font-weight: 600;
+	}
+	&.primary_red {
+		border: none;
+		background: $primary_red;
+		color: #fff;
 	}
 }
 

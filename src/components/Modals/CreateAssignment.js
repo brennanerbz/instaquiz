@@ -25,7 +25,7 @@ import ProcessingModal from './ProcessingModal';
   	deleting: state.assignments.deleting,
   	finished: state.assignments.finished,
   	items: state.assignments.items,
-  	assignment: state.assignments.assignment,
+  	assignment: state.assignments.workingAssignment,
   	error: state.assignments.error
   }),
   dispatch => ({
@@ -43,6 +43,7 @@ export default class CreateAssignment extends Component {
 	state = {
 		title: '',
 		text: '',
+		draft: false,
 		isTextLink: false,
 		subject: null,
 		readingLevel: null,
@@ -87,6 +88,14 @@ export default class CreateAssignment extends Component {
 	}
 
 	componentDidMount() {
+		const { editing, text, title } = this.props;
+		if(editing || text || title) {
+			this.setState({
+				draft: true,
+				title: title,
+				text: text
+			});
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -104,6 +113,15 @@ export default class CreateAssignment extends Component {
 				text: text,
 				isTextLink: false
 			});
+		}
+		// Incoming assignment
+		const { draft } = this.state;
+		if(draft) {
+			if(Object.keys(this.props.assignment).length === 0 && Object.keys(nextProps.assignment).length > 0) {
+				this.setState({
+					draft: false
+				});
+			}
 		}
 		// Error
 		const { error } = nextProps;
@@ -180,7 +198,7 @@ export default class CreateAssignment extends Component {
 
 	render() {
 		const style = require('./Modals.scss')
-		const { isMobile } = this.props;
+		const { pushState, isMobile } = this.props;
 		const { createAssignment } = this.props;
 		// Assignment 
 		const { assignment } = this.props;
@@ -246,6 +264,8 @@ export default class CreateAssignment extends Component {
 			lineHeight: '14px',
 			color: 'red'
 		}
+		// Draft
+		const { draft } = this.state;
 		return (
 			<div id="create" className="display_flex flex_vertical relative">
 				<img 
@@ -255,8 +275,8 @@ export default class CreateAssignment extends Component {
 				onClick={() => {
 					this.props.close()
 					this.props.clearDraft()
-					if(assignment) {
-						this.props.deleteAssignment(assignment.id, token)
+					if(assignment && assignment.id) {
+						this.props.deleteAssignment(assignment.id, token, pushState)
 					}
 				}} 
 				src={deleteIcon} 
@@ -281,6 +301,7 @@ export default class CreateAssignment extends Component {
 					}}>
 					{!editing && 'Create Assignment'}
 					{editing && `Select Questions (${items.filter(i => i.selected).length})`}
+					{draft && <span style={{color: '#F75352'}}>&nbsp;-&nbsp;Draft</span>}
 					</h1>
 					{isMobile &&
 					<a
@@ -309,8 +330,8 @@ export default class CreateAssignment extends Component {
 						onClick={() => {
 							this.props.close()
 							this.props.clearDraft()
-							if(assignment) {
-								this.props.deleteAssignment(assignment.id, token)
+							if(assignment && assignment.id) {
+								this.props.deleteAssignment(assignment.id, token, pushState)
 							}
 						}}
 						style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 
@@ -332,6 +353,7 @@ export default class CreateAssignment extends Component {
 						</LaddaButton>
 					</div>
 				</div>}
+				{/* Draft Prompt */}
 				{/* Title and text */}
 				<div 
 				className="flex_vertical" 
@@ -497,8 +519,8 @@ export default class CreateAssignment extends Component {
 							onClick={() => {
 								this.props.close()
 								this.props.clearDraft()
-								if(assignment) {
-									this.props.deleteAssignment(assignment.id, token)
+								if(assignment && assignment.id) {
+									this.props.deleteAssignment(assignment.id, token, pushState)
 								}
 							}}
 							style={{height: '44px', lineHeight: '44px', padding: '0 25px'}} 

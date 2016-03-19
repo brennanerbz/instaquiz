@@ -46,6 +46,7 @@ const initialState = {
 	editing: false,
 	deleting: false,
 	finished: false,
+	workingAssignment: {},
 	assignment: {},
 	items: [],
 	sequences: [],
@@ -119,7 +120,7 @@ export default function reducer(state = initialState, action) {
 				creating: false,
 				editing: true,
 				assignments: [action.result, ...state.assignments],
-				assignment: action.result,
+				workingAssignment: action.result,
 				items: action.result.items.items.map(item => {
 					item.selected = true
 					return item;
@@ -148,8 +149,8 @@ export default function reducer(state = initialState, action) {
 				assignment: action.result,
 				items: action.result.items.items,
 				items_count: action.result.items.items.length,
-				title: action.result.title,
-				text: action.result.text,
+				// title: action.result.title,
+				// text: action.result.text,
 				token: action.result.token,
 				sequences: action.result.sequences.sequences
 			}
@@ -202,9 +203,16 @@ export default function reducer(state = initialState, action) {
 				...state,
 			}
 		case DELETE_ASSIGNMENT_SUCCESS:
-			console.log(action.result)
 			return {
 				...state,
+				assignments: state.assignments.filter(a => a.id !== action.result.id),
+				workingAssignment: {},
+				items: [],
+				title: '',
+				text: '',
+				creating: false,
+				editing: false,
+				finished: false
 			}
 		case DELETE_ASSIGNMENT_FAILURE:
 			return {
@@ -218,7 +226,8 @@ export default function reducer(state = initialState, action) {
 				text: '',
 				editing: false,
 				creating: false,
-				finished: false
+				finished: false,
+				workingAssignment: {}
 			}
 		case CLEAR_ASSIGNMENT:
 			return {
@@ -299,10 +308,22 @@ export function deleteItems(list, id, token) {
 	}
 }
 
-export function deleteAssignment(id, token) {
-	return {
-		types: [DELETE_ASSIGNMENT, DELETE_ASSIGNMENT_SUCCESS, DELETE_ASSIGNMENT_FAILURE],
-		promise: (client) => client.del(`/assignments/${id}`, null, token)
+export function deleteAssignment(id, token, pushState) {
+	return(dispatch, getState) => {
+		dispatch({type: DELETE_ASSIGNMENT})
+		request
+		.del(`https://nightly-server.herokuapp.com/api/v1.0/assignments/${id}`)
+		.auth(token, '')
+		.end((err, res) => {
+			if(res.ok) {
+				const result = res.body
+				dispatch({type: DELETE_ASSIGNMENT_SUCCESS, result})
+				pushState(null, '/')
+			} else {
+				const error = err;
+				dispatch({type: DELETE_ASSIGNMENT_FAILURE, error})
+			}
+		})
 	}
 }
 

@@ -113,7 +113,7 @@ export default class Header extends Component {
 					style={{
 						height: isMobile ? '40px' : (teacher ? '45px' : '55px'),
 						cursor: teacher && 'pointer',
-						position: homeworkView || assignmentsView ? '' : 'absolute',
+						position: '',
 						left: '25px'
 					}}/>
 					: null}

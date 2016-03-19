@@ -47,7 +47,6 @@ export default class HomeworkContainer extends Component {
 			if(!teacher) cookie.save('student', true, {path: '/'})
 			var sequences = cookie.load('sequences', {path: '/'})
 			if(sequences) sequences = JSON.parse(sequences)
-			console.log('seq:   ', sequences)
 			if(sequences && sequences[route_token]) {
 				fetchSequence(sequences[route_token])
 			} else {

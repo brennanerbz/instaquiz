@@ -46,7 +46,7 @@ export default class Homework extends Component {
 						<a 
 						ref="next_link" 
 						style={{marginRight: '27px', opacity: touching ? '0.7' : '1'}} 
-						className={(question_selected ? '' : (touching ? '' : 'grey')) + ' ' + 'link'}>Next</a>
+						className={'link' + ' ' + (question_selected ? '' : 'grey_no_hover')}>Next</a>
 						<img 
 						src={question_selected ? forwardArrow : forwardArrowGrey} 
 						style={{height: '18.5px', position: 'absolute', right: '10px', top: '0', opacity: touching ? '0.5' : '1'}}/>

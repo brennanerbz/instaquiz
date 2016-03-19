@@ -132,7 +132,8 @@ export default function reducer (state = initialState, action) {
 			return {
 				...state,
 				loading: false,
-				question: action.result
+				question: action.result,
+				question_selected: false
 			}
 		case FETCH_QUESTION_FAILURE:
 			return {
@@ -142,7 +143,8 @@ export default function reducer (state = initialState, action) {
 		// Answer
 		case SUBMIT_ANSWER:
 			return {
-				...state
+				...state,
+				loading: true
 			}
 		case SUBMIT_ANSWER_SUCCESS:
 			return {

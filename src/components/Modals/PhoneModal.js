@@ -27,7 +27,7 @@ export default class PhoneModal extends Component {
 				style={{
 					height: isMobile ? '15px' : '16px',
 					position: 'absolute',
-					top: isMobile ? '1.25em' : '2em',
+					top: isMobile ? '3.25em' : '2em',
 					right: '2em',
 					cursor: 'pointer'
 				}}/>

@@ -149,7 +149,9 @@ export default class Landing extends Component {
 								<li className={style.footer_link_header}>
 									HANDY LINKS
 								</li>
-								<li className={style.footer_link}>
+								<li 
+								onClick={() => {openModal('create_assignment')}}
+								className={style.footer_link}>
 									<a>Create a new assignment</a>
 								</li>
 							</ul>

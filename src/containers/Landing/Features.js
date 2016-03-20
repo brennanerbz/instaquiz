@@ -13,17 +13,17 @@ export default class ProductDetails extends Component {
 			},
 			{
 				heading: 'Parse',
-				message: 'We read the text to find all the key concepts and facts.',
+				message: 'Our A.I. reads the text to find all the key concepts and facts.',
 				image: require('./images/crack.png'),
 			},
 			{
 				heading: 'Tap',
-				message: 'You swipe and tap to customize the auto-generated content.',
+				message: 'You tap to customize the auto-generated content.',
 				image: require('./images/tap.png'),
 			},
 			{
 				heading: 'Push',
-				message: 'A single button sends it to all of your students.',
+				message: 'A single button sends the link to all of your students.',
 				image: require('./images/push.png'),
 			},
 			{
@@ -33,7 +33,7 @@ export default class ProductDetails extends Component {
 			},
 			{
 				heading: 'Pop',
-				message: 'Then get quizzed by adaptive system, which outsmarts cheaters.',
+				message: 'Then get quizzed by our system, which outsmarts cheaters.',
 				image: require('./images/pop.png'),
 			},
 			{

@@ -5,3 +5,7 @@ dist/
 webpack-assets.json
 webpack-stats.json
 npm-debug.log
+server.csr
+server.pass.key
+www_nightly-app_com.key
+www_nightly-app_com.pem

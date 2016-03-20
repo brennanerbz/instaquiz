@@ -52,7 +52,7 @@ export default class Homework extends Component {
 						style={{height: '18.5px', position: 'absolute', right: '10px', top: '0', opacity: touching ? '0.5' : '1'}}/>
 					</span>}
 					<div style={{padding: isMobile ? '3.5em 0 0' : '5em 25px', height: '100%'}}>
-					{loading && <LoadingSpinner size={4}/>}
+					{loading && !showFinished && <LoadingSpinner size={4}/>}
 					{!loading && !showFinished && homeworkChildrenWithProps}
 					{showFinished && 
 					<div style={{height: '90%'}} className="display_flex flex_vertical flex_center flex_container_center">

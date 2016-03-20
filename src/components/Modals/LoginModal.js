@@ -90,7 +90,7 @@ export default class LoginModal extends Component {
 			color: '#2C3239',
 			fontWeight: '600',
 			fontSize: isMobile ? '21px' : '22px',
-			margin: isMobile ? '15px 0 10px 0!important' : '25px 0 15px 0!important'
+			margin: isMobile ? '2em 0 10px 0!important' : '25px 0 15px 0!important'
 		}
 		const noteStyle = {
 			color: '#8492A6',

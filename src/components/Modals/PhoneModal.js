@@ -5,6 +5,10 @@ export default class PhoneModal extends Component {
 	static propTypes = {
 	}
 
+	state = {
+		copied: false
+	}
+
 	componentDidMount() {
 		setTimeout(() => {
 			this.refs.link_to_homework.setSelectionRange(0, this.refs.link_to_homework.value.length)
@@ -17,6 +21,7 @@ export default class PhoneModal extends Component {
 		const deleteIcon = require('../../../static/icons/delete.png');
 		const { isMobile } = this.props;
 		const linkToHomework = this.props.path.split('/')[2]
+		const { copied } = this.state;
 		return(
 			<div className="">
 				<img 
@@ -27,7 +32,7 @@ export default class PhoneModal extends Component {
 				style={{
 					height: isMobile ? '15px' : '16px',
 					position: 'absolute',
-					top: isMobile ? '3.25em' : '2em',
+					top: copied ? '3.25em' : '2em',
 					right: '2em',
 					cursor: 'pointer'
 				}}/>
@@ -85,7 +90,12 @@ export default class PhoneModal extends Component {
 					/>
 					<CopyToClipboard 
 					text={`https://nightly-app.herokuapp.com/homework/${linkToHomework}/read`} 
-					onCopy={() => this.props.copy()}>
+					onCopy={() => {
+						this.setState({
+							copied: true
+						});
+						this.props.copy()
+					}}>
 						<button 
 						style={{
 							margin: '5px 0px',

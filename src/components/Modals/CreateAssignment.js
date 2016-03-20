@@ -111,7 +111,11 @@ export default class CreateAssignment extends Component {
 			this.setState({
 				title: title,
 				text: text,
-				isTextLink: false
+				isTextLink: false,
+				error: {
+					...this.state.error,
+					code: null
+				}
 			});
 		}
 		// Incoming assignment

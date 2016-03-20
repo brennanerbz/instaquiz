@@ -7,12 +7,12 @@ export default class ProductDetails extends Component {
 	state = {
 		features: [
 			{
-				heading: 'Snap',
-				message: 'You snap a photo of any material to create an assignment.',
+				heading: 'Paste',
+				message: 'You paste any website URL or reading you want.',
 				image: require('./images/snap.png'),
 			},
 			{
-				heading: 'Crack',
+				heading: 'Parse',
 				message: 'We read the text to find all the key concepts and facts.',
 				image: require('./images/crack.png'),
 			},
@@ -81,7 +81,7 @@ export default class ProductDetails extends Component {
 										style={{order: ((even && !isMobile) ? 0 : 1), width: isMobile ? '100%' : '50%', minWidth: isMobile ? '' : '350px'}} 
 										className={'display_flex ' + (isMobile ? 'flex_center' : '')}>
 											{
-												feature.heading === 'Snap' || feature.heading === 'Watch'
+												feature.heading === 'Paste' || feature.heading === 'Watch'
 												? <img 
 												src={feature.image} 
 												className={(!isMobile ? (even ? 'flex_item_align_left ' : 'flex_item_align_right ') : '') + style.feature_phone}/>

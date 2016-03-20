@@ -98,7 +98,7 @@ export default class DefaultModal extends Component {
 					</div>
 				}
 				<Modal.Body 
-				bsClass={(type === 'phone' ? 'display_flex flex_container_center' : '') + ' '  + 'modal-body'} 
+				bsClass={'modal-body' + ' ' + (type === 'phone' ? 'display_flex flex_container_center' : '')} 
 				style={{
 					padding: bodyPadding,
 					background: isMobile 

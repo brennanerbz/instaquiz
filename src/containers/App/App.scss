@@ -31,6 +31,9 @@ $primary-red: #F75352;
 // Text overflow => ellipsis
 :global .overflow_ellipsis {
 	display: block;
+	-webkit-overflow: ellipsis;
+	-moz-overflow: ellipsis;
+	-ms-overflow: ellipsis;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -347,11 +350,13 @@ $primary-red: #F75352;
 :global .fade {
 	opacity: 0;
 	-webkit-transition: opacity .05s linear;
+	-ms-transition: opacity .05s linear;
 	-moz-transition: opacity .05s linear;
 	-o-transition: opacity .05s linear;
 	transition: opacity .05s linear;
 	&.in {
 		-webkit-transition: opacity .05s linear;
+		-ms-transition: opacity .05s linear;
 		-moz-transition: opacity .05s linear;
 		-o-transition: opacity .05s linear;
 		transition: opacity .05s linear;
@@ -432,6 +437,7 @@ $primary-red: #F75352;
 // Animations
 :global .animate_width {
 	-webkit-transition: width 0.1s ease-out;
+	-ms-transition: width 0.1s ease-out;
 	-moz-transition: width 0.1s ease-out;
 	-o-transition: width 0.1s ease-out;
 	transition: width 0.1s ease-out;
@@ -441,6 +447,7 @@ $primary-red: #F75352;
 :global .touching {
 	opacity: 0.6;
 	-webkit-transition: opacity 0.1s ease-out;
+	-ms-transition: width 0.1s ease-out;
 	-moz-transition: opacity 0.1s ease-out;
 	-o-transition: opacity 0.1s ease-out;
 	transition: opacity 0.1s ease-out;
@@ -491,6 +498,15 @@ $primary-red: #F75352;
 	}
 }
 	@-moz-keyframes :global(placeHolderShimmer) {
+	  0% {
+	    background-position: -468px 0
+	  }
+	  100% {
+	    background-position: 468px 0
+	  }
+	}
+
+	@-ms-keyframes :global(placeHolderShimmer) {
 	  0% {
 	    background-position: -468px 0
 	  }

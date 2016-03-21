@@ -117,6 +117,7 @@ button {
 		&.fade {
 			top: 200%!important;
 			-webkit-transition: opacity .01s linear,top .4s ease-out;
+			-ms-transition: opacity .01s linear,top .4s ease-out;
 			-moz-transition: opacity .01s linear,top .4s ease-out;
 			-o-transition: opacity .01s linear,top .4s ease-out;
 			transition: opacity .01s linear,top .4s ease-out;
@@ -124,6 +125,7 @@ button {
 				top: 0!important;
 				opacity: 1;
 				-webkit-transition: opacity .01s linear,top .4s ease-out;
+				-ms-transition: opacity .01s linear,top .4s ease-out;
 				-moz-transition: opacity .01s linear,top .4s ease-out;
 				-o-transition: opacity .01s linear,top .4s ease-out;
 				transition: opacity .01s linear,top .4s ease-out;
@@ -133,6 +135,7 @@ button {
 	&.fade {
 		top: -100%;
 		-webkit-transition: opacity .10s linear,top .15s ease-out;
+		-ms-transition: opacity .01s linear,top .4s ease-out;
 		-moz-transition: opacity .10s linear,top .15s ease-out;
 		-o-transition: opacity .10s linear,top .15s ease-out;
 		transition: opacity .10s linear,top .15s ease-out;
@@ -140,6 +143,7 @@ button {
 			top: 3%;
 			opacity: 1;	
 			-webkit-transition: opacity .10s linear,top .15s ease-out;
+			-ms-transition: opacity .01s linear,top .4s ease-out;
 			-moz-transition: opacity .10s linear,top .15s ease-out;
 			-o-transition: opacity .10s linear,top .15s ease-out;
 			transition: opacity .10s linear,top .15s ease-out;
@@ -228,6 +232,8 @@ button {
 .fade {
 	opacity: 0;
     -webkit-transition: opacity 0.05s linear;
+    -moz-transition: opacity 0.05s linear;
+    -ms-transition: opacity 0.05s linear;
     -o-transition: opacity 0.05s linear;
     transition: opacity 0.05s linear;
 }
@@ -277,6 +283,8 @@ button {
 // Spin
 .fa-spin {
     -webkit-animation: fa-spin 1.2s infinite linear;
+    -moz-animation: fa-spin 1.2s infinite linear;
+    -ms-animation: fa-spin 1.2s infinite linear;
     animation: fa-spin 1.2s infinite linear;
 }
 

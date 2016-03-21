@@ -3,6 +3,7 @@ require('babel/polyfill');
 // Webpack config for creating the production bundle.
 var path = require('path');
 var webpack = require('webpack');
+var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
@@ -55,6 +56,7 @@ module.exports = {
     extensions: ['', '.json', '.js', '.jsx']
   },
   plugins: [
+    new ModernizrWebpackPlugin(),
     new CleanPlugin([assetsPath], { root: projectRootPath }),
 
     // css files from the extract-text-plugin loader

@@ -4,6 +4,7 @@ require('babel/polyfill');
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
+var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var assetsPath = path.resolve(__dirname, '../static/dist');
@@ -88,6 +89,7 @@ module.exports = {
   },
   plugins: [
     // hot reload
+    new ModernizrWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({

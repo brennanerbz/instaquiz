@@ -45,7 +45,7 @@ export default class Landing extends Component {
 		return (
 			<div id="landing">
 				<div id="hero">
-					<div id={style.landing} style={{borderBottom: '1px solid #D7D8DA'}} id={style.landing} className="display_flex flex_center">
+					<div style={{borderBottom: '1px solid #D7D8DA', display: 'block'}}>
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
 							<div 
 								style={{padding: isMobile ? '10px 20px 0' : '70px 0 0'}} 

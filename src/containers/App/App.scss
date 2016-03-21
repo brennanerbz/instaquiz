@@ -88,6 +88,7 @@ $primary-red: #F75352;
 	-webkit-justify-content: center;
 	-moz-justify-content: center;
 	-ms-flex-align: center;
+	-ms-flex-item-align: center;
 	-ms-justify-content: center;
 	justify-content: center;
 }
@@ -101,6 +102,7 @@ $primary-red: #F75352;
 	-moz-align-content: flex-start;
 	-ms-align-content: flex-start;
 	-ms-flex-align: start;
+	-ms-flex-item-align: start;
 	align-content: flex-start;
 	margin-right: auto;
 }
@@ -109,6 +111,7 @@ $primary-red: #F75352;
 	-moz-align-items: center;
 	-ms-align-items: center;
 	-ms-flex-align: center;
+	-ms-flex-item-align: center;
 	align-items: center;
 	margin: auto;
 }
@@ -121,6 +124,7 @@ $primary-red: #F75352;
 	-moz-align-content: flex-end;
 	-ms-align-content: flex-end;
 	-ms-flex-align: end;
+	-ms-flex-item-align: end;
 	align-content: flex-end;
 	margin-left: auto;
 }
@@ -130,6 +134,7 @@ $primary-red: #F75352;
 	-moz-align-self: flex-start;
 	-ms-align-self: flex-start;
 	-ms-flex-align: start;
+	-ms-flex-item-align: start;
 	align-self: flex-start;
 	margin-right: auto;
 }
@@ -139,6 +144,7 @@ $primary-red: #F75352;
 	-moz-align-self: center;
 	-ms-align-self: center;
 	-ms-flex-align: center;
+	-ms-flex-item-align: center;
 	align-self: center;
 	margin: auto;
 }
@@ -147,6 +153,7 @@ $primary-red: #F75352;
 	-moz-align-self: flex-end;
 	-ms-align-self: flex-end;
 	-ms-flex-align: end;
+	-ms-flex-item-align: end;
 	align-self: flex-end;
 	margin-left: auto;
 }

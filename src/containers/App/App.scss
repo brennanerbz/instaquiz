@@ -74,36 +74,44 @@ $primary-red: #F75352;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    display: box;
 }
 :global .flex_center {
 	-webkit-align-items: center; 
+	-moz-align-items: center;
 	-ms-align-items: center;
 	align-items: center;
 	-webkit-justify-content: center;
+	-moz-justify-content: center;
 	-ms-justify-content: center;
 	justify-content: center;
 }
 // All Items
 :global .flex_container_left {
 	-webkit-align-items: flex-start;
+	-moz-align-items: flex-start;
 	-ms-align-items: flex-start;
 	align-items: flex-start;
 	-webkit-align-content: flex-start;
+	-moz-align-content: flex-start;
 	-ms-align-content: flex-start;
 	align-content: flex-start;
 	margin-right: auto;
 }
 :global .flex_container_center {
 	-webkit-align-items: center;
+	-moz-align-items: center;
 	-ms-align-items: center;
 	align-items: center;
 	margin: auto;
 }
 :global .flex_container_right {
 	-webkit-align-items: flex-end;
+	-moz-align-items: flex-end;
 	-ms-align-items: flex-end;
 	align-items: flex-end;
 	-webkit-align-content: flex-end;
+	-moz-align-content: flex-end;
 	-ms-align-content: flex-end;
 	align-content: flex-end;
 	margin-left: auto;
@@ -111,6 +119,7 @@ $primary-red: #F75352;
 // Single item
 :global .flex_item_align_left {
 	-webkit-align-self: flex-start;
+	-moz-align-self: flex-start;
 	-ms-align-self: flex-start;
 	align-self: flex-start;
 	margin-right: auto;
@@ -118,18 +127,21 @@ $primary-red: #F75352;
 :global .flex_item_align_center {
 	// max-width: 50%;
 	-webkit-align-self: center;
+	-moz-align-self: center;
 	-ms-align-self: center;
 	align-self: center;
 	margin: auto;
 }
 :global .flex_item_align_right {
 	-webkit-align-self: flex-end;
+	-moz-align-self: flex-end;
 	-ms-align-self: flex-end;
 	align-self: flex-end;
 	margin-left: auto;
 }
 :global .flex_vertical {
 	display: -webkit-box;
+	display: -moz-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: box;
@@ -142,6 +154,7 @@ $primary-red: #F75352;
 }
 :global .flex_horizontal {
 	display: -webkit-box;
+	display: -moz-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: box;
@@ -158,16 +171,19 @@ $primary-red: #F75352;
 // Wrapping
 :global .flex_nowrap {
 	-webkit-flex-wrap: nowrap;
+	-moz-flex-wrap: nowrap;
 	-ms-flex-wrap: nowrap;
 	flex-wrap: nowrap;
 }
 :global .flex_wrap {
 	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
 :global .flex_spacer {
 	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
 	-o-box-flex: 1;
 	box-flex: 1;
 	-webkit-flex: 1;

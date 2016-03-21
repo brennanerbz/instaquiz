@@ -26,6 +26,13 @@ export default class Landing extends Component {
 	static propTypes = {
 	}
 
+	componentDidMount() {
+		console.log('Landing mounted')
+		setTimeout(() => {
+			console.log('ES6 Timeout worked')
+		})
+	}
+
 	render() {
 		const style = require('./Landing.scss');
 		const { location, isMobile, pushState } = this.props;

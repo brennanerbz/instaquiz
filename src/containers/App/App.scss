@@ -69,6 +69,7 @@ $primary-red: #F75352;
 
 // Flexbox
 :global .display_flex {
+	-js-display: flex;
 	display: -webkit-box;
 	display: -moz-box;
     display: -webkit-flex;
@@ -140,6 +141,7 @@ $primary-red: #F75352;
 	margin-left: auto;
 }
 :global .flex_vertical {
+	-js-display: flex;
 	display: -webkit-box;
 	display: -moz-box;
     display: -webkit-flex;
@@ -153,6 +155,7 @@ $primary-red: #F75352;
     flex-direction: column;
 }
 :global .flex_horizontal {
+	-js-display: flex;
 	display: -webkit-box;
 	display: -moz-box;
 	display: -webkit-flex;

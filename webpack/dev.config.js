@@ -6,6 +6,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var flexibility = require('postcss-flexibility');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
@@ -78,7 +79,9 @@ module.exports = {
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
-  postcss: [ autoprefixer({ browsers: ['last 3 versions'] }) ],
+  postcss: function () {
+    return [require('autoprefixer'), require('postcss-flexibility')]
+  },
   progress: true,
   resolve: {
     modulesDirectories: [

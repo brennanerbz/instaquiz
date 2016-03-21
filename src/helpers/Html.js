@@ -58,6 +58,7 @@ export default class Html extends Component {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
           <script src="https://wzrd.in/standalone/es7-shim@latest"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <script src="/flexibility.js"></script>
           <script src={assets.javascript.main} charSet="UTF-8"/>
         </body>
       </html>

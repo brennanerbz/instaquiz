@@ -46,7 +46,9 @@ module.exports = {
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
-  postcss: [ autoprefixer({ browsers: ['last 3 versions'] }) ],
+  postcss: function () {
+   return [require('autoprefixer'), require('postcss-flexibility')]
+  },
   progress: true,
   resolve: {
     modulesDirectories: [

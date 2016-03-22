@@ -35,7 +35,6 @@ export default (store) => {
           <Route path="questions" component={HomeworkQuestions}/>
         </Route>
       </Route>
-      <Route path="error" component={ErrorPage}/>
       <Route path="*" component={NotFound} status={404} />
     </Route>
   )

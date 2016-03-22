@@ -67,8 +67,8 @@ function fetchData(getState, dispatch) {
 )
 export default class App extends Component {
 	static propTypes = {
-		children: PropTypes.object.isRequired,
-		pushState: PropTypes.func.isRequired
+		children: PropTypes.object,
+		pushState: PropTypes.func
 	}
 
 	state = {
@@ -129,6 +129,7 @@ export default class App extends Component {
 		const account = cookie.load('account', {path: '/'})
 		var appChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
+				pushState: pushState,
 				userLoaded: userLoaded,
 				isMobile: isMobile,
 				location: location,

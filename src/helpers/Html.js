@@ -34,7 +34,7 @@ export default class Html extends Component {
           {head.script.toComponent()}
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta charSet="UTF-8"/>
-          <meta httpEquiv="x-ua-compatible" content="ie=edge,chrome=1"/>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>

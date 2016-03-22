@@ -114,7 +114,8 @@ button {
 
 // Modal 
 .modal {
-	font-family: "Lato","Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;	&.mobile {
+	font-family: "Lato","Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif!important;	
+	&.mobile {
 		&.fade {
 			top: 200%!important;
 			-webkit-transition: opacity .01s linear,top .4s ease-out;
@@ -136,7 +137,7 @@ button {
 	&.fade {
 		top: -100%;
 		-webkit-transition: opacity .10s linear,top .15s ease-out;
-		-ms-transition: opacity .01s linear,top .4s ease-out;
+		-ms-transition: opacity .01s linear,top .15s ease-out;
 		-moz-transition: opacity .10s linear,top .15s ease-out;
 		-o-transition: opacity .10s linear,top .15s ease-out;
 		transition: opacity .10s linear,top .15s ease-out;
@@ -144,7 +145,7 @@ button {
 			top: 3%;
 			opacity: 1;	
 			-webkit-transition: opacity .10s linear,top .15s ease-out;
-			-ms-transition: opacity .01s linear,top .4s ease-out;
+			-ms-transition: opacity .01s linear,top .15s ease-out;
 			-moz-transition: opacity .10s linear,top .15s ease-out;
 			-o-transition: opacity .10s linear,top .15s ease-out;
 			transition: opacity .10s linear,top .15s ease-out;

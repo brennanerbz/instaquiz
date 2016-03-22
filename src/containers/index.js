@@ -1,3 +1,4 @@
+export About from './About/About';
 export App from './App/App';
 export Assignment from './Assignment/Assignment';
 export Index from './Index/Index';

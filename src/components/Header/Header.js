@@ -79,13 +79,15 @@ export default class Header extends Component {
 		const { progress, length } = this.state; 
 		// Touch
 		const { touching } = this.state;
+		// About page
+		const aboutView = location.pathname.match(/about/gi);
  		return (
 			<div 
 				style={{
 					position: isNotHomeView || assignmentsView ? 'fixed' : '',
 					background: '#fff',
 					width: '100%' , 
-					boxShadow: isNotHomeView || assignmentsView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
+					boxShadow: isNotHomeView || assignmentsView || aboutView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
 					zIndex: '2'
 				}} 
 				className={'display_flex'}>
@@ -108,14 +110,14 @@ export default class Header extends Component {
 					{!isMobile || (isMobile && !isNotHomeView && !assignmentsView)
 					? <img 
 					onClick={() => {
-						if(teacher) {
+						if(teacher || aboutView) {
 							pushState(null, '/')
 						}
 					}} 
 					src={blueLogo} 
 					style={{
 						height: isMobile ? '40px' : (teacher ? '45px' : '55px'),
-						cursor: teacher && 'pointer',
+						cursor: (teacher || aboutView) && 'pointer',
 						position: '',
 						left: '25px'
 					}}/>

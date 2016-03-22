@@ -144,7 +144,7 @@ export default class Landing extends Component {
 								<li className={style.footer_link_header}>
 									COMPANY
 								</li>
-								<li className={style.footer_link}>
+								<li onClick={() => pushState(null, 'about')} className={style.footer_link}>
 									<a>About Us</a>
 								</li>
 							</ul>

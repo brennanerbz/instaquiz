@@ -2,6 +2,7 @@ import React from 'react';
 import cookie from 'react-cookie';
 import {IndexRoute, Route} from 'react-router';
 import {
+    About,
     App,
     Assignment,
     Index,
@@ -20,6 +21,8 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
+      <Route path="about" component={About}>
+      </Route>
   	  <Route path="assignment" component={Assignment}>
   	  	<Route path=":token" component={Assignment}>
           <Route path=":tab" component={Assignment}/>

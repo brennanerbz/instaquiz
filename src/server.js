@@ -12,7 +12,6 @@ import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import cookie from 'react-cookie';
-import enforce = from 'express-sslify';
 
 import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
@@ -61,10 +60,6 @@ proxy.on('error', (error, req, res) => {
   json = {error: 'proxy_error', reason: error.message};
   res.end(JSON.stringify(json));
 });
-
-if(!__DEVELOPMENT__) {
-  app.use(enforce.HTTPS({ trustProtoHeader: true }))
-}
 
 app.use((req, res) => {
 

@@ -1,5 +1,6 @@
 {
   "stage": 0,
+  "blacklist": ["useStrict"],
   "optional": "runtime",
   "loose": "all",
   "plugins": [

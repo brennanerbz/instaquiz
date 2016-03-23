@@ -128,6 +128,32 @@ $primary-red: #F75352;
 	align-content: flex-end;
 	margin-left: auto;
 }
+:global .flex_container_top {
+	-webkit-align-items: flex-start;
+	-moz-align-items: flex-start;
+	-ms-align-items: flex-start;
+	align-items: flex-start;
+	-webkit-align-content: flex-start;
+	-moz-align-content: flex-start;
+	-ms-align-content: flex-start;
+	-ms-flex-align: start;
+	-ms-flex-item-align: start;
+	align-content: flex-start;
+	margin-bottom: auto;
+}
+:global .flex_container_bottom {
+	-webkit-align-items: flex-end;
+	-moz-align-items: flex-end;
+	-ms-align-items: flex-end;
+	align-items: flex-end;
+	-webkit-align-content: flex-end;
+	-moz-align-content: flex-end;
+	-ms-align-content: flex-end;
+	-ms-flex-align: end;
+	-ms-flex-item-align: end;
+	align-content: flex-end;
+	margin-top: auto;
+}
 // Single item
 :global .flex_item_align_left {
 	-webkit-align-self: flex-start;

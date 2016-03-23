@@ -58,7 +58,7 @@ export default class Footer extends Component {
 			}
 		}
 		return (
-			<div style={styles.container} className="display_flex flex_container_center flex_center flex_container_right">
+			<div style={styles.container} className="flex_container_bottom">
 				<div style={styles.wrapper}>
 					<ul style={styles.list} className="display_flex flex_horizontal">
 						<li className="flex_item_align_left" style={{fontSize: '14.5px'}}>

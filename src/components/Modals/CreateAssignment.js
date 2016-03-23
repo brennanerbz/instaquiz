@@ -103,6 +103,7 @@ export default class CreateAssignment extends Component {
 		if(!this.props.finished && nextProps.finished) {
 			this.props.pushState(null, `/assignment/${assignment.token}/questions`)
 			this.props.close()
+			this.props.clearDraft()
 		}
 		// Incoming text & title from link
 		const { title, text } = nextProps;

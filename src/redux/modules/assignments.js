@@ -189,7 +189,7 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				finished: true,
-				deleting: false,
+				deleting: false
 			}
 		case DELETE_ITEMS_FAILURE:
 			return {

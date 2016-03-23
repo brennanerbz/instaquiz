@@ -14,7 +14,7 @@ export default class QuizHeader extends Component {
 		const styles = {
 			 container: {
 			 	textAlign: isMobile ? 'center' : '', 
-				padding: !isMobile ? `${promptOpen ? '5em' : '6em'} 25px 0 25px` : `${promptOpen ? '1em' : '5em'} 0 0 0`
+				padding: !isMobile ? `${promptOpen ? '0em' : '0em'} 25px 0 25px` : `${promptOpen ? '1em' : '1em'} 0 0 0`
 			 },
 			 header: {
 			 	fontSize: isMobile ? '21px' : '32px',

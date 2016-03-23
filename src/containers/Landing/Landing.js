@@ -44,7 +44,7 @@ export default class Landing extends Component {
 		const isTeacher = cookie.load('token', {path: '/'})
 		return (
 			<div id="landing">
-				<div id="hero">
+				<div id="hero" style={{marginTop: '4.5em'}}>
 					<div style={{borderBottom: '1px solid #D7D8DA', display: 'block'}}>
 						<div style={{marginBottom: '0', marginTop: '0'}} className="flex_container_center">
 							<div 
@@ -76,7 +76,7 @@ export default class Landing extends Component {
 									}
 									openModal('create_assignment')
 								}} 
-								style={{ margin: isMobile ? '20px 0' : '20px 0 50px'}} 
+								style={{ margin: isMobile ? '25px 0' : '20px 0 50px'}} 
 								className="button primary_blue">
 									Create new assignment
 								</button>

@@ -80,14 +80,14 @@ export default class Header extends Component {
 		// Touch
 		const { touching } = this.state;
 		// About page
-		const aboutView = location.pathname.match(/about/gi);
+		const aboutView = location.pathname.match(/about/g);
  		return (
 			<div 
 				style={{
 					position: isNotHomeView || assignmentsView ? 'fixed' : '',
 					background: '#fff',
 					width: '100%' , 
-					boxShadow: isNotHomeView || assignmentsView || aboutView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
+					boxShadow: isNotHomeView || assignmentsView ? '0px 1px 1px 0px rgba(203,203,203,0.50)' : '',
 					zIndex: '2'
 				}} 
 				className={'display_flex'}>

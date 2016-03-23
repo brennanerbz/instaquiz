@@ -127,6 +127,7 @@ export default class App extends Component {
 		const user = cookie.load('token', {path: '/'}) ? true : false
 		const teacher = cookie.load('teacher', {path: '/'})
 		const account = cookie.load('account', {path: '/'})
+		const homeworkPath = location.pathname.split('/')[1] === 'homework';
 		var appChildrenWithProps = React.Children.map(this.props.children, (child) => {
 			return React.cloneElement(child, {
 				pushState: pushState,
@@ -140,7 +141,7 @@ export default class App extends Component {
 			})
 		})
 		return (
-			<div id={style.app} style={{background: isMobile || !teacher || true ? '#fff' : '#f9fafc'}}>
+			<div className="display_flex flex_vertical" id={style.app} style={{background: isMobile || !teacher || true ? '#fff' : '#f9fafc'}}>
 				<Helmet {...config.app.head}/>
 				<Header 
 					openModal={openModal}
@@ -164,7 +165,7 @@ export default class App extends Component {
 					account={account}
 				/>
 				{appChildrenWithProps}
-				{false &&
+				{teacher && !homeworkPath &&
 				<Footer
 				assignments={this.props.assignments}
 				location={location}

@@ -100,7 +100,7 @@ export default class Assignment extends Component {
 				flex: '1',
 				background: '#00B5FF',
 				padding: isMobile ? '2em 0 2em 0' : '2em',
-				margin: isMobile ? '3.5em auto 0 auto' : '1em auto 0em auto',
+				margin: isMobile ? '0em auto 0 auto' : '1em auto 0em auto',
 				display: promptOpen ? '' : 'none',
 				maxWidth: '1000px',
 				minWidth: isMobile ? '' : '900px',
@@ -124,7 +124,7 @@ export default class Assignment extends Component {
 					.filter(seq => {return seq.identifier && seq.identifier.length > 0})
 		const scoresIn = seq.length > 0
 		return (
-			<div style={{maxWidth: '1050px', minWidth: isMobile ? '' : '950px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
+			<div style={{display: 'block', margin: isMobile ? '3.5em auto' : '5.25em auto', width: '100%', maxWidth: '1050px', minWidth: isMobile ? '' : '950px', height: error ? window.innerHeight - 55 : ''}} className="display_flex flex_container_center">
 				<div style={{width: '100%'}} className="flex_vertical">
 					{
 						isMobile && promptOpen &&

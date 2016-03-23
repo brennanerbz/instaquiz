@@ -73,8 +73,8 @@ $primary-red: #F75352;
 // Flexbox
 :global .display_flex {
 	-js-display: flex;
-	display: -webkit-box;
 	display: -moz-box;
+	display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;

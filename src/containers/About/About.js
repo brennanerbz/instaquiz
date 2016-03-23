@@ -21,9 +21,9 @@ export default class About extends Component {
 				margin: '0 25px'
 			},
 			header: {
-				fontSize: '32px',
+				fontSize: '34px',
 				fontWeight: '600',
-				color: '#333333',
+				color: '#1FB6FF',
 				margin: '25px'
 			},
 			founderContainer: {
@@ -31,7 +31,7 @@ export default class About extends Component {
 				minWidth: '300px',
 				border: isMobile ? '' : '1px solid #f2f2f2',
 				borderRadius: '10px',
-				padding: isMobile ? '' : '2em',
+				padding: isMobile ? '0 0.5em' : '2em',
 				margin: isMobile ? '1em 2em 1em' : '1em 3em 1em'
 			},
 			founderImage: {
@@ -42,10 +42,13 @@ export default class About extends Component {
 				padding: '1em 0 1em 0',
 				fontSize: '20px',
 				fontWeight: '600',
-				color: '#1FB6FF'
+				color: '#333333'
 			},
 			founderInfo: {
 				fontSize: '15px',
+				color: '#3C4858'
+			},
+			inlineName: {
 				color: '#333333'
 			}
 		}
@@ -56,12 +59,12 @@ export default class About extends Component {
 					<div style={[styles.founderContainer, {order: 1}]} className="display_flex flex_vertical flex_center">
 						<img style={styles.founderImage} src={nateDogg}/>
 						<h2 style={styles.founderName}>Nathan Lomeli (co-founder)</h2>
-						<p style={styles.founderInfo}><b>Nathan Lomeli</b> is the back-end engineer and co-founder of Nightly. Since early on, Nathan has been focused on creating intelligent software for learning purposes.<br/><br/>Prior to founding Nightly, Nathan worked as a teacher in Oakland, CA where he experienced the day-to-day stress of teaching. He also spent a year at the EdTech startup LearnBoost, where we worked on software for teachers. He graduated Stanford Universtiy with a BS in Economics.</p>
+						<p style={styles.founderInfo}><b style={styles.inlineName}>Nathan Lomeli</b> is the back-end engineer and co-founder of Nightly. Since early on, Nathan has been focused on creating intelligent software for learning purposes.<br/><br/>Prior to founding Nightly, Nathan worked as a teacher in Oakland, CA where he experienced the day-to-day stress of teaching. He also spent a year leading product development at the Edtech startup LearnBoost. He graduated Stanford University with a BS in Economics.</p>
 					</div>
 					<div style={[styles.founderContainer, {order: 2}]} className="display_flex flex_vertical flex_center">
 						<img style={[styles.founderImage]} src={erbz}/>
 						<h2 style={styles.founderName}>Brennan Erbeznik (co-founder)</h2>
-						<p style={styles.founderInfo}><b>Brennan Erbeznik</b> is the front-end engineer and co-founder of Nightly. A native of Venice, California, Brennan holds a BS in Economics from Villanova University.<br/><br/>Prior to founding Nightly, Brennan was a documentary filmmaker and designer. He had his own production company, Pack Media Group, which produced 'Arafa's Journey', a short documentary and Indiegogo campaign that helped bring a small girl from Tanzania, Africa to attend school in the U.S.</p>
+						<p style={styles.founderInfo}><b style={styles.inlineName}>Brennan Erbeznik</b> is the front-end engineer and co-founder of Nightly. A native of Venice, CA, Brennan holds a BS in Economics from Villanova University.<br/><br/>Prior to founding Nightly, Brennan started multiple media businesses. The first was a production company which produced 'Arafa's Journey', a documentary and Indiegogo campaign that helped bring a small girl from Tanzania, Africa to the U.S. for primary school. The second was Socializer, a toolkit to help social media users gain bigger followings.</p>
 					</div>
 				</div>
 			</div>

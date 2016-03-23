@@ -29,18 +29,16 @@ export default class Footer extends Component {
 	render() {
 		const { location, isMobile, teacher, account, assignments } = this.props;
 		const { footerLinks } = this.state;
-		const path = location.pathname;
-		const pathIsNotIndex = (path !== '/') || (assignments.length > 5)
 		const styles = {
 			container: {
-				position: pathIsNotIndex ? '' : 'fixed',
-				margin: isMobile ? '9.25em 0 0 0' : '3em 0 0 0',
 				background: '#fff',
 				bottom: '0', 
 				width: '100%', 
+				minHeight: '54px',
 				height: '54px', 
 				lineHeight: '48px',
-				padding: '0 10px',
+				padding: '0 1em',
+				marginBottom: '0'
 			},
 			wrapper: {
 				width: '100%', maxWidth: '1000px'
@@ -49,7 +47,7 @@ export default class Footer extends Component {
 				listStyleType: 'none'
 			},
 			listItem: {
-				margin: '0 10px 0 0',
+				margin: '0 0 0 10px',
 				fontSize: '14.5px'
 			},
 			link: {
@@ -60,15 +58,18 @@ export default class Footer extends Component {
 			}
 		}
 		return (
-			<div style={styles.container} className="display_flex flex_container_center flex_center">
+			<div style={styles.container} className="display_flex flex_container_center flex_center flex_container_right">
 				<div style={styles.wrapper}>
 					<ul style={styles.list} className="display_flex flex_horizontal">
+						<li className="flex_item_align_left" style={{fontSize: '14.5px'}}>
+							<p style={styles.element}>&copy; Nightly 2016</p>
+						</li>
 						{footerLinks.map((link, i) => {
 							if(teacher && !account) {
 								return (
 									<li 
 									key={link.text + i} 
-									className="flex_item_align_left" 
+									className="flex_item_align_right" 
 									style={styles.listItem} 
 									onClick={() => {
 										if(link.text.match(/Clear/g)) {
@@ -84,9 +85,6 @@ export default class Footer extends Component {
 								)
 							}
 						})}
-						<li className="flex_item_align_right" style={{fontSize: '14.5px'}}>
-							<p style={styles.element}>&copy; Nightly 2016</p>
-						</li>
 					</ul>
 				</div>
 			</div>

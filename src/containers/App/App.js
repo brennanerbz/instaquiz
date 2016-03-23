@@ -166,6 +166,7 @@ export default class App extends Component {
 				{appChildrenWithProps}
 				{teacher && !account &&
 				<Footer
+				isMobile={isMobile}
 				teacher={teacher}
 				account={account}
 				pushState={pushState}

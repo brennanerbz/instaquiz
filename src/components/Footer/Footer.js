@@ -27,11 +27,11 @@ export default class Footer extends Component {
 	}
 
 	render() {
-		const { teacher, account } = this.props;
+		const { isMobile, teacher, account } = this.props;
 		const { footerLinks } = this.state;
 		const styles = {
 			container: {
-				margin: '5.25em 0 0 0',
+				margin: isMobile ? '9.25em 0 0 0' : '5.25em 0 0 0',
 				background: '#fff',
 				bottom: '0', 
 				width: '100%', 

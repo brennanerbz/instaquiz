@@ -164,6 +164,13 @@ export default class App extends Component {
 					account={account}
 				/>
 				{appChildrenWithProps}
+				{teacher && !account &&
+				<Footer
+				teacher={teacher}
+				account={account}
+				pushState={pushState}
+				logOut={logOut}
+				/>}
 				<Modal isMobile={isMobile}/>
 				<FsModal isMobile={isMobile}/>
 			</div>

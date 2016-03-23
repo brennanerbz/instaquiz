@@ -12,7 +12,7 @@ export default class About extends Component {
 		const erbz = require('../../../static/images/Erbz.jpg')
 		const styles = {
 			page: {
-				margin: '2em 0 0'
+				margin: isMobile ? '3em 0 2em' : '2em 0 2em'
 			},
 			container: {
 				width: '100%',

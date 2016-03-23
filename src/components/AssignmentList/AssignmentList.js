@@ -46,7 +46,7 @@ export default class AssignmentList extends Component {
 					{!loading && assignments && assignments.map((assignment, i) => {
 						const length = assignments.length - 1;
 						let renderBorder = true;
-						if(length > 6 && i === length) renderBorder = false;
+						if((length > 5) && (i === length)) renderBorder = false;
 						return (
 							<AssignmentListItem
 								key={assignment.title + i} 

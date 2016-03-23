@@ -27,11 +27,14 @@ export default class Footer extends Component {
 	}
 
 	render() {
-		const { isMobile, teacher, account } = this.props;
+		const { location, isMobile, teacher, account, assignments } = this.props;
 		const { footerLinks } = this.state;
+		const path = location.pathname;
+		const pathIsNotIndex = (path !== '/') || (assignments.length > 5)
 		const styles = {
 			container: {
-				margin: isMobile ? '9.25em 0 0 0' : '5.25em 0 0 0',
+				position: pathIsNotIndex ? '' : 'fixed',
+				margin: isMobile ? '9.25em 0 0 0' : '3em 0 0 0',
 				background: '#fff',
 				bottom: '0', 
 				width: '100%', 

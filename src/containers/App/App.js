@@ -164,8 +164,10 @@ export default class App extends Component {
 					account={account}
 				/>
 				{appChildrenWithProps}
-				{teacher && !account &&
+				{false &&
 				<Footer
+				assignments={this.props.assignments}
+				location={location}
 				isMobile={isMobile}
 				teacher={teacher}
 				account={account}
